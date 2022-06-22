@@ -7,5 +7,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  corePlugins: {
+    aspectRatio: true,
+  },
   plugins: [],
 };
