@@ -3,7 +3,7 @@ import ProductPageContent from "../../components/ProductPageContent";
 
 export default function ProductPage({ product }) {
   return (
-    <div>
+    <div className="min-h-screen py-12 sm:pt-20 bg-[#FAF8F7]">
       <ProductPageContent product={product} />
     </div>
   );
