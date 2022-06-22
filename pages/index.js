@@ -11,10 +11,11 @@ export default function Home({ products }) {
 
 export async function getStaticProps() {
   let products = await getProductsInCollection();
-  products = products.collectionByHandle.products.edges;
+  
   return {
     props: {
       products,
     },
+    revalidate: 10,
   };
 }
