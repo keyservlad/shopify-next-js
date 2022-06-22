@@ -8,7 +8,7 @@ export default function ProductPageContent({ product }) {
         <div className="w-full m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
           <Image
             src={product.images.edges[0].node.originalSrc}
-            alt={product.images.edges[0].node.altText}
+            alt={product.images.edges[0].node.altText ? product.images.edges[0].node.altText : "Image bouteille"}
             width={2275}
             height={3500}
             quality={100}
