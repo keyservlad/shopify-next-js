@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
           <div className="w-full m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
             <Image
               src={originalSrc}
-              alt={altText}
+              alt={altText ? altText : "Image bouteille"}
               width={2275}
               height={3500}
               quality={100}

@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import ShopProvider from "../context/ShopContext";
 import { useRouter } from "next/router";
 

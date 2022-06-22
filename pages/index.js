@@ -1,9 +1,13 @@
 import { getProductsInCollection } from "../lib/shopify";
 import ProductList from "../components/ProductList";
+import Head from "next/head";
 
 export default function Home({ products }) {
   return (
-    <div className="text-3xl">
+    <div>
+      <Head>
+        <title>Emovin</title>
+      </Head>
       <ProductList products={products} />
     </div>
   );
