@@ -21,7 +21,7 @@ export default function ProductForm({ product }) {
         onClick={() => {
           addToCart(variant);
         }}
-        className="w-48 rounded text-white bg-[#A83D72] px-1 py-2 hover:bg-pink-800 "
+        className="w-48 rounded text-white bg-redWine px-1 py-2 hover:bg-pink-800 "
       >
         Add to cart
       </button>
