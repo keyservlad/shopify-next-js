@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const product = await getProduct(params.product);
+  const product = await getProduct(params.product); // TODO initial state for available and stock remaining to avoid small loading time when we click on a product for the first time
   return {
     props: {
       product,
