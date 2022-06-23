@@ -1,4 +1,4 @@
-import { getAllProducts, getproduct } from "../../lib/shopify";
+import { getAllProducts, getProduct } from "../../lib/shopify";
 import ProductPageContent from "../../components/ProductPageContent";
 
 export default function ProductPage({ product }) {
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const product = await getproduct(params.product);
+  const product = await getProduct(params.product);
   return {
     props: {
       product,
