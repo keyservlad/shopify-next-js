@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-title-in-document-head */
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -23,7 +24,6 @@ class MyDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          <title>Emovin : le Plaisir de Partager</title>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta
             httpEquiv="Content-Type"
