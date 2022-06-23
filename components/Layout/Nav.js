@@ -25,7 +25,7 @@ export default function Nav() {
             setCartOpen(!cartOpen);
           }}
         >
-          Panier({cartQuantity})
+          Panier ({cartQuantity})
         </button>
         <MiniCart cart={cart} />
       </div>
