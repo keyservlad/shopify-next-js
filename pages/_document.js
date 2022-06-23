@@ -21,7 +21,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="fr">
         <Head>
           <title>Emovin : le Plaisir de Partager</title>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
