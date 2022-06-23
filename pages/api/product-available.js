@@ -1,57 +1,61 @@
-import { gql, GraphQLClient } from "graphql-request";
+export default async function send(req, res) {
+  const {
+    query: { id },
+  } = req
 
-const domain = process.env.SHOPIFY_STORE_DOMAIN;
-const URL = `https://${domain}/api/2021-07/graphql.json`;
-const storeFrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN;
+  const domain = process.env.SHOPIFY_STORE_DOMAIN
+  const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN
 
-const Shopify = async (query) => {
-  const graphQLClient = new GraphQLClient(URL, {
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": storeFrontAccessToken,
-    },
-  });
-  return await graphQLClient.request(query);
-};
+  async function ShopifyData(query) {
+    const URL = `https://${domain}/api/2021-07/graphql.json`
 
-async function getProduct(handle) {
-  const query = gql`
+    const options = {
+      endpoint: URL,
+      method: "POST",
+      headers: {
+        "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query })
+    }
+
+    try {
+      const data = await fetch(URL, options).then(response => {
+        return response.json()
+      })
+
+      return data
+    } catch (error) {
+      throw new Error("Products not fetched")
+    }
+  }
+
+  async function getProduct(handle) {
+    const query = `
     {
       productByHandle(handle: "${handle}") {
         id
         variants(first: 1) {
           edges {
             node {
-              selectedOptions {
-                name
-                value
-              }
-              image {
-                originalSrc
-                altText
-              }
-              title
               id
-              priceV2 {
-                amount
-              }
+              quantityAvailable
+              availableForSale
             }
           }
         }
       }
-    }
-  `;
+    }`
 
-  const response = await Shopify(query);
-  const product = response.productByHandle ? response.productByHandle : [];
+    const response = await ShopifyData(query)
 
-  return product;
-}
+    const product = response.data.productByHandle ? response.data.productByHandle : []
 
-export default async function productAvailable(req, res) {
-  const {
-    query: { id },
-  } = req;
+    return product
+  }
 
-  res.status(200).json({ name: "John Doe" });
+  const product = await getProduct(id)
+
+  res.json(product)
 }
