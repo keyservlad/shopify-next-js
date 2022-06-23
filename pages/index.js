@@ -7,9 +7,9 @@ export default function Home({ products }) {
     <div>
       <Head>
         <title>Emovin : le Plaisir de Partager</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta
-          http-equiv="Content-Type"
+          httpEquiv="Content-Type"
           content="text/html; charset=ISO-8859-1"
         />
         <meta
