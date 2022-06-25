@@ -17,7 +17,7 @@ export default function ProductForm({ product }) {
   const { data: productInventory } = useSWR(
     ["/api/product-available", product.handle],
     (url, id) => fetchInventory(url, id),
-    { errorRetryCount: 3, revalidateOnMount: true, refreshInterval: 10000 }
+    { errorRetryCount: 3, revalidateOnMount: true }
   );
 
   const [available, setAvailable] = useState(true);
