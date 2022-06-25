@@ -9,6 +9,6 @@ export default async function handler(req, res) {
         .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
     }
     
-    return res.status(200)
+    return res.status(200).json({ status: "Ok" });
     
   }
