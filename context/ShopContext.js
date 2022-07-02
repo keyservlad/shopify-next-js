@@ -71,8 +71,6 @@ export default function ShopProvider({ children }) {
       "checkout_id",
       JSON.stringify([updatedCart, newCheckout])
     );
-
-    
   }
 
   return (

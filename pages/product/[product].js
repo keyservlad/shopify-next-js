@@ -1,4 +1,4 @@
-import { getAllProducts, getProduct } from "../../lib/shopify";
+import { getAllProductsNotreCave, getProduct } from "../../lib/shopify";
 import ProductPageContent from "../../components/ProductPageContent";
 
 export default function ProductPage({ product }) {
@@ -10,7 +10,7 @@ export default function ProductPage({ product }) {
 }
 
 export async function getStaticPaths() {
-  const products = await getAllProducts();
+  const products = await getAllProductsNotreCave();
   const paths = products.map((item) => {
     const product = String(item.node.handle);
     return {
