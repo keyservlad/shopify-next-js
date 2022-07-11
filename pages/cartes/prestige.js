@@ -1,6 +1,7 @@
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 import { getCarte, test } from "../../lib/shopify";
+import { getCarte2 } from "../../lib/admin";
 
 export default function Example({ carte, test2 }) {
   useEffect(() => {
@@ -342,11 +343,10 @@ export default function Example({ carte, test2 }) {
 
 export async function getStaticProps() {
   let carte = await getCarte("carte-prestige");
-  let test2 = await test();
+  let test2 = await getCarte2();
   return {
     props: {
-      carte,
-      test2,
+      carte, test2
     },
   };
 }
