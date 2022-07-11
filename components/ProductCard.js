@@ -11,14 +11,13 @@ const ProductCard = ({ product }) => {
     <Link href={`/product/${handle}`}>
       <a className="group bg-white rounded-md hover:drop-shadow-lg">
         <div className="group relative">
-          <div className="w-full m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
+          <div className="relative w-full m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
             <Image
               src={originalSrc}
               alt={altText ? altText : "Image bouteille"}
-              width={2275}
-              height={3500}
+              layout="fill"
+              objectFit="contain"
               quality={100}
-              className="w-full h-full object-center object-cover"
             />
           </div>
           <div className="text-center">
