@@ -1,26 +1,29 @@
 import { createContext, useState, useEffect } from "react";
-import { createCheckout, updateCheckout } from "../lib/shopify";
+import { addCartLine, createCart, increaseQuantCart } from "../lib/shopifyCart";
 
 const CartContext = createContext();
 
 export default function ShopProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
-  const [checkoutId, setCheckoutId] = useState("");
+  const [cartId, setCartId] = useState("");
   const [checkoutUrl, setCheckoutUrl] = useState("");
+  const [lines, setLines] = useState({});
 
   useEffect(() => {
-    if (localStorage.checkout_id) {
-      const cartObject = JSON.parse(localStorage.checkout_id);
+    if (localStorage.cart_id) {
+      const cartObject = JSON.parse(localStorage.cart_id);
 
       if (cartObject[0].id) {
         setCart([cartObject[0]]);
+        setLines(...[cartObject[1].lines.edges]);
       } else if (cartObject[0].length > 0) {
         setCart(...[cartObject[0]]);
+        setLines(...[cartObject[1].lines.edges]);
       }
 
-      setCheckoutId(cartObject[1].id);
-      setCheckoutUrl(cartObject[1].webUrl);
+      setCartId(cartObject[1].id);
+      setCheckoutUrl(cartObject[1].checkoutUrl);
     }
   }, []);
 
@@ -29,32 +32,21 @@ export default function ShopProvider({ children }) {
     if (cart.length === 0) {
       setCart([newItem]);
 
-      const checkout = await createCheckout(
-        newItem.id,
-        newItem.variantQuantity
-      );
-      setCheckoutId(checkout.id);
-      setCheckoutUrl(checkout.webUrl);
+      const cartResp = await createCart(newItem.id, newItem.variantQuantity);
+      setCartId(cartResp.id);
+      setCheckoutUrl(cartResp.checkoutUrl);
+      setLines(cartResp.lines.edges);
 
-      localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
+      localStorage.setItem("cart_id", JSON.stringify([newItem, cartResp]));
     } else {
-      let newCart = [...cart];
-
+      let isIncreased = false;
       cart.map((item) => {
         if (item.id === newItem.id) {
-          item.variantQuantity++;
-          newCart = [...cart];
-        } else {
-          newCart = [...cart, newItem];
+          isIncreased = true;
         }
       });
 
-      setCart(newCart);
-      const newCheckout = await updateCheckout(checkoutId, newCart);
-      localStorage.setItem(
-        "checkout_id",
-        JSON.stringify([newCart, newCheckout])
-      );
+      isIncreased ? increaseCart(newItem) : addLineCart(newItem);
     }
   }
 
@@ -65,14 +57,49 @@ export default function ShopProvider({ children }) {
     if (cart.length === 1) {
       setCartOpen(false);
     }
-    const newCheckout = await updateCheckout(checkoutId, updatedCart);
+    const newCheckout = await increaseQuantCart(cartId, updatedCart);
 
-    localStorage.setItem(
-      "checkout_id",
-      JSON.stringify([updatedCart, newCheckout])
-    );
+    localStorage.setItem("cart_id", JSON.stringify([updatedCart, newCheckout]));
   }
 
+  async function increaseCart(newItem) {
+    let newCart = [...cart];
+    cart.map((item) => {
+      if (item.id === newItem.id) {
+        item.variantQuantity++;
+        newCart = [...cart];
+      }
+    });
+
+    setCart(newCart);
+    let newLines = [...lines];
+
+    lines.map((item) => {
+      if (item.node.merchandise.id === newItem.id) {
+        item.node.quantity++;
+        newLines = [...lines];
+      }
+    });
+
+    const newCheckout = await increaseQuantCart(cartId, newLines);
+
+    localStorage.setItem("cart_id", JSON.stringify([newCart, newCheckout]));
+
+    setLines(newCheckout.lines.edges);
+  }
+
+  async function addLineCart(newItem) {
+    let newCart = [...cart, newItem];
+    setCart(newCart);
+
+    const newCheckout = await addCartLine(newItem.id, 1, cartId);
+
+    localStorage.setItem("cart_id", JSON.stringify([newCart, newCheckout]));
+
+    setLines(newCheckout.lines.edges);
+  }
+
+  
   return (
     <CartContext.Provider
       value={{
