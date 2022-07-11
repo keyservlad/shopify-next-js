@@ -1,21 +1,11 @@
-import { getAllProductsNotreCave } from "../lib/shopify";
-import ProductList from "../components/ProductList";
+import HomePage from "../components/HomePage";
 
-export default function Home({ products }) {
+const test = () => {
   return (
-    <div>
-      <ProductList products={products} />
-    </div>
+    <>
+      <HomePage />
+    </>
   );
-}
+};
 
-export async function getStaticProps() {
-  let products = await getAllProductsNotreCave();
-
-  return {
-    props: {
-      products,
-    },
-    revalidate: 10,
-  };
-}
+export default test;

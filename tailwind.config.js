@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        lexend: ["Lexend"],
+        caveat: ["Caveat"],
+      },
       colors: {
         redWine: "#A83D72",
       },
@@ -14,7 +18,5 @@ module.exports = {
   corePlugins: {
     aspectRatio: true,
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [require("@tailwindcss/forms")],
 };

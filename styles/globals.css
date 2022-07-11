@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Lexend";
+  src: url("../public/fonts/Lexend-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("../public/fonts/Caveat-Regular.ttf");
+}
+
+@layer components {
+  h1 {
+    @apply font-caveat font-bold text-5xl;
+  }
+  p {
+    @apply font-lexend;
+  }
+}
