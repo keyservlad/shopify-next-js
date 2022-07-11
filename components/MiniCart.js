@@ -81,12 +81,13 @@ export default function MiniCart({ cart }) {
                             >
                               {cart.map((product) => (
                                 <li key={product.id} className="flex py-6">
-                                  <div className="relative w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <div className="relative w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 m-auto aspect-[0.65] max-h-96 sm:h-auto">
                                     <Image
                                       src={product.image}
                                       alt={product.title}
-                                      width={2275}
-                                      height={3500}
+                                      layout="fill"
+                                      objectFit="contain"
+                                      quality={50}
                                       // className="h-full w-full object-cover object-center" TODO add millesime + other texts (to get in the requet too)
                                     />
                                   </div>
