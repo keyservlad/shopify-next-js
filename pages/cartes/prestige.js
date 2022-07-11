@@ -1,11 +1,9 @@
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 import { getCarte, test } from "../../lib/shopify";
-import { getCarte2 } from "../../lib/admin";
 
-export default function Example({ carte, test2 }) {
+export default function Example({ carte }) {
   useEffect(() => {
-    console.log(test2);
   }, []);
 
   const variant = {
@@ -343,7 +341,6 @@ export default function Example({ carte, test2 }) {
 
 export async function getStaticProps() {
   let carte = await getCarte("carte-prestige");
-  let test2 = await getCarte2();
   return {
     props: {
       carte, test2
