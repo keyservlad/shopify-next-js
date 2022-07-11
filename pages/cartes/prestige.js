@@ -343,7 +343,7 @@ export async function getStaticProps() {
   let carte = await getCarte("carte-prestige");
   return {
     props: {
-      carte, test2
+      carte
     },
   };
 }
