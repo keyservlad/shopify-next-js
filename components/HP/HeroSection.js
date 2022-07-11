@@ -1,10 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowCircleDownIcon } from "@heroicons/react/outline";
 
-const HomePage = () => {
+const HeroSection = (props) => {
+  const scrollHeroHP = () => {
+    props.refButtonHeroHP.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <>
-      <div className="hidden sm:flex relative w-screen aspect-[2.18] max-h-screen overflow-hidden">
+    <div className="relative w-screen aspect-[0.65] sm:aspect-[2.18] max-h-screen overflow-hidden">
+      <div className="hidden sm:flex">
         <Image
           src="/images/HP/hero_HP.png"
           alt="Image fond d'écran Home Page"
@@ -13,7 +20,7 @@ const HomePage = () => {
           quality={100}
         />
       </div>
-      <div className="sm:hidden relative w-screen aspect-[0.65] max-h-screen overflow-hidden">
+      <div className="sm:hidden">
         <Image
           src="/images/HP/hero_HP_mobile.jpg"
           alt="Image fond d'écran Home Page mobile"
@@ -33,10 +40,15 @@ const HomePage = () => {
             </button>
           </a>
         </Link>
-        {/* TODO mettre la page d'acceuil sur index */}
       </div>
-    </>
+      <ArrowCircleDownIcon
+        // TODO add anchor to div under with smooth scrolling effect
+        onClick={() => scrollHeroHP()}
+        className="absolute left-0 right-0 mx-auto bottom-3 h-11 w-11 duration-500 hover:scale-125 ease-[cubic-bezier(.47,2.02,.31,-.36)] cursor-pointer"
+        aria-hidden="true"
+      />
+    </div>
   );
 };
 
-export default HomePage;
+export default HeroSection;
