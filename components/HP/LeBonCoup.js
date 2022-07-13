@@ -1,10 +1,6 @@
-const NosCartesMembres = (props) => {
+const LeBonCoup = () => {
   return (
-    <div
-      id="nos-cartes-membres-div"
-      ref={props.refButtonHeroHP}
-      className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-40"
-    >
+    <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-40">
       <div className="text-white border-solid rounded-xl border-white border-[1px] px-5 py-3 inline-block uppercase mt-14 mb-11">
         Nos cartes membres
       </div>
@@ -17,9 +13,9 @@ const NosCartesMembres = (props) => {
         </div>
         <div className="mt-12 sm:mt-0">
           <div className="text-white">
-            Réunir tous les passionnés «&nbsp;d&#39;art de vivre&nbsp;» autour du vin…
-            Celui que l&#39;on achète en toute confiance et que l&#39;on a
-            plaisir à partager avec ses amis.
+            Réunir tous les passionnés «&nbsp;d&#39;art de vivre&nbsp;» autour
+            du vin… Celui que l&#39;on achète en toute confiance et que l&#39;on
+            a plaisir à partager avec ses amis.
           </div>
           <div className="mt-6 flex text-center sm:inline-block">
             <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
@@ -32,4 +28,4 @@ const NosCartesMembres = (props) => {
   );
 };
 
-export default NosCartesMembres;
+export default LeBonCoup;
