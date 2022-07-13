@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { addCartLine, createCart, increaseQuantCart } from "../lib/shopifyCart";
+import { addCartLine, createCart, increaseQuantCart, removeCartLine } from "../lib/shopifyCart";
 
 const CartContext = createContext();
 
@@ -50,16 +50,29 @@ export default function ShopProvider({ children }) {
     }
   }
 
-  async function removeCartItem(itemToRemove) {
-    const updatedCart = cart.filter((item) => item.id !== itemToRemove);
+  async function removeCartItem(itemToRemoveId) {
+    console.log(itemToRemoveId);
+    console.log(cart);
+    const updatedCart = cart.filter((item) => item.id !== itemToRemoveId);
 
     setCart(updatedCart);
     if (cart.length === 1) {
       setCartOpen(false);
     }
-    const newCheckout = await increaseQuantCart(cartId, updatedCart);
+
+    let lineToRemove;
+    lines.map((item) => {
+      if (item.node.merchandise.id === itemToRemoveId) {
+        lineToRemove = item.node.id;
+        return;
+      }
+    });
+
+    const newCheckout = await removeCartLine(lineToRemove, cartId);
 
     localStorage.setItem("cart_id", JSON.stringify([updatedCart, newCheckout]));
+
+    setLines(newCheckout.lines.edges);
   }
 
   async function increaseCart(newItem) {
@@ -99,7 +112,6 @@ export default function ShopProvider({ children }) {
     setLines(newCheckout.lines.edges);
   }
 
-  
   return (
     <CartContext.Provider
       value={{
