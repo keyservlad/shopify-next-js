@@ -35,16 +35,15 @@ const HeroSection = (props) => {
         </h1>
         <Link href="/notre-cave" passHref>
           <a>
-            <button className="bg-redWine text-white font-lexend font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
+            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
               Découvrir notre cave
             </button>
           </a>
         </Link>
       </div>
       <ArrowCircleDownIcon
-        // TODO add anchor to div under with smooth scrolling effect
         onClick={() => scrollHeroHP()}
-        className="absolute left-0 right-0 mx-auto bottom-3 h-11 w-11 duration-500 hover:scale-125 ease-[cubic-bezier(.47,2.02,.31,-.36)] cursor-pointer"
+        className="hidden sm:block absolute left-0 right-0 mx-auto bottom-3 h-11 w-11 duration-500 hover:scale-125 ease-[cubic-bezier(.47,2.02,.31,-.36)] cursor-pointer"
         aria-hidden="true"
       />
     </div>

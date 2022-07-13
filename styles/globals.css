@@ -13,10 +13,10 @@
 }
 
 @layer components {
+  html {
+    @apply font-lexend text-base;
+  }
   h1 {
     @apply font-caveat font-bold text-5xl;
-  }
-  p {
-    @apply font-lexend;
   }
 }
