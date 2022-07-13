@@ -8,10 +8,12 @@ module.exports = {
     extend: {
       fontFamily: {
         lexend: ["Lexend"],
+        lexendbold: ["Lexend-bold"],
         caveat: ["Caveat"],
       },
       colors: {
         redWine: "#A83D72",
+        blueWine: "#51BBC9",
       },
     },
   },

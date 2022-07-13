@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ImageHero from "../../public/images/HP/hero_HP.png";
+import ImageHeroMobile from "../../public/images/HP/hero_HP_mobile.jpg";
 import Link from "next/link";
 import { ArrowCircleDownIcon } from "@heroicons/react/outline";
 
@@ -13,19 +15,21 @@ const HeroSection = (props) => {
     <div className="relative w-screen aspect-[0.65] sm:aspect-[2.18] max-h-screen overflow-hidden">
       <div className="hidden sm:flex">
         <Image
-          src="/images/HP/hero_HP.png"
+          src={ImageHero}
           alt="Image fond d'écran Home Page"
           layout="fill"
           objectFit="contain"
           quality={100}
+          placeholder="blur"
         />
       </div>
       <div className="sm:hidden">
         <Image
-          src="/images/HP/hero_HP_mobile.jpg"
+          src={ImageHeroMobile}
           alt="Image fond d'écran Home Page mobile"
           layout="fill"
           quality={100}
+          placeholder="blur"
         />
       </div>
 
@@ -35,7 +39,7 @@ const HeroSection = (props) => {
         </h1>
         <Link href="/notre-cave" passHref>
           <a>
-            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
+            <button className="bg-redWine text-white font-lexendbold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
               Découvrir notre cave
             </button>
           </a>

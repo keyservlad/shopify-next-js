@@ -1,4 +1,4 @@
-const NosCartesMembres = (props) => {
+const MeilleuresVentes = (props) => {
   return (
     <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-40 relative">
       <div className="absolute -top-10" ref={props.refButtonHeroHP}></div>
@@ -29,4 +29,4 @@ const NosCartesMembres = (props) => {
   );
 };
 
-export default NosCartesMembres;
+export default MeilleuresVentes;

@@ -4,17 +4,21 @@
 
 @font-face {
   font-family: "Lexend";
-  src: url("../public/fonts/Lexend-Regular.ttf");
+  src: url("../public/fonts/Lexend-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Lexend-bold";
+  src: url("../public/fonts/Lexend-SemiBold.ttf");
 }
 
 @font-face {
   font-family: "Caveat";
-  src: url("../public/fonts/Caveat-Regular.ttf");
+  src: url("../public/fonts/Caveat-VariableFont_wght.ttf");
 }
 
 @layer components {
   html {
-    @apply font-lexend text-base;
+    @apply font-lexend text-base font-normal;
   }
   h1 {
     @apply font-caveat font-bold text-5xl;

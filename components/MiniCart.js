@@ -88,7 +88,6 @@ export default function MiniCart({ cart }) {
                                       layout="fill"
                                       objectFit="contain"
                                       quality={50}
-                                      // className="h-full w-full object-cover object-center" TODO add millesime + other texts (to get in the requet too)
                                     />
                                   </div>
 
