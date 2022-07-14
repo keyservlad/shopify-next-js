@@ -88,6 +88,7 @@ export default function MiniCart({ cart }) {
                                       layout="fill"
                                       objectFit="contain"
                                       quality={50}
+                                      className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
                                     />
                                   </div>
 

@@ -18,6 +18,7 @@ export default function ProductPageContent({ product }) {
               layout="fill"
               objectFit="contain"
               quality={100}
+              className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
             />
           </div>
         </div>
