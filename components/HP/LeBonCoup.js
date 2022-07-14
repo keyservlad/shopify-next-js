@@ -11,7 +11,7 @@ const LeBonCoup = () => {
           </h1>
           <div className="w-3/4">
             <div className="mt-8">
-              <span className="font-lexendbold">
+              <span className="font-bold">
                 A votre écoute et désireux de vous faire partager un “coup de
                 cœur”, l&#39;équipe d&#39;EMOVIN vous propose 3 à 4 fois par an
                 (selon les opportunités) d&#39;acheter “Malin”&nbsp;!
@@ -28,7 +28,7 @@ const LeBonCoup = () => {
               membres.
             </div>
             <div className="mt-8 flex text-center sm:inline-block">
-              <button className="bg-blueWine text-white font-lexendbold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:text-blueWine hover:bg-white">
+              <button className="bg-blueWine text-white font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:text-blueWine hover:bg-white">
                 Tous les avantages du club
               </button>
             </div>
@@ -55,7 +55,7 @@ const LeBonCoup = () => {
           />
         </div>
         <div className="mt-8">
-          <span className="font-lexendbold">
+          <span className="font-bold">
             A votre écoute et désireux de vous faire partager un “coup de cœur”,
             l&#39;équipe d&#39;EMOVIN vous propose 3 à 4 fois par an (selon les
             opportunités) d&#39;acheter “Malin”&nbsp;!
@@ -70,7 +70,7 @@ const LeBonCoup = () => {
           Ces opérations sont éligibles aux points de fidélité pour les membres.
         </div>
         <div className="mt-8 flex text-center sm:inline-block">
-          <button className="bg-blueWine text-white font-lexendbold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
+          <button className="bg-blueWine text-white font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
             Tous les avantages du club
           </button>
         </div>
