@@ -19,7 +19,7 @@ const NosCartesMembres = (props) => {
             a plaisir à partager avec ses amis.
           </div>
           <div className="mt-6 flex text-center sm:inline-block">
-            <button className="bg-redWine text-white font-lexendbold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
+            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
               Tous les avantages du club
             </button>
           </div>

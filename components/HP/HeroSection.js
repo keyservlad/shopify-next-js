@@ -39,7 +39,7 @@ const HeroSection = (props) => {
         </h1>
         <Link href="/notre-cave" passHref>
           <a>
-            <button className="bg-redWine text-white font-lexendbold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
+            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
               Découvrir notre cave
             </button>
           </a>
