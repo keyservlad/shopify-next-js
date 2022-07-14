@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
               layout="fill"
               objectFit="contain"
               quality={100}
-              className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
+              // className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
             />
           </div>
           <div className="text-center">
