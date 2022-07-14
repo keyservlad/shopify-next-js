@@ -1,30 +1,20 @@
-const MeilleuresVentes = (props) => {
+import ProductCard from "../ProductCard";
+
+const MeilleuresVentes = ({ products }) => {
+  console.log(products);
   return (
-    <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-40 relative">
-      <div className="absolute -top-10" ref={props.refButtonHeroHP}></div>
-      <div className="text-white border-solid rounded-xl border-white border-[1px] px-5 py-3 inline-block uppercase mt-14 mb-11">
-        Nos cartes membres
+    <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-40">
+      <div className="text-redWine border-solid rounded-xl border-redWine border-[1px] px-5 py-3 inline-block uppercase mt-14 mb-11">
+        Notre cave
       </div>
-      <div className="pb-11 sm:pb-28 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-24">
-        <div className="">
-          <h1 className="text-white text-4xl sm:text-5xl font-normal sm:font-bold">
-            Devenez membre d&#39;une communauté d&#39;amateurs de vin qui
-            s&#39;intéresse à vous&nbsp;!
-          </h1>
+      <h1 className="text-4xl sm:text-5xl font-normal sm:font-bold">
+        Meilleures ventes
+      </h1>
+      <div className="mt-8 grid grid-cols-2 gap-y-10 gap-x-6 sm:gap-y-8 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
+          {products.map((product) => (
+            <ProductCard key={product.node.id} product={product} />
+          ))}
         </div>
-        <div className="mt-12 sm:mt-0">
-          <div className="text-white">
-            Réunir tous les passionnés «&nbsp;d&#39;art de vivre&nbsp;» autour
-            du vin… Celui que l&#39;on achète en toute confiance et que l&#39;on
-            a plaisir à partager avec ses amis.
-          </div>
-          <div className="mt-6 flex text-center sm:inline-block">
-            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
-              Tous les avantages du club
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

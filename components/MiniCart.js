@@ -56,8 +56,7 @@ export default function MiniCart({ cart }) {
                     <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-lg font-medium text-gray-900">
-                          {" "}
-                          Shopping cart{" "}
+                          Panier
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -66,7 +65,7 @@ export default function MiniCart({ cart }) {
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
                             onClick={() => setCartOpen(false)}
                           >
-                            <span className="sr-only">Close panel</span>
+                            <span className="sr-only">Fermer le panier</span>
                             <XIcon className="h-6 w-6" aria-hidden="true" />
                           </button>
                         </div>
@@ -88,7 +87,7 @@ export default function MiniCart({ cart }) {
                                       layout="fill"
                                       objectFit="contain"
                                       quality={50}
-                                      // className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
+                                      className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
                                     />
                                   </div>
 
@@ -118,7 +117,7 @@ export default function MiniCart({ cart }) {
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
                                       <p className="text-gray-500">
-                                        Qty {product.variantQuantity}
+                                        Qté : {product.variantQuantity}
                                       </p>
 
                                       <div className="flex">
@@ -129,7 +128,7 @@ export default function MiniCart({ cart }) {
                                             removeCartItem(product.id);
                                           }}
                                         >
-                                          Remove
+                                          Supprimer
                                         </button>
                                       </div>
                                     </div>
@@ -148,29 +147,29 @@ export default function MiniCart({ cart }) {
                     {cart.length > 0 ? (
                       <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
-                          <p>Subtotal</p>
+                          <p>Total</p>
                           <p>{formatter.format(cartTotal)}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
-                          Shipping and taxes calculated at checkout.
+                          Taxes incluse. Les frais de livraison sont calculés à l&#39;étape de paiement
                         </p>
                         <div className="mt-6">
                           <a
                             href={checkoutUrl}
                             className="flex items-center justify-center rounded-md border border-transparent bg-redWine px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-pink-800"
                           >
-                            Checkout
+                            Procéder au Paiement
                           </a>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
-                            or{" "}
+                            ou{" "}
                             <button
                               type="button"
                               className="font-medium text-redWine hover:text-pink-800"
                               onClick={() => setCartOpen(false)}
                             >
-                              Continue Shopping
+                              Continuez vos achats
                               <span aria-hidden="true"> &rarr;</span>
                             </button>
                           </p>

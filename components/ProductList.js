@@ -6,7 +6,7 @@ const ProductList = ({ products }) => {
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-baseline sm:justify-between">
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-            Our Favorites
+            Notre Cave
           </h2>
         </div>
 
@@ -14,15 +14,6 @@ const ProductList = ({ products }) => {
           {products.map((product) => (
             <ProductCard key={product.node.id} product={product} />
           ))}
-        </div>
-
-        <div className="mt-6 sm:hidden">
-          <a
-            href="#"
-            className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            Browse all favorites<span aria-hidden="true"> &rarr;</span>
-          </a>
         </div>
       </div>
     </div>
