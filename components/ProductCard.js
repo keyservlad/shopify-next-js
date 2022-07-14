@@ -8,9 +8,11 @@ const ProductCard = ({ product }) => {
   const price = product.node.priceRange.minVariantPrice.amount;
   const rawColor = product.node.couleur.value;
   const color = rawColor.toLowerCase().includes("rouge") ? "text-redWine" : rawColor.toLowerCase().includes("rosé") ? "text-[#FA9898]" : "text-blueWine";
+  // mettre ca cote serveur pour opti
 
   return (
     <Link href={`/product/${handle}`}>
+      
       <a className="group hover:bg-white rounded-md hover:drop-shadow-lg">
         <div className="group relative">
           <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
