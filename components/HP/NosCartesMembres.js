@@ -1,9 +1,9 @@
 const NosCartesMembres = (props) => {
   return (
-    <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-40 relative">
+    <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 relative">
       <div className="absolute -top-10" ref={props.refButtonHeroHP}></div>
       <div className="text-white border-solid rounded-xl border-white border-[1px] px-5 py-3 inline-block uppercase mt-14 mb-11">
-        Nos cartes membres
+        Nos cartes membre
       </div>
       <div className="pb-11 sm:pb-28 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-24">
         <div className="">

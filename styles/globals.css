@@ -4,7 +4,7 @@
 
 @layer components {
   html {
-    @apply font-lexend text-base font-normal;
+    @apply font-lexend text-base font-normal leading-7;
   }
   h1 {
     @apply font-caveat font-bold text-5xl;

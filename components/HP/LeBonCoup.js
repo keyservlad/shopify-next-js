@@ -3,7 +3,7 @@ import ImageBonCoup from "../../public/images/HP/bon_coup_accueil.jpg";
 
 const LeBonCoup = () => {
   return (
-    <div className="w-full bg-[url('/images/HP/fond_lbc.jpeg')] bg-center bg-cover bg-no-repeat px-5 sm:px-10 lg:px-20 xl:px-40">
+    <div className="w-full bg-[url('/images/HP/fond_lbc.jpeg')] bg-center bg-cover bg-no-repeat px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
       <div className="hidden md:grid py-20 grid-cols-5 gap-x-9">
         <div className="col-span-3">
           <h1 className="text-4xl sm:text-5xl font-normal sm:font-bold">
@@ -70,8 +70,8 @@ const LeBonCoup = () => {
           Ces opérations sont éligibles aux points de fidélité pour les membres.
         </div>
         <div className="mt-8 flex text-center sm:inline-block">
-          <button className="bg-blueWine text-white font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
-            Tous les avantages du club
+          <button className="bg-blueWine text-white font-semibold sm:font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
+            Je découvre le prochain bon Coup&nbsp;!
           </button>
         </div>
       </div>

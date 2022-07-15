@@ -1,4 +1,5 @@
 import { createRef } from "react";
+import Fidelite from "./Fidelite";
 import HeroSection from "./HeroSection";
 import LeBonCoup from "./LeBonCoup";
 import MeilleuresVentes from "./MeilleuresVentes";
@@ -12,6 +13,7 @@ const HomePage = ({ products }) => {
       <NosCartesMembres refButtonHeroHP={refButtonHeroHP} />
       <LeBonCoup />
       <MeilleuresVentes products={products} />
+      <Fidelite />
     </>
   );
 };
