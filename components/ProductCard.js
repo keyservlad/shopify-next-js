@@ -35,14 +35,14 @@ const ProductCard = ({ product }) => {
             />
           </div>
           <div className="text-center leading-6 mt-5">
-            <h3
+            <h2
               className={`mt-4 font-semibold ${
                 rawColor ? color : "text-blueWine"
               }`}
             >
               {title}{" "}
               {product.node.millesime ? product.node.millesime.value : ""}
-            </h3>
+            </h2>
             <p className="">
               {product.node.nom_vin ? product.node.nom_vin.value : ""}
               {product.node.productType ? " - " + product.node.productType : ""}

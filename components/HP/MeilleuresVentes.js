@@ -1,7 +1,6 @@
 import ProductCard from "../ProductCard";
 
 const MeilleuresVentes = ({ products }) => {
-  console.log(products);
   return (
     <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
       <div className="text-redWine border-solid rounded-xl border-redWine border-[1px] px-5 py-3 inline-block uppercase mt-14 mb-11">

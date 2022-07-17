@@ -51,8 +51,6 @@ export default function ShopProvider({ children }) {
   }
 
   async function removeCartItem(itemToRemoveId) {
-    console.log(itemToRemoveId);
-    console.log(cart);
     const updatedCart = cart.filter((item) => item.id !== itemToRemoveId);
 
     setCart(updatedCart);
