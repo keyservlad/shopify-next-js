@@ -47,7 +47,7 @@ const HeroSection = (props) => {
       </div>
       <ArrowCircleDownIcon
         onClick={() => scrollHeroHP()}
-        className="hidden sm:block absolute left-0 right-0 mx-auto bottom-3 h-11 w-11 duration-500 hover:scale-125 ease-[cubic-bezier(.47,2.02,.31,-.36)] cursor-pointer"
+        className="hidden sm:block absolute left-0 right-0 mx-auto bottom-3 h-14 w-14 duration-500 hover:scale-125 ease-[cubic-bezier(.47,2.02,.31,-.36)] cursor-pointer"
         aria-hidden="true"
       />
     </div>

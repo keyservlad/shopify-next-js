@@ -5,6 +5,7 @@ import HeroSection from "./HeroSection";
 import LeBonCoup from "./LeBonCoup";
 import MeilleuresVentes from "./MeilleuresVentes";
 import NosCartesMembres from "./NosCartesMembres";
+import NotreConcept from "./NotreConcept";
 
 const HomePage = ({ products }) => {
   const refButtonHeroHP = createRef();
@@ -18,6 +19,7 @@ const HomePage = ({ products }) => {
       <MeilleuresVentes products={products} />
       <Fidelite />
       <Carousel slides={slides} />
+      <NotreConcept />
     </>
   );
 };
