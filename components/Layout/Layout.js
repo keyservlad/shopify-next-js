@@ -4,9 +4,9 @@ import Nav from "./Nav";
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen max-w-[100vw] overflow-hidden">
+    <div className="min-h-screen max-w-[100vw]">
       <Nav />
-      <main>{children}</main>
+      <main className="overflow-hidden">{children}</main>
       <Footer />
     </div>
   );
