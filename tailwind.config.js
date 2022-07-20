@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
 module.exports = {
   mode: "jit",
   content: [
@@ -14,6 +16,8 @@ module.exports = {
       colors: {
         redWine: "#A83D72",
         blueWine: "#51BBC9",
+        sky: colors.sky,
+        teal: colors.teal,
       },
     },
   },

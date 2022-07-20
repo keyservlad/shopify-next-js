@@ -14,18 +14,23 @@
   }
   ```
 */
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   MenuIcon,
   SearchIcon,
   ShoppingBagIcon,
   XIcon,
+  ChevronDownIcon,
+  UserIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
 import ImageSerieLim from "../../public/images/HP/header-serie.png";
 import ImageKrone from "../../public/images/HP/krone.png";
+import ImageLogo from "../../public/images/logo_emovin-05.svg";
 import Link from "next/link";
+import { CartContext } from "../../context/ShopContext";
+import MiniCart from "../MiniCart";
 
 const navigation = {
   categories: [
@@ -38,8 +43,7 @@ const navigation = {
           href: "#",
           imageSrc:
             "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
+          imageAlt: "Image series limitees",
         },
       ],
       sections: [
@@ -90,6 +94,7 @@ const navigation = {
   pages: [
     { name: "Bon Coup", href: "#" },
     { name: "Le concept", href: "#" },
+    { name: "Série Limitée", href: "#" },
   ],
 };
 
@@ -99,6 +104,12 @@ function classNames(...classes) {
 
 export default function Nav2() {
   const [open, setOpen] = useState(false);
+  const { cart, cartOpen, setCartOpen } = useContext(CartContext);
+
+  let cartQuantity = 0;
+  cart.map((item) => {
+    return (cartQuantity += item?.variantQuantity);
+  });
 
   return (
     <div className="bg-white lg:sticky top-0 z-20 border-b border-gray-200">
@@ -257,20 +268,6 @@ export default function Nav2() {
                     </a>
                   </div>
                 </div>
-
-                <div className="border-t border-gray-200 py-6 px-4">
-                  <a href="#" className="-m-2 p-2 flex items-center">
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="w-5 h-auto block flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-base font-medium text-gray-900">
-                      CAD
-                    </span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
-                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -294,15 +291,14 @@ export default function Nav2() {
               </button>
 
               {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
-                <a href="#">
-                  <span className="sr-only">Workflow</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                    alt=""
-                  />
-                </a>
+              <div className="ml-4 flex lg:ml-0 h-full">
+                <span className="sr-only">Workflow</span>
+                <Link href="/" passHref>
+                  <a className="relative cursor-pointer lg:px-4 h-full flex items-center">
+                    {/* <span className="text-lg pt-1 font-bold">Emovin</span> */}
+                    <Image src={ImageLogo} alt="logo" height={35} width={100} />
+                  </a>
+                </Link>
               </div>
 
               {/* Flyout menus */}
@@ -316,12 +312,22 @@ export default function Nav2() {
                             <Popover.Button
                               className={classNames(
                                 open
-                                  ? "border-indigo-600 text-indigo-600"
+                                  ? "border-redWine text-redWine"
                                   : "border-transparent text-gray-700 hover:text-gray-800",
                                 "relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px focus:outline-none"
                               )}
                             >
-                              {category.name}
+                              {category.id == "notre-cave" ? (
+                                <div className="flex flex-row items-center">
+                                  <p className="mr-2">{category.name}</p>
+                                  <ChevronDownIcon
+                                    className="w-4 h-4"
+                                    aria-hidden="true"
+                                  />
+                                </div>
+                              ) : (
+                                category.name
+                              )}
                             </Popover.Button>
                           </div>
 
@@ -443,58 +449,48 @@ export default function Nav2() {
                 </div>
               </Popover.Group>
 
-              <div className="ml-auto flex items-center">
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+              <div className="ml-auto flex items-center text-redWine">
+                <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 hover:opacity-70">
                   <a
                     href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    className="text-sm font-medium flex flex-row items-center"
                   >
-                    Sign in
-                  </a>
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Create account
-                  </a>
-                </div>
-
-                <div className="hidden lg:ml-8 lg:flex">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-gray-800 flex items-center"
-                  >
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="w-5 h-auto block flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
-                    <span className="sr-only">, change currency</span>
+                    <UserIcon className="h-6 w-6 mr-2" aria-hidden="true" />
+                    {/* <UserCircleIcon className="h-6 w-6" aria-hidden="true" /> */}
+                    <p className="mr-2">Arnaud</p>
+                    <ChevronDownIcon className="w-4 h-4" aria-hidden="true" />
                   </a>
                 </div>
 
                 {/* Search */}
                 <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+                  <button
+                    href="#"
+                    className="p-2 hover:opacity-70 hover:cursor-pointer"
+                  >
                     <span className="sr-only">Search</span>
                     <SearchIcon className="w-6 h-6" aria-hidden="true" />
-                  </a>
+                  </button>
                 </div>
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 p-2 flex items-center">
+                  <button
+                    className="text-md font-bold cursor-pointer group -m-2 p-2 flex items-center"
+                    onClick={() => {
+                      setCartOpen(!cartOpen);
+                    }}
+                  >
                     <ShoppingBagIcon
-                      className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                      className="flex-shrink-0 h-6 w-6 group-hover:opacity-70"
                       aria-hidden="true"
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                    <span className="ml-2 text-sm font-medium group-hover:opacity-70">
+                      {cartQuantity}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  </button>
+                  <MiniCart cart={cart} />
                 </div>
               </div>
             </div>
