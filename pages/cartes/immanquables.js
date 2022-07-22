@@ -6,7 +6,7 @@ export default function Example({ carte }) {
 }
 
 export async function getStaticProps() {
-  let carte = await getCarte("carte-prestige");
+  let carte = await getCarte("carte-immanquables");
   return {
     props: {
       carte,

@@ -95,18 +95,22 @@ export default function MiniCart({ cart }) {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <Link
-                                            href={`/product/${product.handle}`}
-                                            passHref
-                                          >
-                                            <a
-                                              onClick={() => {
-                                                setCartOpen(false);
-                                              }}
+                                          {product.handle.includes("carte") ? (
+                                            product.title
+                                          ) : (
+                                            <Link
+                                              href={`/product/${product.handle}`}
+                                              passHref
                                             >
-                                              {product.title}
-                                            </a>
-                                          </Link>
+                                              <a
+                                                onClick={() => {
+                                                  setCartOpen(false);
+                                                }}
+                                              >
+                                                {product.title}
+                                              </a>
+                                            </Link>
+                                          )}
                                         </h3>
                                         <p className="ml-4">
                                           {formatter.format(
@@ -151,7 +155,8 @@ export default function MiniCart({ cart }) {
                           <p>{formatter.format(cartTotal)}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
-                          Taxes incluse. Les frais de livraison sont calculés à l&#39;étape de paiement
+                          Taxes incluse. Les frais de livraison sont calculés à
+                          l&#39;étape de paiement
                         </p>
                         <div className="mt-6">
                           <a
