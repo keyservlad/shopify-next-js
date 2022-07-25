@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect } from "react";
-import { addCartLine, createCart, increaseQuantCart, removeCartLine } from "../lib/shopifyCart";
+import {
+  addCartLine,
+  createCart,
+  increaseQuantCart,
+  removeCartLine,
+} from "../lib/shopifyCart";
 
 const CartContext = createContext();
 
@@ -13,6 +18,11 @@ export default function ShopProvider({ children }) {
   useEffect(() => {
     if (localStorage.cart_id) {
       const cartObject = JSON.parse(localStorage.cart_id);
+
+      if (!cartObject[1].lines) {
+        localStorage.removeItem("cart_id");
+        return;
+      }
 
       if (cartObject[0].id) {
         setCart([cartObject[0]]);

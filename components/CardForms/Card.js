@@ -1,5 +1,12 @@
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
+import fr from "react-phone-number-input/locale/fr.json";
+import "react-phone-number-input/style.css";
+import PhoneInput, {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isValidPhoneNumber,
+} from "react-phone-number-input";
 
 export const Card = ({ carte }) => {
   useEffect(() => {}, []);
@@ -14,6 +21,7 @@ export const Card = ({ carte }) => {
   };
 
   const { addToCart } = useContext(CartContext);
+  const [value, setValue] = useState("");
 
   return (
     <div>
@@ -27,6 +35,7 @@ export const Card = ({ carte }) => {
       </button>
       <div className="max-w-7xl mx-auto py-16 sm:my-16 px-4 sm:py-24 sm:px-6 lg:px-8 bg-gray-100">
         <div className="mt-10 sm:mt-0">
+          <h1 className="text-center mb-10">{carte.title}</h1>
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">
               <div className="px-4 sm:px-0">
@@ -162,17 +171,40 @@ export const Card = ({ carte }) => {
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="telephone"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Numéro de téléphone
+                        </label>
+                        <PhoneInput
+                          defaultCountry="FR"
+                          international
+                          countryCallingCodeEditable={false}
+                          name="telephone"
+                          placeholder="Numéro de téléphone"
+                          value={value}
+                          onChange={setValue}
+                          className="mt-1"
+                        />
+                        <label
+                          htmlFor="telephone"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {value
+                            ? isValidPhoneNumber(value)
+                              ? undefined
+                              : "Invalid phone number"
+                            : "Phone number required"}
+                        </label>
+                      </div>
                     </div>
                   </div>
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                      Save
-                    </button>
-                  </div>
                 </div>
+                <button type="submit">
+                  as
+                </button>
               </form>
             </div>
           </div>
