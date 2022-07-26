@@ -7,9 +7,22 @@ import PhoneInput, {
   formatPhoneNumberIntl,
   isValidPhoneNumber,
 } from "react-phone-number-input";
+import Autocomplete from "react-google-autocomplete";
+import { usePlacesWidget } from "react-google-autocomplete";
 
 export const Card = ({ carte }) => {
   useEffect(() => {}, []);
+
+  const { ref } = usePlacesWidget({
+    apiKey: process.env.GOOGLE_MAPS_API_KEY,
+    onPlaceSelected: (place) => {
+      console.log(place);
+    },
+    options: {
+      types: ["address"],
+      componentRestrictions: { country: "fr" },
+    },
+  });
 
   const variant = {
     id: carte.variants.edges[0].node.id,
@@ -132,6 +145,8 @@ export const Card = ({ carte }) => {
                           Adresse
                         </label>
                         <input
+                          ref={ref}
+                          placeholder=""
                           type="text"
                           name="street-address"
                           id="street-address"
@@ -181,6 +196,7 @@ export const Card = ({ carte }) => {
                         <PhoneInput
                           defaultCountry="FR"
                           international
+                          labels={fr}
                           countryCallingCodeEditable={false}
                           name="telephone"
                           placeholder="Numéro de téléphone"
@@ -199,12 +215,23 @@ export const Card = ({ carte }) => {
                             : "Phone number required"}
                         </label>
                       </div>
+                      <div className="col-span-6 sm:col-span-3">
+                        <Autocomplete
+                          apiKey={process.env.GOOGLE_MAPS_API_KEY}
+                          onPlaceSelected={(place) => {
+                            console.log(place);
+                          }}
+                          options={{
+                            types: ["address"],
+                            componentRestrictions: { country: "fr" },
+                          }}
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <button type="submit">
-                  as
-                </button>
+                <button type="submit">as</button>
               </form>
             </div>
           </div>
