@@ -8,7 +8,6 @@ import PhoneInput, {
   formatPhoneNumberIntl,
   isValidPhoneNumber,
 } from "react-phone-number-input";
-import Autocomplete from "react-google-autocomplete";
 import { usePlacesWidget } from "react-google-autocomplete";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,22 +20,16 @@ const schema = object({
   email: string()
     .email("Email must be a valid email address")
     .required("Email is required"),
-  address: string().required("Veuillez entrer votre adresse"),
   country: string().required("Veuillez entrer votre pays"),
   city: string().required("Veuillez entrer votre Ville"),
-  zipCode: number()
-    .typeError("Age must be a number")
-    .required("Age is required"),
+  zipCode: string().required("Veuillez entrer votre code postal"),
 });
 
 function onSubmit(values) {
   console.log(values);
 }
 
-
 export const Card = ({ carte }) => {
-  useEffect(() => {}, []);
-
   const {
     register,
     handleSubmit,
@@ -59,11 +52,6 @@ export const Card = ({ carte }) => {
     },
   });
 
-  const refAddress = React.useRef();
-  const refCountry = React.useRef();
-  const refCity = React.useRef();
-  const refZip = React.useRef();
-
   const variant = {
     id: carte.variants.edges[0].node.id,
     title: carte.title,
@@ -79,6 +67,10 @@ export const Card = ({ carte }) => {
   const [countryState, setCountryState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
+
+  // useEffect(() => {
+  //   console.log(countryState);
+  // }, [countryState]);
 
   return (
     <div>
@@ -185,23 +177,34 @@ export const Card = ({ carte }) => {
 
                       <div className="col-span-6">
                         <label
-                          htmlFor="street-address"
+                          htmlFor="address"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Adresse
                         </label>
-                        <input
-                          ref={ref}
-                          placeholder=""
-                          type="text"
-                          name="street-address"
-                          id="street-address"
-                          {...register("address")}
-                          autoComplete="street-address"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+
+                        <Controller
+                          name="address"
+                          id="address"
+                          control={control}
+                          defaultValue=""
+                          render={({
+                            field: { value, onChange, onBlur, ...field },
+                          }) => (
+                            <input
+                              {...field}
+                              type="text"
+                              autoComplete="street-address"
+                              {...register("address")}
+                              ref={ref}
+                              placeholder=""
+                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          )}
                         />
+
                         <span
-                          htmlFor="street-address"
+                          htmlFor="address"
                           className="block text-sm font-medium text-orange-600"
                         >
                           {errors?.address?.message}
@@ -219,14 +222,16 @@ export const Card = ({ carte }) => {
                         <Controller
                           name="country"
                           control={control}
-                          {...register("country")}
                           defaultValue=""
                           render={({
-                            field: { value, ref, onChange, onBlur, ...field },
+                            field: { value, onChange, onBlur, ...field },
                           }) => (
                             <input
                               {...field}
                               type="text"
+                              autoComplete="country-name"
+                              {...register("country")}
+                              value={countryState}
                               onChange={({ target: { value } }) => {
                                 onChange(value);
                                 setCountryState(value);
@@ -253,18 +258,19 @@ export const Card = ({ carte }) => {
                           Ville
                         </label>
 
-                        {/* <Controller
+                        <Controller
                           name="city"
-                          id="city"
                           control={control}
-                          {...register("city")}
                           defaultValue=""
                           render={({
-                            field: { value, onChange, ...field },
+                            field: { value, onChange, onBlur, ...field },
                           }) => (
                             <input
                               {...field}
                               type="text"
+                              autoComplete="address-level2"
+                              {...register("city")}
+                              value={city}
                               onChange={({ target: { value } }) => {
                                 onChange(value);
                                 setCity(value);
@@ -273,7 +279,7 @@ export const Card = ({ carte }) => {
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
                           )}
-                        /> */}
+                        />
                         <span className="block text-sm font-medium text-orange-600">
                           {errors?.city?.message}
                         </span>
@@ -281,23 +287,37 @@ export const Card = ({ carte }) => {
 
                       <div className="col-span-4 sm:col-span-2">
                         <label
-                          htmlFor="postal-code"
+                          htmlFor="zipCode"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Code Postal
                         </label>
-                        <input
-                          type="text"
-                          name="postal-code"
-                          id="postal-code"
-                          value={zip}
-                          {...register("zipCode")}
-                          onChange={(e) => setZip(e.target.value)}
-                          autoComplete="postal-code"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+
+                        <Controller
+                          name="zipCode"
+                          id="zipCode"
+                          control={control}
+                          defaultValue=""
+                          render={({
+                            field: { value, onChange, onBlur, ...field },
+                          }) => (
+                            <input
+                              {...field}
+                              type="text"
+                              autoComplete="postal-code"
+                              {...register("zipCode")}
+                              value={zip}
+                              onChange={({ target: { value } }) => {
+                                onChange(value);
+                                setZip(value);
+                              }}
+                              placeholder=""
+                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          )}
                         />
                         <span
-                          htmlFor="postal-code"
+                          htmlFor="zipCode"
                           className="block text-sm font-medium text-orange-600"
                         >
                           {errors?.zipCode?.message}
