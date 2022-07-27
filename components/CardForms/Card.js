@@ -1,3 +1,4 @@
+import React from "react";
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 import fr from "react-phone-number-input/locale/fr.json";
@@ -10,8 +11,42 @@ import PhoneInput, {
 import Autocomplete from "react-google-autocomplete";
 import { usePlacesWidget } from "react-google-autocomplete";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { object, string, number, array, InferType, TypeOf } from "yup";
+import { Controller, useForm } from "react-hook-form";
+
+const schema = object({
+  firstName: string().required("Name is required"),
+  lastName: string().required("Name is required"),
+  email: string()
+    .email("Email must be a valid email address")
+    .required("Email is required"),
+  address: string().required("Veuillez entrer votre adresse"),
+  country: string().required("Veuillez entrer votre pays"),
+  city: string().required("Veuillez entrer votre Ville"),
+  zipCode: number()
+    .typeError("Age must be a number")
+    .required("Age is required"),
+});
+
+function onSubmit(values) {
+  console.log(values);
+}
+
+
 export const Card = ({ carte }) => {
   useEffect(() => {}, []);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
 
   const { ref } = usePlacesWidget({
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -24,6 +59,11 @@ export const Card = ({ carte }) => {
     },
   });
 
+  const refAddress = React.useRef();
+  const refCountry = React.useRef();
+  const refCity = React.useRef();
+  const refZip = React.useRef();
+
   const variant = {
     id: carte.variants.edges[0].node.id,
     title: carte.title,
@@ -34,7 +74,11 @@ export const Card = ({ carte }) => {
   };
 
   const { addToCart } = useContext(CartContext);
-  const [value, setValue] = useState("");
+  const [phoneValue, setPhoneValue] = useState("");
+
+  const [countryState, setCountryState] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
 
   return (
     <div>
@@ -47,22 +91,22 @@ export const Card = ({ carte }) => {
         Save
       </button>
       <div className="max-w-7xl mx-auto py-16 sm:my-16 px-4 sm:py-24 sm:px-6 lg:px-8 bg-gray-100">
-        <div className="mt-10 sm:mt-0">
-          <h1 className="text-center mb-10">{carte.title}</h1>
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-            <div className="md:col-span-1">
-              <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  Informations Personnelles
-                </h3>
-                <p className="mt-1 text-sm text-gray-600">
-                  Rensignez vos informations Personnelles pour la création de
-                  votre compte
-                </p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-10 sm:mt-0">
+            <h1 className="text-center mb-10">{carte.title}</h1>
+            <div className="md:grid md:grid-cols-3 md:gap-6">
+              <div className="md:col-span-1">
+                <div className="px-4 sm:px-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Informations Personnelles
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Rensignez vos informations Personnelles pour la création de
+                    votre compte
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="">
+              <div className="mt-5 md:mt-0 md:col-span-2">
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
@@ -77,9 +121,16 @@ export const Card = ({ carte }) => {
                           type="text"
                           name="first-name"
                           id="first-name"
+                          {...register("firstName")}
                           autoComplete="given-name"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
+                        <span
+                          htmlFor="first-name"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.firstName?.message}
+                        </span>
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
@@ -93,9 +144,16 @@ export const Card = ({ carte }) => {
                           type="text"
                           name="last-name"
                           id="last-name"
+                          {...register("lastName")}
                           autoComplete="family-name"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
+                        <span
+                          htmlFor="last-name"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.lastName?.message}
+                        </span>
                       </div>
 
                       <div className="col-span-6 sm:col-span-4">
@@ -113,28 +171,16 @@ export const Card = ({ carte }) => {
                           type="text"
                           name="email-address"
                           id="email-address"
+                          {...register("email")}
                           autoComplete="email"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
                         />
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-3">
-                        <label
-                          htmlFor="country"
-                          className="block text-sm font-medium text-gray-700"
+                        <span
+                          htmlFor="email-address"
+                          className="block text-sm font-medium text-orange-600"
                         >
-                          Pays
-                        </label>
-                        <select
-                          id="country"
-                          name="country"
-                          autoComplete="country-name"
-                          className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                          <option>France</option>
-                          <option>France</option>
-                          <option>France</option>
-                        </select>
+                          {errors?.email?.message}
+                        </span>
                       </div>
 
                       <div className="col-span-6">
@@ -150,9 +196,53 @@ export const Card = ({ carte }) => {
                           type="text"
                           name="street-address"
                           id="street-address"
+                          {...register("address")}
                           autoComplete="street-address"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
+                        <span
+                          htmlFor="street-address"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.address?.message}
+                        </span>
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="country"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Pays
+                        </label>
+
+                        <Controller
+                          name="country"
+                          control={control}
+                          {...register("country")}
+                          defaultValue=""
+                          render={({
+                            field: { value, ref, onChange, onBlur, ...field },
+                          }) => (
+                            <input
+                              {...field}
+                              type="text"
+                              onChange={({ target: { value } }) => {
+                                onChange(value);
+                                setCountryState(value);
+                              }}
+                              placeholder=""
+                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          )}
+                        />
+
+                        <span
+                          htmlFor="country"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.country?.message}
+                        </span>
                       </div>
 
                       <div className="col-span-6 sm:col-span-4">
@@ -162,13 +252,31 @@ export const Card = ({ carte }) => {
                         >
                           Ville
                         </label>
-                        <input
-                          type="text"
+
+                        {/* <Controller
                           name="city"
                           id="city"
-                          autoComplete="address-level2"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
+                          control={control}
+                          {...register("city")}
+                          defaultValue=""
+                          render={({
+                            field: { value, onChange, ...field },
+                          }) => (
+                            <input
+                              {...field}
+                              type="text"
+                              onChange={({ target: { value } }) => {
+                                onChange(value);
+                                setCity(value);
+                              }}
+                              placeholder=""
+                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          )}
+                        /> */}
+                        <span className="block text-sm font-medium text-orange-600">
+                          {errors?.city?.message}
+                        </span>
                       </div>
 
                       <div className="col-span-4 sm:col-span-2">
@@ -182,9 +290,18 @@ export const Card = ({ carte }) => {
                           type="text"
                           name="postal-code"
                           id="postal-code"
+                          value={zip}
+                          {...register("zipCode")}
+                          onChange={(e) => setZip(e.target.value)}
                           autoComplete="postal-code"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
+                        <span
+                          htmlFor="postal-code"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.zipCode?.message}
+                        </span>
                       </div>
                       <div className="col-span-6 sm:col-span-3">
                         <label
@@ -200,63 +317,47 @@ export const Card = ({ carte }) => {
                           countryCallingCodeEditable={false}
                           name="telephone"
                           placeholder="Numéro de téléphone"
-                          value={value}
-                          onChange={setValue}
+                          value={phoneValue}
+                          onChange={setPhoneValue}
                           className="mt-1"
                         />
                         <label
                           htmlFor="telephone"
                           className="block text-sm font-medium text-orange-600"
                         >
-                          {value
-                            ? isValidPhoneNumber(value)
+                          {phoneValue
+                            ? isValidPhoneNumber(phoneValue)
                               ? undefined
                               : "Invalid phone number"
                             : "Phone number required"}
                         </label>
                       </div>
-                      <div className="col-span-6 sm:col-span-3">
-                        <Autocomplete
-                          apiKey={process.env.GOOGLE_MAPS_API_KEY}
-                          onPlaceSelected={(place) => {
-                            console.log(place);
-                          }}
-                          options={{
-                            types: ["address"],
-                            componentRestrictions: { country: "fr" },
-                          }}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
                     </div>
                   </div>
                 </div>
-                <button type="submit">as</button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden sm:block" aria-hidden="true">
-          <div className="py-5">
-            <div className="border-t border-gray-200" />
-          </div>
-        </div>
-
-        <div className="mt-10 sm:mt-0">
-          <div className="md:grid md:grid-cols-3 md:gap-6">
-            <div className="md:col-span-1">
-              <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  Livraison
-                </h3>
-                <p className="mt-1 text-sm text-gray-600">
-                  Decidez comment vous souhaitez recevoir votre vin
-                </p>
               </div>
             </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="">
+          </div>
+
+          <div className="hidden sm:block" aria-hidden="true">
+            <div className="py-5">
+              <div className="border-t border-gray-200" />
+            </div>
+          </div>
+
+          <div className="mt-10 sm:mt-0">
+            <div className="md:grid md:grid-cols-3 md:gap-6">
+              <div className="md:col-span-1">
+                <div className="px-4 sm:px-0">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Livraison
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Decidez comment vous souhaitez recevoir votre vin
+                  </p>
+                </div>
+              </div>
+              <div className="mt-5 md:mt-0 md:col-span-2">
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <fieldset>
@@ -379,20 +480,15 @@ export const Card = ({ carte }) => {
                     data-handle={carte.handle}
                   ></div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button
-                      onClick={() => {
-                        addToCart(variant);
-                      }}
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
+                    <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       Save
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
