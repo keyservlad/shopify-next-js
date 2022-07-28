@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 import fr from "react-phone-number-input/locale/fr.json";
 import "react-phone-number-input/style.css";
-import PhoneInput, {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-  isValidPhoneNumber,
-} from "react-phone-number-input";
+import PhoneInput, { formatPhoneNumberIntl } from "react-phone-number-input";
 import { usePlacesWidget } from "react-google-autocomplete";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string, number, array, InferType, TypeOf } from "yup";
+import { object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
 
+const phoneRegExp = /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/
 const schema = object({
   firstName: string().required("Name is required"),
   lastName: string().required("Name is required"),
   email: string()
     .email("Email must be a valid email address")
     .required("Email is required"),
+  address: string().required("Veuillez entrer votre adresse"),
   country: string().required("Veuillez entrer votre pays"),
   city: string().required("Veuillez entrer votre Ville"),
   zipCode: string().required("Veuillez entrer votre code postal"),
+  phone: string()
+    .required("required")
+    .matches(phoneRegExp, "Phone number is not valid")
+    .min(10, "to short"),
 });
 
 function onSubmit(values) {
@@ -34,6 +36,9 @@ export const Card = ({ carte }) => {
     register,
     handleSubmit,
     control,
+    setValue,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -44,7 +49,28 @@ export const Card = ({ carte }) => {
   const { ref } = usePlacesWidget({
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
     onPlaceSelected: (place) => {
-      console.log(place);
+      setAddressState(
+        place.address_components[0].long_name +
+          " " +
+          place.address_components[1].long_name
+      );
+      setValue(
+        "address",
+        place.address_components[0].long_name +
+          " " +
+          place.address_components[1].long_name
+      );
+      setCountryState(place.address_components[5].long_name);
+      setValue("country", place.address_components[5].long_name);
+
+      setCity(place.address_components[2].long_name);
+      setValue("city", place.address_components[2].long_name);
+      setZip(place.address_components[6].long_name);
+      setValue("zipCode", place.address_components[6].long_name);
+      clearErrors("address");
+      clearErrors("country");
+      clearErrors("city");
+      clearErrors("zipCode");
     },
     options: {
       types: ["address"],
@@ -64,13 +90,15 @@ export const Card = ({ carte }) => {
   const { addToCart } = useContext(CartContext);
   const [phoneValue, setPhoneValue] = useState("");
 
+  const [addressState, setAddressState] = useState("");
   const [countryState, setCountryState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
 
-  // useEffect(() => {
-  //   console.log(countryState);
-  // }, [countryState]);
+  useEffect(() => {
+    register("address");
+    register("phone");
+  }, [register]);
 
   return (
     <div>
@@ -195,8 +223,20 @@ export const Card = ({ carte }) => {
                               {...field}
                               type="text"
                               autoComplete="street-address"
-                              {...register("address")}
                               ref={ref}
+                              value={addressState}
+                              onChange={({ target: { value } }) => {
+                                onChange(value);
+                                setAddressState(value);
+                                if (value.length < 1) {
+                                  setError("address", {
+                                    type: "custom",
+                                    message: "Veuillez entrer votre adresse",
+                                  });
+                                } else {
+                                  setValue("address", value);
+                                }
+                              }}
                               placeholder=""
                               className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -330,6 +370,7 @@ export const Card = ({ carte }) => {
                         >
                           Numéro de téléphone
                         </label>
+
                         <PhoneInput
                           defaultCountry="FR"
                           international
@@ -338,18 +379,27 @@ export const Card = ({ carte }) => {
                           name="telephone"
                           placeholder="Numéro de téléphone"
                           value={phoneValue}
-                          onChange={setPhoneValue}
+                          onChange={(value) => {
+                            setPhoneValue(value);
+                            if (!value) {
+                              setError("phone", {
+                                type: "custom",
+                                message:
+                                  "Veuillez entrer votre numéro de téléphone",
+                              });
+                            } else {
+                              console.log(formatPhoneNumberIntl(value));
+                              setValue("phone", formatPhoneNumberIntl(value));
+                              clearErrors("phone");
+                            }
+                          }}
                           className="mt-1"
                         />
                         <label
                           htmlFor="telephone"
                           className="block text-sm font-medium text-orange-600"
                         >
-                          {phoneValue
-                            ? isValidPhoneNumber(phoneValue)
-                              ? undefined
-                              : "Invalid phone number"
-                            : "Phone number required"}
+                          {errors?.phone?.message}
                         </label>
                       </div>
                     </div>
