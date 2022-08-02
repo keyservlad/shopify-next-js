@@ -9,8 +9,11 @@ import { usePlacesWidget } from "react-google-autocomplete";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
+import { createCustomer } from "../../lib/shopifyCustomerAdmin";
+import axios from "axios";
 
-const phoneRegExp = /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/
+const phoneRegExp =
+  /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
 const schema = object({
   firstName: string().required("Name is required"),
   lastName: string().required("Name is required"),
@@ -27,9 +30,49 @@ const schema = object({
     .min(10, "to short"),
 });
 
-function onSubmit(values) {
+async function onSubmit(values) {
   console.log(values);
+
+  const input = {
+    email: values.email,
+    addresses: [
+      {
+        address1: values.address,
+        city: values.city,
+        country: values.country,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phone: values.phone,
+        zip: values.zipCode,
+      },
+    ],
+    firstName: values.firstName,
+    lastName: values.lastName,
+    metafields: [
+      {
+        key: "expirationDate",
+        namespace: "custom",
+        value: new Date(Date.now()).toISOString(),
+      },
+    ],
+    phone: values.phone,
+    tags: ["prestige"],
+  };
+
+  console.log(JSON.stringify(input));
+
+  const customer = createCustomerRequest(JSON.stringify(input));
+  console.log(customer);
 }
+
+const createCustomerRequest = (input) =>
+  axios
+    .get("/api/create-customer", {
+      params: {
+        input: input,
+      },
+    })
+    .then((res) => res.data);
 
 export const Card = ({ carte }) => {
   const {
@@ -49,24 +92,37 @@ export const Card = ({ carte }) => {
   const { ref } = usePlacesWidget({
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
     onPlaceSelected: (place) => {
-      setAddressState(
-        place.address_components[0].long_name +
-          " " +
-          place.address_components[1].long_name
-      );
-      setValue(
-        "address",
-        place.address_components[0].long_name +
-          " " +
-          place.address_components[1].long_name
-      );
-      setCountryState(place.address_components[5].long_name);
-      setValue("country", place.address_components[5].long_name);
+      console.log(place);
+      if (place.address_components.length == 7) {
+        setAddressState(
+          place.address_components[0].long_name +
+            " " +
+            place.address_components[1].long_name
+        );
+        setValue(
+          "address",
+          place.address_components[0].long_name +
+            " " +
+            place.address_components[1].long_name
+        );
+        setCountryState(place.address_components[5].long_name);
+        setValue("country", place.address_components[5].long_name);
 
-      setCity(place.address_components[2].long_name);
-      setValue("city", place.address_components[2].long_name);
-      setZip(place.address_components[6].long_name);
-      setValue("zipCode", place.address_components[6].long_name);
+        setCity(place.address_components[2].long_name);
+        setValue("city", place.address_components[2].long_name);
+        setZip(place.address_components[6].long_name);
+        setValue("zipCode", place.address_components[6].long_name);
+      } else if (place.address_components.length == 6) {
+        setAddressState(place.address_components[0].long_name);
+        setValue("address", place.address_components[0].long_name);
+        setCountryState(place.address_components[4].long_name);
+        setValue("country", place.address_components[4].long_name);
+
+        setCity(place.address_components[1].long_name);
+        setValue("city", place.address_components[1].long_name);
+        setZip(place.address_components[5].long_name);
+        setValue("zipCode", place.address_components[5].long_name);
+      }
       clearErrors("address");
       clearErrors("country");
       clearErrors("city");
