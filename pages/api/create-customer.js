@@ -7,7 +7,7 @@ export default async function send(req, res) {
   // console.log(req.oney);
   // console.log(req.oney.customer);
   // console.log(req.oney.line_items);
-  console.log(req.rawBody.customer);
+  console.log(req.rawBody);
   return res.status(200).json({ status: "Ok" });
 
   // // check for the POST request
