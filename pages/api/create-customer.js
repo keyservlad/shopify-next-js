@@ -4,9 +4,9 @@ export default async function send(req, res) {
   // const passwordCreateUser = process.env.PASSWORD_CREATE_USER;
 
   // const customer = await createCustomer("guilhamat.arnaud@gmail.com", passwordCreateUser);
-  console.log(req.oney);
-  console.log(req.oney.customer);
-  console.log(req.oney.line_items);
+  // console.log(req.oney);
+  // console.log(req.oney.customer);
+  // console.log(req.oney.line_items);
   console.log(req.customer);
   console.log(req.line_items);
   return res.status(200).json({ status: "Ok" });
