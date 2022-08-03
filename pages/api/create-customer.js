@@ -1,23 +1,24 @@
-import { gql } from "graphql-request";
+import { createCustomer } from "../../lib/shopifyCustomer";
 
 export default async function send(req, res) {
-  console.log(req);
-  // check for the POST request
-  if (req.method !== "POST") {
-    return res
-      .status(400)
-      .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
-  }
+  // const passwordCreateUser = process.env.PASSWORD_CREATE_USER;
 
-  return res.status(200).json({ status: "Ok" });
-  // const {
-  //   query: { input },
-  // } = req;
+  // const customer = await createCustomer("guilhamat.arnaud@gmail.com", passwordCreateUser);
+  console.log(req);
+  return res.status(200).json(req);
+
+  // // check for the POST request
+  // if (req.method !== "POST") {
+  //   return res
+  //     .status(400)
+  //     .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
+  // }
+
+  // return res.status(200).json({ status: "Ok" });
 
   // const domain = process.env.SHOPIFY_STORE_DOMAIN;
 
   // const storeFrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN;
-  // const passwordCreateUser = process.env.PASSWORD_CREATE_USER;
 
   // async function ShopifyData(query) {
   //   const URL = `https://${domain}/api/2022-07/graphql.json`;
@@ -40,15 +41,14 @@ export default async function send(req, res) {
 
   //     return data;
   //   } catch (error) {
-  //     throw new Error("customers not fetched");
+  //     throw new Error("customers not fetched " + error);
   //   }
   // }
 
-  // async function getProduct(input) {
-  //   const inputt = input.replace(/"([^"]+)":/g, "$1:");
-  //   const query = gql`
+  // async function getProduct() {
+  //   const query = `
   //   mutation {
-  //     customerCreate(input: ${inputt}) {
+  //     customerCreate(input: {email: "guilhamat.arnaud@gmail.com", password: "${passwordCreateUser}"}) {
   //       customer {
   //         email
   //         firstName
@@ -62,7 +62,6 @@ export default async function send(req, res) {
   //     }
   //   }`;
   //   console.log(query);
-
   //   const response = await ShopifyData(query);
 
   //   const product = response ? response : [];
@@ -70,7 +69,7 @@ export default async function send(req, res) {
   //   return product;
   // }
 
-  // const product = await getProduct(input);
+  // const product = await getProduct();
   // console.log(product);
 
   // res.json(product);
