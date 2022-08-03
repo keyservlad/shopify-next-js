@@ -8,7 +8,10 @@ export default async function send(req, res) {
   // console.log(req.oney.customer);
   // console.log(req.oney.line_items);
   console.log(
-    "line items : " + req.body.line_items + "customer : " + req.body.customer
+    "line items : " +
+      JSON.stringify(req.body.line_items) +
+      "customer : " +
+      JSON.stringify(req.body.customer)
   );
   return res.status(200).json({ status: "Ok" });
 

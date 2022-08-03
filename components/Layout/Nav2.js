@@ -36,7 +36,7 @@ const navigation = {
   categories: [
     {
       id: "notre-cave",
-      name: "Notre Cave",
+      name: "Notre Boutique",
       featured: [
         {
           name: "Série limitée",
