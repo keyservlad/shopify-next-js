@@ -5,7 +5,7 @@ export default async function send(req, res) {
 
   // const customer = await createCustomer("guilhamat.arnaud@gmail.com", passwordCreateUser);
   console.log(req);
-  return res.status(200).json(req);
+  return res.status(200).json({ status: "Ok" });
 
   // // check for the POST request
   // if (req.method !== "POST") {
