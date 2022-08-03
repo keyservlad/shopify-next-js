@@ -8,7 +8,8 @@ export default async function send(req, res) {
   // console.log(req.oney.customer);
   // console.log(req.oney.line_items);
 
-  req.body.line_items[0].map((item) => {
+  req.body.line_items.map((item) => {
+    console.log(item);
     if(item.title == "Carte Prestige") {
       console.log("found it");
       console.log("customer : " + req.body.customer.id + req.body.customer.email + req.body.customer.first_name + req.body.customer.last_name);
