@@ -7,6 +7,7 @@ export default async function send(req, res) {
   // console.log(req.oney);
   // console.log(req.oney.customer);
   // console.log(req.oney.line_items);
+  console.log(req);
   console.log(req.customer);
   console.log(req.line_items);
   return res.status(200).json({ status: "Ok" });
