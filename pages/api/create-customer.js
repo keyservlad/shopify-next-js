@@ -7,6 +7,14 @@ export default async function send(req, res) {
   // console.log(req.oney);
   // console.log(req.oney.customer);
   // console.log(req.oney.line_items);
+
+  req.body.line_items[0].map((item) => {
+    if(item.title == "Carte Prestige") {
+      console.log("found it");
+      console.log("customer : " + req.body.customer.id + req.body.customer.email + req.body.customer.first_name + req.body.customer.last_name);
+    }
+  })
+
   console.log(
     "line items : " +
       JSON.stringify(req.body.line_items) +
