@@ -35,13 +35,11 @@ export default async function send(req, res) {
     id: "gid://shopify/Customer/" + customer.id,
     metafields: [
       {
-        id: "gid://shopify/Metafield/22028108824725",
         key: "status",
         namespace: "custom",
         value: "toBeActivated",
       },
       {
-        id: "gid://shopify/Metafield/22028208078997",
         key: "carte",
         namespace: "custom",
         value: title,
