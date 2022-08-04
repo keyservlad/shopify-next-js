@@ -28,11 +28,11 @@ export default async function send(req, res) {
     email: req.body.customer.email,
   };
 
-  const title = "prestige"
+  const title = "prestige";
 
   const input = {
     email: customer.email,
-    id: customer.id,
+    id: "gid://shopify/Customer/" + customer.id,
     metafields: [
       {
         id: "gid://shopify/Metafield/22028108824725",
@@ -50,6 +50,7 @@ export default async function send(req, res) {
   };
 
   const user = await createCustomer(JSON.stringify(input));
+  console.log(req);
   console.log(user);
 
   return res.status(200).json({ status: "Ok" });
