@@ -6,7 +6,7 @@ const nextConfig = {
     SHOPIFY_ADMIN_ACCESSTOKEN: process.env.SHOPIFY_ADMIN_ACCESSTOKEN,
     SHOPIFY_STORE_DOMAIN: process.env.SHOPIFY_STORE_DOMAIN,
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
-    PASSWORD_CREATE_USER: process.env.PASSWORD_CREATE_USER,
+    PASSWORD_MAIL_CONTACT: process.env.PASSWORD_MAIL_CONTACT,
   },
   images: {
     domains: ["cdn.shopify.com"],
