@@ -243,6 +243,7 @@ export const Card = ({ carte }) => {
                           Cette adresse sera utilisé pour communiquer avec vous
                           et pour la création de votre compte
                         </p>
+
                         <input
                           type="text"
                           name="email-address"
@@ -257,206 +258,6 @@ export const Card = ({ carte }) => {
                         >
                           {errors?.email?.message}
                         </span>
-                      </div>
-
-                      <div className="col-span-6">
-                        <label
-                          htmlFor="address"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Adresse
-                        </label>
-
-                        <Controller
-                          name="address"
-                          id="address"
-                          control={control}
-                          defaultValue=""
-                          render={({
-                            field: { value, onChange, onBlur, ...field },
-                          }) => (
-                            <input
-                              {...field}
-                              type="text"
-                              autoComplete="street-address"
-                              ref={ref}
-                              value={addressState}
-                              onChange={({ target: { value } }) => {
-                                onChange(value);
-                                setAddressState(value);
-                                if (value.length < 1) {
-                                  setError("address", {
-                                    type: "custom",
-                                    message: "Veuillez entrer votre adresse",
-                                  });
-                                } else {
-                                  setValue("address", value);
-                                }
-                              }}
-                              placeholder=""
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          )}
-                        />
-
-                        <span
-                          htmlFor="address"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.address?.message}
-                        </span>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-3">
-                        <label
-                          htmlFor="country"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Pays
-                        </label>
-
-                        <Controller
-                          name="country"
-                          control={control}
-                          defaultValue=""
-                          render={({
-                            field: { value, onChange, onBlur, ...field },
-                          }) => (
-                            <input
-                              {...field}
-                              type="text"
-                              autoComplete="country-name"
-                              {...register("country")}
-                              value={countryState}
-                              onChange={({ target: { value } }) => {
-                                onChange(value);
-                                setCountryState(value);
-                              }}
-                              placeholder=""
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          )}
-                        />
-
-                        <span
-                          htmlFor="country"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.country?.message}
-                        </span>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label
-                          htmlFor="city"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Ville
-                        </label>
-
-                        <Controller
-                          name="city"
-                          control={control}
-                          defaultValue=""
-                          render={({
-                            field: { value, onChange, onBlur, ...field },
-                          }) => (
-                            <input
-                              {...field}
-                              type="text"
-                              autoComplete="address-level2"
-                              {...register("city")}
-                              value={city}
-                              onChange={({ target: { value } }) => {
-                                onChange(value);
-                                setCity(value);
-                              }}
-                              placeholder=""
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          )}
-                        />
-                        <span className="block text-sm font-medium text-orange-600">
-                          {errors?.city?.message}
-                        </span>
-                      </div>
-
-                      <div className="col-span-4 sm:col-span-2">
-                        <label
-                          htmlFor="zipCode"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Code Postal
-                        </label>
-
-                        <Controller
-                          name="zipCode"
-                          id="zipCode"
-                          control={control}
-                          defaultValue=""
-                          render={({
-                            field: { value, onChange, onBlur, ...field },
-                          }) => (
-                            <input
-                              {...field}
-                              type="text"
-                              autoComplete="postal-code"
-                              {...register("zipCode")}
-                              value={zip}
-                              onChange={({ target: { value } }) => {
-                                onChange(value);
-                                setZip(value);
-                              }}
-                              placeholder=""
-                              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                          )}
-                        />
-                        <span
-                          htmlFor="zipCode"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.zipCode?.message}
-                        </span>
-                      </div>
-                      <div className="col-span-6 sm:col-span-3">
-                        <label
-                          htmlFor="telephone"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Numéro de téléphone
-                        </label>
-
-                        <PhoneInput
-                          defaultCountry="FR"
-                          international
-                          labels={fr}
-                          countryCallingCodeEditable={false}
-                          name="telephone"
-                          placeholder="Numéro de téléphone"
-                          value={phoneValue}
-                          onChange={(value) => {
-                            setPhoneValue(value);
-                            if (!value) {
-                              setError("phone", {
-                                type: "custom",
-                                message:
-                                  "Veuillez entrer votre numéro de téléphone",
-                              });
-                            } else {
-                              console.log(formatPhoneNumberIntl(value));
-                              setValue("phone", formatPhoneNumberIntl(value));
-                              clearErrors("phone");
-                            }
-                          }}
-                          className="mt-1"
-                        />
-                        <label
-                          htmlFor="telephone"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.phone?.message}
-                        </label>
                       </div>
                     </div>
                   </div>
@@ -487,82 +288,6 @@ export const Card = ({ carte }) => {
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <fieldset>
-                      <legend className="sr-only">By Email</legend>
-                      <div
-                        className="text-base font-medium text-gray-900"
-                        aria-hidden="true"
-                      >
-                        By Email
-                      </div>
-                      <div className="mt-4 space-y-4">
-                        <div className="flex items-start">
-                          <div className="flex items-center h-5">
-                            <input
-                              id="comments"
-                              name="comments"
-                              type="checkbox"
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label
-                              htmlFor="comments"
-                              className="font-medium text-gray-700"
-                            >
-                              Comments
-                            </label>
-                            <p className="text-gray-500">
-                              Get notified when someones posts a comment on a
-                              posting.
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex items-center h-5">
-                            <input
-                              id="candidates"
-                              name="candidates"
-                              type="checkbox"
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label
-                              htmlFor="candidates"
-                              className="font-medium text-gray-700"
-                            >
-                              Candidates
-                            </label>
-                            <p className="text-gray-500">
-                              Get notified when a candidate applies for a job.
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-start">
-                          <div className="flex items-center h-5">
-                            <input
-                              id="offers"
-                              name="offers"
-                              type="checkbox"
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label
-                              htmlFor="offers"
-                              className="font-medium text-gray-700"
-                            >
-                              Offers
-                            </label>
-                            <p className="text-gray-500">
-                              Get notified when a candidate accepts or rejects
-                              an offer.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </fieldset>
-                    <fieldset>
                       <legend className="contents text-base font-medium text-gray-900">
                         Mode de Livraison
                       </legend>
@@ -577,6 +302,7 @@ export const Card = ({ carte }) => {
                             type="radio"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                           />
+                          {/* TODO add state to control what shows up + add transition with headless ui : https://headlessui.com/react/transition + chill on validation of the fields (not required for the address etc) + add same transition etc for the billing address (same or not) */}
                           <label
                             htmlFor="push-everything"
                             className="ml-3 block text-sm font-medium text-gray-700"
@@ -597,6 +323,249 @@ export const Card = ({ carte }) => {
                           >
                             Livraison à domicile (+ 7,20€)
                           </label>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend className="contents text-base font-medium text-gray-900">
+                        Adresse de livraison
+                      </legend>
+                      <p className="text-sm text-gray-500">
+                        Sélectionnez l&#39;adresse à laquelle vous voulez
+                        recevoir votre vin
+                      </p>
+                      <div className="mt-4 grid grid-cols-6 gap-6">
+                        <div className="col-span-6 ">
+                          <label
+                            htmlFor="address"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Adresse
+                          </label>
+
+                          <Controller
+                            name="address"
+                            id="address"
+                            control={control}
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange, onBlur, ...field },
+                            }) => (
+                              <input
+                                {...field}
+                                type="text"
+                                autoComplete="street-address"
+                                ref={ref}
+                                value={addressState}
+                                onChange={({ target: { value } }) => {
+                                  onChange(value);
+                                  setAddressState(value);
+                                  if (value.length < 1) {
+                                    setError("address", {
+                                      type: "custom",
+                                      message: "Veuillez entrer votre adresse",
+                                    });
+                                  } else {
+                                    setValue("address", value);
+                                  }
+                                }}
+                                placeholder=""
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              />
+                            )}
+                          />
+
+                          <span
+                            htmlFor="address"
+                            className="block text-sm font-medium text-orange-600"
+                          >
+                            {errors?.address?.message}
+                          </span>
+                        </div>
+
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="country"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Pays
+                          </label>
+
+                          <Controller
+                            name="country"
+                            control={control}
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange, onBlur, ...field },
+                            }) => (
+                              <input
+                                {...field}
+                                type="text"
+                                autoComplete="country-name"
+                                {...register("country")}
+                                value={countryState}
+                                onChange={({ target: { value } }) => {
+                                  onChange(value);
+                                  setCountryState(value);
+                                }}
+                                placeholder=""
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              />
+                            )}
+                          />
+
+                          <span
+                            htmlFor="country"
+                            className="block text-sm font-medium text-orange-600"
+                          >
+                            {errors?.country?.message}
+                          </span>
+                        </div>
+
+                        <div className="col-span-6 sm:col-span-4">
+                          <label
+                            htmlFor="city"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Ville
+                          </label>
+
+                          <Controller
+                            name="city"
+                            control={control}
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange, onBlur, ...field },
+                            }) => (
+                              <input
+                                {...field}
+                                type="text"
+                                autoComplete="address-level2"
+                                {...register("city")}
+                                value={city}
+                                onChange={({ target: { value } }) => {
+                                  onChange(value);
+                                  setCity(value);
+                                }}
+                                placeholder=""
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              />
+                            )}
+                          />
+                          <span className="block text-sm font-medium text-orange-600">
+                            {errors?.city?.message}
+                          </span>
+                        </div>
+
+                        <div className="col-span-4 sm:col-span-2">
+                          <label
+                            htmlFor="zipCode"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Code Postal
+                          </label>
+
+                          <Controller
+                            name="zipCode"
+                            id="zipCode"
+                            control={control}
+                            defaultValue=""
+                            render={({
+                              field: { value, onChange, onBlur, ...field },
+                            }) => (
+                              <input
+                                {...field}
+                                type="text"
+                                autoComplete="postal-code"
+                                {...register("zipCode")}
+                                value={zip}
+                                onChange={({ target: { value } }) => {
+                                  onChange(value);
+                                  setZip(value);
+                                }}
+                                placeholder=""
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                              />
+                            )}
+                          />
+                          <span
+                            htmlFor="zipCode"
+                            className="block text-sm font-medium text-orange-600"
+                          >
+                            {errors?.zipCode?.message}
+                          </span>
+                        </div>
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="telephone"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Numéro de téléphone
+                          </label>
+
+                          <PhoneInput
+                            defaultCountry="FR"
+                            international
+                            labels={fr}
+                            countryCallingCodeEditable={false}
+                            name="telephone"
+                            placeholder="Numéro de téléphone"
+                            value={phoneValue}
+                            onChange={(value) => {
+                              setPhoneValue(value);
+                              if (!value) {
+                                setError("phone", {
+                                  type: "custom",
+                                  message:
+                                    "Veuillez entrer votre numéro de téléphone",
+                                });
+                              } else {
+                                console.log(formatPhoneNumberIntl(value));
+                                setValue("phone", formatPhoneNumberIntl(value));
+                                clearErrors("phone");
+                              }
+                            }}
+                            className="mt-1"
+                          />
+                          <label
+                            htmlFor="telephone"
+                            className="block text-sm font-medium text-orange-600"
+                          >
+                            {errors?.phone?.message}
+                          </label>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset>
+                      <legend className="contents text-base font-medium text-gray-900">
+                        Adresse de livraison
+                      </legend>
+                      <p className="text-sm text-gray-500">
+                        Sélectionnez l&#39;adresse à laquelle vous voulez
+                        recevoir votre vin
+                      </p>
+                      <div className="mt-4 grid grid-cols-6 gap-6">
+                        <div className="col-span-6 sm:col-span-3">
+                          <label
+                            htmlFor="plateforme"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Pateforme
+                          </label>
+                          <select
+                            id="plateforme"
+                            name="plateforme"
+                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          >
+                            <option value={"Rambouillet"}>Rambouillet</option>
+                            <option value={"Lyon"}>Lyon</option>
+                            <option value={"Avignon"}>Avignon</option>
+                            <option value={"Grenoble"}>Grenoble</option>
+                            <option value={"Chronopost"}>
+                              Point Relais Chronopost proche de chez vous
+                            </option>
+                            {/* TODO renseigner les adresses des points relais sélectionnés */}
+                          </select>
                         </div>
                       </div>
                     </fieldset>
