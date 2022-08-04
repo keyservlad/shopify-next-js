@@ -3,7 +3,7 @@
 // create the account with the field "status" toBeActivated
 // send mail to email adress to create the account
 
-import { createCustomer } from "../../lib/shopifyCustomerAdmin";
+import { updateCustomer } from "../../lib/shopifyCustomerAdmin";
 
 // TODO add validation with the token in the header of the request
 // TODO set up email to my address with logs when there is an error
@@ -49,8 +49,7 @@ export default async function send(req, res) {
     ],
   };
 
-  const user = await createCustomer(JSON.stringify(input));
-  console.log(req);
+  const user = await updateCustomer(JSON.stringify(input));
   console.log(user);
 
   return res.status(200).json({ status: "Ok" });
