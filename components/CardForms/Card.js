@@ -15,6 +15,8 @@ import PersonalInfos from "./PersonalInfos";
 import DeliveryAdress from "./DeliveryAdress";
 import DeliveryAdress2 from "./DeliveryAdress2";
 
+// TODO peut etre rajouter une troisieme adresse ou alors rendre le component Address dynamique pour creer 3 instance pour fix quelques bugs mineurs
+
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
 const schemaPlat = object({
@@ -86,41 +88,6 @@ const schemaDom2Addresses = object({
     .min(10, "Trop court"),
 });
 
-async function onSubmit(values) {
-  console.log(values);
-  // TODO faire le submit avec les differentes possibilités pour les inputs + faire les changements de state de schema 
-  const input = {
-    email: values.email,
-    addresses: [
-      {
-        address1: values.address,
-        city: values.city,
-        country: values.country,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        phone: values.phone,
-        zip: values.zipCode,
-      },
-    ],
-    firstName: values.firstName,
-    lastName: values.lastName,
-    metafields: [
-      {
-        key: "expirationDate",
-        namespace: "custom",
-        value: new Date(Date.now()).toISOString(),
-      },
-    ],
-    phone: values.phone,
-    // tags: ["prestige"],
-  };
-
-  console.log(JSON.stringify(input));
-
-  // const customer = createCustomerRequest(JSON.stringify(input));
-  // console.log(customer);
-}
-
 const createCustomerRequest = (input) =>
   axios
     .get("/api/create-customer", {
@@ -131,6 +98,204 @@ const createCustomerRequest = (input) =>
     .then((res) => res.data);
 
 export const Card = ({ carte }) => {
+  async function onSubmit(values) {
+    console.log(values);
+    const Cartetitle = carte.title.toLowerCase().includes("prestige")
+      ? "prestige"
+      : carte.title.toLowerCase().includes("decouverte")
+      ? "decouverte"
+      : "immanquables";
+
+    var input;
+    if (schema == schemaPlat) {
+      input = {
+        email: values.email,
+        addresses: [
+          {
+            address1: values.address,
+            city: values.city,
+            country: values.country,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phone: values.phone,
+            zip: values.zipCode,
+          },
+        ],
+        firstName: values.firstName,
+        lastName: values.lastName,
+        metafields: [
+          {
+            key: "carte",
+            namespace: "custom",
+            value: Cartetitle,
+            // value: new Date(Date.now()).toISOString(),
+          },
+          {
+            key: "status",
+            namespace: "custom",
+            value: "toBeActivated",
+          },
+          {
+            key: "boxBilling",
+            namespace: "custom",
+            value: {
+              adresse: values.address,
+              ville: values.city,
+              pays: values.country,
+              zip: values.zipCode,
+              prénom: values.firstName,
+              nom: values.lastName,
+              tel: values.phone,
+            },
+          },
+          {
+            key: "isDomicile",
+            namespace: "custom",
+            value: true,
+          },
+          {
+            key: "plateforme",
+            namespace: "custom",
+            value: values.plateforme,
+          },
+        ],
+        phone: values.phone,
+      };
+    } else if (schema == schemaDom) {
+      input = {
+        email: values.email,
+        addresses: [
+          {
+            address1: values.address,
+            city: values.city,
+            country: values.country,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phone: values.phone,
+            zip: values.zipCode,
+          },
+        ],
+        firstName: values.firstName,
+        lastName: values.lastName,
+        metafields: [
+          {
+            key: "carte",
+            namespace: "custom",
+            value: Cartetitle,
+            // value: new Date(Date.now()).toISOString(),
+          },
+          {
+            key: "status",
+            namespace: "custom",
+            value: "toBeActivated",
+          },
+          {
+            key: "boxBilling",
+            namespace: "custom",
+            value: {
+              adresse: values.address,
+              ville: values.city,
+              pays: values.country,
+              zip: values.zipCode,
+              prénom: values.firstName,
+              nom: values.lastName,
+              tel: values.phone,
+            },
+          },
+          {
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            value: {
+              adresse: values.address,
+              ville: values.city,
+              pays: values.country,
+              zip: values.zipCode,
+              prénom: values.firstName,
+              nom: values.lastName,
+              tel: values.phone,
+            },
+          },
+          {
+            key: "isDomicile",
+            namespace: "custom",
+            value: false,
+          },
+        ],
+        phone: values.phone,
+      };
+    } else if (schema == schemaDom2Addresses) {
+      input = {
+        email: values.email,
+        addresses: [
+          {
+            address1: values.address,
+            city: values.city,
+            country: values.country,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            phone: values.phone,
+            zip: values.zipCode,
+          },
+        ],
+        firstName: values.firstName,
+        lastName: values.lastName,
+        metafields: [
+          {
+            key: "carte",
+            namespace: "custom",
+            value: Cartetitle,
+            // value: new Date(Date.now()).toISOString(),
+          },
+          {
+            key: "status",
+            namespace: "custom",
+            value: "toBeActivated",
+          },
+          {
+            key: "boxBilling",
+            namespace: "custom",
+            value: {
+              adresse: values.address2,
+              ville: values.city2,
+              pays: values.country2,
+              zip: values.zipCode2,
+              prénom: values.firstName,
+              nom: values.lastName,
+              tel: values.phone2,
+            },
+          },
+          {
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            value: {
+              adresse: values.address,
+              ville: values.city,
+              pays: values.country,
+              zip: values.zipCode,
+              prénom: values.firstName,
+              nom: values.lastName,
+              tel: values.phone,
+            },
+          },
+          {
+            key: "isDomicile",
+            namespace: "custom",
+            value: false,
+          },
+        ],
+        phone: values.phone,
+      };
+    } else {
+      return;
+    }
+
+    console.log(JSON.stringify(input));
+
+    // TODO verif si le customer existe deja avant de l'overwrite (s'il existe verif le status) + mettre en place un systeme de loading pendant les requetes
+    // const customer = createCustomerRequest(JSON.stringify(input));
+    // console.log(customer);
+  }
+
   const [schema, setSchema] = useState(schemaPlat);
   const {
     register,
@@ -166,6 +331,22 @@ export const Card = ({ carte }) => {
     register("address2");
     register("phone2");
   }, [register]);
+
+  useEffect(() => {
+    if (deliveryMode == "Plateforme") {
+      setSchema(schemaPlat);
+    } else {
+      if (sameAddress) {
+        setSchema(schemaDom);
+      } else {
+        setSchema(schemaDom2Addresses);
+      }
+    }
+  }, [deliveryMode, sameAddress]);
+
+  useEffect(() => {
+    console.log(schema);
+  }, [schema]);
 
   return (
     <div>
@@ -232,47 +413,50 @@ export const Card = ({ carte }) => {
                         Sélectionnez le mode de livraison pour recevoir vos box.
                       </p>
                       <div className="mt-4 space-y-4">
-                        <div className="flex items-center">
-                          <input
-                            id="mode-plateforme"
-                            name="modeLivraison"
-                            type="radio"
-                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            defaultChecked
-                            {...register("modeLivraison")}
-                            value={deliveryMode}
-                            onClick={() => setDeliveryMode("Plateforme")}
-                          />
-                          <label
-                            htmlFor="mode-plateforme"
-                            className="ml-3 block text-sm font-medium text-gray-700"
-                          >
-                            Plateformes
-                          </label>
+                        <div className="flex flex-col-reverse">
+                          <div className="flex items-center mt-2">
+                            <input
+                              id="mode-domicile"
+                              name="modeLivraison"
+                              type="radio"
+                              {...register("modeLivraison")}
+                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                              value={deliveryMode}
+                              onClick={() => setDeliveryMode("Domicile")}
+                            />
+                            <label
+                              htmlFor="mode-domicile"
+                              className="ml-3 block text-sm font-medium text-gray-700"
+                            >
+                              Livraison à domicile (+ 7,20€)
+                            </label>
+                            <span
+                              htmlFor="mode-domicile"
+                              className="block text-sm font-medium text-orange-600"
+                            >
+                              {errors?.modeLivraison?.message}
+                            </span>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              id="mode-plateforme"
+                              name="modeLivraison"
+                              type="radio"
+                              defaultChecked={true}
+                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                              {...register("modeLivraison")}
+                              value={deliveryMode}
+                              onClick={() => setDeliveryMode("Plateforme")}
+                            />
+                            <label
+                              htmlFor="mode-plateforme"
+                              className="ml-3 block text-sm font-medium text-gray-700"
+                            >
+                              Plateformes
+                            </label>
+                          </div>
                         </div>
-                        <div className="flex items-center">
-                          <input
-                            id="mode-domicile"
-                            name="modeLivraison"
-                            type="radio"
-                            {...register("modeLivraison")}
-                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            value={deliveryMode}
-                            onClick={() => setDeliveryMode("Domicile")}
-                          />
-                          <label
-                            htmlFor="mode-domicile"
-                            className="ml-3 block text-sm font-medium text-gray-700"
-                          >
-                            Livraison à domicile (+ 7,20€)
-                          </label>
-                          <span
-                            htmlFor="mode-domicile"
-                            className="block text-sm font-medium text-orange-600"
-                          >
-                            {errors?.modeLivraison?.message}
-                          </span>
-                        </div>
+
                         {deliveryMode == "Plateforme" ? (
                           <>
                             <fieldset>
@@ -355,6 +539,15 @@ export const Card = ({ carte }) => {
                                 fr={fr}
                                 clearErrors={clearErrors}
                               />
+                            </fieldset>
+                            <fieldset>
+                              <legend className="contents text-base font-medium text-gray-900">
+                                Adresse de facturation
+                              </legend>
+                              <p className="text-sm text-gray-500">
+                                Sélectionnez votre adresse de facturation pour
+                                les cartes
+                              </p>
                             </fieldset>
                             <div className="relative flex items-start pt-3">
                               <div className="flex items-center h-5">
