@@ -11,28 +11,84 @@ import { object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { createCustomer } from "../../lib/shopifyCustomerAdmin";
 import axios from "axios";
+import PersonalInfos from "./PersonalInfos";
+import DeliveryAdress from "./DeliveryAdress";
+import DeliveryAdress2 from "./DeliveryAdress2";
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
-const schema = object({
-  firstName: string().required("Name is required"),
-  lastName: string().required("Name is required"),
+const schemaPlat = object({
+  firstName: string().required("Veuillez entrer votre prénom"),
+  lastName: string().required("Veuillez entrer votre nom"),
   email: string()
-    .email("Email must be a valid email address")
-    .required("Email is required"),
+    .email("Veuillez entrer une adresse email valide")
+    .required("Veuillez entrer votre adresse email"),
+  modeLivraison: string()
+    .required("veuillez selectionner un mode de livraison")
+    .oneOf(["Plateforme", "Domicile"], "Mode de livraison non valide"),
+  plateforme: string()
+    .required("veuillez choisir une plateforme")
+    .oneOf(
+      ["Rambouillet", "Lyon", "Avignon", "Grenoble", "Chronopost"],
+      "Veuillez entrer une plateforme de livraison valide"
+    ),
   address: string().required("Veuillez entrer votre adresse"),
   country: string().required("Veuillez entrer votre pays"),
   city: string().required("Veuillez entrer votre Ville"),
   zipCode: string().required("Veuillez entrer votre code postal"),
   phone: string()
-    .required("required")
-    .matches(phoneRegExp, "Phone number is not valid")
-    .min(10, "to short"),
+    .required("Veuillez entrer votre numéro de téléphone")
+    .matches(phoneRegExp, "Numéro de léléphone non valide")
+    .min(10, "Trop court"),
+});
+const schemaDom = object({
+  firstName: string().required("Veuillez entrer votre prénom"),
+  lastName: string().required("Veuillez entrer votre nom"),
+  email: string()
+    .email("Veuillez entrer une adresse email valide")
+    .required("Veuillez entrer votre adresse email"),
+  modeLivraison: string()
+    .required("veuillez selectionner un mode de livraison")
+    .oneOf(["Plateforme", "Domicile"], "Mode de livraison non valide"),
+  address: string().required("Veuillez entrer votre adresse"),
+  country: string().required("Veuillez entrer votre pays"),
+  city: string().required("Veuillez entrer votre Ville"),
+  zipCode: string().required("Veuillez entrer votre code postal"),
+  phone: string()
+    .required("Veuillez entrer votre numéro de téléphone")
+    .matches(phoneRegExp, "Numéro de léléphone non valide")
+    .min(10, "Trop court"),
+});
+const schemaDom2Addresses = object({
+  firstName: string().required("Veuillez entrer votre prénom"),
+  lastName: string().required("Veuillez entrer votre nom"),
+  email: string()
+    .email("Veuillez entrer une adresse email valide")
+    .required("Veuillez entrer votre adresse email"),
+  modeLivraison: string()
+    .required("veuillez selectionner un mode de livraison")
+    .oneOf(["Plateforme", "Domicile"], "Mode de livraison non valide"),
+  address: string().required("Veuillez entrer votre adresse"),
+  country: string().required("Veuillez entrer votre pays"),
+  city: string().required("Veuillez entrer votre Ville"),
+  zipCode: string().required("Veuillez entrer votre code postal"),
+  phone: string()
+    .required("Veuillez entrer votre numéro de téléphone")
+    .matches(phoneRegExp, "Numéro de léléphone non valide")
+    .min(10, "Trop court"),
+  address2: string().required("Veuillez entrer votre adresse"),
+  country2: string().required("Veuillez entrer votre pays"),
+  city2: string().required("Veuillez entrer votre Ville"),
+  zipCode2: string().required("Veuillez entrer votre code postal"),
+  phone2: string()
+    .required("Veuillez entrer votre numéro de téléphone")
+    .matches(phoneRegExp, "Numéro de téléphone non valide")
+    .min(10, "Trop court"),
 });
 
 async function onSubmit(values) {
   console.log(values);
-
+  // TODO faire le submit avec les differentes possibilités pour les inputs + faire les changements de state de schema 
   const input = {
     email: values.email,
     addresses: [
@@ -56,13 +112,13 @@ async function onSubmit(values) {
       },
     ],
     phone: values.phone,
-    tags: ["prestige"],
+    // tags: ["prestige"],
   };
 
   console.log(JSON.stringify(input));
 
-  const customer = createCustomerRequest(JSON.stringify(input));
-  console.log(customer);
+  // const customer = createCustomerRequest(JSON.stringify(input));
+  // console.log(customer);
 }
 
 const createCustomerRequest = (input) =>
@@ -75,6 +131,7 @@ const createCustomerRequest = (input) =>
     .then((res) => res.data);
 
 export const Card = ({ carte }) => {
+  const [schema, setSchema] = useState(schemaPlat);
   const {
     register,
     handleSubmit,
@@ -89,51 +146,6 @@ export const Card = ({ carte }) => {
     reValidateMode: "onChange",
   });
 
-  const { ref } = usePlacesWidget({
-    apiKey: process.env.GOOGLE_MAPS_API_KEY,
-    onPlaceSelected: (place) => {
-      console.log(place);
-      if (place.address_components.length == 7) {
-        setAddressState(
-          place.address_components[0].long_name +
-            " " +
-            place.address_components[1].long_name
-        );
-        setValue(
-          "address",
-          place.address_components[0].long_name +
-            " " +
-            place.address_components[1].long_name
-        );
-        setCountryState(place.address_components[5].long_name);
-        setValue("country", place.address_components[5].long_name);
-
-        setCity(place.address_components[2].long_name);
-        setValue("city", place.address_components[2].long_name);
-        setZip(place.address_components[6].long_name);
-        setValue("zipCode", place.address_components[6].long_name);
-      } else if (place.address_components.length == 6) {
-        setAddressState(place.address_components[0].long_name);
-        setValue("address", place.address_components[0].long_name);
-        setCountryState(place.address_components[4].long_name);
-        setValue("country", place.address_components[4].long_name);
-
-        setCity(place.address_components[1].long_name);
-        setValue("city", place.address_components[1].long_name);
-        setZip(place.address_components[5].long_name);
-        setValue("zipCode", place.address_components[5].long_name);
-      }
-      clearErrors("address");
-      clearErrors("country");
-      clearErrors("city");
-      clearErrors("zipCode");
-    },
-    options: {
-      types: ["address"],
-      componentRestrictions: { country: "fr" },
-    },
-  });
-
   const variant = {
     id: carte.variants.edges[0].node.id,
     title: carte.title,
@@ -144,16 +156,15 @@ export const Card = ({ carte }) => {
   };
 
   const { addToCart } = useContext(CartContext);
-  const [phoneValue, setPhoneValue] = useState("");
 
-  const [addressState, setAddressState] = useState("");
-  const [countryState, setCountryState] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
+  const [deliveryMode, setDeliveryMode] = useState("Plateforme");
+  const [sameAddress, setSameAddress] = useState(true);
 
   useEffect(() => {
     register("address");
     register("phone");
+    register("address2");
+    register("phone2");
   }, [register]);
 
   return (
@@ -185,81 +196,7 @@ export const Card = ({ carte }) => {
               <div className="mt-5 md:mt-0 md:col-span-2">
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
-                    <div className="grid grid-cols-6 gap-6">
-                      <div className="col-span-6 sm:col-span-3">
-                        <label
-                          htmlFor="first-name"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Prénom
-                        </label>
-                        <input
-                          type="text"
-                          name="first-name"
-                          id="first-name"
-                          {...register("firstName")}
-                          autoComplete="given-name"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                        <span
-                          htmlFor="first-name"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.firstName?.message}
-                        </span>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-3">
-                        <label
-                          htmlFor="last-name"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Nom
-                        </label>
-                        <input
-                          type="text"
-                          name="last-name"
-                          id="last-name"
-                          {...register("lastName")}
-                          autoComplete="family-name"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                        <span
-                          htmlFor="last-name"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.lastName?.message}
-                        </span>
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-4">
-                        <label
-                          htmlFor="email-address"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Adresse mail
-                        </label>
-                        <p className="mt-1 text-sm text-gray-600">
-                          Cette adresse sera utilisé pour communiquer avec vous
-                          et pour la création de votre compte
-                        </p>
-
-                        <input
-                          type="text"
-                          name="email-address"
-                          id="email-address"
-                          {...register("email")}
-                          autoComplete="email"
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
-                        />
-                        <span
-                          htmlFor="email-address"
-                          className="block text-sm font-medium text-orange-600"
-                        >
-                          {errors?.email?.message}
-                        </span>
-                      </div>
-                    </div>
+                    <PersonalInfos register={register} errors={errors} />
                   </div>
                 </div>
               </div>
@@ -297,14 +234,17 @@ export const Card = ({ carte }) => {
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="push-everything"
-                            name="push-notifications"
+                            id="mode-plateforme"
+                            name="modeLivraison"
                             type="radio"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            defaultChecked
+                            {...register("modeLivraison")}
+                            value={deliveryMode}
+                            onClick={() => setDeliveryMode("Plateforme")}
                           />
-                          {/* TODO add state to control what shows up + add transition with headless ui : https://headlessui.com/react/transition + chill on validation of the fields (not required for the address etc) + add same transition etc for the billing address (same or not) */}
                           <label
-                            htmlFor="push-everything"
+                            htmlFor="mode-plateforme"
                             className="ml-3 block text-sm font-medium text-gray-700"
                           >
                             Plateformes
@@ -312,261 +252,150 @@ export const Card = ({ carte }) => {
                         </div>
                         <div className="flex items-center">
                           <input
-                            id="push-email"
-                            name="push-notifications"
+                            id="mode-domicile"
+                            name="modeLivraison"
                             type="radio"
+                            {...register("modeLivraison")}
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            value={deliveryMode}
+                            onClick={() => setDeliveryMode("Domicile")}
                           />
                           <label
-                            htmlFor="push-email"
+                            htmlFor="mode-domicile"
                             className="ml-3 block text-sm font-medium text-gray-700"
                           >
                             Livraison à domicile (+ 7,20€)
                           </label>
-                        </div>
-                      </div>
-                    </fieldset>
-                    <fieldset>
-                      <legend className="contents text-base font-medium text-gray-900">
-                        Adresse de livraison
-                      </legend>
-                      <p className="text-sm text-gray-500">
-                        Sélectionnez l&#39;adresse à laquelle vous voulez
-                        recevoir votre vin
-                      </p>
-                      <div className="mt-4 grid grid-cols-6 gap-6">
-                        <div className="col-span-6 ">
-                          <label
-                            htmlFor="address"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Adresse
-                          </label>
-
-                          <Controller
-                            name="address"
-                            id="address"
-                            control={control}
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange, onBlur, ...field },
-                            }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="street-address"
-                                ref={ref}
-                                value={addressState}
-                                onChange={({ target: { value } }) => {
-                                  onChange(value);
-                                  setAddressState(value);
-                                  if (value.length < 1) {
-                                    setError("address", {
-                                      type: "custom",
-                                      message: "Veuillez entrer votre adresse",
-                                    });
-                                  } else {
-                                    setValue("address", value);
-                                  }
-                                }}
-                                placeholder=""
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                              />
-                            )}
-                          />
-
                           <span
-                            htmlFor="address"
+                            htmlFor="mode-domicile"
                             className="block text-sm font-medium text-orange-600"
                           >
-                            {errors?.address?.message}
+                            {errors?.modeLivraison?.message}
                           </span>
                         </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Pays
-                          </label>
-
-                          <Controller
-                            name="country"
-                            control={control}
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange, onBlur, ...field },
-                            }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="country-name"
-                                {...register("country")}
-                                value={countryState}
-                                onChange={({ target: { value } }) => {
-                                  onChange(value);
-                                  setCountryState(value);
-                                }}
-                                placeholder=""
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        {deliveryMode == "Plateforme" ? (
+                          <>
+                            <fieldset>
+                              <legend className="contents text-base font-medium text-gray-900">
+                                Plateforme de livraison
+                              </legend>
+                              <p className="text-sm text-gray-500">
+                                Sélectionnez la plateforme à laquelle vous
+                                voulez recevoir votre vin
+                              </p>
+                              <div className="mt-4 grid grid-cols-6 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="plateforme"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Plateforme
+                                  </label>
+                                  <select
+                                    id="plateforme"
+                                    name="plateforme"
+                                    {...register("plateforme")}
+                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                  >
+                                    <option value={"Rambouillet"}>
+                                      Rambouillet
+                                    </option>
+                                    <option value={"Lyon"}>Lyon</option>
+                                    <option value={"Avignon"}>Avignon</option>
+                                    <option value={"Grenoble"}>Grenoble</option>
+                                    <option value={"Chronopost"}>
+                                      Point Relais Chronopost proche de chez
+                                      vous
+                                    </option>
+                                    {/* TODO renseigner les adresses des points relais sélectionnés */}
+                                  </select>
+                                  <span
+                                    htmlFor="plateforme"
+                                    className="block text-sm font-medium text-orange-600"
+                                  >
+                                    {errors?.plateforme?.message}
+                                  </span>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset>
+                              <legend className="contents text-base font-medium text-gray-900">
+                                Adresse de facturation
+                              </legend>
+                              <p className="text-sm text-gray-500">
+                                Sélectionnez l&#39;adresse de facturation
+                              </p>
+                              <DeliveryAdress
+                                control={control}
+                                setError={setError}
+                                setValue={setValue}
+                                errors={errors}
+                                register={register}
+                                fr={fr}
+                                clearErrors={clearErrors}
+                              />
+                            </fieldset>
+                          </>
+                        ) : (
+                          <>
+                            <fieldset>
+                              <legend className="contents text-base font-medium text-gray-900">
+                                Adresse de livraison
+                              </legend>
+                              <p className="text-sm text-gray-500">
+                                Sélectionnez l&#39;adresse à laquelle vous
+                                souhaitez recevoir votre vin
+                              </p>
+                              <DeliveryAdress
+                                control={control}
+                                setError={setError}
+                                setValue={setValue}
+                                errors={errors}
+                                register={register}
+                                fr={fr}
+                                clearErrors={clearErrors}
+                              />
+                            </fieldset>
+                            <div className="relative flex items-start pt-3">
+                              <div className="flex items-center h-5">
+                                <input
+                                  id="sameAddress"
+                                  aria-describedby="sameAddress-description"
+                                  type="checkbox"
+                                  checked={sameAddress}
+                                  onChange={() => setSameAddress(!sameAddress)}
+                                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                />
+                              </div>
+                              <div className="ml-3 text-sm">
+                                <label
+                                  htmlFor="sameAddress"
+                                  className="font-medium text-gray-700"
+                                >
+                                  Même adresse de facturation ?
+                                </label>
+                                <p className="text-gray-500">
+                                  Décocher pour utiliser une adresse de
+                                  facturation différente de l&#39;adresse de
+                                  livraison
+                                </p>
+                              </div>
+                            </div>
+                            {sameAddress ? (
+                              ""
+                            ) : (
+                              <DeliveryAdress2
+                                control={control}
+                                setError={setError}
+                                setValue={setValue}
+                                errors={errors}
+                                register={register}
+                                fr={fr}
+                                clearErrors={clearErrors}
                               />
                             )}
-                          />
-
-                          <span
-                            htmlFor="country"
-                            className="block text-sm font-medium text-orange-600"
-                          >
-                            {errors?.country?.message}
-                          </span>
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-4">
-                          <label
-                            htmlFor="city"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Ville
-                          </label>
-
-                          <Controller
-                            name="city"
-                            control={control}
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange, onBlur, ...field },
-                            }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="address-level2"
-                                {...register("city")}
-                                value={city}
-                                onChange={({ target: { value } }) => {
-                                  onChange(value);
-                                  setCity(value);
-                                }}
-                                placeholder=""
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                              />
-                            )}
-                          />
-                          <span className="block text-sm font-medium text-orange-600">
-                            {errors?.city?.message}
-                          </span>
-                        </div>
-
-                        <div className="col-span-4 sm:col-span-2">
-                          <label
-                            htmlFor="zipCode"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Code Postal
-                          </label>
-
-                          <Controller
-                            name="zipCode"
-                            id="zipCode"
-                            control={control}
-                            defaultValue=""
-                            render={({
-                              field: { value, onChange, onBlur, ...field },
-                            }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="postal-code"
-                                {...register("zipCode")}
-                                value={zip}
-                                onChange={({ target: { value } }) => {
-                                  onChange(value);
-                                  setZip(value);
-                                }}
-                                placeholder=""
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                              />
-                            )}
-                          />
-                          <span
-                            htmlFor="zipCode"
-                            className="block text-sm font-medium text-orange-600"
-                          >
-                            {errors?.zipCode?.message}
-                          </span>
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="telephone"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Numéro de téléphone
-                          </label>
-
-                          <PhoneInput
-                            defaultCountry="FR"
-                            international
-                            labels={fr}
-                            countryCallingCodeEditable={false}
-                            name="telephone"
-                            placeholder="Numéro de téléphone"
-                            value={phoneValue}
-                            onChange={(value) => {
-                              setPhoneValue(value);
-                              if (!value) {
-                                setError("phone", {
-                                  type: "custom",
-                                  message:
-                                    "Veuillez entrer votre numéro de téléphone",
-                                });
-                              } else {
-                                console.log(formatPhoneNumberIntl(value));
-                                setValue("phone", formatPhoneNumberIntl(value));
-                                clearErrors("phone");
-                              }
-                            }}
-                            className="mt-1"
-                          />
-                          <label
-                            htmlFor="telephone"
-                            className="block text-sm font-medium text-orange-600"
-                          >
-                            {errors?.phone?.message}
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset>
-                    <fieldset>
-                      <legend className="contents text-base font-medium text-gray-900">
-                        Adresse de livraison
-                      </legend>
-                      <p className="text-sm text-gray-500">
-                        Sélectionnez l&#39;adresse à laquelle vous voulez
-                        recevoir votre vin
-                      </p>
-                      <div className="mt-4 grid grid-cols-6 gap-6">
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="plateforme"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Pateforme
-                          </label>
-                          <select
-                            id="plateforme"
-                            name="plateforme"
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option value={"Rambouillet"}>Rambouillet</option>
-                            <option value={"Lyon"}>Lyon</option>
-                            <option value={"Avignon"}>Avignon</option>
-                            <option value={"Grenoble"}>Grenoble</option>
-                            <option value={"Chronopost"}>
-                              Point Relais Chronopost proche de chez vous
-                            </option>
-                            {/* TODO renseigner les adresses des points relais sélectionnés */}
-                          </select>
-                        </div>
+                          </>
+                        )}
                       </div>
                     </fieldset>
                   </div>
