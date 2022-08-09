@@ -56,8 +56,8 @@ export default async function send(req, res) {
   var headers = JSON.stringify(req.headers);
 
   headers = headers.replace("x-shopify-order-id", "orderId");
-  console.log("headers string : ", headers);
-  console.log("id : ", headers.orderId);
+  console.log("headers : ", JSON.parse(headers));
+  console.log("id : ", JSON.parse(headers).orderId);
 
   return res.status(200).json({ status: "Ok" });
 
