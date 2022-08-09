@@ -59,7 +59,7 @@ export default async function send(req, res) {
   const orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
 
   const attribute = await getOrderCustomAttributes(orderId);
-  console.log({attribute})
+  console.log(attribute)
 
 
 
