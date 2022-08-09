@@ -4,7 +4,7 @@
 // send mail to email adress to create the account
 
 import { createCustomer } from "../../lib/shopifyCustomer";
-import { updateCustomer } from "../../lib/shopifyCustomerAdmin";
+import { getOrderCustomAttributes, updateCustomer } from "../../lib/shopifyCustomerAdmin";
 import { sendMail } from "../../utils/sendMail";
 
 // TODO add validation with the token in the header of the request
