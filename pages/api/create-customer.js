@@ -52,7 +52,8 @@ export default async function send(req, res) {
   // console.log(user2);
 
   // sendMail(customer.email, "subject", "<h1>html</h1>");
-  const headers = JSON.parse(req.headers)
+  console.log("full:", req.headers)
+  const headers = JSON.stringify(req.headers)
   console.log("headers : ", headers)
   console.log("id : ", headers.x-shopify-order-id)
 
