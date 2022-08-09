@@ -53,11 +53,11 @@ export default async function send(req, res) {
 
   // sendMail(customer.email, "subject", "<h1>html</h1>");
   // console.log("full:", req.headers)
-  const headers = JSON.stringify(req.headers)
+  var headers = JSON.stringify(req.headers);
 
-  console.log("headers string : ", headers)
-  console.log("id : ", headers.x-shopify-order-id)
-
+  headers = headers.replace("x-shopify-order-id", "orderId");
+  console.log("headers string : ", headers);
+  console.log("id : ", headers.orderId);
 
   return res.status(200).json({ status: "Ok" });
 
