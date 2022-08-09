@@ -22,36 +22,38 @@ export default async function send(req, res) {
   //   id: "gid://shopify/Customer/" + 6392490164373,
   //   email: "guilhamat.arnaud@gmail.com",
   // };
-  const customer = {
-    id: "gid://shopify/Customer/" + req.body.customer.id,
-    email: req.body.customer.email,
-  };
+  // const customer = {
+  //   id: "gid://shopify/Customer/" + req.body.customer.id,
+  //   email: req.body.customer.email,
+  // };
 
-  const title = "prestige";
+  // const title = "prestige";
 
-  const input = {
-    email: customer.email,
-    id: customer.id,
-    metafields: [
-      {
-        key: "status",
-        namespace: "custom",
-        value: "toBeActivated",
-      },
-      {
-        key: "carte",
-        namespace: "custom",
-        value: title,
-      },
-    ],
-  };
+  // const input = {
+  //   email: customer.email,
+  //   id: customer.id,
+  //   metafields: [
+  //     {
+  //       key: "status",
+  //       namespace: "custom",
+  //       value: "toBeActivated",
+  //     },
+  //     {
+  //       key: "carte",
+  //       namespace: "custom",
+  //       value: title,
+  //     },
+  //   ],
+  // };
 
-  const user = await updateCustomer(JSON.stringify(input));
-  console.log(user);
-  const user2 = await createCustomer(customer.email, "test");
-  console.log(user2);
+  // const user = await updateCustomer(JSON.stringify(input));
+  // console.log(user);
+  // const user2 = await createCustomer(customer.email, "test");
+  // console.log(user2);
 
   // sendMail(customer.email, "subject", "<h1>html</h1>");
+
+  console.log(req.body);
 
   return res.status(200).json({ status: "Ok" });
 
