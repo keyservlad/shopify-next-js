@@ -53,7 +53,7 @@ export default async function send(req, res) {
 
   // sendMail(customer.email, "subject", "<h1>html</h1>");
 
-  console.log(req.body);
+  console.log(req);
 
   return res.status(200).json({ status: "Ok" });
 
