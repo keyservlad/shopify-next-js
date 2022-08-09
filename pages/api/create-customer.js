@@ -56,12 +56,12 @@ export default async function send(req, res) {
   var headers = JSON.stringify(req.headers);
   headers = headers.replace("x-shopify-order-id", "orderId");
 
-  orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
+  const orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
 
   attribute = await getOrderCustomAttributes(orderId);
   console.log({attribute})
 
-  
+
 
 
   return res.status(200).json({ status: "Ok" });
