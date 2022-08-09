@@ -54,10 +54,15 @@ export default async function send(req, res) {
   // sendMail(customer.email, "subject", "<h1>html</h1>");
   // console.log("full:", req.headers)
   var headers = JSON.stringify(req.headers);
-
   headers = headers.replace("x-shopify-order-id", "orderId");
-  console.log("headers : ", JSON.parse(headers));
-  console.log("id : ", JSON.parse(headers).orderId);
+
+  orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
+
+  attribute = await getOrderCustomAttributes(orderId);
+  console.log({attribute})
+
+  
+
 
   return res.status(200).json({ status: "Ok" });
 
