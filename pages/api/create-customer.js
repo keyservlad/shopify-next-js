@@ -4,7 +4,10 @@
 // send mail to email adress to create the account
 
 import { createCustomer } from "../../lib/shopifyCustomer";
-import { getOrderCustomAttributes, updateCustomer } from "../../lib/shopifyCustomerAdmin";
+import {
+  getOrderCustomAttributes,
+  updateCustomer,
+} from "../../lib/shopifyCustomerAdmin";
 import { sendMail } from "../../utils/sendMail";
 
 // TODO add validation with the token in the header of the request
@@ -59,12 +62,9 @@ export default async function send(req, res) {
   const orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
 
   const attribute = await getOrderCustomAttributes(orderId);
-  const input = attribute[0].value
+  const input = attribute[0].value;
 
-  console.log(input)
-
-
-
+  console.log(JSON.stringify(input));
 
   return res.status(200).json({ status: "Ok" });
 
