@@ -64,7 +64,6 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   console.log(attribute);
-  attribute = JSON.parse(attribute);
   const input = attribute[0].value;
   console.log(JSON.stringify(input));
 

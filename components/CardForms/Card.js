@@ -312,7 +312,8 @@ export const Card = ({ carte }) => {
 
     const customAttribute = {
       key: "newCustomerInput",
-      value: input,
+      value: JSON.stringify(input),
+      
     };
     console.log(customAttribute);
     addToCartCarte(variant, customAttribute);
