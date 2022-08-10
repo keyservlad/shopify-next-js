@@ -64,20 +64,12 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   console.log("attribute", attribute);
-  const input = attribute[0].value;
+  var input = attribute[0].value;
 
-  const inputt = input.replace(/"([^"]+)":/g, "$1:");
+  input = input.replace("adresse", "\"adresse\"")
 
-  console.log(input);
 
-  console.log(inputt.metafields);
-
-  inputt.map((item) => {
-    if (item.key.includes("boxBilling")) {
-      console.log("item : ", JSON.stringify(item.value));
-    }
-  });
-  // console.log(JSON.stringify(input));
+  console.log(JSON.stringify(input));
 
   // customer = await createCustomer(input);
   // console.log(customer);
