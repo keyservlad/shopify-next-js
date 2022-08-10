@@ -67,12 +67,11 @@ export default async function send(req, res) {
   console.log("input", input);
 
   const meta = input.metafields;
-  console.log("meta", meta);
-  for (item in meta) {
-    if (item.key.includes(boxBilling)) {
-      console.log("item : ", JSON.stringify(item));
+  meta.map((item) => {
+    if (item.key.includes("boxBilling")) {
+      console.log("item : ", JSON.stringify(item.value));
     }
-  }
+  });
   // console.log(JSON.stringify(input));
 
   // customer = await createCustomer(input);
