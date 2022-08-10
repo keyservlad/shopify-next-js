@@ -1,9 +1,9 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout/Layout";
-import ShopProvider from "../context/ShopContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "../styles/embla.css";
+import ShopProvider from "../context/ShopContext";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
