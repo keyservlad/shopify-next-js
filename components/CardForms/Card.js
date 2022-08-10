@@ -1,15 +1,11 @@
-import React, { useRef } from "react";
 import { CartContext } from "../../context/ShopContext";
 import { useContext, useEffect, useState } from "react";
 import fr from "react-phone-number-input/locale/fr.json";
 import "react-phone-number-input/style.css";
-import PhoneInput, { formatPhoneNumberIntl } from "react-phone-number-input";
-import { usePlacesWidget } from "react-google-autocomplete";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
-import { Controller, useForm } from "react-hook-form";
-import { createCustomer } from "../../lib/shopifyCustomerAdmin";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import PersonalInfos from "./PersonalInfos";
 import DeliveryAdress from "./DeliveryAdress";
@@ -88,18 +84,42 @@ const schemaDom2Addresses = object({
     .min(10, "Trop court"),
 });
 
-const createCustomerRequest = (input) =>
+const getCustomerByEmail = (email) =>
   axios
-    .get("/api/create-customer", {
+    .get("/api/verif-customer-exists", {
       params: {
-        input: input,
+        email: email,
       },
     })
     .then((res) => res.data);
 
+// const createCustomerRequest = (input) =>
+//   axios
+//     .get("/api/create-customer", {
+//       params: {
+//         input: input,
+//       },
+//     })
+//     .then((res) => res.data);
+
 export const Card = ({ carte }) => {
   async function onSubmit(values) {
     console.log(values);
+
+    setIsLoading(true);
+
+    // verif que le membre n'existe pas
+    const customer = await getCustomerByEmail(values.email);
+
+    if (customer.customer.length != 0) {
+      setIsLoading(false);
+      setError("email", {
+        type: "custom",
+        message: "Un compte avec cette adresse mail existe déjà",
+      });
+      return;
+    }
+
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
       ? "prestige"
       : carte.title.toLowerCase().includes("decouverte")
@@ -286,14 +306,23 @@ export const Card = ({ carte }) => {
         phone: values.phone,
       };
     } else {
+      setIsLoading(false);
       return;
     }
 
-    console.log(JSON.stringify(input));
+    const customAttribute = {
+      key: "newCustomerInput",
+      value: input,
+    };
+    console.log(customAttribute);
+    addToCartCarte(variant, customAttribute);
 
-    // TODO verif si le customer existe deja avant de l'overwrite (s'il existe verif le status) + mettre en place un systeme de loading pendant les requetes
+    setIsLoading(false);
+
     // const customer = createCustomerRequest(JSON.stringify(input));
     // console.log(customer);
+
+    // TODO acheter qu'une seule carte à la fois
   }
 
   const [schema, setSchema] = useState(schemaPlat);
@@ -320,10 +349,12 @@ export const Card = ({ carte }) => {
     variantQuantity: 1,
   };
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCartCarte } = useContext(CartContext);
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
   const [sameAddress, setSameAddress] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     register("address");
@@ -352,7 +383,7 @@ export const Card = ({ carte }) => {
     <div>
       <button
         onClick={() => {
-          addToCart(variant);
+          // addToCart(variant);
         }}
         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
@@ -597,9 +628,35 @@ export const Card = ({ carte }) => {
                     data-handle={carte.handle}
                   ></div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      Save
-                    </button>
+                    {isLoading ? (
+                      <button
+                        className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                      >
+                        <svg
+                          role="status"
+                          className="inline mr-3 w-4 h-4 text-white animate-spin"
+                          viewBox="0 0 100 101"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="#E5E7EB"
+                          />
+                          <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                        Chargement...
+                      </button>
+                    ) : (
+                      <button
+                        className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                      >
+                        Ajouter au panier
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
