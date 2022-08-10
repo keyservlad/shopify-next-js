@@ -112,6 +112,9 @@ export const Card = ({ carte }) => {
     const customer = await getCustomerByEmail(values.email);
 
     if (customer.customer.length != 0) {
+
+      // TODO ajouter verification avec les metafields si l'utilisateur existe mais il n'a pas de carte
+
       setIsLoading(false);
       setError("email", {
         type: "custom",
@@ -163,7 +166,7 @@ export const Card = ({ carte }) => {
               ville: values.city,
               pays: values.country,
               zip: values.zipCode,
-              prénom: values.firstName,
+              prenom: values.firstName,
               nom: values.lastName,
               tel: values.phone,
             },
@@ -217,7 +220,7 @@ export const Card = ({ carte }) => {
               ville: values.city,
               pays: values.country,
               zip: values.zipCode,
-              prénom: values.firstName,
+              prenom: values.firstName,
               nom: values.lastName,
               tel: values.phone,
             },
@@ -230,7 +233,7 @@ export const Card = ({ carte }) => {
               ville: values.city,
               pays: values.country,
               zip: values.zipCode,
-              prénom: values.firstName,
+              prenom: values.firstName,
               nom: values.lastName,
               tel: values.phone,
             },
@@ -279,7 +282,7 @@ export const Card = ({ carte }) => {
               ville: values.city2,
               pays: values.country2,
               zip: values.zipCode2,
-              prénom: values.firstName,
+              prenom: values.firstName,
               nom: values.lastName,
               tel: values.phone2,
             },
@@ -292,7 +295,7 @@ export const Card = ({ carte }) => {
               ville: values.city,
               pays: values.country,
               zip: values.zipCode,
-              prénom: values.firstName,
+              prenom: values.firstName,
               nom: values.lastName,
               tel: values.phone,
             },
@@ -313,7 +316,6 @@ export const Card = ({ carte }) => {
     const customAttribute = {
       key: "newCustomerInput",
       value: JSON.stringify(input),
-      
     };
     console.log(customAttribute);
     addToCartCarte(variant, customAttribute);
