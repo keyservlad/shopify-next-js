@@ -65,7 +65,7 @@ export default async function send(req, res) {
 
   const input = attribute[0].value;
 
-  const meta = input.metafields;
+  const meta = JSON.parse(input).metafields;
   console.log("meta", meta);
   for (item in meta) {
     if (item.key.includes(boxBilling)) {
