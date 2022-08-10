@@ -3,10 +3,10 @@
 // create the account with the field "status" toBeActivated + add the card
 // send mail to email adress to create the account
 
-import { createCustomer } from "../../lib/shopifyCustomer";
 import {
   getOrderCustomAttributes,
   updateCustomer,
+  createCustomer,
 } from "../../lib/shopifyCustomerAdmin";
 import { sendMail } from "../../utils/sendMail";
 
@@ -64,7 +64,8 @@ export default async function send(req, res) {
   const attribute = await getOrderCustomAttributes(orderId);
   const input = attribute[0].value;
 
-  console.log(JSON.stringify(input));
+  customer = await updateCustomer(input);
+  console.log(customer);
 
   return res.status(200).json({ status: "Ok" });
 
