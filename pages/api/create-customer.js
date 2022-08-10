@@ -12,6 +12,7 @@ import { sendMail } from "../../utils/sendMail";
 
 // TODO add validation with the token in the header of the request
 // TODO set up email to my address with logs when there is an error
+// TODO check que le membre n'a pas deja été créé car les webhooks sont appelé plusieurs fois souvent
 export default async function send(req, res) {
   // req.body.line_items.map((item) => {
   //   console.log(item);
@@ -63,16 +64,20 @@ export default async function send(req, res) {
 
   var attribute = await getOrderCustomAttributes(orderId);
 
-  console.log("attribute", attribute);
   var input = attribute[0].value;
 
-  input = input.replace("adresse", "\"adresse\"")
-
+  input = input.replace("adresse", '"adresse"');
+  input = input.replace("ville", '"ville"');
+  input = input.replace("pays", '"pays"');
+  input = input.replace("zip", '"zip"');
+  input = input.replace("prenom", '"prenom"');
+  input = input.replace("nom", '"nom"');
+  input = input.replace("tel", '"tel"');
 
   console.log(JSON.stringify(input));
 
-  // customer = await createCustomer(input);
-  // console.log(customer);
+  customer = await createCustomer(JSON.stringify(input));
+  console.log(customer);
 
   return res.status(200).json({ status: "Ok" });
 
