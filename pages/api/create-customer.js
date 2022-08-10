@@ -64,9 +64,15 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   console.log("attribute", attribute);
-  const input = attribute[0].value.metafields;
+  const input = attribute[0].value;
 
-  input.map((item) => {
+  const inputt = input.replace(/"([^"]+)":/g, "$1:");
+
+  console.log(input);
+
+  console.log(inputt.metafields);
+
+  inputt.map((item) => {
     if (item.key.includes("boxBilling")) {
       console.log("item : ", JSON.stringify(item.value));
     }
