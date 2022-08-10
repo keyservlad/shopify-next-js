@@ -63,12 +63,11 @@ export default async function send(req, res) {
 
   var attribute = await getOrderCustomAttributes(orderId);
 
-  console.log(attribute);
   const input = attribute[0].value;
   console.log(JSON.stringify(input));
 
-  // customer = await createCustomer(JSON.stringify(input));
-  // console.log(customer);
+  customer = await createCustomer(input);
+  console.log(customer);
 
   return res.status(200).json({ status: "Ok" });
 
