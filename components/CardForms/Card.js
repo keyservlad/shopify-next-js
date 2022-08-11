@@ -162,15 +162,6 @@ export const Card = ({ carte }) => {
             namespace: "custom",
             type: "json",
             value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
-            // {
-            //   adresse: values.address,
-            //   ville: values.city,
-            //   pays: values.country,
-            //   zip: values.zipCode,
-            //   prenom: values.firstName,
-            //   nomFamille: values.lastName,
-            //   tel: values.phone,
-            // },
           },
           {
             key: "isDomicile",
@@ -328,6 +319,7 @@ export const Card = ({ carte }) => {
     // console.log(customer);
 
     // TODO acheter qu'une seule carte à la fois
+    // TODO add date + router.push
   }
 
   const [schema, setSchema] = useState(schemaPlat);

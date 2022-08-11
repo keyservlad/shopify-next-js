@@ -65,18 +65,13 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   var input = attribute[0].value;
-
-  // input = input.replace("adresse", '"adresse"');
-  // input = input.replace("ville", '"ville"');
-  // input = input.replace("pays", '"pays"');
-  // input = input.replace("zip", '"zip"');
-  // input = input.replace("prenom", '"prenom"');
-  // input = input.replace("nomFamille", '"nomFamille"');
-  // input = input.replace("tel", '"tel"');
   input = input.replaceAll("~", '\\"');
 
   console.log(input);
 
+
+  // traiter les cas ou les deux adresses sont differentes
+  // if userErrors not empty return 400
   const customer = await updateCustomer(input);
   console.log(customer);
 
