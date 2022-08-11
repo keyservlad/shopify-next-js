@@ -71,7 +71,7 @@ export default async function send(req, res) {
   input = input.replace("pays", '"pays"');
   input = input.replace("zip", '"zip"');
   input = input.replace("prenom", '"prenom"');
-  input = input.replace("nom", '"nom"');
+  input = input.replace("nomFamille", '"nomFamille"');
   input = input.replace("tel", '"tel"');
 
   console.log(input);
