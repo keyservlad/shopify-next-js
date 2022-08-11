@@ -74,9 +74,9 @@ export default async function send(req, res) {
   input = input.replace("nom", '"nom"');
   input = input.replace("tel", '"tel"');
 
-  console.log(JSON.stringify(input));
+  console.log(input);
 
-  customer = await createCustomer(JSON.stringify(input));
+  customer = await createCustomer(input);
   console.log(customer);
 
   return res.status(200).json({ status: "Ok" });
