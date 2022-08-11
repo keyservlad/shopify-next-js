@@ -161,7 +161,7 @@ export const Card = ({ carte }) => {
             key: "boxBilling",
             namespace: "custom",
             type: "json",
-            value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.nomFamille}~, ~tel~: ~${values.phone}~}`,
+            value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
             // {
             //   adresse: values.address,
             //   ville: values.city,

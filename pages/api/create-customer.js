@@ -73,7 +73,7 @@ export default async function send(req, res) {
   // input = input.replace("prenom", '"prenom"');
   // input = input.replace("nomFamille", '"nomFamille"');
   // input = input.replace("tel", '"tel"');
-  input = input.replace("~", '"');
+  input = input.replaceAll("~", '"');
 
   console.log(input);
 
