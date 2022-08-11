@@ -30,7 +30,6 @@ export default async function send(req, res) {
   })
 
   // sendMail(customer.email, "subject", "<h1>html</h1>");
-  console.log("full:", req.headers)
 
   // we get the order ID to get access to the custom attribute where the request is
   var headers = JSON.stringify(req.headers);
