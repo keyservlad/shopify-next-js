@@ -112,7 +112,6 @@ export const Card = ({ carte }) => {
     const customer = await getCustomerByEmail(values.email);
 
     if (customer.customer.length != 0) {
-
       // TODO ajouter verification avec les metafields si l'utilisateur existe mais il n'a pas de carte
 
       setIsLoading(false);
@@ -162,7 +161,7 @@ export const Card = ({ carte }) => {
             key: "boxBilling",
             namespace: "custom",
             type: "json",
-            value: `{"adresse": "${values.address}", "ville": "${values.city}", "pays":"${values.country}", "zip":"${values.zipCode}", "prenom": "${values.firstName}", "nomFamille":"${values.nomFamille}", "tel": "${values.phone}"}`
+            value: `{\"adresse\": \"${values.address}\", \"ville\": \"${values.city}\", \"pays\":\"${values.country}\", \"zip\":\"${values.zipCode}\", \"prenom\": \"${values.firstName}\", \"nomFamille\":\"${values.nomFamille}\", \"tel\": \"${values.phone}\"}`,
             // {
             //   adresse: values.address,
             //   ville: values.city,
