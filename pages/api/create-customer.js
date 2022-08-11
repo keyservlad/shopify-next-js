@@ -66,13 +66,13 @@ export default async function send(req, res) {
 
   var input = attribute[0].value;
 
-  input = input.replace("adresse", '"adresse"');
-  input = input.replace("ville", '"ville"');
-  input = input.replace("pays", '"pays"');
-  input = input.replace("zip", '"zip"');
-  input = input.replace("prenom", '"prenom"');
-  input = input.replace("nomFamille", '"nomFamille"');
-  input = input.replace("tel", '"tel"');
+  // input = input.replace("adresse", '"adresse"');
+  // input = input.replace("ville", '"ville"');
+  // input = input.replace("pays", '"pays"');
+  // input = input.replace("zip", '"zip"');
+  // input = input.replace("prenom", '"prenom"');
+  // input = input.replace("nomFamille", '"nomFamille"');
+  // input = input.replace("tel", '"tel"');
 
   console.log(input);
 
