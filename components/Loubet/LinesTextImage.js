@@ -62,19 +62,16 @@ const LinesTextImage = ({ lineNumber }) => {
   const line = lineNumber === 1 ? line1 : lineNumber === 2 ? line2 : line3;
   return (
     <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
-      <div className="pt-36 grid grid-cols-1 md:grid-cols-2 md:gap-x-24">
-        <div className={`col-span-1 hidden m-auto w-4/5 ${line.reverse ? "block" : ""}`}>
-          <Image
-            src={line.image}
-            alt="image heart page d'accueil"
-            placeholder="blur"
-          />
-        </div>
-        <div className="my-auto col-span-1">
+      <div
+        className={`pt-20 md:pt-36 flex flex-col md:flex-row md:gap-x-24 ${
+          line.reverse ? "md:flex-row-reverse" : ""
+        }`}
+      >
+        <div className="my-auto basis-1/2">
           <h1 className="">{line.title}</h1>
           <div className="mt-5">{line.text}</div>
         </div>
-        <div className={`m-auto col-span-1 w-4/5 ${line.reverse ? "hidden" : ""}`}>
+        <div className={`m-auto w-4/5 basis-1/2 pt-10 md:pt-10`}>
           <Image
             src={line.image}
             alt="image heart page d'accueil"
