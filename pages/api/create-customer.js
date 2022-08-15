@@ -46,7 +46,6 @@ export default async function send(req, res) {
   // traiter les cas ou les deux adresses sont differentes
   // if userErrors not empty return 400
 
-  console.log("input :", input);
   // var customer = await createCustomer(input);
   // console.log("create", customer);
 
@@ -55,15 +54,15 @@ export default async function send(req, res) {
   input = JSON.parse(input);
   const email = input.email;
   var userByEmail = await queryCustomerByEmail(email);
-  console.log("user id : ", userByEmail);
 
   input.id = userByEmail[0].id;
-  console.log("input with id", input);
 
   input = JSON.stringify(input);
   input = input.replaceAll("\\", "");
   input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-  input = input.replaceAll("~", "'"); // formatting the request as it is stringified inside a parsed object
+  input = input.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+
+  console.log("finale", input);
   var customer = await updateCustomer(input);
   console.log("update", customer);
 
