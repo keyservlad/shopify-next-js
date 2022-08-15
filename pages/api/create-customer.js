@@ -16,11 +16,11 @@ import { sendMail } from "../../utils/sendMail";
 // TODO check que le membre n'a pas deja été créé car les webhooks sont appelé plusieurs fois souvent
 export default async function send(req, res) {
   // check for the POST request
-  if (req.method !== "POST") {
-    return res
-      .status(400)
-      .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
-  }
+  // if (req.method !== "POST") {
+  //   return res
+  //     .status(400)
+  //     .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
+  // }
 
   req.body.line_items.map((item) => {
     if (
