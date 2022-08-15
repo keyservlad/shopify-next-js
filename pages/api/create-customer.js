@@ -56,10 +56,11 @@ export default async function send(req, res) {
   const email = input.email;
   var userByEmail = await queryCustomerByEmail(email);
   console.log("user id : ", userByEmail);
+
   input.id = userByEmail.id;
-  input = input.stringify(input);
+  input = JSON.stringify(input);
   input = input.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
-  // get id and add it to input
+
   customer = await updateCustomer(input);
   console.log("update", customer);
 
