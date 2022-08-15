@@ -9,6 +9,7 @@ import {
   createCustomer,
   queryCustomerByEmail,
 } from "../../lib/shopifyCustomerAdmin";
+import { createCustomer as createCustomerStorefront } from "../../lib/shopifyCustomer";
 import { sendMail } from "../../utils/sendMail";
 
 // TODO add validation with the token in the header of the request
@@ -53,18 +54,29 @@ export default async function send(req, res) {
   input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
   input = JSON.parse(input);
   const email = input.email;
+
+  var inputCreate = JSON.stringify(input);
+  inputCreate = inputCreate.replaceAll("\\", "");
+  inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+  inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+
+  // we first call create in case the user didnt enter the same address so the account is not yet created
+  var customerCreate = await createCustomer(inputCreate);
+  console.log("create", customerCreate);
+
   var userByEmail = await queryCustomerByEmail(email);
 
   input.id = userByEmail[0].id;
-
   input = JSON.stringify(input);
   input = input.replaceAll("\\", "");
   input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-  input = input.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+  input = input.replaceAll("~", '\\"');
 
-  console.log("finale", input);
   var customer = await updateCustomer(input);
   console.log("update", customer);
+
+  var customerStoreFront = await createCustomerStorefront(email, process.env.PASSWORD_CREATE_ACCOUNT);
+  console.log(customerStoreFront);
 
   return res.status(200).json({ status: "Ok" });
 }
