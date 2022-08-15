@@ -42,7 +42,6 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   var input = attribute[0].value;
-  input = input.replaceAll("~", "\\'"); // formatting the request as it is stringified inside a parsed object
 
   // traiter les cas ou les deux adresses sont differentes
   // if userErrors not empty return 400
@@ -55,8 +54,10 @@ export default async function send(req, res) {
   var userByEmail = await queryCustomerByEmail(email);
   console.log("user id : ", userByEmail);
   input.id = userByEmail.id;
+  input = input.stringify(input);
+  input = input.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
   // get id and add it to input
-  customer = await updateCustomer(JSON.stringify(input));
+  customer = await updateCustomer(input);
   console.log("update", customer);
 
   return res.status(200).json({ status: "Ok" });
