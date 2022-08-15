@@ -42,7 +42,7 @@ export default async function send(req, res) {
   var attribute = await getOrderCustomAttributes(orderId);
 
   var input = attribute[0].value;
-  input = input.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+  input = input.replaceAll("~", "\\'"); // formatting the request as it is stringified inside a parsed object
 
   // traiter les cas ou les deux adresses sont differentes
   // if userErrors not empty return 400
