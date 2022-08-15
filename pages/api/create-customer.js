@@ -57,7 +57,9 @@ export default async function send(req, res) {
   var userByEmail = await queryCustomerByEmail(email);
   console.log("user id : ", userByEmail);
 
-  input.id = userByEmail.id;
+  input.id = userByEmail[0].id;
+  console.log("input with id", input);
+
   input = JSON.stringify(input);
   input = input.replaceAll("\\", "");
   input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
