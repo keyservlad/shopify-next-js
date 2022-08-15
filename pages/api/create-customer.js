@@ -50,9 +50,9 @@ export default async function send(req, res) {
   console.log("input :", input);
   var customer = await createCustomer(input);
   console.log("create", customer);
-  var userByEmail = queryCustomerByEmail("email");
+  var userByEmail = await queryCustomerByEmail("email");
   console.log("user id : ", userByEmail);
-  input.push(userByEmail.id);
+  input.id = userByEmail.id;
   // get id and add it to input
   customer = await updateCustomer(input);
   console.log("update", customer);
