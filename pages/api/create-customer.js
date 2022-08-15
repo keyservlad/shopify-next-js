@@ -28,7 +28,7 @@ export default async function send(req, res) {
       item.title == "Carte Découverte" ||
       item.title == "Carte Immanquables"
     ) {
-      console.log("card trigger");
+      // console.log("card trigger");
     }
   });
 
@@ -47,11 +47,12 @@ export default async function send(req, res) {
   // traiter les cas ou les deux adresses sont differentes
   // if userErrors not empty return 400
 
-  console.log("attribute :", attribute);
   console.log("input :", input);
   var customer = await createCustomer(input);
   console.log("create", customer);
   var userByEmail = queryCustomerByEmail("email");
+  console.log("user id : ", userByEmail);
+  input.push(userByEmail.id);
   // get id and add it to input
   customer = await updateCustomer(input);
   console.log("update", customer);
