@@ -47,8 +47,11 @@ export default async function send(req, res) {
   // if userErrors not empty return 400
 
   console.log("input :", input);
-  var customer = await createCustomer(input);
-  console.log("create", customer);
+  // var customer = await createCustomer(input);
+  // console.log("create", customer);
+
+  // sanatize JSON using regex
+  input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
   input = JSON.parse(input);
   const email = input.email;
   var userByEmail = await queryCustomerByEmail(email);
