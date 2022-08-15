@@ -50,11 +50,13 @@ export default async function send(req, res) {
   console.log("input :", input);
   var customer = await createCustomer(input);
   console.log("create", customer);
-  var userByEmail = await queryCustomerByEmail("email");
+  input = JSON.parse(input);
+  const email = input.email;
+  var userByEmail = await queryCustomerByEmail(email);
   console.log("user id : ", userByEmail);
   input.id = userByEmail.id;
   // get id and add it to input
-  customer = await updateCustomer(input);
+  customer = await updateCustomer(JSON.stringify(input));
   console.log("update", customer);
 
   return res.status(200).json({ status: "Ok" });
