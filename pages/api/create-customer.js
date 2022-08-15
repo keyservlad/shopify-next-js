@@ -62,7 +62,7 @@ export default async function send(req, res) {
   input = input.replaceAll("\\", "");
   input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
   input = input.replaceAll("~", "'"); // formatting the request as it is stringified inside a parsed object
-  customer = await updateCustomer(input);
+  var customer = await updateCustomer(input);
   console.log("update", customer);
 
   return res.status(200).json({ status: "Ok" });
