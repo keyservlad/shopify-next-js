@@ -337,15 +337,6 @@ export const Card = ({ carte }) => {
     reValidateMode: "onChange",
   });
 
-  const variant = {
-    id: carte.variants.edges[0].node.id,
-    title: carte.title,
-    handle: carte.handle,
-    image: carte.images?.edges[0].node.originalSrc,
-    variantPrice: carte.variants.edges[0].node.price,
-    variantQuantity: 1,
-  };
-
   const { addToCartCarte } = useContext(CartContext);
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
@@ -372,20 +363,8 @@ export const Card = ({ carte }) => {
     }
   }, [deliveryMode, sameAddress]);
 
-  useEffect(() => {
-    console.log(schema);
-  }, [schema]);
-
   return (
     <div>
-      <button
-        onClick={() => {
-          // addToCart(variant);
-        }}
-        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Save
-      </button>
       <div className="max-w-7xl mx-auto py-16 sm:my-16 px-4 sm:py-24 sm:px-6 lg:px-8 bg-gray-100">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-10 sm:mt-0">
