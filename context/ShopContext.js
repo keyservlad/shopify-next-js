@@ -13,6 +13,7 @@ export default function ShopProvider({ children }) {
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutId, setCheckoutId] = useState("");
   const [checkoutUrl, setCheckoutUrl] = useState("");
+  const [isCartLoading, setIsCartLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -31,14 +32,13 @@ export default function ShopProvider({ children }) {
 
   async function addToCart(newItem) {
     setCartOpen(true);
+    setIsCartLoading(true);
 
     if (cart.length === 0) {
       setCart([newItem]);
 
-      const checkout = await createCheckout(
-        newItem.id,
-        newItem.variantQuantity
-      );
+      let newCart = [newItem];
+      const checkout = await createCheckout(newCart);
 
       setCheckoutId(checkout.id);
       setCheckoutUrl(checkout.webUrl);
@@ -61,14 +61,18 @@ export default function ShopProvider({ children }) {
       }
 
       setCart(newCart);
-      const newCheckout = await updateCheckout(checkoutId, newCart);
+      const newCheckout = await createCheckout(newCart);
       localStorage.setItem(
         "checkout_id",
         JSON.stringify([newCart, newCheckout])
       );
     }
+    setIsCartLoading(false);
   }
+
+  // TODO fix cartes too
   async function addToCartCarte(newItem, customAttribute) {
+    setIsCartLoading(true);
     setCartOpen(true);
 
     if (cart.length === 0) {
@@ -111,14 +115,16 @@ export default function ShopProvider({ children }) {
         JSON.stringify([newCart, newCheckout])
       );
     }
+    setIsCartLoading(false);
   }
 
   async function removeCartItem(itemToRemove) {
+    setIsCartLoading(true);
     const updatedCart = cart.filter((item) => item.id !== itemToRemove);
 
     setCart(updatedCart);
 
-    const newCheckout = await updateCheckout(checkoutId, updatedCart);
+    const newCheckout = await createCheckout(updatedCart);
 
     localStorage.setItem(
       "checkout_id",
@@ -128,6 +134,7 @@ export default function ShopProvider({ children }) {
     if (cart.length === 1) {
       setCartOpen(false);
     }
+    setIsCartLoading(false);
   }
 
   return (
@@ -140,6 +147,7 @@ export default function ShopProvider({ children }) {
         addToCartCarte,
         checkoutUrl,
         removeCartItem,
+        isCartLoading,
       }}
     >
       {children}
