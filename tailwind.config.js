@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
   content: [
@@ -24,5 +24,8 @@ module.exports = {
   corePlugins: {
     aspectRatio: true,
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwindcss-animation-delay"),
+  ],
 };
