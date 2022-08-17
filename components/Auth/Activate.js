@@ -1,9 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string } from "yup";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
-import axios from "axios";
+import { useRouter } from "next/router";
 import Loading from "../Loading";
 import ActivateComp from "./ActivateComp";
 
