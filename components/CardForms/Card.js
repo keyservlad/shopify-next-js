@@ -337,6 +337,15 @@ export const Card = ({ carte }) => {
     reValidateMode: "onChange",
   });
 
+  const variant = {
+    id: carte.variants.edges[0].node.id,
+    title: carte.title,
+    handle: carte.handle,
+    image: carte.images?.edges[0].node.originalSrc,
+    variantPrice: carte.variants.edges[0].node.price,
+    variantQuantity: 1,
+  };
+
   const { addToCartCarte } = useContext(CartContext);
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");

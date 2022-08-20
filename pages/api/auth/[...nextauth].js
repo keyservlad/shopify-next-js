@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { createAccessToken } from "../../../lib/shopifyCustomer";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -17,7 +18,6 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("test")
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
@@ -37,6 +37,12 @@ export default NextAuth({
         // }
         // // Return null if user data could not be retrieved
         // return null;
+        const token = await createAccessToken(
+          "guilhamat.arnaud@gmail.com",
+          "Arnaud99"
+        );
+        console.log(token);
+        
         if (
           credentials.email === "guilhamat.arnaud@gmail.com" &&
           credentials.password === "Arnaud99"
@@ -52,10 +58,10 @@ export default NextAuth({
       },
     }),
   ],
-  secret: 'test',
+  secret: "test",
   pages: {
-    signIn: '/login',
+    signIn: "/login",
   },
   // Enable debug messages in the console if you are having problems
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
 });

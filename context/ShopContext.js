@@ -78,9 +78,9 @@ export default function ShopProvider({ children }) {
     if (cart.length === 0) {
       setCart([newItem]);
 
+      let newCart = [newItem];
       const checkout = await createCheckoutCustomAttribute(
-        newItem.id,
-        newItem.variantQuantity,
+        newCart,
         customAttribute
       );
 
@@ -105,8 +105,7 @@ export default function ShopProvider({ children }) {
       }
 
       setCart(newCart);
-      const newCheckout = await updateCheckoutCustomAttribute(
-        checkoutId,
+      const newCheckout = await createCheckoutCustomAttribute(
         newCart,
         customAttribute
       );

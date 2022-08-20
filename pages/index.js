@@ -1,16 +1,11 @@
-import { useSession, signOut } from "next-auth/react";
 import HomePage from "../components/HP/HomePage";
 import { getAllProductsMeilleuresVentes } from "../lib/shopify";
 
 // TODO add notification when message error comes with router query
 const test = ({ products }) => {
-  const sessiondata = useSession();
-  console.log(sessiondata);
-  
   return (
     <>
-      <button onClick={()=> signOut()}>logout</button>
-      <HomePage products={products}/>
+      <HomePage products={products} />
     </>
   );
 };
