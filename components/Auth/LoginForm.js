@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Loading from "../Loading";
+import { signIn } from "next-auth/react";
 
 const schema = object({
   email: string().required("Veuillez entrer votre adresse email"),
@@ -16,12 +17,26 @@ const LoginForm = () => {
     setIsLoading(true);
     console.log(values);
 
-    setIsLoading(false);
-
-    router.push({
-      pathname: "/login",
-      query: { success: "creation de compte reussie" },
+    const res = await signIn("EmovinShopify", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+      callbackUrl: `${window.location.origin}`,
     });
+    console.log(res);
+
+    setIsLoading(false);
+    // if (res?.error) {
+    //   setError("global",res.error);
+    // } else {
+    //   setError("global", null);
+    // }
+    // if (res.url) router.push(res.url);
+
+    // router.push({
+    //   pathname: "/login",
+    //   query: { success: "creation de compte reussie" },
+    // });
   }
 
   const {
