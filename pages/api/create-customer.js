@@ -24,7 +24,6 @@ export default async function send(req, res) {
   // }
 
   res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
-  console.log("test");
   req.body.line_items.map((item) => {
     if (
       item.title == "Carte Prestige" ||
@@ -62,6 +61,7 @@ export default async function send(req, res) {
   inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
   inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
+  console.log(inputCreate);
   // we first call create in case the user didnt enter the same address so the account is not yet created
   var customerCreate = await createCustomer(inputCreate);
   console.log("create", customerCreate);
