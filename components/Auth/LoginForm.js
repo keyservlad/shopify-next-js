@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Loading from "../Loading";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const schema = object({
   email: string().required("Veuillez entrer votre adresse email"),
@@ -13,9 +13,15 @@ const schema = object({
 });
 
 const LoginForm = () => {
+  const router = useRouter();
+  const sessiondata = useSession();
+  // TODO this could be done using a middleWare or a loading page but not enough time right now
+  if (sessiondata.status === "authenticated") {
+    router.push("/"); // TODO change to MonCompte
+  }
+
   async function onSubmit(values) {
     setIsLoading(true);
-    console.log(values);
 
     const res = await signIn("EmovinShopify", {
       redirect: false,
@@ -23,20 +29,18 @@ const LoginForm = () => {
       password: values.password,
       callbackUrl: `${window.location.origin}`,
     });
-    console.log(res);
+
+    if (res?.error) {
+      setError("global", {
+        type: "custom",
+        message: "Identifiants incorrects",
+      });
+    } else {
+      setError("global", null);
+    }
 
     setIsLoading(false);
-    // if (res?.error) {
-    //   setError("global",res.error);
-    // } else {
-    //   setError("global", null);
-    // }
-    // if (res.url) router.push(res.url);
-
-    // router.push({
-    //   pathname: "/login",
-    //   query: { success: "creation de compte reussie" },
-    // });
+    if (res.url) router.push(res.url);
   }
 
   const {
@@ -124,6 +128,12 @@ const LoginForm = () => {
                   className="block text-sm font-medium text-orange-600"
                 >
                   {errors?.password?.message}
+                </span>
+                <span
+                  htmlFor="email"
+                  className="block text-sm font-medium text-orange-600"
+                >
+                  {errors?.global?.message}
                 </span>
               </div>
 

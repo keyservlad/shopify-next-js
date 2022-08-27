@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { createAccessToken } from "../../../lib/shopifyCustomer";
+import { createAccessToken, getCustomer } from "../../../lib/shopifyCustomer";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -37,30 +37,40 @@ export default NextAuth({
         // }
         // // Return null if user data could not be retrieved
         // return null;
+
         const token = await createAccessToken(
-          "guilhamat.arnaud@gmail.com",
-          "Arnaud99"
+          credentials.email,
+          credentials.password
         );
-        console.log(token);
-        
-        if (
-          credentials.email === "guilhamat.arnaud@gmail.com" &&
-          credentials.password === "Arnaud99"
-        ) {
-          return {
-            id: 1,
-            name: "Arnaud",
-            email: "guilhamat.arnaud@gmail.com",
+
+        if (token.customerAccessToken) {
+          const userWithoutToken = await getCustomer(
+            token.customerAccessToken.accessToken
+          );
+
+          const user = {
+            token: token.customerAccessToken,
+            userWithoutToken,
           };
+          return user;
         } else {
           return null;
         }
       },
     }),
   ],
-  secret: "test",
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user; // Setting token in session
+      return session;
+    },
   },
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === "development",
