@@ -23,7 +23,7 @@ export default async function send(req, res) {
   //     .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
   // }
 
-  res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
+  // res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
   req.body.line_items.map((item) => {
     if (
       item.title == "Carte Prestige" ||
