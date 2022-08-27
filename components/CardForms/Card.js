@@ -318,6 +318,8 @@ export const Card = ({ carte }) => {
     // const customer = createCustomerRequest(JSON.stringify(input));
     // console.log(customer);
 
+    // TODO verif unique phone number
+    // TODO add all the address + phone number + mail + note under the card to the checkout
     // TODO acheter qu'une seule carte à la fois
     // TODO add date + router.push
   }
