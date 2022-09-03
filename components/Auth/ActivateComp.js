@@ -58,7 +58,7 @@ const ActivateComp = ({ activation_url }) => {
     // modif password
     const modifUser = await modifPassword(
       values.password,
-      accessToken.accessToken
+      accessToken.customerAccessToken.accessToken
     );
     console.log(modifUser);
 
