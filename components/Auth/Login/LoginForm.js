@@ -1,11 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Loading from "../Loading";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 const schema = object({
   email: string().required("Veuillez entrer votre adresse email"),
@@ -14,11 +12,6 @@ const schema = object({
 
 const LoginForm = () => {
   const router = useRouter();
-  const sessiondata = useSession();
-  // TODO this could be done using a middleWare or a loading page but not enough time right now
-  if (sessiondata.status === "authenticated") {
-    router.push("/"); // TODO change to MonCompte
-  }
 
   async function onSubmit(values) {
     setIsLoading(true);
@@ -27,7 +20,11 @@ const LoginForm = () => {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: `${window.location.origin}`,
+      callbackUrl: `${
+        router.query.callbackUrl
+          ? router.query.callbackUrl
+          : `${window.location.origin}`
+      }`,
     });
 
     if (res?.error) {
@@ -39,8 +36,8 @@ const LoginForm = () => {
       setError("global", null);
     }
 
-    setIsLoading(false);
     if (res.url) router.push(res.url);
+    setIsLoading(false);
   }
 
   const {

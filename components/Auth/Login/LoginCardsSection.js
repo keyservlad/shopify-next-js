@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import ImageDecouverte from "../../public/images/login/decouverte.png";
-import ImageImmanquables from "../../public/images/login/immanquables.png";
-import ImagePrestige from "../../public/images/login/prestige.png";
+import ImageDecouverte from "../../../public/images/login/decouverte.png";
+import ImageImmanquables from "../../../public/images/login/immanquables.png";
+import ImagePrestige from "../../../public/images/login/prestige.png";
 
 const LoginCardsSection = () => {
   return (

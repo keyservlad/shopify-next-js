@@ -451,6 +451,7 @@ export default function Nav2() {
 
               <div className="ml-auto flex items-center text-redWine">
                 <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 hover:opacity-70">
+                  {/* TODO login */}
                   <a
                     href="#"
                     className="text-sm font-medium flex flex-row items-center"
