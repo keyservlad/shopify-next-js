@@ -1,9 +1,7 @@
-import { useSession } from "next-auth/react";
+import MyAccount from "../components/MyAccount/MyAccount";
 
 const MonCompte = () => {
-  const session = useSession();
-  console.log(session);
-  return <div>mon-compte</div>;
+  return <MyAccount />;
 };
 
 MonCompte.auth = true;

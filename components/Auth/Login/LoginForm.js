@@ -23,7 +23,7 @@ const LoginForm = ({ setIsRouting }) => {
       callbackUrl: `${
         router.query.callbackUrl
           ? router.query.callbackUrl
-          : `${window.location.origin}`
+          : `${window.location.origin}/mon-compte`
       }`,
     });
 

@@ -1,18 +1,18 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Loading from "../../Loading";
 import LoginCardsSection from "./LoginCardsSection";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
+const Login = React.memo(props => {
   const [isRouting, setIsRouting] = useState(false);
   const router = useRouter();
   const session = useSession();
 
   if (session.status === "loading") return <Loading />;
   if (session.status === "authenticated") {
-    if (isRouting) {
+    if (!isRouting) {
       router.push("/mon-compte");
     }
     return <Loading />;
@@ -31,6 +31,6 @@ const Login = () => {
       </>
     );
   }
-};
+});
 
 export default Login;

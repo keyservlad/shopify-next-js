@@ -7,17 +7,12 @@ import MeilleuresVentes from "./MeilleuresVentes";
 import NosCartesMembres from "./NosCartesMembres";
 import NotreConcept from "./NotreConcept";
 
-import { useSession, signOut } from "next-auth/react";
-
 const HomePage = ({ products }) => {
-  const sessiondata = useSession();
-  console.log(sessiondata);
   const refButtonHeroHP = createRef();
   const SLIDE_COUNT = 3;
   const slides = Array.from(Array(SLIDE_COUNT).keys());
   return (
     <>
-      <button onClick={() => signOut()}>logout</button>
       <HeroSection refButtonHeroHP={refButtonHeroHP} />
       <NosCartesMembres refButtonHeroHP={refButtonHeroHP} />
       <LeBonCoup />

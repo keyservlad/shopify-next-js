@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { createContext, useState, useEffect } from "react";
 import {
   createCheckout,
@@ -5,6 +6,7 @@ import {
   updateCheckout,
   updateCheckoutCustomAttribute,
 } from "../lib/shopifyCheckout";
+import { getCustomer } from "../lib/shopifyCustomer";
 
 const CartContext = createContext();
 
@@ -14,6 +16,7 @@ export default function ShopProvider({ children }) {
   const [checkoutId, setCheckoutId] = useState("");
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const [isCartLoading, setIsCartLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -30,6 +33,7 @@ export default function ShopProvider({ children }) {
     }
   }, []);
 
+  // TODO add check token expiry date and add user and infos to checkout
   async function addToCart(newItem) {
     setCartOpen(true);
     setIsCartLoading(true);
@@ -136,6 +140,11 @@ export default function ShopProvider({ children }) {
     setIsCartLoading(false);
   }
 
+  async function fetchUser(clientAccessToken) {
+    const user = await getCustomer(clientAccessToken);
+    setUser(user);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -147,6 +156,8 @@ export default function ShopProvider({ children }) {
         checkoutUrl,
         removeCartItem,
         isCartLoading,
+        user,
+        fetchUser,
       }}
     >
       {children}

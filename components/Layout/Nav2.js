@@ -14,8 +14,10 @@
   }
   ```
 */
-import { Fragment, useContext, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { Dialog, Popover, Tab, Transition, Menu } from "@headlessui/react";
 import {
   MenuIcon,
   SearchIcon,
@@ -31,6 +33,8 @@ import ImageLogo from "../../public/images/logo_emovin-05.svg";
 import Link from "next/link";
 import { CartContext } from "../../context/ShopContext";
 import MiniCart from "../MiniCart";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const navigation = {
   categories: [
@@ -103,13 +107,28 @@ function classNames(...classes) {
 }
 
 export default function Nav2() {
+  const session = useSession();
+  console.log(session);
+
+  const router = useRouter();
+  console.log(router);
+
+  const { cart, cartOpen, setCartOpen, user, fetchUser } =
+    useContext(CartContext);
+
   const [open, setOpen] = useState(false);
-  const { cart, cartOpen, setCartOpen } = useContext(CartContext);
 
   let cartQuantity = 0;
   cart.map((item) => {
     return (cartQuantity += item?.variantQuantity);
   });
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      fetchUser(session.data.user.token.accessToken);
+      console.log(user);
+    }
+  }, [session.status]);
 
   return (
     <div className="bg-white lg:sticky top-0 z-20 border-b border-gray-200">
@@ -277,7 +296,7 @@ export default function Nav2() {
       <header className="relative bg-white">
         <nav
           aria-label="Top"
-          className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mx-auto"
+          className="w-full px-5 sm:px-10 xl:px-28 2xl:px-40 mx-auto"
         >
           <div className="">
             <div className="h-16 flex items-center">
@@ -303,7 +322,7 @@ export default function Nav2() {
 
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="h-full flex space-x-8">
+                <div className="h-full flex space-x-3 xl:space-x-6 2xl:space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
@@ -450,21 +469,109 @@ export default function Nav2() {
               </Popover.Group>
 
               <div className="ml-auto flex items-center text-redWine">
-                <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 hover:opacity-70">
+                <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 hover:opacity-90">
                   {/* TODO login */}
-                  <a
-                    href="#"
-                    className="text-sm font-medium flex flex-row items-center"
-                  >
-                    <UserIcon className="h-6 w-6 mr-2" aria-hidden="true" />
-                    {/* <UserCircleIcon className="h-6 w-6" aria-hidden="true" /> */}
-                    <p className="mr-2">Arnaud</p>
-                    <ChevronDownIcon className="w-4 h-4" aria-hidden="true" />
-                  </a>
+                  <div className="text-sm font-medium flex flex-row items-center">
+                    {session.status === "loading" ||
+                    (!user && session.status === "authenticated") ? (
+                      <>
+                        <Skeleton
+                          circle
+                          height="100%"
+                          containerClassName="h-6 w-6 mr-2 leading-none"
+                        />
+                        <Skeleton width={70} containerClassName="" />
+                      </>
+                    ) : session.status === "authenticated" ? (
+                      <>
+                        <Menu
+                          as="div"
+                          className="relative inline-block text-left"
+                        >
+                          <div className="inline-flex items-center w-full justify-center py-2 text-sm font-medium shadow-sm focus:outline-none">
+                            <Link href={"/mon-compte"} passHref>
+                              <a className="inline-flex items-center w-full justify-center py-2 text-sm font-medium shadow-sm focus:outline-none">
+                                <UserIcon
+                                  className="h-6 w-6 mr-2"
+                                  aria-hidden="true"
+                                />
+                                <p className="mr-2">{user.firstName}</p>
+                              </a>
+                            </Link>
+
+                            <Menu.Button className="">
+                              <ChevronDownIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </Menu.Button>
+                          </div>
+
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <div className="py-1">
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <button
+                                      onClick={() => signOut()}
+                                      className={classNames(
+                                        active
+                                          ? "bg-gray-100 text-gray-900"
+                                          : "text-gray-700",
+                                        "block w-full px-4 py-2 text-left text-sm"
+                                      )}
+                                    >
+                                      Se déconnecter
+                                    </button>
+                                  )}
+                                </Menu.Item>
+                              </div>
+                            </Menu.Items>
+                          </Transition>
+                        </Menu>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex flex-1 items-center justify-end space-x-3 xl:space-x-6">
+                          <Link
+                            href={{
+                              pathname: "/login",
+                              query: { callbackUrl: `${window.location.origin}/` + router.asPath },
+                            }}
+                            passHref
+                          >
+                            <a className="">
+                              <div className="">Se&nbsp;connecter</div>
+                            </a>
+                          </Link>
+
+                          <span
+                            className="h-6 w-px bg-gray-200"
+                            aria-hidden="true"
+                          />
+                          <Link href="/login" passHref>
+                            <a className="">
+                              <div className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-redWine border-redWine focus:outline-none">
+                                Devenir membre
+                              </div>
+                            </a>
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
 
                 {/* Search */}
-                <div className="flex lg:ml-6">
+                <div className="flex lg:ml-3 xl:ml-6">
                   <button
                     href="#"
                     className="p-2 hover:opacity-70 hover:cursor-pointer"
