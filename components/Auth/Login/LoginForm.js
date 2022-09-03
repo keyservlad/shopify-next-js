@@ -10,7 +10,7 @@ const schema = object({
   password: string().required("veuillez entrer votre mot de passe"),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ setIsRouting }) => {
   const router = useRouter();
 
   async function onSubmit(values) {
@@ -36,8 +36,11 @@ const LoginForm = () => {
       setError("global", null);
     }
 
-    if (res.url) router.push(res.url);
     setIsLoading(false);
+    if (res.url) {
+      setIsRouting = true;
+      router.push(res.url);
+    }
   }
 
   const {
