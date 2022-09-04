@@ -111,7 +111,6 @@ export default function Nav2() {
   console.log(session);
 
   const router = useRouter();
-  console.log(router);
 
   const { cart, cartOpen, setCartOpen, user, fetchUser } =
     useContext(CartContext);
@@ -544,7 +543,7 @@ export default function Nav2() {
                           <Link
                             href={{
                               pathname: "/login",
-                              query: { callbackUrl: `${window.location.origin}/` + router.asPath },
+                              query: { callbackUrl: `${window.location.origin}` + router.asPath },
                             }}
                             passHref
                           >

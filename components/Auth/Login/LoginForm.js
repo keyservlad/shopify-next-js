@@ -10,12 +10,18 @@ const schema = object({
   password: string().required("veuillez entrer votre mot de passe"),
 });
 
-const LoginForm = ({ setIsRouting }) => {
+const LoginForm = ({ isRouting }) => {
   const router = useRouter();
+  console.log(isRouting);
 
   async function onSubmit(values) {
     setIsLoading(true);
 
+    console.log(
+      router.query.callbackUrl
+        ? router.query.callbackUrl
+        : `${window.location.origin}mon-compte`
+    );
     const res = await signIn("EmovinShopify", {
       redirect: false,
       email: values.email,
@@ -23,7 +29,7 @@ const LoginForm = ({ setIsRouting }) => {
       callbackUrl: `${
         router.query.callbackUrl
           ? router.query.callbackUrl
-          : `${window.location.origin}/mon-compte`
+          : `${window.location.origin}mon-compte`
       }`,
     });
 
@@ -38,7 +44,7 @@ const LoginForm = ({ setIsRouting }) => {
 
     setIsLoading(false);
     if (res.url) {
-      setIsRouting = true;
+      isRouting.current = true;
       router.push(res.url);
     }
   }
