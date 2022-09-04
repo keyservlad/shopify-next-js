@@ -519,6 +519,24 @@ export default function Nav2() {
                               <div className="py-1">
                                 <Menu.Item>
                                   {({ active }) => (
+                                    <Link href={"/mon-compte"} passHref>
+                                      <a className="">
+                                        <button
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block w-full px-4 py-2 text-left text-sm"
+                                          )}
+                                        >
+                                          Mon compte
+                                        </button>
+                                      </a>
+                                    </Link>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
                                     <button
                                       onClick={() => signOut()}
                                       className={classNames(
@@ -543,7 +561,10 @@ export default function Nav2() {
                           <Link
                             href={{
                               pathname: "/login",
-                              query: { callbackUrl: `${window.location.origin}` + router.asPath },
+                              query: {
+                                callbackUrl:
+                                  `${window.location.origin}` + router.asPath,
+                              },
                             }}
                             passHref
                           >
