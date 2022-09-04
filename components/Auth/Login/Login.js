@@ -5,7 +5,7 @@ import Loading from "../../Loading";
 import LoginCardsSection from "./LoginCardsSection";
 import LoginForm from "./LoginForm";
 
-const Login = React.memo(props => {
+const Login = (props) => {
   const [isRouting, setIsRouting] = useState(false);
   const router = useRouter();
   const session = useSession();
@@ -31,6 +31,6 @@ const Login = React.memo(props => {
       </>
     );
   }
-});
+};
 
 export default Login;
