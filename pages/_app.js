@@ -3,9 +3,10 @@ import Layout from "../components/Layout/Layout";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "../styles/embla.css";
-import ShopProvider from "../context/ShopContext";
+import ShopProvider, { CartContext } from "../context/ShopContext";
 import { SessionProvider, signOut, useSession } from "next-auth/react";
 import Loading from "../components/Loading";
+import { useContext, useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -17,13 +18,13 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <SessionProvider session={pageProps.session}>
         {Component.auth ? (
-          <Auth>
-            <ShopProvider>
+          <ShopProvider>
+            <Auth>
               <Layout>
                 <Component {...pageProps} key={router.asPath} />
               </Layout>
-            </ShopProvider>
-          </Auth>
+            </Auth>
+          </ShopProvider>
         ) : (
           <ShopProvider>
             <Layout>
@@ -39,6 +40,13 @@ function MyApp({ Component, pageProps }) {
 function Auth({ children }) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
   const session = useSession({ required: true });
+  const { fetchUser } = useContext(CartContext);
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      fetchUser(session.data.user.token.accessToken);
+    }
+  }, [session.status]);
 
   if (session.status === "loading") {
     return <Loading />;
