@@ -8,6 +8,7 @@ import {
   KeyIcon,
   UserCircleIcon,
   ViewGridAddIcon,
+  ArrowCircleRightIcon
 } from "@heroicons/react/outline";
 import { CartContext } from "../../context/ShopContext";
 import Profile from "./SubSections/Profile";
@@ -17,6 +18,7 @@ import Historique from "./SubSections/Historique";
 import CoinDuChef from "./SubSections/CoinDuChef";
 import NewPassword from "./SubSections/NewPassword";
 import Loading from "../Loading";
+import Link from "next/link";
 
 // TODO add a loading state during the fetch
 const subNavigation = [
@@ -32,8 +34,14 @@ const subNavigation = [
     component: <Historique />,
     icon: BellIcon,
   },
-  { name: "???", component: "#", icon: CreditCardIcon },
-  { name: "Le coin du chef", component: <CoinDuChef />, icon: ViewGridAddIcon },
+  { name: "Autres services", component: "#", icon: CreditCardIcon },
+  {
+    name: "Le coin du chef",
+    component: <CoinDuChef />,
+    icon: ViewGridAddIcon,
+    isLink: true,
+    href: "/bruno-loubet",
+  },
   {
     name: "Changement de mot de passe",
     component: <NewPassword />,
@@ -103,7 +111,9 @@ const MyAccount = () => {
           </div>
           <header className="relative py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="font-bold text-white">Bonjour {user.firstName} !</h1>
+              <h1 className="font-bold text-white">
+                Bonjour {user.firstName} !
+              </h1>
             </div>
           </header>
         </>
@@ -115,33 +125,59 @@ const MyAccount = () => {
             <div className="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
               <aside className="py-6 lg:col-span-3">
                 <nav className="space-y-1">
-                  {subNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setCurrent(item)}
-                      className={classNames(
-                        item.name === current.name
-                          ? "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"
-                          : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
-                        "group border-l-4 px-3 py-2 flex items-center text-sm font-medium cursor-pointer"
-                      )}
-                      aria-current={
-                        item.name === current.name ? "page" : undefined
-                      }
-                    >
-                      <item.icon
+                  {subNavigation.map((item) =>
+                    item.isLink ? (
+                      <Link href={item.href} passHref>
+                        <a
+                          target="_blank"
+                          key={item.name}
+                          className={classNames(
+                            item.name === current.name
+                              ? "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"
+                              : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                            "group border-l-4 px-3 py-2 flex items-center text-sm font-medium cursor-pointer"
+                          )}
+                        >
+                          <item.icon
+                            className={classNames(
+                              item.name === current.name
+                                ? "text-teal-500 group-hover:text-teal-500"
+                                : "text-gray-400 group-hover:text-gray-500",
+                              "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                            )}
+                            aria-hidden="true"
+                          />
+                          <span className="truncate">{item.name}</span>
+                          <ArrowCircleRightIcon className="flex-shrink-0 ml-auto mr-3 h-6 w-6"/>
+                        </a>
+                      </Link>
+                    ) : (
+                      <div
+                        key={item.name}
+                        onClick={() => setCurrent(item)}
                         className={classNames(
                           item.name === current.name
-                            ? "text-teal-500 group-hover:text-teal-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                            ? "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"
+                            : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                          "group border-l-4 px-3 py-2 flex items-center text-sm font-medium cursor-pointer"
                         )}
-                        aria-hidden="true"
-                      />
-                      <span className="truncate">{item.name}</span>
-                    </a>
-                  ))}
+                        aria-current={
+                          item.name === current.name ? "page" : undefined
+                        }
+                      >
+                        <item.icon
+                          className={classNames(
+                            item.name === current.name
+                              ? "text-teal-500 group-hover:text-teal-500"
+                              : "text-gray-400 group-hover:text-gray-500",
+                            "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        />
+                        <span className="truncate">{item.name}</span>
+                      </div>
+                    )
+                  )}
                 </nav>
               </aside>
 
