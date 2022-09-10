@@ -11,7 +11,8 @@ import PersonalInfos from "./PersonalInfos";
 import DeliveryAdress from "./DeliveryAdress";
 import DeliveryAdress2 from "./DeliveryAdress2";
 
-// TODO peut etre rajouter une troisieme adresse ou alors rendre le component Address dynamique pour creer 3 instance pour fix quelques bugs mineurs
+// TODO remove billing address + add shippping address to be the id of the current address of the user
+// TODO do the other cards like prestige
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -92,15 +93,6 @@ const getCustomerByEmail = (email) =>
       },
     })
     .then((res) => res.data);
-
-// const createCustomerRequest = (input) =>
-//   axios
-//     .get("/api/create-customer", {
-//       params: {
-//         input: input,
-//       },
-//     })
-//     .then((res) => res.data);
 
 export const Card = ({ carte }) => {
   async function onSubmit(values) {

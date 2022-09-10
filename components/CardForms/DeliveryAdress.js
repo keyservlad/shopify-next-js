@@ -15,7 +15,6 @@ const DeliveryAdress = ({
   const { ref } = usePlacesWidget({
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
     onPlaceSelected: (place) => {
-      console.log(place);
       if (place.address_components.length == 7) {
         setAddressState(
           place.address_components[0].long_name +
@@ -239,7 +238,6 @@ const DeliveryAdress = ({
                 message: "Veuillez entrer votre numéro de téléphone",
               });
             } else {
-              console.log(formatPhoneNumberIntl(value));
               setValue("phone", formatPhoneNumberIntl(value));
               clearErrors("phone");
             }

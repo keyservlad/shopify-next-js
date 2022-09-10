@@ -487,9 +487,9 @@ export default function Nav2() {
                           as="div"
                           className="relative inline-block text-left"
                         >
-                          <div className="inline-flex items-center w-full justify-center py-2 text-sm font-medium shadow-sm focus:outline-none">
+                          <div className="inline-flex items-center w-full justify-center py-2 text-sm font-medium focus:outline-none">
                             <Link href={"/mon-compte"} passHref>
-                              <a className="inline-flex items-center w-full justify-center py-2 text-sm font-medium shadow-sm focus:outline-none">
+                              <a className="inline-flex items-center w-full justify-center py-2 text-sm font-medium focus:outline-none">
                                 <UserIcon
                                   className="h-6 w-6 mr-2"
                                   aria-hidden="true"

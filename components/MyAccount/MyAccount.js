@@ -11,11 +11,10 @@ import {
   ArrowCircleRightIcon
 } from "@heroicons/react/outline";
 import { CartContext } from "../../context/ShopContext";
-import Profile from "./SubSections/Profile";
+import Profile from "./SubSections/Profile/Profile";
 import MaCarteMembre from "./SubSections/MaCarteMembre";
 import MesAvantages from "./SubSections/MesAvantages";
 import Historique from "./SubSections/Historique";
-import CoinDuChef from "./SubSections/CoinDuChef";
 import NewPassword from "./SubSections/NewPassword";
 import Loading from "../Loading";
 import Link from "next/link";
@@ -37,7 +36,6 @@ const subNavigation = [
   { name: "Autres services", component: "#", icon: CreditCardIcon },
   {
     name: "Le coin du chef",
-    component: <CoinDuChef />,
     icon: ViewGridAddIcon,
     isLink: true,
     href: "/bruno-loubet",
@@ -127,7 +125,7 @@ const MyAccount = () => {
                 <nav className="space-y-1">
                   {subNavigation.map((item) =>
                     item.isLink ? (
-                      <Link href={item.href} passHref>
+                      <Link href={item.href} passHref key={item.name}>
                         <a
                           target="_blank"
                           key={item.name}
