@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../../context/ShopContext";
 import CardAddress from "./CardAddress";
 
-const Addresses = ({}) => {
+const Addresses = ({ isAddressEditing, setIsAddressEditing, setAddressToModify }) => {
   const { user } = useContext(CartContext);
   const addresses = user?.addresses.edges;
   return (
@@ -26,6 +26,8 @@ const Addresses = ({}) => {
               key={address.node.id}
               address={address.node}
               defaultAddress={user.defaultAddress.id}
+              setIsAddressEditing={setIsAddressEditing}
+              setAddressToModify={setAddressToModify}
             />
           ))}
         </div>
