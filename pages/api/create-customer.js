@@ -61,10 +61,10 @@ export default async function send(req, res) {
 
     // recup l'adresse si isDomicile est false
     var jsonAddress;
-    var isDomicile = true;
+    var isDomicile = false;
     input.metafields.map((metafield) => {
-      if (metafield.key == "isDomicile" && metafield.value == "false") {
-        isDomicile = false;
+      if (metafield.key == "isDomicile" && metafield.value == "true") {
+        isDomicile = true;
         jsonAddress = {
           address1: input.addresses[0].address1,
           city: input.addresses[0].city,
@@ -105,7 +105,7 @@ export default async function send(req, res) {
     console.log(customerStoreFront);
 
     // TODO after creating to get the id of the address and add it to the input
-    if (!isDomicile) {
+    if (isDomicile) {
       // requete des addresses du user avec l'id user
       // si l'adresse match avec celle de l'input alors on ajoute l'id de l'adresse a l'input
       // sinon on crée l'adresse et on ajoute l'id a l'input
