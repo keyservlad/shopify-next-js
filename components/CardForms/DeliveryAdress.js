@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 import PhoneInput, { formatPhoneNumberIntl } from "react-phone-number-input";
 import { usePlacesWidget } from "react-google-autocomplete";
-
 
 // TODO add company
 const DeliveryAdress = ({
@@ -13,6 +12,7 @@ const DeliveryAdress = ({
   register,
   fr,
   clearErrors,
+  address,
 }) => {
   const { ref } = usePlacesWidget({
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -58,12 +58,31 @@ const DeliveryAdress = ({
     },
   });
 
-  const [phoneValue, setPhoneValue] = useState("");
+  const [phoneValue, setPhoneValue] = address
+    ? useState(address.phone)
+    : useState("");
 
-  const [addressState, setAddressState] = useState("");
-  const [countryState, setCountryState] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
+  const [addressState, setAddressState] = address
+    ? useState(address.address1)
+    : useState("");
+  const [countryState, setCountryState] = address
+    ? useState(address.country)
+    : useState("");
+  const [city, setCity] = address ? useState(address.city) : useState("");
+  const [zip, setZip] = address ? useState(address.zip) : useState("");
+
+  useEffect(() => {
+    if (address) {
+      setValue("address", address.address1);
+      setValue("country", address.country);
+      setValue("city", address.city);
+      setValue("zipCode", address.zip);
+      setValue("firstName", address.firstName);
+      setValue("lastName", address.lastName);
+      setValue("phone", address.phone);
+    }
+  }, []);
+
   return (
     <div className="mt-4 grid grid-cols-6 gap-6">
       <div className="col-span-6 ">

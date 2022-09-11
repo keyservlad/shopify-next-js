@@ -1,6 +1,11 @@
 import { PencilIcon, ArrowLeftIcon, XIcon } from "@heroicons/react/outline";
 
-const CardAddress = ({ address, defaultAddress, setIsAddressEditing, setAddressToModify }) => {
+const CardAddress = ({
+  address,
+  defaultAddress,
+  setIsAddressEditing,
+  setAddressToModify,
+}) => {
   return (
     <div className="group relative border border-gray-200 rounded-lg shadow-sm overflow-hidden">
       <div className="p-6 flex flex-col justify-between h-full">
@@ -48,7 +53,12 @@ const CardAddress = ({ address, defaultAddress, setIsAddressEditing, setAddressT
             className="flex-shrink-0 h-5 w-5 cursor-pointer hover:opacity-70"
           />
           {address.id !== defaultAddress && address.id !== defaultAddress && (
-            <XIcon className="flex-shrink-0 h-5 w-5 ml-2 cursor-pointer hover:opacity-70" />
+            <XIcon
+              onClick={() => {
+                // TODO delete this address
+              }}
+              className="flex-shrink-0 h-5 w-5 ml-2 cursor-pointer hover:opacity-70"
+            />
           )}
         </div>
       </div>
