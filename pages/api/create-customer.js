@@ -63,7 +63,9 @@ export default async function send(req, res) {
     var jsonAddress;
     var isDomicile = false;
     input.metafields.map((metafield) => {
+      console.log(metafield.key, metafield.value, metafield.value == "true");
       if (metafield.key == "isDomicile" && metafield.value == "true") {
+        console.log("passe");
         isDomicile = true;
         jsonAddress = {
           address1: input.addresses[0].address1,
