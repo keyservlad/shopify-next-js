@@ -122,6 +122,7 @@ export default async function send(req, res) {
       });
       jsonAddress = JSON.stringify(jsonAddress);
       let inputAddress = {
+        id: userWithAddresses[0].id,
         metafields: [
           {
             key: "boxBilling",
