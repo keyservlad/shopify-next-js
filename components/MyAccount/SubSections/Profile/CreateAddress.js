@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import DeliveryAdress from "../../../CardForms/DeliveryAdress";
 
 import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { createAddress } from "../../../../lib/shopifyCustomer";
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -33,27 +34,30 @@ const schema = object({
 const CreateAddress = ({ setIsAddressCreating }) => {
   async function onSubmit(values) {
     console.log({ values });
-    // TODO finish it off we already have all the values
-
     setIsLoading(true);
 
     // // modif the user
-    // const phone = values.phone.replace(/\s/g, "");
-    // const customer = {
-    //   firstName: values.firstName,
-    //   lastName: values.lastName,
-    //   email: values.email,
-    //   phone: phone,
-    // };
+    const phone = values.phone.replace(/\s/g, "");
+
+    const address = {
+      address1: values.address,
+      city: values.city,
+      country: values.country,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: phone,
+      zip: values.zipCode,
+    };
 
     const token = session.data.user.token.accessToken;
 
-    // const user = await modifyCustomer(customer, token);
-    // console.log(user);
+    const user = await createAddress(address, token);
+    console.log(user);
 
     // // refresh the user
-    // fetchUser(session.data.user.token.accessToken);
+    fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
+    setIsAddressCreating(false);
   }
 
   const {

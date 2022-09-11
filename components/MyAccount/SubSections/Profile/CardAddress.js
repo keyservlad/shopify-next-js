@@ -1,4 +1,8 @@
 import { PencilIcon, ArrowLeftIcon, XIcon } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import { CartContext } from "../../../../context/ShopContext";
+import { deleteAddress } from "../../../../lib/shopifyCustomer";
 
 const CardAddress = ({
   address,
@@ -6,6 +10,9 @@ const CardAddress = ({
   setIsAddressEditing,
   setAddressToModify,
 }) => {
+  const { user, fetchUser } = useContext(CartContext);
+  const session = useSession();
+
   return (
     <div className="group relative border border-gray-200 rounded-lg shadow-sm overflow-hidden">
       <div className="p-6 flex flex-col justify-between h-full">
@@ -54,8 +61,12 @@ const CardAddress = ({
           />
           {address.id !== defaultAddress && address.id !== defaultAddress && (
             <XIcon
-              onClick={() => {
-                // TODO delete this address
+              onClick={async () => {
+                // TODO add alert state before deleting the address https://tailwindui.com/components/application-ui/overlays/modals
+                const token = session.data.user.token.accessToken;
+                const add = await deleteAddress(token, address.id);
+                console.log(add);
+                fetchUser();
               }}
               className="flex-shrink-0 h-5 w-5 ml-2 cursor-pointer hover:opacity-70"
             />
