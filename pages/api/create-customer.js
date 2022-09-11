@@ -25,60 +25,65 @@ export default async function send(req, res) {
 
   // TODO have to figure out a solution
   // res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
-  req.body.line_items.map(async (item) => {
+  const isCard = false;
+  req.body.line_items.map((item) => {
     if (
       item.title == "Carte Prestige" ||
       item.title == "Carte Découverte" ||
       item.title == "Carte Immanquables"
     ) {
-      // sendMail(customer.email, "subject", "<h1>html</h1>");
-
-      // we get the order ID to get access to the custom attribute where the request is
-      var headers = JSON.stringify(req.headers);
-      headers = headers.replace("x-shopify-order-id", "orderId");
-
-      const orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
-      var attribute = await getOrderCustomAttributes(orderId);
-
-      var input = attribute[0].value;
-
-      // TODO if userErrors not empty return 400
-
-      // sanatize JSON using regex
-      input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
-      input = JSON.parse(input);
-      const email = input.email;
-
-      console.log("input here :", input);
-
-      var inputCreate = JSON.stringify(input);
-      inputCreate = inputCreate.replaceAll("\\", "");
-      inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-      // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
-
-      console.log(inputCreate);
-      // we first call create in case the user didnt enter the same address so the account is not yet created
-      var customerCreate = await createCustomer(inputCreate);
-      console.log("create", customerCreate);
-
-      var userByEmail = await queryCustomerByEmail(email);
-
-      input.id = userByEmail[0].id;
-      input = JSON.stringify(input);
-      input = input.replaceAll("\\", "");
-      input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-      // input = input.replaceAll("~", '\\"');
-
-      var customer = await updateCustomer(input);
-      console.log("update", customer);
-
-      var customerStoreFront = await createCustomerStorefront(
-        email,
-        process.env.PASSWORD_CREATE_ACCOUNT
-      );
-      console.log(customerStoreFront);
+      isCard = true;
     }
   });
+
+  if (isCard) {
+    // sendMail(customer.email, "subject", "<h1>html</h1>");
+
+    // we get the order ID to get access to the custom attribute where the request is
+    var headers = JSON.stringify(req.headers);
+    headers = headers.replace("x-shopify-order-id", "orderId");
+
+    const orderId = "gid://shopify/Order/" + JSON.parse(headers).orderId;
+    var attribute = await getOrderCustomAttributes(orderId);
+
+    var input = attribute[0].value;
+
+    // TODO if userErrors not empty return 400
+
+    // sanatize JSON using regex
+    input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
+    input = JSON.parse(input);
+    const email = input.email;
+
+    console.log("input here :", input);
+
+    var inputCreate = JSON.stringify(input);
+    inputCreate = inputCreate.replaceAll("\\", "");
+    inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+    // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+
+    console.log(inputCreate);
+    // we first call create in case the user didnt enter the same address so the account is not yet created
+    var customerCreate = await createCustomer(inputCreate);
+    console.log("create", customerCreate);
+
+    var userByEmail = await queryCustomerByEmail(email);
+
+    input.id = userByEmail[0].id;
+    input = JSON.stringify(input);
+    input = input.replaceAll("\\", "");
+    input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+    // input = input.replaceAll("~", '\\"');
+
+    var customer = await updateCustomer(input);
+    console.log("update", customer);
+
+    var customerStoreFront = await createCustomerStorefront(
+      email,
+      process.env.PASSWORD_CREATE_ACCOUNT
+    );
+    console.log(customerStoreFront);
+  }
 
   return res.status(200).json({ status: "Good" });
 }
