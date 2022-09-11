@@ -163,7 +163,8 @@ export const Card = ({ carte }) => {
           {
             key: "isDomicile",
             namespace: "custom",
-            value: false,
+            type: "boolean",
+            value: "false",
           },
         ],
       };
