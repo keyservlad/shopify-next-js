@@ -66,7 +66,7 @@ const CardAddress = ({
                 const token = session.data.user.token.accessToken;
                 const add = await deleteAddress(token, address.id);
                 console.log(add);
-                fetchUser();
+                fetchUser(session.data.user.token.accessToken);
               }}
               className="flex-shrink-0 h-5 w-5 ml-2 cursor-pointer hover:opacity-70"
             />

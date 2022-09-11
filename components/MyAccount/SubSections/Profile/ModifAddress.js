@@ -13,7 +13,11 @@ import { useSession } from "next-auth/react";
 import DeliveryAdress from "../../../CardForms/DeliveryAdress";
 
 import { ArrowLeftIcon } from "@heroicons/react/outline";
-import { modifAddress } from "../../../../lib/shopifyCustomer";
+import {
+  deleteAddress,
+  modifAddress,
+  updateDefaultAddress,
+} from "../../../../lib/shopifyCustomer";
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -277,8 +281,17 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
                 {user.defaultAddress.id !== address.id && (
                   <>
                     <div
-                      onClick={() => {
-                        // TODO modif the address to set it to default
+                      onClick={async () => {
+                        setIsLoading(true);
+                        const token = session.data.user.token.accessToken;
+                        const add = await updateDefaultAddress(
+                          token,
+                          address.id
+                        );
+                        console.log(add);
+                        fetchUser(session.data.user.token.accessToken);
+                        setIsLoading(false);
+                        setIsAddressEditing(false);
                       }}
                       className={`bg-white border hover:cursor-pointer border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500`}
                     >
