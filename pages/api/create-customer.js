@@ -53,7 +53,7 @@ export default async function send(req, res) {
     // TODO if userErrors not empty return 400
 
     // sanatize JSON using regex
-    // input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
+    input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
     input = JSON.parse(input);
     const email = input.email;
 
@@ -64,10 +64,10 @@ export default async function send(req, res) {
     inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
     // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
-    // console.log(inputCreate);
+    console.log(inputCreate);
     // we first call create in case the user didnt enter the same address so the account is not yet created
     var customerCreate = await createCustomer(inputCreate);
-    // console.log("create", customerCreate);
+    console.log("create", customerCreate);
 
     var userByEmail = await queryCustomerByEmail(email);
 
@@ -78,13 +78,13 @@ export default async function send(req, res) {
     // input = input.replaceAll("~", '\\"');
 
     var customer = await updateCustomer(input);
-    // console.log("update", customer);
+    console.log("update", customer);
 
     var customerStoreFront = await createCustomerStorefront(
       email,
       process.env.PASSWORD_CREATE_ACCOUNT
     );
-    // console.log(customerStoreFront);
+    console.log(customerStoreFront);
   }
 
   return res.status(200).json({ status: "Good" });

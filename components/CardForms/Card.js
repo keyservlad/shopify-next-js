@@ -111,7 +111,7 @@ export const Card = ({ carte }) => {
           {
             key: "expirationDate",
             namespace: "custom",
-            value: expiryDate.toISOString(),
+            value: expiryDate.toISOString().split("T")[0],
           },
           // {
           //   key: "boxBilling",
@@ -158,7 +158,7 @@ export const Card = ({ carte }) => {
           {
             key: "expirationDate",
             namespace: "custom",
-            value: expiryDate.toISOString(),
+            value: expiryDate.toISOString().split("T")[0],
           },
           {
             key: "isDomicile",
