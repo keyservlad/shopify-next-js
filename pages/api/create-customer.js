@@ -48,10 +48,13 @@ export default async function send(req, res) {
 
     var input = attribute[0].value;
 
+    console.log(input);
+
     // TODO if userErrors not empty return 400
 
     // sanatize JSON using regex
     input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
+    console.log(input)
     input = JSON.parse(input);
     const email = input.email;
 
