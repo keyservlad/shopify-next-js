@@ -125,7 +125,7 @@ export default async function send(req, res) {
         id: userWithAddresses[0].id,
         metafields: [
           {
-            key: "boxBilling",
+            key: "boxDeliveryAddress",
             namespace: "custom",
             type: "json",
             value: jsonAddress,
