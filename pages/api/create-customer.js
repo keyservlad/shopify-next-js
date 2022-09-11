@@ -53,15 +53,14 @@ export default async function send(req, res) {
     // TODO if userErrors not empty return 400
 
     // sanatize JSON using regex
-    input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
-    console.log(input)
+    // input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
     input = JSON.parse(input);
     const email = input.email;
 
     console.log("input here :", input);
 
     var inputCreate = JSON.stringify(input);
-    inputCreate = inputCreate.replaceAll("\\", "");
+    // inputCreate = inputCreate.replaceAll("\\", "");
     inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
     // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
