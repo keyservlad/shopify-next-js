@@ -58,6 +58,18 @@ const DeliveryAdress = ({
     },
   });
 
+  useEffect(() => {
+    if (address) {
+      setValue("address", address.address1);
+      setValue("country", address.country);
+      setValue("city", address.city);
+      setValue("zipCode", address.zip);
+      setValue("firstName", address.firstName);
+      setValue("lastName", address.lastName);
+      setValue("phone", address.phone);
+    }
+  }, []);
+
   const [phoneValue, setPhoneValue] = address
     ? useState(address.phone)
     : useState("");
@@ -70,18 +82,6 @@ const DeliveryAdress = ({
     : useState("");
   const [city, setCity] = address ? useState(address.city) : useState("");
   const [zip, setZip] = address ? useState(address.zip) : useState("");
-
-  useEffect(() => {
-    if (address) {
-      setValue("address", address.address1);
-      setValue("country", address.country);
-      setValue("city", address.city);
-      setValue("zipCode", address.zip);
-      setValue("firstName", address.firstName);
-      setValue("lastName", address.lastName);
-      setValue("phone", address.phone);
-    }
-  }, []);
 
   return (
     <div className="mt-4 grid grid-cols-6 gap-6">
