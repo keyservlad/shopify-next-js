@@ -111,6 +111,31 @@ export default async function send(req, res) {
       // sinon on crée l'adresse et on ajoute l'id a l'input
       var userWithAddresses = await queryCustomerByEmail(email);
       console.log({ userWithAddresses });
+      userWithAddresses[0].addresses.map((address) => {
+        if (address.address1 == jsonAddress.address1) {
+          jsonAddress.id = address.id;
+        } else {
+          // TODO create address
+        }
+      });
+      jsonAddress = JSON.stringify(jsonAddress);
+      let inputAddress = {
+        metafields: [
+          {
+            key: "boxBilling",
+            namespace: "custom",
+            type: "json",
+            value: jsonAddress,
+          },
+        ],
+      };
+      inputAddress = JSON.stringify(inputAddress);
+      inputAddress = inputAddress.replaceAll('\\"', "~");
+      inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
+      inputAddress = inputAddress.replaceAll("~", '\\"');
+      console.log(inputAddress);
+      let cust = await updateCustomer(inputAddress);
+      console.log(cust);
     }
   }
 
