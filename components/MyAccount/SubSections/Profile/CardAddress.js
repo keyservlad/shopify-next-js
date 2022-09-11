@@ -13,6 +13,8 @@ const CardAddress = ({
   const { user, fetchUser } = useContext(CartContext);
   const session = useSession();
 
+  const boxAddress = JSON.parse(user.boxDeliveryAddress.value);
+
   return (
     <div className="group relative border border-gray-200 rounded-lg shadow-sm overflow-hidden">
       <div className="p-6 flex flex-col justify-between h-full">
@@ -23,12 +25,14 @@ const CardAddress = ({
                 Par défaut
               </span>
             </div>
-            <div className="absolute top-0 left-0 pt-3 pl-3">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                Livraison boxes
-              </span>
-            </div>
           </>
+        )}
+        {address.id.split("?model")[0] === boxAddress.id.split("?model")[0] && (
+          <div className="absolute top-0 left-0 pt-3 pl-3">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+              Livraison boxes
+            </span>
+          </div>
         )}
         <div className="flex-1">
           <p className="mt-5 text-sm text-gray-500">

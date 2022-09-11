@@ -33,7 +33,7 @@ export default function ShopProvider({ children }) {
     }
   }, []);
 
-  // TODO add check token expiry date and add user and infos to checkout
+  // TODO add check token expiry date and add user and infos to checkout and attributes if already an attribute to the checkout + email if already
   async function addToCart(newItem) {
     setCartOpen(true);
     setIsCartLoading(true);
@@ -74,7 +74,6 @@ export default function ShopProvider({ children }) {
     setIsCartLoading(false);
   }
 
-  // TODO fix cartes too
   async function addToCartCarte(newItem, customAttribute, email) {
     setIsCartLoading(true);
     setCartOpen(true);

@@ -20,7 +20,7 @@ const LoginForm = ({ isRouting }) => {
     console.log(
       router.query.callbackUrl
         ? router.query.callbackUrl
-        : `${window.location.origin}mon-compte`
+        : `${window.location.origin}/mon-compte`
     );
     const res = await signIn("EmovinShopify", {
       redirect: false,
@@ -29,7 +29,7 @@ const LoginForm = ({ isRouting }) => {
       callbackUrl: `${
         router.query.callbackUrl
           ? router.query.callbackUrl
-          : `${window.location.origin}mon-compte`
+          : `${window.location.origin}/mon-compte`
       }`,
     });
 
