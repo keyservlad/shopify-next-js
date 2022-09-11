@@ -88,7 +88,7 @@ export const Card = ({ carte }) => {
 
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
       ? "prestige"
-      : carte.title.toLowerCase().includes("decouverte")
+      : carte.title.toLowerCase().includes("découverte")
       ? "decouverte"
       : "immanquables";
 
