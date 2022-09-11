@@ -52,17 +52,35 @@ export default async function send(req, res) {
 
     // TODO if userErrors not empty return 400
 
-    // sanatize JSON using regex
+    // sanatize JSON using regex because we had to remove the quotes around the keys for the query to work
     input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
     input = JSON.parse(input);
     const email = input.email;
 
     console.log("input here :", input);
 
+    // recup l'adresse si isDomicile est false
+    var jsonAddress;
+    var isDomicile = true;
+    input.metafields.map((metafield) => {
+      if (metafield.key == "isDomicile" && metafield.value == "false") {
+        isDomicile = false;
+        jsonAddress = {
+          address1: input.addresses[0].address1,
+          city: input.addresses[0].city,
+          country: input.addresses[0].country,
+          firstName: input.addresses[0].firstName,
+          lastName: input.addresses[0].lastName,
+          phone: input.addresses[0].phone,
+          zip: input.addresses[0].zip,
+        };
+      }
+    });
+
     var inputCreate = JSON.stringify(input);
-    // inputCreate = inputCreate.replaceAll("\\", "");
+    inputCreate = inputCreate.replaceAll("\\", "");
     inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-    // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+    inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
     console.log(inputCreate);
     // we first call create in case the user didnt enter the same address so the account is not yet created
@@ -75,7 +93,7 @@ export default async function send(req, res) {
     input = JSON.stringify(input);
     input = input.replaceAll("\\", "");
     input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-    // input = input.replaceAll("~", '\\"');
+    input = input.replaceAll("~", '\\"');
 
     var customer = await updateCustomer(input);
     console.log("update", customer);
@@ -85,6 +103,15 @@ export default async function send(req, res) {
       process.env.PASSWORD_CREATE_ACCOUNT
     );
     console.log(customerStoreFront);
+
+    // TODO after creating to get the id of the address and add it to the input
+    if (!isDomicile) {
+      // requete des addresses du user avec l'id user
+      // si l'adresse match avec celle de l'input alors on ajoute l'id de l'adresse a l'input
+      // sinon on crée l'adresse et on ajoute l'id a l'input
+      var userWithAddresses = await queryCustomerByEmail(email);
+      console.log({ userWithAddresses });
+    }
   }
 
   return res.status(200).json({ status: "Good" });
