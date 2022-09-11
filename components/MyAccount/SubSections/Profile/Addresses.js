@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 import { CartContext } from "../../../../context/ShopContext";
 import CardAddress from "./CardAddress";
 
-const Addresses = ({ isAddressEditing, setIsAddressEditing, setAddressToModify }) => {
+const Addresses = ({
+  setIsAddressCreating,
+  setIsAddressEditing,
+  setAddressToModify,
+}) => {
   const { user } = useContext(CartContext);
   const addresses = user?.addresses.edges;
   return (
@@ -30,6 +34,16 @@ const Addresses = ({ isAddressEditing, setIsAddressEditing, setAddressToModify }
               setAddressToModify={setAddressToModify}
             />
           ))}
+          <div
+            onClick={() => {
+              setIsAddressCreating(true);
+            }}
+            className="group relative border border-gray-200 rounded-lg shadow-sm overflow-hidden cursor-pointer"
+          >
+            <div className="p-6 flex flex-col justify-between h-full">
+              <h1 className="text-2xl">Créer une nouvelle adresse</h1>
+            </div>
+          </div>
         </div>
       </div>
       {user.isDomicile.value !== "true" && (

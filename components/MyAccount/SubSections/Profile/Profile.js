@@ -13,6 +13,7 @@ import Addresses from "./Addresses";
 import { useSession } from "next-auth/react";
 import { modifyCustomer } from "../../../../lib/shopifyCustomer";
 import ModifAddress from "./ModifAddress";
+import CreateAddress from "./CreateAddress";
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -85,6 +86,7 @@ const Profile = () => {
 
   const [isAddressEditing, setIsAddressEditing] = useState(false); // state to toggle the address editing components
   const [addressToModify, setAddressToModify] = useState(null); // state to store the address to modify
+  const [isAddressCreating, setIsAddressCreating] = useState(false); // state to toggle the address creation components
 
   useEffect(() => {
     register("phone");
@@ -111,6 +113,8 @@ const Profile = () => {
           setIsAddressEditing={setIsAddressEditing}
           address={addressToModify}
         />
+      ) : isAddressCreating ? (
+        <CreateAddress setIsAddressCreating={setIsAddressCreating} />
       ) : (
         <div className="divide-y divide-gray-200 lg:col-span-9">
           {/* Profile section */}
@@ -366,6 +370,7 @@ const Profile = () => {
               isAddressEditing={isAddressEditing}
               setIsAddressEditing={setIsAddressEditing}
               setAddressToModify={setAddressToModify}
+              setIsAddressCreating={setIsAddressCreating}
             />
           </div>
         </div>
