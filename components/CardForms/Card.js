@@ -123,7 +123,7 @@ export const Card = ({ carte }) => {
             key: "isDomicile",
             namespace: "custom",
             type: "boolean",
-            value: "true",
+            value: "false",
           },
           {
             key: "plateforme",
@@ -164,7 +164,7 @@ export const Card = ({ carte }) => {
             key: "isDomicile",
             namespace: "custom",
             type: "boolean",
-            value: "false",
+            value: "true",
           },
         ],
       };
