@@ -31,14 +31,6 @@ const schemaPlat = object({
       ["Rambouillet", "Lyon", "Avignon", "Grenoble", "Chronopost"],
       "Veuillez entrer une plateforme de livraison valide"
     ),
-  address: string().required("Veuillez entrer votre adresse"),
-  country: string().required("Veuillez entrer votre pays"),
-  city: string().required("Veuillez entrer votre Ville"),
-  zipCode: string().required("Veuillez entrer votre code postal"),
-  phone: string()
-    .required("Veuillez entrer votre numéro de téléphone")
-    .matches(phoneRegExp, "Numéro de léléphone non valide")
-    .min(10, "Trop court"),
 });
 const schemaDom = object({
   firstName: string().required("Veuillez entrer votre prénom"),
@@ -56,32 +48,6 @@ const schemaDom = object({
   phone: string()
     .required("Veuillez entrer votre numéro de téléphone")
     .matches(phoneRegExp, "Numéro de léléphone non valide")
-    .min(10, "Trop court"),
-});
-const schemaDom2Addresses = object({
-  firstName: string().required("Veuillez entrer votre prénom"),
-  lastName: string().required("Veuillez entrer votre nom"),
-  email: string()
-    .email("Veuillez entrer une adresse email valide")
-    .required("Veuillez entrer votre adresse email"),
-  modeLivraison: string()
-    .required("veuillez selectionner un mode de livraison")
-    .oneOf(["Plateforme", "Domicile"], "Mode de livraison non valide"),
-  address: string().required("Veuillez entrer votre adresse"),
-  country: string().required("Veuillez entrer votre pays"),
-  city: string().required("Veuillez entrer votre Ville"),
-  zipCode: string().required("Veuillez entrer votre code postal"),
-  phone: string()
-    .required("Veuillez entrer votre numéro de téléphone")
-    .matches(phoneRegExp, "Numéro de léléphone non valide")
-    .min(10, "Trop court"),
-  address2: string().required("Veuillez entrer votre adresse"),
-  country2: string().required("Veuillez entrer votre pays"),
-  city2: string().required("Veuillez entrer votre Ville"),
-  zipCode2: string().required("Veuillez entrer votre code postal"),
-  phone2: string()
-    .required("Veuillez entrer votre numéro de téléphone")
-    .matches(phoneRegExp, "Numéro de téléphone non valide")
     .min(10, "Trop court"),
 });
 
@@ -102,16 +68,22 @@ export const Card = ({ carte }) => {
 
     // verif que le membre n'existe pas
     const customer = await getCustomerByEmail(values.email);
+    console.log(customer);
 
     if (customer.customer.length != 0) {
-      // TODO ajouter verification avec les metafields si l'utilisateur existe mais il n'a pas de carte
+      const isReturn = false;
 
-      setIsLoading(false);
-      setError("email", {
-        type: "custom",
-        message: "Un compte avec cette adresse mail existe déjà",
+      customer.customer[0].metafields.nodes.map((metafield) => {
+        if (metafield.key == "carte" && metafield.value) {
+          setIsLoading(false);
+          setError("email", {
+            type: "custom",
+            message: "Un compte avec cette adresse mail existe déjà",
+          });
+          isReturn = true;
+        }
       });
-      return;
+      if (isReturn) return;
     }
 
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
@@ -120,41 +92,33 @@ export const Card = ({ carte }) => {
       ? "decouverte"
       : "immanquables";
 
+    const expiryDate = new Date();
+    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+
     var input;
     if (schema == schemaPlat) {
       input = {
         email: values.email,
-        addresses: [
-          {
-            address1: values.address,
-            city: values.city,
-            country: values.country,
-            firstName: values.firstName,
-            lastName: values.lastName,
-            phone: values.phone,
-            zip: values.zipCode,
-          },
-        ],
         firstName: values.firstName,
         lastName: values.lastName,
+        phone: values.phone,
         metafields: [
           {
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
-            // value: new Date(Date.now()).toISOString(),
           },
           {
-            key: "status",
+            key: "expirationDate",
             namespace: "custom",
-            value: "toBeActivated",
+            value: expiryDate.toISOString(),
           },
-          {
-            key: "boxBilling",
-            namespace: "custom",
-            type: "json",
-            value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
-          },
+          // {
+          //   key: "boxBilling",
+          //   namespace: "custom",
+          //   type: "json",
+          //   value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
+          // },
           {
             key: "isDomicile",
             namespace: "custom",
@@ -167,7 +131,6 @@ export const Card = ({ carte }) => {
             value: values.plateforme,
           },
         ],
-        phone: values.phone,
       };
     } else if (schema == schemaDom) {
       input = {
@@ -185,43 +148,17 @@ export const Card = ({ carte }) => {
         ],
         firstName: values.firstName,
         lastName: values.lastName,
+        phone: values.phone,
         metafields: [
           {
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
-            // value: new Date(Date.now()).toISOString(),
           },
           {
-            key: "status",
+            key: "expirationDate",
             namespace: "custom",
-            value: "toBeActivated",
-          },
-          {
-            key: "boxBilling",
-            namespace: "custom",
-            value: {
-              adresse: values.address,
-              ville: values.city,
-              pays: values.country,
-              zip: values.zipCode,
-              prenom: values.firstName,
-              nomFamille: values.lastName,
-              tel: values.phone,
-            },
-          },
-          {
-            key: "boxDeliveryAddress",
-            namespace: "custom",
-            value: {
-              adresse: values.address,
-              ville: values.city,
-              pays: values.country,
-              zip: values.zipCode,
-              prenom: values.firstName,
-              nom: values.lastName,
-              tel: values.phone,
-            },
+            value: expiryDate.toISOString(),
           },
           {
             key: "isDomicile",
@@ -229,69 +166,6 @@ export const Card = ({ carte }) => {
             value: false,
           },
         ],
-        phone: values.phone,
-      };
-    } else if (schema == schemaDom2Addresses) {
-      input = {
-        email: values.email,
-        addresses: [
-          {
-            address1: values.address,
-            city: values.city,
-            country: values.country,
-            firstName: values.firstName,
-            lastName: values.lastName,
-            phone: values.phone,
-            zip: values.zipCode,
-          },
-        ],
-        firstName: values.firstName,
-        lastName: values.lastName,
-        metafields: [
-          {
-            key: "carte",
-            namespace: "custom",
-            value: Cartetitle,
-            // value: new Date(Date.now()).toISOString(),
-          },
-          {
-            key: "status",
-            namespace: "custom",
-            value: "toBeActivated",
-          },
-          {
-            key: "boxBilling",
-            namespace: "custom",
-            value: {
-              adresse: values.address2,
-              ville: values.city2,
-              pays: values.country2,
-              zip: values.zipCode2,
-              prenom: values.firstName,
-              nom: values.lastName,
-              tel: values.phone2,
-            },
-          },
-          {
-            key: "boxDeliveryAddress",
-            namespace: "custom",
-            value: {
-              adresse: values.address,
-              ville: values.city,
-              pays: values.country,
-              zip: values.zipCode,
-              prenom: values.firstName,
-              nom: values.lastName,
-              tel: values.phone,
-            },
-          },
-          {
-            key: "isDomicile",
-            namespace: "custom",
-            value: false,
-          },
-        ],
-        phone: values.phone,
       };
     } else {
       setIsLoading(false);
@@ -303,7 +177,7 @@ export const Card = ({ carte }) => {
       value: JSON.stringify(input),
     };
     console.log(customAttribute);
-    addToCartCarte(variant, customAttribute);
+    addToCartCarte(variant, customAttribute, values.email);
 
     setIsLoading(false);
 
@@ -343,28 +217,21 @@ export const Card = ({ carte }) => {
   const { addToCartCarte } = useContext(CartContext);
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
-  const [sameAddress, setSameAddress] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     register("address");
     register("phone");
-    register("address2");
-    register("phone2");
   }, [register]);
 
   useEffect(() => {
     if (deliveryMode == "Plateforme") {
       setSchema(schemaPlat);
     } else {
-      if (sameAddress) {
-        setSchema(schemaDom);
-      } else {
-        setSchema(schemaDom2Addresses);
-      }
+      setSchema(schemaDom);
     }
-  }, [deliveryMode, sameAddress]);
+  }, [deliveryMode]);
 
   return (
     <div>
@@ -512,23 +379,6 @@ export const Card = ({ carte }) => {
                                 </div>
                               </div>
                             </fieldset>
-                            <fieldset>
-                              <legend className="contents text-base font-medium text-gray-900">
-                                Adresse de facturation
-                              </legend>
-                              <p className="text-sm text-gray-500">
-                                Sélectionnez l&#39;adresse de facturation
-                              </p>
-                              <DeliveryAdress
-                                control={control}
-                                setError={setError}
-                                setValue={setValue}
-                                errors={errors}
-                                register={register}
-                                fr={fr}
-                                clearErrors={clearErrors}
-                              />
-                            </fieldset>
                           </>
                         ) : (
                           <>
@@ -550,53 +400,6 @@ export const Card = ({ carte }) => {
                                 clearErrors={clearErrors}
                               />
                             </fieldset>
-                            <fieldset>
-                              <legend className="contents text-base font-medium text-gray-900">
-                                Adresse de facturation
-                              </legend>
-                              <p className="text-sm text-gray-500">
-                                Sélectionnez votre adresse de facturation pour
-                                les cartes
-                              </p>
-                            </fieldset>
-                            <div className="relative flex items-start pt-3">
-                              <div className="flex items-center h-5">
-                                <input
-                                  id="sameAddress"
-                                  aria-describedby="sameAddress-description"
-                                  type="checkbox"
-                                  checked={sameAddress}
-                                  onChange={() => setSameAddress(!sameAddress)}
-                                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                />
-                              </div>
-                              <div className="ml-3 text-sm">
-                                <label
-                                  htmlFor="sameAddress"
-                                  className="font-medium text-gray-700"
-                                >
-                                  Même adresse de facturation ?
-                                </label>
-                                <p className="text-gray-500">
-                                  Décocher pour utiliser une adresse de
-                                  facturation différente de l&#39;adresse de
-                                  livraison
-                                </p>
-                              </div>
-                            </div>
-                            {sameAddress ? (
-                              ""
-                            ) : (
-                              <DeliveryAdress2
-                                control={control}
-                                setError={setError}
-                                setValue={setValue}
-                                errors={errors}
-                                register={register}
-                                fr={fr}
-                                clearErrors={clearErrors}
-                              />
-                            )}
                           </>
                         )}
                       </div>

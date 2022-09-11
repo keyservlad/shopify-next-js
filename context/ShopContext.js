@@ -75,7 +75,7 @@ export default function ShopProvider({ children }) {
   }
 
   // TODO fix cartes too
-  async function addToCartCarte(newItem, customAttribute) {
+  async function addToCartCarte(newItem, customAttribute, email) {
     setIsCartLoading(true);
     setCartOpen(true);
 
@@ -85,7 +85,8 @@ export default function ShopProvider({ children }) {
       let newCart = [newItem];
       const checkout = await createCheckoutCustomAttribute(
         newCart,
-        customAttribute
+        customAttribute,
+        email
       );
 
       setCheckoutId(checkout.id);
