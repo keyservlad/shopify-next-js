@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { createContext, useState, useEffect } from "react";
 import {
   createCheckout,
@@ -17,6 +17,8 @@ export default function ShopProvider({ children }) {
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const [isCartLoading, setIsCartLoading] = useState(false);
   const [user, setUser] = useState(null);
+
+  const session = useSession();
 
   useEffect(() => {
     if (localStorage.checkout_id) {
@@ -141,8 +143,24 @@ export default function ShopProvider({ children }) {
   }
 
   async function fetchUser(clientAccessToken) {
-    const user = await getCustomer(clientAccessToken);
-    setUser(user);
+    const userr = await getCustomer(clientAccessToken);
+
+    const date = new Date(userr?.expirationDate.value);
+    
+    const dateToken = new Date(session.data.user.token.expiresAt);
+
+    // TODO implement this check in the login page too
+    if (
+      userr.expirationDate.value === null ||
+      date < new Date() ||
+      !userr.carte ||
+      dateToken < new Date()
+    ) {
+      signOut();
+      return;
+    }
+    setUser(userr);
+    console.log(user);
   }
 
   return (

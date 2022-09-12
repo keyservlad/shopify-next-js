@@ -125,7 +125,6 @@ export default function Nav2() {
   useEffect(() => {
     if (session.status === "authenticated") {
       fetchUser(session.data.user.token.accessToken);
-      console.log(user);
     }
   }, [session.status]);
 
