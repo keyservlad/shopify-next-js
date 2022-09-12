@@ -116,14 +116,14 @@ const Profile = () => {
       ) : isAddressCreating ? (
         <CreateAddress setIsAddressCreating={setIsAddressCreating} />
       ) : (
-        <div className="divide-y divide-gray-200 lg:col-span-9">
+        <div className="divide-y divide-gray-200 lg:col-span-9 px-4 sm:px-6 py-6">
           {/* Profile section */}
-          <div className="pt-6 divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200">
             <form
               className="divide-y divide-gray-200 lg:col-span-9"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <div className="px-4 sm:px-6">
+              <div className="">
                 <div className="">
                   <h2 className="text-lg leading-6 font-medium text-gray-900">
                     Mon profil

@@ -15,7 +15,7 @@ const Addresses = ({
       action="#"
       method="POST"
     >
-      <div className="px-4 sm:px-6 pb-6">
+      <div className="">
         <div>
           <h2 className="text-lg leading-6 font-medium text-gray-900">
             Mes adresses
