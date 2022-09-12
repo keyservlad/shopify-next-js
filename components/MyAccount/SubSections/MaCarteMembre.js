@@ -18,7 +18,7 @@ const MaCarteMembre = () => {
         <h1 className="text-redWine">Ma carte membre</h1>
         <div className="mt-6">
           <p className="font-bold">Mon status de membre :</p>
-          <p className="">Valable jusqu'au {expirationDate}</p>
+          <p className="">Valable jusqu&#39;au {expirationDate}</p>
         </div>
       </div>
     </div>
