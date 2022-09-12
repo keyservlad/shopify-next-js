@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { createAccessToken, getCustomer } from "../../../lib/shopifyCustomer";
+import { createAccessToken, getCustomerLight } from "../../../lib/shopifyCustomer";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -44,7 +44,7 @@ export default NextAuth({
         );
 
         if (token.customerAccessToken) {
-          const userWithoutToken = await getCustomer(
+          const userWithoutToken = await getCustomerLight(
             token.customerAccessToken.accessToken
           );
 
