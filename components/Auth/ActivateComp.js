@@ -16,7 +16,7 @@ const schema = object({
   password: string()
     .required("Veuillez entrer votre nouveau mot de passe")
     .min(8, "Mot de passe trop court, veuillez entrer minimum 8 caractères")
-    .max(20, "Mot de passe trop long, veuillez entrer maximum 8 caractères")
+    .max(20, "Mot de passe trop long, veuillez entrer maximum 20 caractères")
     .matches(
       passwordRegex,
       "Mot de passe non valide, Veuillez entrer au moins une Majuscule, une Minuscule et un Numéro"

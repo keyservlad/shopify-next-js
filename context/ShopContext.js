@@ -144,6 +144,7 @@ export default function ShopProvider({ children }) {
 
   async function fetchUser(clientAccessToken) {
     const userr = await getCustomer(clientAccessToken);
+    console.log(userr);
 
     const date = new Date(userr?.expirationDate.value);
     

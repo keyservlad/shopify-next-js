@@ -14,7 +14,7 @@ import { CartContext } from "../../context/ShopContext";
 import Profile from "./SubSections/Profile/Profile";
 import MesAvantages from "./SubSections/MesAvantages";
 import Historique from "./SubSections/Historique";
-import NewPassword from "./SubSections/NewPassword";
+import NewPassword from "./SubSections/NewPassword/NewPassword";
 import Loading from "../Loading";
 import Link from "next/link";
 import MaCarteMembre from "./SubSections/Cartes/MaCarteMembre";

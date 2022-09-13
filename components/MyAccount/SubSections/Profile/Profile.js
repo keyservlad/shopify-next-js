@@ -116,7 +116,7 @@ const Profile = () => {
       ) : isAddressCreating ? (
         <CreateAddress setIsAddressCreating={setIsAddressCreating} />
       ) : (
-        <div className="divide-y divide-gray-200 lg:col-span-9 px-4 sm:px-6 py-6">
+        <div className="divide-y divide-gray-200 lg:col-span-9 px-4 sm:px-10 py-6">
           {/* Profile section */}
           <div className="divide-y divide-gray-200">
             <form
