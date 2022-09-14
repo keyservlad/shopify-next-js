@@ -2,8 +2,7 @@ import MyAccount from "../components/MyAccount/MyAccount";
 import { getAllProductsVinotheque } from "../lib/shopify";
 
 const MonCompte = ({ products }) => {
-  console.log(products);
-  return <MyAccount />;
+  return <MyAccount products={products} />;
 };
 
 MonCompte.auth = true;

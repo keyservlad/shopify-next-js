@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^0.0.0-insiders.5af3bd4",
+    "@headlessui/react": "^1.7.1",
     "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.9.7",
     "@shopify/shopify-api": "^3.1.3",

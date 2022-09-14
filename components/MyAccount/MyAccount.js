@@ -8,7 +8,7 @@ import {
   KeyIcon,
   UserCircleIcon,
   ViewGridAddIcon,
-  ArrowCircleRightIcon
+  ArrowCircleRightIcon,
 } from "@heroicons/react/outline";
 import { CartContext } from "../../context/ShopContext";
 import Profile from "./SubSections/Profile/Profile";
@@ -20,38 +20,39 @@ import MaCarteMembre from "./SubSections/Cartes/MaCarteMembre";
 import MesAvantages from "./SubSections/MesAvantages/MesAvantages";
 
 // TODO add a loading state during the fetch
-const subNavigation = [
-  { name: "Profil", component: <Profile />, icon: UserCircleIcon },
-  { name: "Ma Carte Membre", component: <MaCarteMembre />, icon: CogIcon },
-  {
-    name: "Mes avantages fidélité",
-    component: <MesAvantages />,
-    icon: KeyIcon,
-  },
-  {
-    name: "Historique de commandes ",
-    component: <Historique />,
-    icon: BellIcon,
-  },
-  { name: "Autres services", component: "#", icon: CreditCardIcon },
-  {
-    name: "Le coin du chef",
-    icon: ViewGridAddIcon,
-    isLink: true,
-    href: "/bruno-loubet",
-  },
-  {
-    name: "Changement de mot de passe",
-    component: <NewPassword />,
-    icon: KeyIcon,
-  },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const MyAccount = () => {
+const MyAccount = ({ products }) => {
+  const subNavigation = [
+    { name: "Profil", component: <Profile />, icon: UserCircleIcon },
+    { name: "Ma Carte Membre", component: <MaCarteMembre />, icon: CogIcon },
+    {
+      name: "Mes avantages fidélité",
+      component: <MesAvantages products={products} />,
+      icon: KeyIcon,
+    },
+    {
+      name: "Historique de commandes ",
+      component: <Historique />,
+      icon: BellIcon,
+    },
+    { name: "Autres services", component: "#", icon: CreditCardIcon },
+    {
+      name: "Le coin du chef",
+      icon: ViewGridAddIcon,
+      isLink: true,
+      href: "/bruno-loubet",
+    },
+    {
+      name: "Changement de mot de passe",
+      component: <NewPassword />,
+      icon: KeyIcon,
+    },
+  ];
+
   const session = useSession();
   console.log(session);
 
@@ -146,7 +147,7 @@ const MyAccount = () => {
                             aria-hidden="true"
                           />
                           <span className="truncate">{item.name}</span>
-                          <ArrowCircleRightIcon className="flex-shrink-0 ml-auto mr-3 h-6 w-6"/>
+                          <ArrowCircleRightIcon className="flex-shrink-0 ml-auto mr-3 h-6 w-6" />
                         </a>
                       </Link>
                     ) : (
