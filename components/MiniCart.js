@@ -62,7 +62,7 @@ export default function MiniCart({ cart }) {
                           <button
                             ref={cancelButtonRef}
                             type="button"
-                            className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                            className="-m-2 p-2 text-gray-400 hover:text-gray-500 focus:outline-none"
                             onClick={() => setCartOpen(false)}
                           >
                             <span className="sr-only">Fermer le panier</span>

@@ -159,7 +159,7 @@ export default function Nav2() {
                 <div className="px-4 pt-5 pb-2 flex">
                   <button
                     type="button"
-                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400 focus:outline-none"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
@@ -300,7 +300,7 @@ export default function Nav2() {
             <div className="h-16 flex items-center">
               <button
                 type="button"
-                className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
+                className="bg-white p-2 rounded-md text-gray-400 lg:hidden focus:outline-none"
                 onClick={() => setOpen(true)}
               >
                 <span className="sr-only">Open menu</span>

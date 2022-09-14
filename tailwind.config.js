@@ -27,5 +27,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("tailwindcss-animation-delay"),
+    require("@tailwindcss/aspect-ratio"),
   ],
 };

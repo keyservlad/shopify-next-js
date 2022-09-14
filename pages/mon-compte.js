@@ -10,6 +10,7 @@ export default MonCompte;
 
 export async function getStaticProps() {
   let products = await getAllProductsVinotheque();
+  // TODO order croissant de points de la vinotheque
 
   return {
     props: {

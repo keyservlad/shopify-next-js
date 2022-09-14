@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../../context/ShopContext";
 import ProductCardVinotheque from "./ProductCardVinotheque";
 import LogoCoeur from "../../../../public/images/mini-logos/coeur.png";
@@ -29,7 +29,7 @@ const MesAvantages = ({ products }) => {
             </p>
             <Link href={"/notre-cave"} passHref>
               <a>
-                <button className="bg-white text-redWine font-bold py-2 px-4 rounded mt-6">
+                <button className="bg-white text-redWine font-bold py-2 px-4 rounded mt-6 hover:opacity-95">
                   Je fais un tour à la cave
                 </button>
               </a>
@@ -50,14 +50,12 @@ const MesAvantages = ({ products }) => {
           <h1 className="font-bold text-3xl">Notre vinothèque des membres</h1>
           <div className="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 w-full">
             {products.map((product) => (
-              <>
-                <ProductCardVinotheque
-                  key={product.node.id}
-                  product={product}
-                  setOpenQuickView={setOpenQuickView}
-                  setCurrentProduct={setCurrentProduct}
-                />
-              </>
+              <ProductCardVinotheque
+                key={product.node.id}
+                product={product}
+                setOpenQuickView={setOpenQuickView}
+                setCurrentProduct={setCurrentProduct}
+              />
             ))}
           </div>
         </div>
