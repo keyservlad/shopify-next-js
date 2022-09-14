@@ -28,7 +28,7 @@ const MesAvantages = ({ products }) => {
               Il vous manque quelques points pour le cadeau de vos rêves&nbsp;?
             </p>
             <Link href={"/notre-cave"} passHref>
-              <a>
+              <a target="_blank">
                 <button className="bg-white text-redWine font-bold py-2 px-4 rounded mt-6 hover:opacity-95">
                   Je fais un tour à la cave
                 </button>

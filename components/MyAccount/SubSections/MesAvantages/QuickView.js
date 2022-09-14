@@ -3,16 +3,83 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import { CartContext } from "../../../../context/ShopContext";
+import {
+  completeCheckoutFree,
+  createCheckout,
+  createCheckoutVinotheque,
+  setFreeShipping,
+} from "../../../../lib/shopifyCheckout";
+import { useSession } from "next-auth/react";
+import { removePoints } from "../../../../lib/shopifyCustomer";
+import axios from "axios";
 
 export default function QuickView({ product, open, setOpen }) {
-  const { user } = useContext(CartContext);
+  const { user, fetchUser } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
+  const session = useSession();
+
+  var shippingAddress = {
+    address1: user.defaultAddress.address1,
+    city: user.defaultAddress.city,
+    country: user.defaultAddress.country,
+    firstName: user.defaultAddress.firstName,
+    lastName: user.defaultAddress.lastName,
+    phone: user.defaultAddress.phone,
+    province: user.defaultAddress.province,
+    zip: user.defaultAddress.zip,
+  };
 
   const orderVinotheque = async () => {
     setIsLoading(true);
-    // TODO order vinotheque
+    const lineItems = [
+      {
+        id: product.node.variants.nodes[0].id,
+        variantQuantity: 1,
+      },
+    ];
+
+    shippingAddress = JSON.stringify(shippingAddress);
+    shippingAddress = shippingAddress.replace(/"([^"]+)":/g, "$1:");
+
+    // Set metafield in the order to identify it as a vinotheque order and the number of points
+    const checkout = await createCheckoutVinotheque(
+      lineItems,
+      user.email,
+      shippingAddress
+    );
+    const ratedCheckout = await setFreeShipping(checkout.id);
+    const freeCheckout = await completeCheckoutFree(ratedCheckout.checkout.id);
+
+    // success
+    if (freeCheckout.checkoutUserErrors.length == 0) {
+      // TODO à faire côté back pour etre plus secure
+      const removePts = await updatePoints(
+        user.id,
+        user.points.value - product.node.points.value,
+        user.points.id
+      );
+      console.log({ removePts });
+    } else {
+      // error TODO
+    }
+    // TODO notification of success or error
+
+    fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
+    setOpen(false);
   };
+
+  const updatePoints = (id, points, idPoints) =>
+    axios
+      .get("/api/update-points", {
+        params: {
+          id: id,
+          points: points,
+          idPoints: idPoints,
+        },
+      })
+      .then((res) => res.data);
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={setOpen} open={open}>
@@ -51,8 +118,8 @@ export default function QuickView({ product, open, setOpen }) {
                   </button>
 
                   <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
-                    <div className="sm:col-span-4 lg:col-span-5 flex h-full">
-                      <div className="aspect-1 max-w-[250px] overflow-hidden rounded-lg relative">
+                    <div className="sm:col-span-4 lg:col-span-5 flex h-full justify-center">
+                      <div className="aspect-1 min-w-[200px] max-w-[250px] overflow-hidden rounded-lg relative">
                         <Image
                           src={product?.node.images.edges[0].node.originalSrc}
                           alt={product?.node.images.edges[0].node.altText}
@@ -61,6 +128,11 @@ export default function QuickView({ product, open, setOpen }) {
                           quality={100}
                           className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
                         />
+                        <div className="absolute top-0 right-0 left-0 pt-3 mx-auto flex justify-center">
+                          <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                            {product?.node.points.value} points
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
@@ -112,12 +184,26 @@ export default function QuickView({ product, open, setOpen }) {
                             Chargement...
                           </div>
                         ) : (
-                          <button
-                            onClick={() => orderVinotheque()}
-                            className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-redWine py-3 px-8 text-base font-medium text-white hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-redWine focus:ring-offset-2"
-                          >
-                            Commander
-                          </button>
+                          <>
+                            <p className="text-xs text-gray-500">
+                              Votre vin sera envoyé à l'adresse par défaut de
+                              votre compte :
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {shippingAddress.address1}, {shippingAddress.city}
+                              , {shippingAddress.zip}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              Vous pouvez la modifier dans la section "Profil"
+                              avant votre commande
+                            </p>
+                            <button
+                              onClick={() => orderVinotheque()}
+                              className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-redWine py-3 px-8 text-base font-medium text-white hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-redWine focus:ring-offset-2"
+                            >
+                              Commander
+                            </button>
+                          </>
                         )}
                       </section>
                     </div>
