@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/outline";
 import { CartContext } from "../../context/ShopContext";
 import Profile from "./SubSections/Profile/Profile";
-import Historique from "./SubSections/Historique";
+import Historique from "./SubSections/Historique/Historique";
 import NewPassword from "./SubSections/NewPassword/NewPassword";
 import Loading from "../Loading";
 import Link from "next/link";
