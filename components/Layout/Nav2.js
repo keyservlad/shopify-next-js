@@ -97,7 +97,7 @@ const navigation = {
   ],
   pages: [
     { name: "Bon Coup", href: "#" },
-    { name: "Le concept", href: "#" },
+    { name: "Le Concept", href: "#" },
     { name: "Série Limitée", href: "#" },
   ],
 };
@@ -576,7 +576,7 @@ export default function Nav2() {
                             className="h-6 w-px bg-gray-200"
                             aria-hidden="true"
                           />
-                          <Link href="/login" passHref>
+                          <Link href="/cartes" passHref>
                             <a className="">
                               <div className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-redWine border-redWine focus:outline-none">
                                 Devenir membre
