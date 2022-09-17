@@ -18,9 +18,9 @@ const LeBonCoup = () => {
               </span>
               <br />
               L&#39;idée est de “réserver auprès d&#39;un viticulture un lot à
-              un prix « EMOVIN » et de vous le proposer en exclusivité sur une
-              période limitée. Regroupez-vous pour bénéficier de frais de
-              livraison réduits ou de l&#39;un des 4 plateformes EMOVIN en
+              un prix «&nbsp;EMOVIN&nbsp;» et de vous le proposer en exclusivité
+              sur une période limitée. Regroupez-vous pour bénéficier de frais
+              de livraison réduits ou de l&#39;un des 4 plateformes EMOVIN en
               France !<br />
               Attention les quantités peuvent être limitées.
               <br />
@@ -62,9 +62,10 @@ const LeBonCoup = () => {
           </span>
           <br />
           L&#39;idée est de “réserver auprès d&#39;un viticulture un lot à un
-          prix « EMOVIN » et de vous le proposer en exclusivité sur une période
-          limitée. Regroupez-vous pour bénéficier de frais de livraison réduits
-          ou de l&#39;un des 4 plateformes EMOVIN en France !<br />
+          prix «&nbsp;EMOVIN&nbsp;» et de vous le proposer en exclusivité sur
+          une période limitée. Regroupez-vous pour bénéficier de frais de
+          livraison réduits ou de l&#39;un des 4 plateformes EMOVIN en France !
+          <br />
           Attention les quantités peuvent être limitées.
           <br />
           Ces opérations sont éligibles aux points de fidélité pour les membres.

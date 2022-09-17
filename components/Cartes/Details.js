@@ -99,7 +99,7 @@ const Details = (props) => {
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="w-full h-full border-[3px] border-[#73992C] p-6 text-[#73992C]">
               <p className="font-semibold">
-                « LES DÉCOUVERTES DE l&#39;AUTOMNE&nbsp;»
+                «&nbsp;LES DÉCOUVERTES DE l&#39;AUTOMNE&nbsp;»
               </p>
               <p>
                 Box de 3 bouteilles{" "}
@@ -107,7 +107,9 @@ const Details = (props) => {
                 année
               </p>
               <p>+</p>
-              <p className="font-semibold">« DÉCOUVERTE DE PRINTEMPS&nbsp;»</p>
+              <p className="font-semibold">
+                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
+              </p>
               <p>
                 Box de 3 bouteilles{" "}
                 <span className="font-semibold">en février</span> de chaque
@@ -117,14 +119,18 @@ const Details = (props) => {
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="w-full h-full border-[3px] border-[#7FA8E2] p-6 text-[#7FA8E2]">
-              <p className="font-semibold">« LES GRANDES APPELLATIONS&nbsp;»</p>
+              <p className="font-semibold">
+                «&nbsp;LES GRANDES APPELLATIONS&nbsp;»
+              </p>
               <p>
                 Box de 3 bouteilles{" "}
                 <span className="font-semibold">en septembre</span> de chaque
                 année
               </p>
               <p>+</p>
-              <p className="font-semibold">« DÉCOUVERTE DE PRINTEMPS&nbsp;»</p>
+              <p className="font-semibold">
+                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
+              </p>
               <p>
                 Box de 3 bouteilles{" "}
                 <span className="font-semibold">en février</span> de chaque
@@ -134,14 +140,16 @@ const Details = (props) => {
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="w-full h-full border-[3px] border-[#901340] p-6 text-[#901340]">
-              <p className="font-semibold">« PRESTIGE DE FRANCE&nbsp;»</p>
+              <p className="font-semibold">«&nbsp;PRESTIGE DE FRANCE&nbsp;»</p>
               <p>
                 Box de 3 bouteilles{" "}
                 <span className="font-semibold">en septembre</span> de chaque
                 année
               </p>
               <p>+</p>
-              <p className="font-semibold">« DÉCOUVERTE DE PRINTEMPS&nbsp;»</p>
+              <p className="font-semibold">
+                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
+              </p>
               <p>
                 Box de 3 bouteilles{" "}
                 <span className="font-semibold">en février</span> de chaque

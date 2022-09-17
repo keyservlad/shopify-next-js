@@ -32,15 +32,21 @@ const Carousel = ({ slides }) => {
   return (
     <>
       <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 bg-blueWine">
-        <h1 className="text-white text-center pt-16 text-4xl sm:text-5xl">« Entre nous »</h1>
+        <h1 className="text-white text-center pt-16 text-4xl sm:text-5xl">
+          «&nbsp;Entre nous&nbsp;»
+        </h1>
         <div className="embla py-10">
           <div className="embla__viewport cursor-grab" ref={viewportRef}>
             <div className="embla__container">
               {slides.map((index) => (
                 <div className="embla__slide m-auto" key={index}>
                   <div className="embla__slide__inner sm:px-24 text-center">
-                    <p className="text-3xl sm:text-4xl text-white font-light">{mediaByIndex(index).commentaire}</p>
-                    <p className="mt-5 text-sm text-white">{mediaByIndex(index).pseudo}</p>
+                    <p className="text-3xl sm:text-4xl text-white font-light">
+                      {mediaByIndex(index).commentaire}
+                    </p>
+                    <p className="mt-5 text-sm text-white">
+                      {mediaByIndex(index).pseudo}
+                    </p>
                   </div>
                 </div>
               ))}

@@ -51,10 +51,12 @@ const MaCarteMembre = () => {
           <>
             <div>
               <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux « privilèges ».
+                Accès au programme de fidélité pour des cadeaux
+                «&nbsp;privilèges&nbsp;».
               </p>
               <p>
-                (accès à des vins de « précision » et des millésimes recherchés)
+                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
+                recherchés)
               </p>
             </div>
           </>
@@ -65,7 +67,8 @@ const MaCarteMembre = () => {
         text: (
           <>
             <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles « le Bon Coup »
+              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
+              Coup&nbsp;»
             </p>
           </>
         ),
@@ -79,7 +82,7 @@ const MaCarteMembre = () => {
                 Un conseil personnalisé pour constituer ta cave
               </span>{" "}
               selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement « festif », cadeaux...)
+              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
             </p>
           </>
         ),
@@ -107,10 +110,12 @@ const MaCarteMembre = () => {
           <>
             <div>
               <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux « privilèges ».
+                Accès au programme de fidélité pour des cadeaux
+                «&nbsp;privilèges&nbsp;».
               </p>
               <p>
-                (accès à des vins de « précision » et des millésimes recherchés)
+                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
+                recherchés)
               </p>
             </div>
           </>
@@ -121,7 +126,8 @@ const MaCarteMembre = () => {
         text: (
           <>
             <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles « le Bon Coup »
+              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
+              Coup&nbsp;»
             </p>
           </>
         ),
@@ -135,7 +141,7 @@ const MaCarteMembre = () => {
                 Un conseil personnalisé pour constituer ta cave
               </span>{" "}
               selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement « festif », cadeaux...)
+              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
             </p>
           </>
         ),
@@ -160,7 +166,7 @@ const MaCarteMembre = () => {
               </span>{" "}
               (Boutique et Séries limitées){" "}
               <span className={`${textColorCard} font-bold`}>
-                et les opération ponctuelles « Le Bon Coup »
+                et les opération ponctuelles «&nbsp;Le Bon Coup&nbsp;»
               </span>
             </p>
           </>
@@ -194,10 +200,12 @@ const MaCarteMembre = () => {
           <>
             <div>
               <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux « privilèges ».
+                Accès au programme de fidélité pour des cadeaux
+                «&nbsp;privilèges&nbsp;».
               </p>
               <p>
-                (accès à des vins de « précision » et des millésimes recherchés)
+                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
+                recherchés)
               </p>
             </div>
           </>
@@ -208,7 +216,8 @@ const MaCarteMembre = () => {
         text: (
           <>
             <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles « le Bon Coup »
+              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
+              Coup&nbsp;»
             </p>
           </>
         ),
@@ -222,7 +231,7 @@ const MaCarteMembre = () => {
                 Un conseil personnalisé pour constituer ta cave
               </span>{" "}
               selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement « festif », cadeaux...)
+              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
             </p>
           </>
         ),
@@ -247,7 +256,7 @@ const MaCarteMembre = () => {
               </span>{" "}
               (Boutique et Séries limitées){" "}
               <span className={`${textColorCard} font-bold`}>
-                et les opération ponctuelles « Le Bon Coup »
+                et les opération ponctuelles «&nbsp;Le Bon Coup&nbsp;»
               </span>
             </p>
           </>
@@ -298,7 +307,7 @@ const MaCarteMembre = () => {
           className={`flex text-center justify-center items-center flex-col w-full border-[3px] ${borderColor} ${textColorCard} p-4 mt-6`}
         >
           <div className="">
-            <p className="font-bold">« {textMesAvantages} »</p>
+            <p className="font-bold">«&nbsp;{textMesAvantages}&nbsp;»</p>
             <p className="">
               Box de 3 bouteilles <strong>en septembre</strong> de chaque année
             </p>
