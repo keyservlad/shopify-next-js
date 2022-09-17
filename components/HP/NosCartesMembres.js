@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NosCartesMembres = (props) => {
   return (
     <div className="w-full bg-[#8D0955] px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 relative">
@@ -19,9 +21,13 @@ const NosCartesMembres = (props) => {
             a plaisir à partager avec ses amis.
           </div>
           <div className="mt-6 flex text-center sm:inline-block">
-            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
-              Tous les avantages du club
-            </button>
+            <Link href="/cartes" passHref>
+              <a>
+                <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:border-white hover:bg-[#8D0955]">
+                  Tous les avantages du club
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

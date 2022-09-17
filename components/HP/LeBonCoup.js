@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ImageBonCoup from "../../public/images/HP/bon_coup_accueil.jpg";
 
 const LeBonCoup = () => {
@@ -28,9 +29,13 @@ const LeBonCoup = () => {
               membres.
             </div>
             <div className="mt-8 flex text-center sm:inline-block">
-              <button className="bg-blueWine text-white font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:text-blueWine hover:bg-white">
-                Tous les avantages du club
-              </button>
+              <Link href="/le-bon-coup" passHref>
+                <a>
+                  <button className="bg-blueWine text-white font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full sm:w-auto hover:text-blueWine hover:bg-white">
+                    Tous les avantages du club
+                  </button>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
