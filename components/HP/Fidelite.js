@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ImageBonCoupCoche from "../../public/images/HP/boncoup_cloche.webp";
+import ImageCoeur from "../../public/images/mini-logos/coeur.png";
 
 const Fidelite = () => {
   return (
@@ -9,8 +9,8 @@ const Fidelite = () => {
           <div className="grid grid-cols-4 md:col-span-2 md:gap-x-3">
             <div className="col-span-1 max-w-[100px] m-auto">
               <Image
-                src={ImageBonCoupCoche}
-                alt="image Le bon coup cloche"
+                src={ImageCoeur}
+                alt="image coeur"
                 placeholder="blur"
               />
             </div>
@@ -35,7 +35,6 @@ const Fidelite = () => {
         </div>
       </div>
     </div>
-    //TODO add carousel with react-glider https://www.npmjs.com/package/react-glider or embla-carousel-react https://www.embla-carousel.com/examples/navigation/
   );
 };
 
