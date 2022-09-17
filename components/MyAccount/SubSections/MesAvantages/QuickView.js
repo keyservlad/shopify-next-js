@@ -186,16 +186,16 @@ export default function QuickView({ product, open, setOpen }) {
                         ) : (
                           <>
                             <p className="text-xs text-gray-500">
-                              Votre vin sera envoyé à l'adresse par défaut de
-                              votre compte :
+                              Votre vin sera envoyé à l&#39;adresse par défaut
+                              de votre compte :
                             </p>
                             <p className="text-xs text-gray-500">
                               {shippingAddress.address1}, {shippingAddress.city}
                               , {shippingAddress.zip}
                             </p>
                             <p className="text-xs text-gray-500">
-                              Vous pouvez la modifier dans la section "Profil"
-                              avant votre commande
+                              Vous pouvez la modifier dans la section
+                              &#34;Profil&#34; avant votre commande
                             </p>
                             <button
                               onClick={() => orderVinotheque()}

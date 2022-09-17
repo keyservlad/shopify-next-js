@@ -189,7 +189,7 @@ const DetailsMobile = ({
         </div>
         <div className="flex items-center justify-center flex-col ">
           <div className="text-center flex flex-col my-6 text-[#73992C]">
-            <p className="font-semibold">Validité de l'abonnement :</p>
+            <p className="font-semibold">Validité de l&#39;abonnement :</p>
             <p className="">
               du {date} au {dateInOneYear}
             </p>
@@ -377,7 +377,7 @@ const DetailsMobile = ({
         </div>
         <div className="flex items-center justify-center flex-col ">
           <div className="text-center flex flex-col my-6 text-[#7FA8E2]">
-            <p className="font-semibold">Validité de l'abonnement :</p>
+            <p className="font-semibold">Validité de l&#39;abonnement :</p>
             <p className="">
               du {date} au {dateInOneYear}
             </p>
@@ -580,7 +580,7 @@ const DetailsMobile = ({
         </div>
         <div className="flex items-center justify-center flex-col ">
           <div className="text-center flex flex-col my-6 text-[#901340]">
-            <p className="font-semibold">Validité de l'abonnement :</p>
+            <p className="font-semibold">Validité de l&#39;abonnement :</p>
             <p className="">
               du {date} au {dateInOneYear}
             </p>

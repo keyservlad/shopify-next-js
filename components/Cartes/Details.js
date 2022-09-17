@@ -184,7 +184,7 @@ const Details = (props) => {
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6 text-[#73992C]">
-              <p className="font-semibold">Validité de l'abonnement :</p>
+              <p className="font-semibold">Validité de l&#39;abonnement :</p>
               <p className="">
                 du {date} au {dateInOneYear}
               </p>
@@ -192,7 +192,7 @@ const Details = (props) => {
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6 text-[#7FA8E2]">
-              <p className="font-semibold">Validité de l'abonnement :</p>
+              <p className="font-semibold">Validité de l&#39;abonnement :</p>
               <p className="">
                 du {date} au {dateInOneYear}
               </p>
@@ -200,7 +200,7 @@ const Details = (props) => {
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6 text-[#901340]">
-              <p className="font-semibold">Validité de l'abonnement :</p>
+              <p className="font-semibold">Validité de l&#39;abonnement :</p>
               <p className="">
                 du {date} au {dateInOneYear}
               </p>

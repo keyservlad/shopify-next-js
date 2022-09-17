@@ -49,7 +49,7 @@ const Cartes = () => {
         />
       </div>
       <div className="px-5 md:w-1/2 md:p-0 mx-auto">
-        <h1 className="">Trois cartes membre et encore plus d'avantages</h1>
+        <h1 className="">Trois cartes membre et encore plus d&#39;avantages</h1>
         <p className="text-2xl font-light mt-6">
           Avec chaque carte membre, profitez de plein d&#39;avantages autour du
           vin et dans notre cave. Et deux fois par an d&#39;une wine box
@@ -103,7 +103,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 hidden lg:block"
             >
-              Plus d&#39;informations sur la carte "DÉCOUVERTE"
+              Plus d&#39;informations sur la carte &#34;DÉCOUVERTE&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
             <p
@@ -112,7 +112,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 lg:hidden"
             >
-              Plus d&#39;informations sur la carte "DÉCOUVERTE"
+              Plus d&#39;informations sur la carte &#34;DÉCOUVERTE&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
           </div>
@@ -162,7 +162,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 hidden lg:block"
             >
-              Plus d&#39;informations sur la carte "IMMANQUABLES"
+              Plus d&#39;informations sur la carte &#34;IMMANQUABLES&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
             <p
@@ -171,7 +171,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 lg:hidden"
             >
-              Plus d&#39;informations sur la carte "IMMANQUABLES"
+              Plus d&#39;informations sur la carte &#34;IMMANQUABLES&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
           </div>
@@ -223,7 +223,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 hidden lg:block"
             >
-              Plus d&#39;informations sur la carte "Prestige"
+              Plus d&#39;informations sur la carte &#34;Prestige&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
             <p
@@ -232,7 +232,7 @@ const Cartes = () => {
               }}
               className="underline cursor-pointer mt-6 lg:hidden"
             >
-              Plus d&#39;informations sur la carte "Prestige"
+              Plus d&#39;informations sur la carte &#34;Prestige&#34;
               <ChevronDownIcon className="inline-block w-3 h-3 ml-2" />
             </p>
           </div>

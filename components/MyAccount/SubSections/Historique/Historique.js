@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { CartContext } from "../../../../context/ShopContext";
 import Order from "./Order";
 
-
 export default function Historique() {
   const { user } = useContext(CartContext);
   const orders = user.orders.nodes;
@@ -15,7 +14,7 @@ export default function Historique() {
             Mon historique de commandes
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            Consultez l'historique de toutes vos commandes.
+            Consultez l&#39;historique de toutes vos commandes.
           </p>
         </div>
       </div>
@@ -25,7 +24,7 @@ export default function Historique() {
         <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">
           <div className="max-w-2xl mx-auto space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
             {orders.map((order) => (
-              <Order order={order} />
+              <Order order={order} key={order.orderNumber} />
             ))}
           </div>
         </div>
