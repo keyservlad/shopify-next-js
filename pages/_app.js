@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <div className="flex align-center text-center items-center h-screen w-screen">
           <h1 className="text-redWine">
-            Emovin est en maintenance pour une nouvelle version de l'application
+            Emovin est en maintenance pour une nouvelle version de l&#39;application
             web dès le 1er Octobre 2022 !
           </h1>
         </div>

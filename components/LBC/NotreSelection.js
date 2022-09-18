@@ -93,9 +93,11 @@ const NotreSelection = ({ productsLBC }) => {
         <h1 className="text-center py-20">Notre sélection</h1>
         <div className="grid grid-cols-3 gap-x-10">
           {bouteilles.map((bouteille) => (
-            <div className="px-3 rounded bg-white">
-              <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto mt-10
-              ">
+            <div className="px-3 rounded bg-white" key={bouteille.id}>
+              <div
+                className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto mt-10
+              "
+              >
                 <Image
                   src={bouteille.featuredImage.url}
                   alt={
