@@ -2,6 +2,7 @@ import Image from "next/image";
 import ImageHeroBonCoup from "../../public/images/bon-coup/hero-bon-coup.png";
 import ImageHouraLBC from "../../public/images/bon-coup/houraLBC.png";
 import ImageCloche from "../../public/images/HP/boncoup_cloche.webp";
+import NotreSelection from "./NotreSelection";
 
 const LeBonCoup = ({ productsLBC }) => {
   console.log(productsLBC);
@@ -55,6 +56,7 @@ const LeBonCoup = ({ productsLBC }) => {
         </p>
       </div>
       {/* TODO faire la section des bouteilles avec à partir de lg un display grid-cols-3 et avant flex-col et faire la div normal et le background une image en position absolute */}
+      <NotreSelection productsLBC={productsLBC} />
       <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-20">
         <div className="py-11 md:pb-28 grid grid-cols-1 md:grid-cols-3 md:gap-x-24">
           <div className="m-auto col-span-1">

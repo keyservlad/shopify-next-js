@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const NotreSelection = ({ productsLBC }) => {
@@ -84,7 +85,36 @@ const NotreSelection = ({ productsLBC }) => {
     accroche: <>Le fleuron du Domaine, tout en finesse et complexité&nbsp;!</>,
   };
 
-  return <div>NotreSelection</div>;
+  const bouteilles = [cuveeMarine, amandiers, capriceValentin];
+
+  return (
+    <>
+      <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-20 bg-[url('/images/bon-coup/bg-lbc.jpeg')] bg-center bg-cover bg-no-repeat">
+        <h1 className="text-center py-20">Notre sélection</h1>
+        <div className="grid grid-cols-3 gap-x-10">
+          {bouteilles.map((bouteille) => (
+            <div className="px-3 rounded bg-white">
+              <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto mt-10
+              ">
+                <Image
+                  src={bouteille.featuredImage.url}
+                  alt={
+                    bouteille.featuredImage.altText
+                      ? bouteille.featuredImage.altText
+                      : "Image bouteille"
+                  }
+                  layout="fill"
+                  objectFit="contain"
+                  quality={100}
+                  className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default NotreSelection;

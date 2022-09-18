@@ -7,10 +7,29 @@ import ShopProvider, { CartContext } from "../context/ShopContext";
 import { SessionProvider, signOut, useSession } from "next-auth/react";
 import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
+import { CookieNotFound } from "@shopify/shopify-api/dist/error";
+import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
+  const cookieTemp = Cookies.get("pwd");
+
+  if (cookieTemp !== "FARIO007") {
+    return (
+      <>
+        <Head>
+          <title>Emovin : le Plaisir de Partager</title>
+        </Head>
+        <div className="flex align-center text-center items-center h-screen w-screen">
+          <h1 className="text-redWine">
+            Emovin est en maintenance pour une nouvelle version de l'application
+            web dès le 1er Octobre 2022 !
+          </h1>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <Head>
