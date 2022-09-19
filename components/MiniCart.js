@@ -95,6 +95,7 @@ export default function MiniCart({ cart }) {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
+                                          {/* TODO fix bug no link for lbc elements */}
                                           {product.handle.includes("carte") ? (
                                             product.title
                                           ) : (

@@ -100,7 +100,7 @@ const CreateAddress = ({ setIsAddressCreating }) => {
             Adresse de livraison
           </legend>
           <p className="text-sm text-gray-500">
-            Modifier cette adresse de livraison
+            Créer une nouvelle adresse de livraison
           </p>
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-3">

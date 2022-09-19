@@ -99,6 +99,7 @@ const navigation = {
     { name: "Bon Coup", href: "#" },
     { name: "Le Concept", href: "#" },
     { name: "Série Limitée", href: "#" },
+    { name: "Coin du chef", href: "/bruno-loubet" },
   ],
 };
 
