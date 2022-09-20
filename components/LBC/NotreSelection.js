@@ -122,25 +122,152 @@ const NotreSelection = ({ productsLBC }) => {
 
   return (
     <>
-      <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-20 bg-[url('/images/bon-coup/bg-lbc.jpeg')] bg-center bg-cover bg-no-repeat">
-        <h1 className="text-center py-20">Notre sélection</h1>
-        <div className="grid grid-cols-3 gap-x-10">
-          {bouteilles.map((bouteille) => {
-            const variant = {
-              id: bouteille.id,
-              title: bouteille.title,
-              handle: bouteille.handle,
-              image: bouteille.image,
-              variantQuantity: bouteille.variantQuantity,
-              variantPrice: bouteille.variantPrice,
-            };
+      {/* desktop */}
+      <div className="hidden md:block">
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-20 bg-[url('/images/bon-coup/bg-lbc.jpeg')] bg-center bg-cover bg-no-repeat">
+          <h1 className="text-center py-20">Notre sélection</h1>
+          <div className="grid grid-cols-3 gap-x-10 xl:gap-x-16">
+            {bouteilles.map((bouteille) => {
+              const variant = {
+                id: bouteille.id,
+                title: bouteille.title,
+                handle: bouteille.handle,
+                image: bouteille.image,
+                variantQuantity: bouteille.variantQuantity,
+                variantPrice: bouteille.variantPrice,
+              };
 
-            return (
-              <div className="px-3 rounded bg-white" key={bouteille.id}>
-                <div
-                  className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto mt-10
+              return (
+                <div className="px-3 rounded-t bg-white" key={bouteille.id}>
+                  <div
+                    className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto mt-10
               "
+                  >
+                    <Image
+                      src={bouteille.image}
+                      alt={
+                        bouteille.title
+                          ? bouteille.image.title
+                          : "Image bouteille"
+                      }
+                      layout="fill"
+                      objectFit="contain"
+                      quality={100}
+                      className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
+                    />
+                  </div>
+                  <div className="px-5 py-5 text-center">
+                    <h2 className={`font-semibold ${bouteille.textColor}`}>
+                      {bouteille.title} {bouteille.millesime}
+                    </h2>
+                    <p>
+                      {bouteille.appellations} {bouteille.couleur}
+                    </p>
+                    <p className="text-sm text-[#707070]">{bouteille.vendor}</p>
+                    <div className="w-full border-b border-[#8F8F8F] mt-10" />
+                    <div className="flex flex-row items-center justify-center space-x-10 mt-5">
+                      <div className="">
+                        <p className="text-xs">Public</p>
+                        <p className="text-center">
+                          {bouteille.variantPrice / bouteille.unite} €
+                        </p>
+                      </div>
+                      <div className={`font-bold ${bouteille.textColor}`}>
+                        <p className="text-xs">Public</p>
+                        <p className="text-center">
+                          {bouteille.prix_membre / bouteille.unite} €
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => addToCart(variant)}
+                      className={`inline-flex justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white ${bouteille.buttonColor} hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                    >
+                      Ajouter au panier
+                    </button>
+
+                    <p className="text-xs text-[#8F8F8F] mt-5">
+                      {bouteille.textCaisse}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
+          <div className="grid grid-cols-3 gap-x-10 xl:gap-x-16">
+            {bouteilles.map((bouteille) => (
+              <>
+                <div
+                  className={`${bouteille.bgColor} p-7 text-left`}
+                  key={bouteille.id}
                 >
+                  <p>
+                    <strong>Cépages : </strong>
+                    {bouteille.cepages}
+                  </p>
+                  <p>
+                    <strong>Age des vignes : </strong>
+                    {bouteille.age}
+                  </p>
+                  <p>
+                    <strong>Rendement : </strong>
+                    {bouteille.rendement}
+                  </p>
+                  <p>
+                    <strong>Vendanges : </strong>
+                    {bouteille.vendanges}
+                  </p>
+                  <p>
+                    <strong>Elevage : </strong>
+                    {bouteille.elevage}
+                  </p>
+                  <p>
+                    <strong>Garde : </strong>
+                    {bouteille.garde}
+                  </p>
+                  <p>
+                    <strong>À table : </strong>
+                    {bouteille.table}
+                  </p>
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
+          <div className="grid grid-cols-3 gap-x-10 xl:gap-x-16">
+            {bouteilles.map((bouteille) => (
+              <>
+                <p
+                  className={`${bouteille.bgColor} px-7 pb-7 text-left rounded-b font-caveat text-2xl`}
+                  key={bouteille.id}
+                >
+                  {bouteille.accroche}
+                </p>
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* mobile */}
+      <div className="md:hidden w-full px-5 pb-5 sm:px-10 mt-20 bg-[url('/images/bon-coup/bg-lbc.jpeg')] bg-cover bg-center">
+        <h1 className="text-center py-20">Notre sélection</h1>
+        {bouteilles.map((bouteille) => {
+          const variant = {
+            id: bouteille.id,
+            title: bouteille.title,
+            handle: bouteille.handle,
+            image: bouteille.image,
+            variantQuantity: bouteille.variantQuantity,
+            variantPrice: bouteille.variantPrice,
+          };
+
+          return (
+            <div className="mb-5">
+              <div className="p-3 rounded-t bg-white" key={bouteille.id}>
+                <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden sm:h-auto">
                   <Image
                     src={bouteille.image}
                     alt={
@@ -189,9 +316,44 @@ const NotreSelection = ({ productsLBC }) => {
                   </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
+              <div className={`${bouteille.bgColor} p-7 text-left`}>
+                <p>
+                  <strong>Cépages : </strong>
+                  {bouteille.cepages}
+                </p>
+                <p>
+                  <strong>Age des vignes : </strong>
+                  {bouteille.age}
+                </p>
+                <p>
+                  <strong>Rendement : </strong>
+                  {bouteille.rendement}
+                </p>
+                <p>
+                  <strong>Vendanges : </strong>
+                  {bouteille.vendanges}
+                </p>
+                <p>
+                  <strong>Elevage : </strong>
+                  {bouteille.elevage}
+                </p>
+                <p>
+                  <strong>Garde : </strong>
+                  {bouteille.garde}
+                </p>
+                <p>
+                  <strong>À table : </strong>
+                  {bouteille.table}
+                </p>
+              </div>
+              <p
+                className={`${bouteille.bgColor} px-7 pb-7 text-left rounded-b font-caveat text-2xl`}
+              >
+                {bouteille.accroche}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </>
   );

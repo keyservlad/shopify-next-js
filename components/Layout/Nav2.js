@@ -295,7 +295,7 @@ export default function Nav2() {
       <header className="relative bg-white">
         <nav
           aria-label="Top"
-          className="w-full px-5 sm:px-10 xl:px-28 2xl:px-40 mx-auto"
+          className="w-full px-5 sm:px-10 xl:px-14 2xl:px-28 mx-auto"
         >
           <div className="">
             <div className="h-16 flex items-center">

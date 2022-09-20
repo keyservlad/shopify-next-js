@@ -1,7 +1,7 @@
 import Image from "next/image";
-import ImagePlat1 from "../../public/images/bruno/plat1.png";
-import ImagePlat2 from "../../public/images/bruno/plat2.png";
-import ImagePlat3 from "../../public/images/bruno/plat3.png";
+import ImagePlat1 from "../../../public/images/bruno/plat1.png";
+import ImagePlat2 from "../../../public/images/bruno/plat2.png";
+import ImagePlat3 from "../../../public/images/bruno/plat3.png";
 
 const line1 = {
   image: ImagePlat1,

@@ -1,17 +1,18 @@
-import DernieresRecettes from "../components/Loubet/DernieresRecettes";
-import HeroLoubet from "../components/Loubet/HeroLoubet";
-import LinesTextImage from "../components/Loubet/LinesTextImage";
+import { useSession } from "next-auth/react";
+import Loading from "../components/Loading";
+import BrunoMembre from "../components/Loubet/Membre/Bruno-membre";
+import BrunoPublic from "../components/Loubet/Public/Bruno-public";
 
 const brunoloubet = () => {
-  return (
-    <div className="">
-      <HeroLoubet />
-      <LinesTextImage lineNumber={1} />
-      <LinesTextImage lineNumber={2} />
-      <LinesTextImage lineNumber={3} />
-      <DernieresRecettes />
-    </div>
-  );
+  const session = useSession();
+
+  if (session.status === "loading") return <Loading />;
+  if (session.status === "authenticated") {
+    return <BrunoMembre />;
+  }
+  if (session.status === "unauthenticated") {
+    return <BrunoPublic />;
+  }
 };
 
 export default brunoloubet;
