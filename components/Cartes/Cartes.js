@@ -39,7 +39,7 @@ const Cartes = () => {
   };
 
   return (
-    <div className="flex flex-col w-full align-center justify-center text-center">
+    <div className="flex flex-col w-full align-center justify-center text-center mb-10">
       <div className="sm:mx-10 lg:mx-20 xl:mx-28 2xl:mx-40 relative">
         <Image
           src={FondHeader}

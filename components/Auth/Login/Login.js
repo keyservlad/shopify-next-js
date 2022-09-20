@@ -21,7 +21,7 @@ const Login = () => {
   if (session.status === "unauthenticated") {
     return (
       <>
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row mb-10">
           <div className="lg:basis-1/2 lg:bg-[#FAF8F7] lg:mt-20 lg:ml-20 lg:mb-5">
             <LoginForm isRouting={isRouting} />
           </div>
