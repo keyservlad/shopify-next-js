@@ -5,7 +5,7 @@ import VectorBackground from "../../../public/images/bruno/Vector.png";
 import VectorBackgroundWhite from "../../../public/images/bruno/VectorWhite.png";
 import DessinDecouverte from "../../../public/images/cartes/decouverteDessin.png";
 
-const DernieresRecettes = () => {
+const ReservedMembres = () => {
   const router = useRouter();
   return (
     <div className="w-full relative pt-11 ">
@@ -32,7 +32,6 @@ const DernieresRecettes = () => {
         </div>
       </div>
       <div className="w-full aspect-[8.276]" />
-      {/* find a solution to get the spacing right in the y axis */}
       <div className="flex flex-row md:gap-x-24 px-5 lg:px-32 xl:px-40 2xl:px-60 bg-[#FAF8F8] pb-10">
         <div className="flex flex-col justify-center md:basis-2/3">
           <h2 className="text-3xl font-semibold mt-5">
@@ -83,4 +82,4 @@ const DernieresRecettes = () => {
   );
 };
 
-export default DernieresRecettes;
+export default ReservedMembres;

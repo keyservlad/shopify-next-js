@@ -1,8 +1,7 @@
 import React from "react";
-import DernieresRecettes from "./DernieresRecettes";
 import HeroLoubet from "./HeroLoubet";
-import LinesTextImage from "./LinesTextImage";
 import MotDeBruno from "./MotDeBruno";
+import ReservedMembres from "./ReservedMembres";
 
 const BrunoPublic = () => {
   return (
@@ -12,7 +11,7 @@ const BrunoPublic = () => {
       <LinesTextImage lineNumber={2} />
       <LinesTextImage lineNumber={3} /> */}
       <MotDeBruno />
-      <DernieresRecettes />
+      <ReservedMembres />
     </div>
   );
 };

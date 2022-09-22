@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 import BrunoMembre from "../components/Loubet/Membre/Bruno-membre";
 import BrunoPublic from "../components/Loubet/Public/Bruno-public";
 
-const brunoloubet = () => {
+const Brunoloubet = () => {
   const session = useSession();
 
   if (session.status === "loading") return <Loading />;
@@ -15,4 +15,4 @@ const brunoloubet = () => {
   }
 };
 
-export default brunoloubet;
+export default Brunoloubet;

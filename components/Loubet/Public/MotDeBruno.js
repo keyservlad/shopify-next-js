@@ -9,10 +9,10 @@ const MotDeBruno = () => {
         j&#39;ai tout de suite été séduit par les valeurs qui les habitent. La
         recherche de l&#39;émotion, le plaisir de partager ont toujours
         &#34;drivé&#34; ma créativité tout au long de ma carrière de la France à
-        l'Australie en passant par le Royaume-Uni. Proposer des recettes
+        l&#39;Australie en passant par le Royaume-Uni. Proposer des recettes
         simples, accessibles à tous et avec des produits du quotodien et des
         saisons…. et qui répondent à vos vies, vos envies, vos modes de
-        consommation… l'idée me plaît&nbsp;!
+        consommation… l&#39;idée me plaît&nbsp;!
       </p>
       <p className="font-bold mt-8">EMOVIN - EMOFOOD&nbsp;!</p>
       <p className="font-bold">Le mariage parfait&nbsp;!</p>

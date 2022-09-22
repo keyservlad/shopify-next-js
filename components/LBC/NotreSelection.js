@@ -265,8 +265,8 @@ const NotreSelection = ({ productsLBC }) => {
           };
 
           return (
-            <div className="mb-5">
-              <div className="p-3 rounded-t bg-white" key={bouteille.id}>
+            <div className="mb-5" key={bouteille.id}>
+              <div className="p-3 rounded-t bg-white">
                 <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden sm:h-auto">
                   <Image
                     src={bouteille.image}
