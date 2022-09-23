@@ -16,7 +16,7 @@ const RowRecette = ({ line, index }) => {
             {line.text}
           </div>
           <Link href={line.href}>
-            <a className="z-10">
+            <a className="z-10" target="_blank">
               <button className="bg-redWine text-white mt-8 font-bold border-solid rounded-xl border-redWine border-4 px-4 py-3 cursor-pointer hover:text-redWine hover:bg-white hover:border-redWine">
                 Je découvre la recette
               </button>

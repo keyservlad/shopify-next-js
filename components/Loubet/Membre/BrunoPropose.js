@@ -14,7 +14,7 @@ const lines = [
         l&#39;ail et petite salade d&#39;herbes
       </>
     ),
-    href: "/",
+    href: "/recettes/echine-porc-grille",
   },
   {
     image: ImagePlat2,
