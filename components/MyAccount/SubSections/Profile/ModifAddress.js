@@ -82,7 +82,9 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
   const session = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
-  const boxAddress = JSON.parse(user.boxDeliveryAddress.value);
+  const boxAddress = user.boxDeliveryAddress
+    ? JSON.parse(user.boxDeliveryAddress.value)
+    : null;
 
   useEffect(() => {
     register("address");
@@ -103,18 +105,33 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
       zip: address.zip,
     };
     jsonAddress = JSON.stringify(jsonAddress);
-    let inputAddress = {
-      id: user.id,
-      metafields: [
-        {
-          id: user.boxDeliveryAddress.id,
-          key: "boxDeliveryAddress",
-          namespace: "custom",
-          type: "json",
-          value: jsonAddress,
-        },
-      ],
-    };
+    let inputAddress;
+    if (boxAddress) {
+      inputAddress = {
+        id: user.id,
+        metafields: [
+          {
+            id: user.boxDeliveryAddress.id,
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            type: "json",
+            value: jsonAddress,
+          },
+        ],
+      };
+    } else {
+      inputAddress = {
+        id: user.id,
+        metafields: [
+          {
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            type: "json",
+            value: jsonAddress,
+          },
+        ],
+      };
+    }
     inputAddress = JSON.stringify(inputAddress);
     inputAddress = inputAddress.replaceAll('\\"', "~");
     inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
@@ -146,7 +163,8 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
             </span>
           </>
         )}
-        {address.id.split("?model")[0] === boxAddress.id.split("?model")[0] && (
+        {address.id.split("?model")[0] ===
+          boxAddress?.id.split("?model")[0] && (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-amber-100 text-amber-800">
             Adresse de livraison des boxes
           </span>
@@ -260,7 +278,7 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
                   </>
                 )}
                 {address.id.split("?model")[0] !==
-                  boxAddress.id.split("?model")[0] && (
+                  boxAddress?.id.split("?model")[0] && (
                   <div
                     className={`bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500`}
                   >
@@ -354,7 +372,7 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
                   </>
                 )}
                 {address.id.split("?model")[0] !==
-                  boxAddress.id.split("?model")[0] && (
+                  boxAddress?.id.split("?model")[0] && (
                   <div
                     onClick={() => {
                       setBoxAddress();
