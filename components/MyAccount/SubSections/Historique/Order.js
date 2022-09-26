@@ -134,10 +134,14 @@ const Order = ({ order }) => {
           {order.lineItems.nodes.map((product) => (
             <li key={product.id} className="p-4 sm:p-6">
               <div className="flex items-center sm:items-start">
-                <div className="flex-shrink-0 w-20 h-20 bg-gray-200 rounded-lg overflow-hidden sm:w-30 sm:h-30 relative">
+                <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden sm:w-30 sm:h-30 relative">
                   <Image
-                    src={product.variant.image.url}
-                    alt={product.variant.image.altText}
+                    src={
+                      product.variant?.image.url
+                        ? product.variant?.image.url
+                        : "/images/loader.gif"
+                    }
+                    alt={product.variant?.image.altText}
                     layout="fill"
                     objectFit="contain"
                     quality={100}

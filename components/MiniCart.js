@@ -184,12 +184,11 @@ export default function MiniCart({ cart }) {
                             </div>
                           ) : (
                             <>
-                              <a
-                                href={checkoutUrl}
-                                className="flex items-center justify-center rounded-md border border-transparent bg-redWine px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-pink-800"
-                              >
-                                Procéder au Paiement
-                              </a>
+                              <Link href={checkoutUrl} passHref>
+                                <a className="flex items-center justify-center rounded-md border border-transparent bg-redWine px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-pink-800">
+                                  Procéder au Paiement
+                                </a>
+                              </Link>
                             </>
                           )}
                         </div>

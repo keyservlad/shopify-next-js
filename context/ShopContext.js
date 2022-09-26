@@ -1,6 +1,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { createContext, useState, useEffect } from "react";
 import {
+  checkoutCustomerAssociate,
   createCheckout,
   createCheckoutCustomAttribute,
   updateCheckout,
@@ -44,10 +45,17 @@ export default function ShopProvider({ children }) {
       setCart([newItem]);
 
       let newCart = [newItem];
-      const checkout = await createCheckout(newCart);
+      let checkout = await createCheckout(newCart);
+      if (session.status === "authenticated") {
+        checkout = await checkoutCustomerAssociate(
+          checkout.id,
+          session.data.user.token.accessToken
+        );
+      }
 
       setCheckoutId(checkout.id);
       setCheckoutUrl(checkout.webUrl);
+      console.log(checkout);
 
       localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
     } else {
@@ -142,12 +150,18 @@ export default function ShopProvider({ children }) {
     setIsCartLoading(false);
   }
 
+  async function deleteCheckout() {
+    localStorage.removeItem("checkout_id");
+    setCart([]);
+    setCartOpen(false);
+  }
+
   async function fetchUser(clientAccessToken) {
     const userr = await getCustomer(clientAccessToken);
     console.log(userr);
 
     const date = new Date(userr?.expirationDate.value);
-    
+
     const dateToken = new Date(session.data.user.token.expiresAt);
 
     // TODO implement this check in the login page too
@@ -177,6 +191,7 @@ export default function ShopProvider({ children }) {
         isCartLoading,
         user,
         fetchUser,
+        deleteCheckout,
       }}
     >
       {children}

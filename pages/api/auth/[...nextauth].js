@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { createAccessToken, getCustomerLight } from "../../../lib/shopifyCustomer";
+import {
+  createAccessToken,
+  getCustomerLight,
+} from "../../../lib/shopifyCustomer";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -70,6 +73,11 @@ export default NextAuth({
     session: async ({ session, token }) => {
       session.user = token.user; // Setting token in session
       return session;
+    },
+    signOut: async ({ session }) => {
+      const { deleteCheckout } = useContext(CartContext);
+      deleteCheckout();
+      return true;
     },
   },
   // Enable debug messages in the console if you are having problems
