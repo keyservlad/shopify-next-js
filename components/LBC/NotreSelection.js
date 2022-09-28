@@ -173,7 +173,7 @@ const NotreSelection = ({ productsLBC }) => {
                         </p>
                       </div>
                       <div className={`font-bold ${bouteille.textColor}`}>
-                        <p className="text-xs">Public</p>
+                        <p className="text-xs">Membre</p>
                         <p className="text-center">
                           {bouteille.prix_membre / bouteille.unite} €
                         </p>
@@ -298,7 +298,7 @@ const NotreSelection = ({ productsLBC }) => {
                       </p>
                     </div>
                     <div className={`font-bold ${bouteille.textColor}`}>
-                      <p className="text-xs">Public</p>
+                      <p className="text-xs">Membre</p>
                       <p className="text-center">
                         {bouteille.prix_membre / bouteille.unite} €
                       </p>

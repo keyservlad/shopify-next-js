@@ -74,11 +74,6 @@ export default NextAuth({
       session.user = token.user; // Setting token in session
       return session;
     },
-    signOut: async ({ session }) => {
-      const { deleteCheckout } = useContext(CartContext);
-      deleteCheckout();
-      return true;
-    },
   },
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === "development",

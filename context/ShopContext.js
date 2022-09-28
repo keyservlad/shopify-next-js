@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { signOut, useSession } from "next-auth/react";
 import { createContext, useState, useEffect } from "react";
 import {
@@ -22,8 +23,8 @@ export default function ShopProvider({ children }) {
   const session = useSession();
 
   useEffect(() => {
-    if (localStorage.checkout_id) {
-      const cartObject = JSON.parse(localStorage.checkout_id);
+    if (Cookies.get("checkout_id")) {
+      const cartObject = JSON.parse(Cookies.get("checkout_id"));
 
       if (cartObject[0].id) {
         setCart([cartObject[0]]);
@@ -57,7 +58,9 @@ export default function ShopProvider({ children }) {
       setCheckoutUrl(checkout.webUrl);
       console.log(checkout);
 
-      localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
+      Cookies.set("checkout_id", JSON.stringify([newCart, checkout]), {
+        expires: 7,
+      });
     } else {
       let newCart = [];
       let added = false;
@@ -76,60 +79,64 @@ export default function ShopProvider({ children }) {
 
       setCart(newCart);
       const newCheckout = await createCheckout(newCart);
-      localStorage.setItem(
-        "checkout_id",
-        JSON.stringify([newCart, newCheckout])
-      );
-    }
-    setIsCartLoading(false);
-  }
-
-  async function addToCartCarte(newItem, customAttribute, email) {
-    setIsCartLoading(true);
-    setCartOpen(true);
-
-    if (cart.length === 0) {
-      setCart([newItem]);
-
-      let newCart = [newItem];
-      const checkout = await createCheckoutCustomAttribute(
-        newCart,
-        customAttribute,
-        email
-      );
-
-      setCheckoutId(checkout.id);
-      setCheckoutUrl(checkout.webUrl);
-
-      localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
-    } else {
-      let newCart = [];
-      let added = false;
-
-      cart.map((item) => {
-        if (item.id === newItem.id) {
-          item.variantQuantity++;
-          newCart = [...cart];
-          added = true;
-        }
+      setCheckoutId(newCheckout.id);
+      setCheckoutUrl(newCheckout.webUrl);
+      Cookies.set("checkout_id", JSON.stringify([newCart, newCheckout]), {
+        expires: 7,
       });
-
-      if (!added) {
-        newCart = [...cart, newItem];
-      }
-
-      setCart(newCart);
-      const newCheckout = await createCheckoutCustomAttribute(
-        newCart,
-        customAttribute
-      );
-      localStorage.setItem(
-        "checkout_id",
-        JSON.stringify([newCart, newCheckout])
-      );
     }
     setIsCartLoading(false);
   }
+
+  // Not used anymore
+  // async function addToCartCarte(newItem, customAttribute, email) {
+  //   setIsCartLoading(true);
+  //   setCartOpen(true);
+
+  //   if (cart.length === 0) {
+  //     setCart([newItem]);
+
+  //     let newCart = [newItem];
+  //     const checkout = await createCheckoutCustomAttribute(
+  //       newCart,
+  //       customAttribute,
+  //       email
+  //     );
+
+  //     setCheckoutId(checkout.id);
+  //     setCheckoutUrl(checkout.webUrl);
+
+  //     localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
+  //   } else {
+  //     let newCart = [];
+  //     let added = false;
+
+  //     cart.map((item) => {
+  //       if (item.id === newItem.id) {
+  //         item.variantQuantity++;
+  //         newCart = [...cart];
+  //         added = true;
+  //       }
+  //     });
+
+  //     if (!added) {
+  //       newCart = [...cart, newItem];
+  //     }
+
+  //     setCart(newCart);
+  //     const newCheckout = await createCheckoutCustomAttribute(
+  //       newCart,
+  //       customAttribute
+  //     );
+  //     setCheckoutId(newCheckout.id);
+  //     setCheckoutUrl(newCheckout.webUrl);
+  //     localStorage.setItem(
+  //       "checkout_id",
+  //       JSON.stringify([newCart, newCheckout])
+  //     );
+  //   }
+  //   setIsCartLoading(false);
+  // }
 
   async function removeCartItem(itemToRemove) {
     setIsCartLoading(true);
@@ -138,11 +145,12 @@ export default function ShopProvider({ children }) {
     setCart(updatedCart);
 
     const newCheckout = await createCheckout(updatedCart);
+    setCheckoutId(newCheckout.id);
+    setCheckoutUrl(newCheckout.webUrl);
 
-    localStorage.setItem(
-      "checkout_id",
-      JSON.stringify([updatedCart, newCheckout])
-    );
+    Cookies.set("checkout_id", JSON.stringify([newCart, newCheckout]), {
+      expires: 7,
+    });
 
     if (cart.length === 1) {
       setCartOpen(false);
@@ -151,7 +159,7 @@ export default function ShopProvider({ children }) {
   }
 
   async function deleteCheckout() {
-    localStorage.removeItem("checkout_id");
+    Cookies.remove("checkout_id");
     setCart([]);
     setCartOpen(false);
   }
@@ -185,10 +193,11 @@ export default function ShopProvider({ children }) {
         cartOpen,
         setCartOpen,
         addToCart,
-        addToCartCarte,
+        // addToCartCarte,
         checkoutUrl,
         removeCartItem,
         isCartLoading,
+        setIsCartLoading,
         user,
         fetchUser,
         deleteCheckout,

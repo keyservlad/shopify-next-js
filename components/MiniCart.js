@@ -100,7 +100,7 @@ export default function MiniCart({ cart }) {
                                             product.title
                                           ) : (
                                             <Link
-                                              href={`/product/${product.handle}`}
+                                              href={`/products/${product.handle}`}
                                               passHref
                                             >
                                               <a

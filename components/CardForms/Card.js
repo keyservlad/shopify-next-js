@@ -10,6 +10,8 @@ import axios from "axios";
 import PersonalInfos from "./PersonalInfos";
 import DeliveryAdress from "./DeliveryAdress";
 import DeliveryAdress2 from "./DeliveryAdress2";
+import { createCheckoutCustomAttribute } from "../../lib/shopifyCheckout";
+import { useRouter } from "next/router";
 
 // TODO remove billing address + add shippping address to be the id of the current address of the user
 // TODO do the other cards like prestige
@@ -178,7 +180,19 @@ export const Card = ({ carte }) => {
       value: JSON.stringify(input),
     };
     console.log(customAttribute);
-    addToCartCarte(variant, customAttribute, values.email);
+    // addToCartCarte(variant, customAttribute, values.email);
+
+    //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
+    setIsCartLoading(true);
+    const checkout = await createCheckoutCustomAttribute(
+      [variant],
+      customAttribute,
+      values.email
+    );
+    // TODO check if any error first
+    router.push(checkout.webUrl);
+
+    setIsCartLoading(false);
 
     setIsLoading(false);
 
@@ -215,7 +229,9 @@ export const Card = ({ carte }) => {
     variantQuantity: 1,
   };
 
-  const { addToCartCarte } = useContext(CartContext);
+  // const { addToCartCarte } = useContext(CartContext);
+  const { setIsCartLoading } = useContext(CartContext);
+  const router = useRouter();
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
 
@@ -412,7 +428,7 @@ export const Card = ({ carte }) => {
                   ></div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     {isLoading ? (
-                      <button
+                      <div
                         className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                       >
                         <svg
@@ -432,12 +448,12 @@ export const Card = ({ carte }) => {
                           />
                         </svg>
                         Chargement...
-                      </button>
+                      </div>
                     ) : (
                       <button
                         className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                       >
-                        Ajouter au panier
+                        Je deviens membre&nbsp;!
                       </button>
                     )}
                   </div>

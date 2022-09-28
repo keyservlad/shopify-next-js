@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
   const reviews = { href: "#", average: 4, totalCount: 117 };
 
   return (
-    <Link href={`/product/${handle}`}>
+    <Link href={`/products/${handle}`}>
       <a className="group hover:bg-white rounded-md hover:drop-shadow-lg">
         <div className="group relative p-3">
           <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
