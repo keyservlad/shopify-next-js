@@ -3,3 +3,5 @@ export const formatter = new Intl.NumberFormat("fr-FR", {
   currency: "EUR",
   minimumFractionDigits: 2,
 });
+
+export const delay = (ms) => new Promise((res) => setTimeout(res, ms));

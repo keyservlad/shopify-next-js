@@ -135,6 +135,7 @@ const NotreSelection = ({ productsLBC }) => {
                 image: bouteille.image,
                 variantQuantity: bouteille.variantQuantity,
                 variantPrice: bouteille.variantPrice,
+                prix_membre: product.prix_membre?.value,
               };
 
               return (
@@ -262,6 +263,7 @@ const NotreSelection = ({ productsLBC }) => {
             image: bouteille.image,
             variantQuantity: bouteille.variantQuantity,
             variantPrice: bouteille.variantPrice,
+            prix_membre: product.prix_membre?.value,
           };
 
           return (

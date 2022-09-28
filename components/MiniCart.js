@@ -5,6 +5,7 @@ import { CartContext } from "../context/ShopContext";
 import { formatter } from "../utils/helper";
 import { XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function MiniCart({ cart }) {
   const cancelButtonRef = useRef();
@@ -12,10 +13,23 @@ export default function MiniCart({ cart }) {
   const { cartOpen, setCartOpen, checkoutUrl, removeCartItem, isCartLoading } =
     useContext(CartContext);
 
+  const session = useSession();
+
   let cartTotal = 0;
   cart.map((item) => {
     cartTotal += item?.variantPrice * item?.variantQuantity;
   });
+
+  let cartTotalMembre = 0;
+  if (session.status === "authenticated") {
+    cart.map((item) => {
+      if (item?.prix_membre) {
+        cartTotalMembre += item?.prix_membre * item?.variantQuantity;
+      } else {
+        cartTotalMembre += item?.variantPrice * item?.variantQuantity;
+      }
+    });
+  }
 
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
@@ -114,8 +128,26 @@ export default function MiniCart({ cart }) {
                                           )}
                                         </h3>
                                         <p className="ml-4">
-                                          {formatter.format(
-                                            product.variantPrice
+                                          {session.status === "authenticated" &&
+                                          product.prix_membre ? (
+                                            <>
+                                              <p className="line-through">
+                                                {formatter.format(
+                                                  product.variantPrice
+                                                )}
+                                              </p>
+                                              <p>
+                                                {formatter.format(
+                                                  Number(product.prix_membre)
+                                                )}
+                                              </p>
+                                            </>
+                                          ) : (
+                                            <>
+                                              {formatter.format(
+                                                product.variantPrice
+                                              )}
+                                            </>
                                           )}
                                         </p>
                                       </div>
@@ -151,12 +183,22 @@ export default function MiniCart({ cart }) {
                     </div>
                     {cart.length > 0 ? (
                       <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                        <div className="flex justify-between text-base font-medium text-gray-900">
+                        <div className="flex items-center justify-between text-base font-medium text-gray-900">
                           <p>Total</p>
-                          <p>{formatter.format(cartTotal)}</p>
+
+                          {session.status === "authenticated" ? (
+                            <div className="flex flex-col">
+                              <p className="line-through">
+                                {formatter.format(cartTotal)}
+                              </p>
+                              <p>{formatter.format(cartTotalMembre)}</p>
+                            </div>
+                          ) : (
+                            <p>{formatter.format(cartTotal)}</p>
+                          )}
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
-                          Taxes incluse. Les frais de livraison sont calculés à
+                          Taxes incluses. Les frais de livraison sont calculés à
                           l&#39;étape de paiement
                         </p>
                         <div className="mt-6">

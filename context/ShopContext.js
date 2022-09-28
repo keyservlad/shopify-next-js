@@ -2,13 +2,17 @@ import Cookies from "js-cookie";
 import { signOut, useSession } from "next-auth/react";
 import { createContext, useState, useEffect } from "react";
 import {
+  checkoutAddress,
   checkoutCustomerAssociate,
+  checkoutDiscount,
+  checkoutEmailAssociate,
   createCheckout,
   createCheckoutCustomAttribute,
   updateCheckout,
   updateCheckoutCustomAttribute,
 } from "../lib/shopifyCheckout";
 import { getCustomer } from "../lib/shopifyCustomer";
+import { delay } from "../utils/helper";
 
 const CartContext = createContext();
 
@@ -48,15 +52,23 @@ export default function ShopProvider({ children }) {
       let newCart = [newItem];
       let checkout = await createCheckout(newCart);
       if (session.status === "authenticated") {
+        // await delay(500);
         checkout = await checkoutCustomerAssociate(
           checkout.id,
           session.data.user.token.accessToken
         );
+
+        let defaultAddress = user.defaultAddress;
+        delete defaultAddress.id;
+        defaultAddress = JSON.stringify(defaultAddress);
+        defaultAddress = defaultAddress.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+        checkout = await checkoutAddress(checkout.id, defaultAddress);
+        checkout = await checkoutEmailAssociate(checkout.id, user.email);
+        checkout = await checkoutDiscount(checkout.id, newItem.handle);
       }
 
       setCheckoutId(checkout.id);
       setCheckoutUrl(checkout.webUrl);
-      console.log(checkout);
 
       Cookies.set("checkout_id", JSON.stringify([newCart, checkout]), {
         expires: 7,
@@ -78,7 +90,29 @@ export default function ShopProvider({ children }) {
       }
 
       setCart(newCart);
-      const newCheckout = await createCheckout(newCart);
+      let newCheckout = await createCheckout(newCart);
+
+      if (session.status === "authenticated") {
+        newCheckout = await checkoutCustomerAssociate(
+          newCheckout.id,
+          session.data.user.token.accessToken
+        );
+
+        let defaultAddress = user.defaultAddress;
+        delete defaultAddress.id;
+        defaultAddress = JSON.stringify(defaultAddress);
+        defaultAddress = defaultAddress.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+        newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
+        newCheckout = await checkoutEmailAssociate(newCheckout.id, user.email);
+
+        for (let i = 0; i < newCart.length; i++) {
+          newCheckout = await checkoutDiscount(
+            newCheckout.id,
+            newCart[i].handle
+          );
+        }
+      }
+
       setCheckoutId(newCheckout.id);
       setCheckoutUrl(newCheckout.webUrl);
       Cookies.set("checkout_id", JSON.stringify([newCart, newCheckout]), {
@@ -138,17 +172,37 @@ export default function ShopProvider({ children }) {
   //   setIsCartLoading(false);
   // }
 
+  // TODO code reduc remove
   async function removeCartItem(itemToRemove) {
     setIsCartLoading(true);
     const updatedCart = cart.filter((item) => item.id !== itemToRemove);
 
     setCart(updatedCart);
 
-    const newCheckout = await createCheckout(updatedCart);
+    let newCheckout = await createCheckout(updatedCart);
+
+    if (session.status === "authenticated") {
+      newCheckout = await checkoutCustomerAssociate(
+        newCheckout.id,
+        session.data.user.token.accessToken
+      );
+
+      let defaultAddress = user.defaultAddress;
+      delete defaultAddress.id;
+      defaultAddress = JSON.stringify(defaultAddress);
+      defaultAddress = defaultAddress.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+      newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
+      newCheckout = await checkoutEmailAssociate(newCheckout.id, user.email);
+
+      for (let i = 0; i < newCart.length; i++) {
+        newCheckout = await checkoutDiscount(newCheckout.id, newCart[i].handle);
+      }
+    }
+
     setCheckoutId(newCheckout.id);
     setCheckoutUrl(newCheckout.webUrl);
 
-    Cookies.set("checkout_id", JSON.stringify([newCart, newCheckout]), {
+    Cookies.set("checkout_id", JSON.stringify([updatedCart, newCheckout]), {
       expires: 7,
     });
 
@@ -166,7 +220,6 @@ export default function ShopProvider({ children }) {
 
   async function fetchUser(clientAccessToken) {
     const userr = await getCustomer(clientAccessToken);
-    console.log(userr);
 
     const date = new Date(userr?.expirationDate.value);
 

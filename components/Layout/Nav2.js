@@ -109,7 +109,7 @@ function classNames(...classes) {
 
 export default function Nav2() {
   const session = useSession();
-  console.log(session);
+  // console.log(session);
 
   const router = useRouter();
 
@@ -591,7 +591,8 @@ export default function Nav2() {
                 </div>
 
                 {/* Search */}
-                <div className="flex lg:ml-3 xl:ml-6">
+                {/* TODO remove or add search in notre boutique page */}
+                {/* <div className="flex lg:ml-3 xl:ml-6">
                   <button
                     href="#"
                     className="p-2 hover:opacity-70 hover:cursor-pointer"
@@ -599,7 +600,7 @@ export default function Nav2() {
                     <span className="sr-only">Search</span>
                     <SearchIcon className="w-6 h-6" aria-hidden="true" />
                   </button>
-                </div>
+                </div> */}
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">

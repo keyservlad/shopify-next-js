@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/ShopContext";
 import axios from "axios";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 const fetchInventory = (url, id) =>
   axios
@@ -22,16 +23,18 @@ export default function ProductForm({ product }) {
 
   const [available, setAvailable] = useState(true);
   const [stock, setStock] = useState(true);
+  const session = useSession();
 
   const { addToCart } = useContext(CartContext);
 
-  const variant = {
+  let variant = {
     id: product.variants.edges[0].node.id,
     title: product.title,
     handle: product.handle,
     image: product.images.edges[0].node.originalSrc,
     variantPrice: product.variants.edges[0].node.priceV2.amount,
     variantQuantity: 1,
+    prix_membre: product.prix_membre?.value,
   };
 
   useEffect(() => {
@@ -64,15 +67,16 @@ export default function ProductForm({ product }) {
         <button
           onClick={() => {
             addToCart(variant);
+            console.log(variant);
           }}
-          className="w-48 rounded text-white bg-redWine px-1 py-2 hover:bg-pink-800 "
+          className="w-48 rounded text-white bg-redWine px-1 py-2 hover:opacity-80"
         >
-          Add to cart
+          Ajouter au panier
         </button>
       ) : (
-        <button className="w-48 rounded text-white bg-pink-300 px-1 py-2 cursor-not-allowed">
+        <div className="w-48 rounded text-white bg-pink-300 px-1 py-2 cursor-not-allowed">
           En rupture de stock...
-        </button>
+        </div>
       )}
     </div>
   );
