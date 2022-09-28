@@ -113,7 +113,7 @@ export default function Nav2() {
 
   const router = useRouter();
 
-  const { cart, cartOpen, setCartOpen, user, fetchUser } =
+  const { cart, cartOpen, setCartOpen, user, fetchUser, fixAuthCheckout } =
     useContext(CartContext);
 
   const [open, setOpen] = useState(false);
@@ -123,11 +123,17 @@ export default function Nav2() {
     return (cartQuantity += item?.variantQuantity);
   });
 
+  const fetchUserAndFixAuthCheckout = async () => {
+    await fetchUser(session.data.user.token.accessToken);
+    await fixAuthCheckout();
+  };
+
   useEffect(() => {
     if (session.status === "authenticated") {
-      fetchUser(session.data.user.token.accessToken);
+      fetchUserAndFixAuthCheckout();
     } else if (session.status === "unauthenticated") {
       // TODO Check that the cart is unauthenticated and discounts disabled => swap the products in case
+      fixAuthCheckout();
     }
   }, [session.status]);
 

@@ -194,8 +194,11 @@ export default function ShopProvider({ children }) {
       newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
       newCheckout = await checkoutEmailAssociate(newCheckout.id, user.email);
 
-      for (let i = 0; i < newCart.length; i++) {
-        newCheckout = await checkoutDiscount(newCheckout.id, newCart[i].handle);
+      for (let i = 0; i < updatedCart.length; i++) {
+        newCheckout = await checkoutDiscount(
+          newCheckout.id,
+          updatedCart[i].handle
+        );
       }
     }
 
@@ -216,6 +219,73 @@ export default function ShopProvider({ children }) {
     Cookies.remove("checkout_id");
     setCart([]);
     setCartOpen(false);
+  }
+
+  async function fixAuthCheckout() {
+    const cartObject = JSON.parse(Cookies.get("checkout_id"));
+    if (
+      !cartObject[1].email &&
+      cartObject[1].lineItems.length !== 0 &&
+      session.status === "authenticated"
+    ) {
+      setIsCartLoading(true);
+      let userr;
+      if (!user) {
+        userr = await getCustomer(session.data.user.token.accessToken);
+      } else {
+        userr = user;
+      }
+
+      let newCheckout = await createCheckout(cart);
+
+      newCheckout = await checkoutCustomerAssociate(
+        newCheckout.id,
+        session.data.user.token.accessToken
+      );
+
+      let defaultAddress = userr.defaultAddress;
+      delete defaultAddress.id;
+      defaultAddress = JSON.stringify(defaultAddress);
+      defaultAddress = defaultAddress.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+      newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
+      newCheckout = await checkoutEmailAssociate(newCheckout.id, userr.email);
+
+      for (let i = 0; i < cart.length; i++) {
+        newCheckout = await checkoutDiscount(newCheckout.id, cart[i].handle);
+      }
+
+      setCheckoutId(newCheckout.id);
+      setCheckoutUrl(newCheckout.webUrl);
+
+      Cookies.set("checkout_id", JSON.stringify([cart, newCheckout]), {
+        expires: 7,
+      });
+
+      if (cart.length === 1) {
+        setCartOpen(false);
+      }
+      setIsCartLoading(false);
+    } else if (
+      cartObject[1].email &&
+      cartObject[1].lineItems.length !== 0 &&
+      session.status === "unauthenticated"
+    ) {
+      console.log("hereee");
+      setIsCartLoading(true);
+      let newCheckout = await createCheckout(cart);
+
+      setCheckoutId(newCheckout.id);
+      setCheckoutUrl(newCheckout.webUrl);
+
+      Cookies.set("checkout_id", JSON.stringify([cart, newCheckout]), {
+        expires: 7,
+      });
+
+      if (cart.length === 1) {
+        setCartOpen(false);
+      }
+      setIsCartLoading(false);
+    }
   }
 
   async function fetchUser(clientAccessToken) {
@@ -254,6 +324,7 @@ export default function ShopProvider({ children }) {
         user,
         fetchUser,
         deleteCheckout,
+        fixAuthCheckout,
       }}
     >
       {children}

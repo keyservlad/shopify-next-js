@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+import { CartContext } from "../../../context/ShopContext";
 
 const schema = object({
   email: string().required("Veuillez entrer votre adresse email"),
@@ -12,16 +13,10 @@ const schema = object({
 
 const LoginForm = ({ isRouting }) => {
   const router = useRouter();
-  console.log(isRouting);
 
   async function onSubmit(values) {
     setIsLoading(true);
 
-    console.log(
-      router.query.callbackUrl
-        ? router.query.callbackUrl
-        : `${window.location.origin}/mon-compte`
-    );
     const res = await signIn("EmovinShopify", {
       redirect: false,
       email: values.email,
@@ -41,8 +36,6 @@ const LoginForm = ({ isRouting }) => {
     } else {
       setError("global", null);
     }
-
-    // TODO check if cart contains items => proceed to swap items for reduc and authenticate the checkout
 
     setIsLoading(false);
     if (res.url) {

@@ -127,7 +127,7 @@ export default function MiniCart({ cart }) {
                                             </Link>
                                           )}
                                         </h3>
-                                        <p className="ml-4">
+                                        <div className="ml-4">
                                           {session.status === "authenticated" &&
                                           product.prix_membre ? (
                                             <>
@@ -149,7 +149,7 @@ export default function MiniCart({ cart }) {
                                               )}
                                             </>
                                           )}
-                                        </p>
+                                        </div>
                                       </div>
                                     </div>
                                     <div className="flex flex-1 items-end justify-between text-sm">
