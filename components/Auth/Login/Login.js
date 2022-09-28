@@ -13,7 +13,7 @@ const Login = () => {
 
   if (session.status === "loading") return <Loading />;
   if (session.status === "authenticated") {
-    if (!isRouting) {
+    if (!isRouting.current) {
       router.push("/mon-compte");
     }
     return <Loading />;

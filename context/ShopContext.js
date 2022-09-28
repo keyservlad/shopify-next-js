@@ -88,7 +88,7 @@ export default function ShopProvider({ children }) {
     setIsCartLoading(false);
   }
 
-  // Not used anymore
+  // Not used anymore we go directly to checkout
   // async function addToCartCarte(newItem, customAttribute, email) {
   //   setIsCartLoading(true);
   //   setCartOpen(true);

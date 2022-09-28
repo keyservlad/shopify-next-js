@@ -42,6 +42,8 @@ const LoginForm = ({ isRouting }) => {
       setError("global", null);
     }
 
+    // TODO check if cart contains items => proceed to swap items for reduc and authenticate the checkout
+
     setIsLoading(false);
     if (res.url) {
       isRouting.current = true;

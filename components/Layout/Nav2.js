@@ -126,6 +126,8 @@ export default function Nav2() {
   useEffect(() => {
     if (session.status === "authenticated") {
       fetchUser(session.data.user.token.accessToken);
+    } else if (session.status === "unauthenticated") {
+      // TODO Check that the cart is unauthenticated and discounts disabled => swap the products in case
     }
   }, [session.status]);
 
@@ -468,8 +470,7 @@ export default function Nav2() {
               </Popover.Group>
 
               <div className="ml-auto flex items-center text-redWine">
-                <div className="hidden lg:flex flex-1 items-center justify-end space-x-6 hover:opacity-90">
-                  {/* TODO login */}
+                <div className="hidden lg:flex flex-1 items-center justify-end space-x-6">
                   <div className="text-sm font-medium flex flex-row items-center">
                     {session.status === "loading" ||
                     (!user && session.status === "authenticated") ? (
@@ -519,20 +520,19 @@ export default function Nav2() {
                               <div className="py-1">
                                 <Menu.Item>
                                   {({ active }) => (
-                                    <Link href={"/mon-compte"} passHref>
-                                      <a className="">
-                                        <button
-                                          className={classNames(
-                                            active
-                                              ? "bg-gray-100 text-gray-900"
-                                              : "text-gray-700",
-                                            "block w-full px-4 py-2 text-left text-sm"
-                                          )}
-                                        >
-                                          Mon compte
-                                        </button>
-                                      </a>
-                                    </Link>
+                                    <button
+                                      onClick={() => {
+                                        router.push("/mon-compte");
+                                      }}
+                                      className={classNames(
+                                        active
+                                          ? "bg-gray-100 text-gray-900"
+                                          : "text-gray-700",
+                                        "block w-full px-4 py-2 text-left text-sm"
+                                      )}
+                                    >
+                                      Mon compte
+                                    </button>
                                   )}
                                 </Menu.Item>
                                 <Menu.Item>
