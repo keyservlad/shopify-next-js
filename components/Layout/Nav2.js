@@ -383,6 +383,7 @@ export default function Nav2() {
                                       setOpen(false);
                                     }}
                                     href={"/notre-boutique"}
+                                    passHref
                                   >
                                     <a>
                                       <h1 className="w-fit p-3 mb-3 mx-auto text-redWine cursor-pointer">
@@ -457,12 +458,14 @@ export default function Nav2() {
                                               </li>
                                             ))}
                                             <li className="flex">
-                                              <a
-                                                href="/notre-boutique"
-                                                className="text-gray-900"
+                                              <Link
+                                                href={"/notre-boutique"}
+                                                passHref
                                               >
-                                                Voir tout
-                                              </a>
+                                                <a className="text-gray-900">
+                                                  Voir tout
+                                                </a>
+                                              </Link>
                                             </li>
                                           </ul>
                                         </div>
