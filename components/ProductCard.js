@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
               {product.node.vendor ? product.node.vendor : ""}
             </p>
             {/* Reviews */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <h3 className="sr-only">Avis</h3>
               <div className="flex justify-center items-center">
                 <div className="flex items-center">
@@ -69,14 +69,14 @@ const ProductCard = ({ product }) => {
                   ))}
                 </div>
                 <p className="sr-only">{reviews.average} sur 5</p>
-                {/* <a
+                 <a
                   href={reviews.href}
                   className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   {reviews.totalCount} avis
-                </a> */}
+                </a> 
               </div>
-            </div>
+            </div> */}
 
             {/* prices */}
             <div className="grid grid-cols-2 w-60 max-w-full mx-auto pt-3 sm:p-3 border-t border-gray-400 mt-6">
@@ -84,7 +84,8 @@ const ProductCard = ({ product }) => {
                 <p className="text-xs font-normal">Public</p>
                 <p>
                   {formatter.format(
-                    product.node.priceRange.minVariantPrice.amount
+                    Number(product.node.priceRange.minVariantPrice.amount) /
+                      Number(product.node.unite.value)
                   )}
                 </p>
               </div>
@@ -92,7 +93,12 @@ const ProductCard = ({ product }) => {
                 className={`font-bold ${rawColor ? color : "text-blueWine"}`}
               >
                 <p className="text-xs">Membres</p>
-                <p>{formatter.format(product.node.prix_membre.value)}</p>
+                <p>
+                  {formatter.format(
+                    Number(product.node.prix_membre.value) /
+                      Number(product.node.unite.value)
+                  )}
+                </p>
               </div>
             </div>
           </div>

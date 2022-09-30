@@ -1,5 +1,5 @@
-import { getAllProductsNotreCave } from "../lib/shopify";
-import ProductList from "../components/ProductList";
+import { getAllProductsEffervescents } from "../../lib/shopify";
+import ProductList from "../../components/ProductList";
 
 export default function Home({ products }) {
   return (
@@ -10,7 +10,7 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  let products = await getAllProductsNotreCave();
+  let products = await getAllProductsEffervescents();
 
   return {
     props: {

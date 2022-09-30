@@ -74,10 +74,13 @@ const navigation = {
           id: "couleur",
           name: "Couleur",
           items: [
-            { name: "Blancs", href: "#" },
-            { name: "Rosés", href: "#" },
-            { name: "Rouges", href: "#" },
-            { name: "Effervescents", href: "#" },
+            { name: "Blancs", href: "/notre-boutique/vins-blancs" },
+            { name: "Rosés", href: "/notre-boutique/vins-roses" },
+            { name: "Rouges", href: "/notre-boutique/vins-rouges" },
+            {
+              name: "Effervescents",
+              href: "/notre-boutique/vins-effervescents",
+            },
           ],
         },
         {
@@ -375,7 +378,19 @@ export default function Nav2() {
 
                               <div className="relative bg-white">
                                 <div className="w-full px-5 sm:px-10 xl:px-28 2xl:px-40 mx-auto">
-                                  <div className="grid grid-cols-6 gap-y-10 gap-x-8 py-16">
+                                  <Link
+                                    onClick={() => {
+                                      setOpen(false);
+                                    }}
+                                    href={"/notre-boutique"}
+                                  >
+                                    <a>
+                                      <h1 className="w-fit p-3 mb-3 mx-auto text-redWine cursor-pointer">
+                                        Notre boutique
+                                      </h1>
+                                    </a>
+                                  </Link>
+                                  <div className="grid grid-cols-6 gap-x-8 pb-16">
                                     <div className="col-span-2">
                                       {category.featured.map((item) => (
                                         <div
@@ -443,7 +458,7 @@ export default function Nav2() {
                                             ))}
                                             <li className="flex">
                                               <a
-                                                href="#"
+                                                href="/notre-boutique"
                                                 className="text-gray-900"
                                               >
                                                 Voir tout
