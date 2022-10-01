@@ -1,11 +1,11 @@
 import { getAllProductsRose } from "../../lib/shopify";
-import ProductList from "../../components/ProductList";
+import BoutiqueTemplate from "../../components/Boutique/BoutiqueTemplate";
 
 export default function Home({ products }) {
   return (
-    <div>
-      <ProductList products={products} />
-    </div>
+    <>
+      <BoutiqueTemplate products={products} pageTitle={"Nos vins rosés"} />
+    </>
   );
 }
 

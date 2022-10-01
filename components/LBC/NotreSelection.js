@@ -199,55 +199,51 @@ const NotreSelection = ({ productsLBC }) => {
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
           <div className="grid grid-cols-3 gap-x-10 xl:gap-x-16">
             {bouteilles.map((bouteille) => (
-              <>
-                <div
-                  className={`${bouteille.bgColor} p-7 text-left`}
-                  key={bouteille.id}
-                >
-                  <p>
-                    <strong>Cépages : </strong>
-                    {bouteille.cepages}
-                  </p>
-                  <p>
-                    <strong>Age des vignes : </strong>
-                    {bouteille.age}
-                  </p>
-                  <p>
-                    <strong>Rendement : </strong>
-                    {bouteille.rendement}
-                  </p>
-                  <p>
-                    <strong>Vendanges : </strong>
-                    {bouteille.vendanges}
-                  </p>
-                  <p>
-                    <strong>Elevage : </strong>
-                    {bouteille.elevage}
-                  </p>
-                  <p>
-                    <strong>Garde : </strong>
-                    {bouteille.garde}
-                  </p>
-                  <p>
-                    <strong>À table : </strong>
-                    {bouteille.table}
-                  </p>
-                </div>
-              </>
+              <div
+                className={`${bouteille.bgColor} p-7 text-left`}
+                key={bouteille.id}
+              >
+                <p>
+                  <strong>Cépages : </strong>
+                  {bouteille.cepages}
+                </p>
+                <p>
+                  <strong>Age des vignes : </strong>
+                  {bouteille.age}
+                </p>
+                <p>
+                  <strong>Rendement : </strong>
+                  {bouteille.rendement}
+                </p>
+                <p>
+                  <strong>Vendanges : </strong>
+                  {bouteille.vendanges}
+                </p>
+                <p>
+                  <strong>Elevage : </strong>
+                  {bouteille.elevage}
+                </p>
+                <p>
+                  <strong>Garde : </strong>
+                  {bouteille.garde}
+                </p>
+                <p>
+                  <strong>À table : </strong>
+                  {bouteille.table}
+                </p>
+              </div>
             ))}
           </div>
         </div>
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
           <div className="grid grid-cols-3 gap-x-10 xl:gap-x-16">
             {bouteilles.map((bouteille) => (
-              <>
-                <p
-                  className={`${bouteille.bgColor} px-7 pb-7 text-left rounded-b font-caveat text-2xl`}
-                  key={bouteille.id}
-                >
-                  {bouteille.accroche}
-                </p>
-              </>
+              <p
+                className={`${bouteille.bgColor} px-7 pb-7 text-left rounded-b font-caveat text-2xl`}
+                key={bouteille.id}
+              >
+                {bouteille.accroche}
+              </p>
             ))}
           </div>
         </div>

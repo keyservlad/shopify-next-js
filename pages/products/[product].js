@@ -1,5 +1,5 @@
 import { getAllProductsNotreCave, getProduct } from "../../lib/shopify";
-import ProductPageContent from "../../components/ProductPageContent";
+import ProductPageContent from "../../components/Boutique/Product/ProductPageContent";
 
 export default function ProductPage({ product }) {
   return (

@@ -1,6 +1,6 @@
-import { formatter } from "../utils/helper";
+import { formatter } from "../../../utils/helper";
 import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../context/ShopContext";
+import { CartContext } from "../../../context/ShopContext";
 import axios from "axios";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";

@@ -16,7 +16,7 @@
 */
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Dialog, Popover, Tab, Transition, Menu } from "@headlessui/react";
 import {
   MenuIcon,
@@ -113,6 +113,7 @@ function classNames(...classes) {
 export default function Nav2() {
   const session = useSession();
   // console.log(session);
+  const buttonRef = useRef();
 
   const router = useRouter();
 
@@ -219,16 +220,15 @@ export default function Nav2() {
                                   className="object-center object-cover"
                                 />
                               </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute z-10 inset-0"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
+                              <Link href={item.href} passHref>
+                                <a className="mt-6 block font-medium text-gray-900">
+                                  <span
+                                    className="absolute z-10 inset-0"
+                                    aria-hidden="true"
+                                  />
+                                  {item.name}
+                                </a>
+                              </Link>
                               <p aria-hidden="true" className="mt-1">
                                 Shop now
                               </p>
@@ -250,12 +250,11 @@ export default function Nav2() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 p-2 block text-gray-500"
-                                  >
-                                    {item.name}
-                                  </a>
+                                  <Link href={item.href} passHref>
+                                    <a className="-m-2 p-2 block text-gray-500">
+                                      {item.name}
+                                    </a>
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -269,32 +268,29 @@ export default function Nav2() {
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 p-2 block font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
+                      <Link href={page.href} passHref>
+                        <a className="-m-2 p-2 block font-medium text-gray-900">
+                          {page.name}
+                        </a>
+                      </Link>
                     </div>
                   ))}
                 </div>
 
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                   <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 p-2 block font-medium text-gray-900"
-                    >
-                      Sign in
-                    </a>
+                    <Link href="/login" passHref>
+                      <a className="-m-2 p-2 block font-medium text-gray-900">
+                        Sign in
+                      </a>
+                    </Link>
                   </div>
                   <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 p-2 block font-medium text-gray-900"
-                    >
-                      Create account
-                    </a>
+                    <Link href="/cartes" passHref>
+                      <a className="-m-2 p-2 block font-medium text-gray-900">
+                        Create account
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </Dialog.Panel>
@@ -339,6 +335,7 @@ export default function Nav2() {
                         <>
                           <div className="relative flex">
                             <Popover.Button
+                              ref={buttonRef}
                               className={classNames(
                                 open
                                   ? "border-redWine text-redWine"
@@ -378,14 +375,10 @@ export default function Nav2() {
 
                               <div className="relative bg-white">
                                 <div className="w-full px-5 sm:px-10 xl:px-28 2xl:px-40 mx-auto">
-                                  <Link
-                                    onClick={() => {
-                                      setOpen(false);
-                                    }}
-                                    href={"/notre-boutique"}
-                                    passHref
-                                  >
-                                    <a>
+                                  <Link href={"/notre-boutique"} passHref>
+                                    <a
+                                      onClick={() => buttonRef.current?.click()}
+                                    >
                                       <h1 className="w-fit p-3 mb-3 mx-auto text-redWine cursor-pointer">
                                         Notre boutique
                                       </h1>
@@ -449,12 +442,17 @@ export default function Nav2() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800"
-                                                >
-                                                  {item.name}
-                                                </a>
+                                                <Link href={item.href} passHref>
+                                                  <a
+                                                    href={item.href}
+                                                    className="hover:text-gray-800"
+                                                    onClick={() =>
+                                                      buttonRef.current?.click()
+                                                    }
+                                                  >
+                                                    {item.name}
+                                                  </a>
+                                                </Link>
                                               </li>
                                             ))}
                                             <li className="flex">
@@ -462,7 +460,12 @@ export default function Nav2() {
                                                 href={"/notre-boutique"}
                                                 passHref
                                               >
-                                                <a className="text-gray-900">
+                                                <a
+                                                  onClick={() =>
+                                                    buttonRef.current?.click()
+                                                  }
+                                                  className="text-gray-900"
+                                                >
                                                   Voir tout
                                                 </a>
                                               </Link>
@@ -482,13 +485,14 @@ export default function Nav2() {
                   ))}
 
                   {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
+                    <Link href={page.href} passHref key={page.name}>
+                      <a
+                        key={page.name}
+                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        {page.name}
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </Popover.Group>

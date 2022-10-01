@@ -1,4 +1,4 @@
-import ProductCard from "../ProductCard";
+import ProductCard from "../Boutique/ProductCard";
 
 const MeilleuresVentes = ({ products }) => {
   return (

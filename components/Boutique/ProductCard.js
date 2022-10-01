@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatter } from "../utils/helper";
+import { formatter } from "../../utils/helper";
 import { StarIcon } from "@heroicons/react/solid";
 
 function classNames(...classes) {

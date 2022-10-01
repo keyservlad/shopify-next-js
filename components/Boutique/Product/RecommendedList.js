@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "../ProductCard";
 
 const RecommendedList = ({ products, current }) => {
   let ProductToDisplay = 3;

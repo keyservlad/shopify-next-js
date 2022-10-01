@@ -1,11 +1,11 @@
+import BoutiqueTemplate from "../../components/Boutique/BoutiqueTemplate";
 import { getAllProductsEffervescents } from "../../lib/shopify";
-import ProductList from "../../components/ProductList";
 
 export default function Home({ products }) {
   return (
-    <div>
-      <ProductList products={products} />
-    </div>
+    <>
+      <BoutiqueTemplate products={products} pageTitle={"Nos vins effervescents"} />
+    </>
   );
 }
 
