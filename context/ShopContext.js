@@ -194,11 +194,13 @@ export default function ShopProvider({ children }) {
       newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
       newCheckout = await checkoutEmailAssociate(newCheckout.id, user.email);
 
+      console.log(updatedCart);
       for (let i = 0; i < updatedCart.length; i++) {
         newCheckout = await checkoutDiscount(
           newCheckout.id,
           updatedCart[i].handle
         );
+        console.log(updatedCart[i].handle);
       }
     }
 
@@ -270,7 +272,6 @@ export default function ShopProvider({ children }) {
       cartObject[1].lineItems.length !== 0 &&
       session.status === "unauthenticated"
     ) {
-      console.log("hereee");
       setIsCartLoading(true);
       let newCheckout = await createCheckout(cart);
 

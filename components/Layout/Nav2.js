@@ -99,7 +99,7 @@ const navigation = {
     },
   ],
   pages: [
-    { name: "Bon Coup", href: "#" },
+    { name: "Bon Coup", href: "/le-bon-coup" },
     { name: "Le Concept", href: "#" },
     { name: "Série Limitée", href: "#" },
     { name: "Coin du chef", href: "/bruno-loubet" },

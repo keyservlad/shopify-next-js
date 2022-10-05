@@ -42,7 +42,7 @@ const NotreSelection = ({ productsLBC }) => {
   const amandiers = {
     title: productsLBC[1].node.title,
     id: productsLBC[1].node.variants.nodes[0].id,
-    handle: productsLBC[0].node.handle,
+    handle: productsLBC[1].node.handle,
     variantQuantity: 1,
     millesime: productsLBC[1].node.millesime.value,
     vendor: productsLBC[1].node.vendor,
@@ -82,7 +82,7 @@ const NotreSelection = ({ productsLBC }) => {
   const capriceValentin = {
     title: productsLBC[2].node.title,
     id: productsLBC[2].node.variants.nodes[0].id,
-    handle: productsLBC[0].node.handle,
+    handle: productsLBC[2].node.handle,
     variantQuantity: 1,
     millesime: productsLBC[2].node.millesime.value,
     vendor: productsLBC[2].node.vendor,
@@ -94,7 +94,7 @@ const NotreSelection = ({ productsLBC }) => {
     unite: productsLBC[2].node.unite.value,
     textCaisse: (
       <>
-        Prix par bouteille, conditionnement : caissse en bois de 6 bouteilles.
+        Prix par bouteille, conditionnement : carton de 6 bouteilles.
         Frais de livraison non inclus.
       </>
     ),
