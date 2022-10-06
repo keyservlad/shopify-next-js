@@ -111,10 +111,8 @@ const recette = {
 
         <p className="mt-7">
           <strong>
-            ... et pour ceux qui n&#39;en ont plus en cave, EMOVIN vous propose
-            une Box de 3 bouteilles au prix doux de 38€ TTC.
-          </strong>{" "}
-          Frais de livraison en point relais inclus.
+            ... et pour ceux qui n&#39;en ont plus en cave, nous contacter
+          </strong>
         </p>
         <div className="w-full flex justify-center md:justify-start">
           <button className="bg-redWine text-white px-5 py-2 rounded-lg mt-7 hover:bg-white hover:text-redWine border border-redWine">
