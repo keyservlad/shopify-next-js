@@ -2,6 +2,7 @@ import { ArrowLeftIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
 import ProductForm from "./ProductForm";
+import ProductTable from "./ProductTable";
 import RecommendedList from "./RecommendedList";
 
 export default function ProductPageContent({ product }) {
@@ -36,9 +37,11 @@ export default function ProductPageContent({ product }) {
           </div>
           <ProductForm product={product} color={color} />
         </div>
-        <p className="pt-16 space-y-8 md:space-x-4 lg:space-x-8">
-          {product.description}
-        </p>
+        <div className="py-12 px-9 mt-20 bg-white w-full rounded">
+          <h1 className="text-2xl">Un vin, son histoire</h1>
+          <p className="mt-5">{product.description}</p>
+        </div>
+        <ProductTable product={product} />
         <RecommendedList
           current={product.id}
           products={product.collections.edges[0].node.products.edges}

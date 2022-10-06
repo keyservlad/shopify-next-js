@@ -71,7 +71,7 @@ export default function ProductForm({ product, color }) {
           {product.nom_vin.value} {product.millesime.value}
         </h1>
       </div>
-      <h2 className="text-3xl mt-2">{product.productType}</h2>
+      <h2 className="text-2xl mt-2">{product.productType}</h2>
       <h2 className="text-[#8F8F8F] ">{product.vendor}</h2>
       <p className="text-lg mt-5">{product.accroche.value}</p>
       <button className="underline cursor-pointer text-sm mt-2">
@@ -82,25 +82,83 @@ export default function ProductForm({ product, color }) {
         bouteilles
       </p>
 
-      <p>{formatter.format(variant.variantPrice)}</p>
+      {stock && stock <= 10 ? <p>{stock} cartons restants</p> : null}
 
-      {stock ? <p>{stock} cartons restants</p> : null}
-
-      {available ? (
-        <button
-          onClick={() => {
-            addToCart(variant);
-            console.log(variant);
-          }}
-          className="w-48 rounded text-white bg-redWine px-1 py-2 hover:opacity-80"
-        >
-          Ajouter au panier
-        </button>
-      ) : (
-        <div className="w-48 rounded text-white bg-pink-300 px-1 py-2 cursor-not-allowed">
-          En rupture de stock...
+      <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" />
+      <div className="flex flex-row gap-x-10">
+        <div className="text-center">
+          <p className="text-sm font-bold">Public</p>
+          <p className="text-lg">{formatter.format(variant.variantPrice)}</p>
+          <p className="text-[#8F8F8F]">
+            {formatter.format(
+              variant.variantPrice / Number(product.unite.value)
+            )}{" "}
+            / bouteille
+          </p>
         </div>
-      )}
+        <div className="text-center">
+          <p className="text-sm font-bold text-redWine">Membre</p>
+          <p className="text-lg text-redWine font-bold">
+            {formatter.format(Number(product.prix_membre.value))}
+          </p>
+          <p className="text-[#8F8F8F]">
+            {formatter.format(
+              Number(product.prix_membre.value) / Number(product.unite.value)
+            )}{" "}
+            / bouteille
+          </p>
+        </div>
+      </div>
+      <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" />
+      <div className="flex flex-row gap-2 md:gap-5 mt-2">
+        <div className="bg-white p-3 rounded flex flex-row items-center gap-2 md:gap-5">
+          <label htmlFor="qte">Quantité</label>
+          <input
+            id="qte"
+            name="qte"
+            type="number"
+            value={variant.variantQuantity}
+            onChange={(e) => {
+              if (
+                typeof parseInt(e.target.value) === "number" &&
+                parseInt(e.target.value) > 0
+              ) {
+                if (stock) {
+                  // TODO add further check for stock check cumulative with what is inside the cart
+                  if (parseInt(e.target.value) < stock) {
+                    updateQuant(parseInt(e.target.value));
+                  }
+                } else {
+                  updateQuant(parseInt(e.target.value));
+                }
+              } else {
+                updateQuant(1);
+              }
+            }}
+            className="appearance-none w-14 block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-redWine focus:border-redWine sm:text-sm"
+          />
+        </div>
+        {available ? (
+          <button
+            onClick={() => {
+              addToCart(variant);
+              console.log(variant);
+            }}
+            className="w-48 rounded text-white bg-redWine px-1 py-2 hover:opacity-80"
+          >
+            Ajouter au panier
+          </button>
+        ) : (
+          <div className="w-48 rounded text-white bg-pink-300 px-1 py-2 cursor-not-allowed">
+            En rupture de stock...
+          </div>
+        )}
+      </div>
+      <p className="text-[#8F8F8F] text-center mt-3 w-2/3 ">
+        Taxes incluses. <span className="underline"></span> Frais de port
+        calculés à l'étape de paiement. Emballage renforcé. Paiement 100%
+        sécurisé.
+      </p>
     </div>
   );
 }
