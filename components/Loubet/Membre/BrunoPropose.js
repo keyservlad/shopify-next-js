@@ -19,7 +19,7 @@ const lines = [
   {
     image: ImagePlat2,
     text: <>Salade d&#39;été pour les copines (végétarien)</>,
-    href: "/",
+    href: "/recettes/salade-copines",
   },
   {
     image: ImagePlat3,
@@ -29,7 +29,7 @@ const lines = [
         d&#39;herbes et avocat
       </>
     ),
-    href: "/",
+    href: "/recettes/lasagne-legumes-ete",
   },
 ];
 

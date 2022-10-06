@@ -7,9 +7,6 @@ const BrunoPublic = () => {
   return (
     <div className="">
       <HeroLoubet />
-      {/* <LinesTextImage lineNumber={1} />
-      <LinesTextImage lineNumber={2} />
-      <LinesTextImage lineNumber={3} /> */}
       <MotDeBruno />
       <ReservedMembres />
     </div>

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Recette from "../../components/Recettes/Recette";
-import ImagePorc from "../../public/images/bruno/plat1.png";
+import ImagePorc from "../../public/images/recettes/plat1.png";
+import VectorRedWine from "../../public/images/recettes/VectorRedWine.png";
+import ImageBouteille from "../../public/images/recettes/bouteille1-modif.png";
 
 const recette = {
   title: (
@@ -11,9 +13,11 @@ const recette = {
   ),
   numberPerson: 6,
   image: ImagePorc,
+  vector: VectorRedWine,
+  imageBouteille: ImageBouteille,
   ingredients: (
-    <>
-      <p className="my-5">6 cotes d&#39;échine de porc</p>
+    <div className="text-[#6D6D6D]">
+      <p className="my-5">6 côtes d&#39;échine de porc</p>
 
       <p className="font-bold">Marinade :</p>
       <p>2 c/s de concentré de tomate</p>
@@ -26,7 +30,7 @@ const recette = {
       <p>Sel et poivre</p>
       <p>1c/s pate de miso (épicerie asiatique)</p>
 
-      <p className="fontbold mt-5">Garniture :</p>
+      <p className="font-bold mt-5">Garniture :</p>
       <p>2 à 3 aubergines</p>
       <p>4 gousses d&#39;ail</p>
       <p>2 échalotes</p>
@@ -38,7 +42,7 @@ const recette = {
       <p className="mt-5">
         Graines de sésame toastées et olives noires émincées
       </p>
-    </>
+    </div>
   ),
   fourneaux: (
     <>
@@ -53,7 +57,7 @@ const recette = {
       <p className="mt-3">
         Mettre les aubergines directement sur la flamme (ou sous le grill du
         four) en les retournant jusqu&#39; à ce que la peau gonfle et soit
-        complètement brulée. Envelopper dans du film étirable ; après
+        complètement brulée. Envelopper dans du film étirable&nbsp;; après
         refroidissement retirer la peau et découper la chair fumée en petits
         cubes (la chair doit être bien moelleuse). Ajouter ensuite l&#39;ail,
         les échalotes, l&#39;huile d&#39;olive, jus de citron et
@@ -83,7 +87,7 @@ const recette = {
         <h2 className="font-light text-3xl">
           Beaujolais 1er Cru Morgon Vieilles Vignes
         </h2>
-        <p className="text-redWine">
+        <p className="text-redWine mt-7">
           « Issu de vieilles vignes de gamay (70-100 ans), un vin gourmand sans
           lourdeur, aux tanins bien fondus. Une belle complexité aromatique sur
           des notes de fruits rouges et d&#39;épices et qui viendront
@@ -93,13 +97,18 @@ const recette = {
         </p>
         <p>Servir à la température de la cave (11-13°C) ou légèrement frais.</p>
 
-        <p>
+        <p className="mt-7">
           <strong>
             ... et pour ceux qui n&#39;en ont plus en cave, EMOVIN vous propose
             une Box de 3 bouteilles au prix doux de 35€ TTC.
           </strong>{" "}
           Frais de livraison en point relais inclus.
         </p>
+        <div className="w-full flex justify-center md:justify-start">
+          <button className="bg-redWine text-white px-5 py-2 rounded-lg mt-7 hover:bg-white hover:text-redWine border border-redWine">
+            Nous contacter
+          </button>
+        </div>
       </>
     ),
     // product: "", TODO once we have the product
@@ -107,7 +116,7 @@ const recette = {
 };
 
 const EchinePorcPrille = () => {
-  return <Recette recette={recette}/>;
+  return <Recette recette={recette} color={"red"} />;
 };
 
 EchinePorcPrille.auth = true;
