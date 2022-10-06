@@ -14,7 +14,7 @@ const fetchInventory = (url, id) =>
     })
     .then((res) => res.data);
 
-export default function ProductForm({ product }) {
+export default function ProductForm({ product, color }) {
   const { data: productInventory } = useSWR(
     ["/api/product-available", product.handle],
     (url, id) => fetchInventory(url, id),
@@ -24,10 +24,7 @@ export default function ProductForm({ product }) {
   const [available, setAvailable] = useState(true);
   const [stock, setStock] = useState(true);
   const session = useSession();
-
-  const { addToCart } = useContext(CartContext);
-
-  let variant = {
+  const [variant, setVariant] = useState({
     id: product.variants.edges[0].node.id,
     title: product.title,
     handle: product.handle,
@@ -35,7 +32,13 @@ export default function ProductForm({ product }) {
     variantPrice: product.variants.edges[0].node.priceV2.amount,
     variantQuantity: 1,
     prix_membre: product.prix_membre?.value,
+  });
+
+  const updateQuant = (quant) => {
+    setVariant({ ...variant, variantQuantity: quant });
   };
+
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     if (productInventory) {
@@ -57,11 +60,31 @@ export default function ProductForm({ product }) {
   }, [productInventory]);
 
   return (
-    <div className="flex flex-col h-full w-full md:w-1/3 items-center">
-      <h2 className="text-2xl font-bold text-center">{product.title}</h2>
+    <div className="flex flex-col h-full w-full md:w-2/3 items-center">
+      <div
+        className={`flex items-center flex-col text-center w-full ${
+          color === "red" ? "text-redWine" : "text-blueWine"
+        }`}
+      >
+        <h1>{product.title}</h1>
+        <h1>
+          {product.nom_vin.value} {product.millesime.value}
+        </h1>
+      </div>
+      <h2 className="text-3xl mt-2">{product.productType}</h2>
+      <h2 className="text-[#8F8F8F] ">{product.vendor}</h2>
+      <p className="text-lg mt-5">{product.accroche.value}</p>
+      <button className="underline cursor-pointer text-sm mt-2">
+        Plus de détails
+      </button>
+      <p className="mt-5 font-bold">
+        L'unité de vente de ce produit est un carton de {product.unite.value}{" "}
+        bouteilles
+      </p>
+
       <p>{formatter.format(variant.variantPrice)}</p>
 
-      {stock ? <p>{stock} bouteilles restantes</p> : null}
+      {stock ? <p>{stock} cartons restants</p> : null}
 
       {available ? (
         <button
