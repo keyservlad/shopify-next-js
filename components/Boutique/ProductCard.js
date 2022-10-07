@@ -23,8 +23,8 @@ const ProductCard = ({ product }) => {
   return (
     <Link href={`/products/${handle}`}>
       <a className="group hover:bg-white rounded-md hover:drop-shadow-lg">
-        <div className="group relative p-3">
-          <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
+        <div className="group relative p-3 h-full flex flex-col justify-start">
+          <div className="relative w-full bg-white aspect-[0.65] max-h-96 overflow-hidden group-hover:opacity-75 sm:h-auto">
             <Image
               src={originalSrc}
               alt={altText ? altText : "Image bouteille"}
@@ -78,8 +78,9 @@ const ProductCard = ({ product }) => {
               </div>
             </div> */}
 
+          </div>
             {/* prices */}
-            <div className="grid grid-cols-2 w-60 max-w-full mx-auto pt-3 sm:p-3 border-t border-gray-400 mt-6">
+            <div className="grid grid-cols-2 w-60 max-w-full mx-auto pt-3 sm:p-3 border-t border-gray-400 mt-auto text-center">
               <div className="">
                 <p className="text-xs font-normal">Public</p>
                 <p>
@@ -101,7 +102,6 @@ const ProductCard = ({ product }) => {
                 </p>
               </div>
             </div>
-          </div>
         </div>
       </a>
     </Link>
