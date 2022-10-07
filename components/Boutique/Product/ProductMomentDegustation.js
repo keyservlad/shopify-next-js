@@ -34,9 +34,9 @@ const SD = [SD1, SD2, SD3, SD4, SD5, SD6, SD7];
 const ST = [ST1, ST2, ST3, ST4, ST5, ST6, ST7];
 
 const ProductMomentDegustation = ({ product }) => {
-  const legerPuissant = LP[product.en_bouche_leger_puissant.value - 1];
-  const secDoux = SD[product.en_bouche_sec_doux.value - 1];
-  const soupleTannique = ST[product.en_bouche_souple_tannique.value - 1];
+  const legerPuissant = LP[product.en_bouche_leger_puissant?.value - 1];
+  const secDoux = SD[product.en_bouche_sec_doux?.value - 1];
+  const soupleTannique = ST[product.en_bouche_souple_tannique?.value - 1];
 
   return (
     <div className="relative pt-12  mt-20 bg-white w-full rounded">
@@ -54,7 +54,7 @@ const ProductMomentDegustation = ({ product }) => {
               />
             </div>
             <p className="text-center mt-4">Servir</p>
-            <p className="font-bold mt-4">{product.service.value}</p>
+            <p className="font-bold mt-4">{product.service?.value}</p>
           </div>
           <div className="flex flex-col items-center md:max-w-[25%] text-center mt-7 md:mt-0">
             <div className="relative h-12 w-20">
@@ -67,7 +67,7 @@ const ProductMomentDegustation = ({ product }) => {
               />
             </div>
             <p className="text-center mt-4">Accords mets-vin</p>
-            <p className="font-bold mt-4">{product.accord_mets_vins.value}</p>
+            <p className="font-bold mt-4">{product.accord_mets_vins?.value}</p>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ const ProductMomentDegustation = ({ product }) => {
             />
           </div>
           <h1 className="text-center mt-4 text-3xl">À l&#39;oeil</h1>
-          <p className="mt-2 mb-5 md:mt-12">{product.a_l_oeil.value}</p>
+          <p className="mt-2 mb-5 md:mt-12">{product.a_l_oeil?.value}</p>
         </div>
         <div className="flex flex-col items-center md:max-w-[25%] text-center">
           <div className="relative w-24 aspect-1">
@@ -96,7 +96,7 @@ const ProductMomentDegustation = ({ product }) => {
             />
           </div>
           <h1 className="text-center mt-4 text-3xl">Au nez</h1>
-          <p className="mt-2 mb-5 md:mt-12">{product.au_nez.value}</p>
+          <p className="mt-2 mb-5 md:mt-12">{product.au_nez?.value}</p>
         </div>
         <div className="flex flex-col items-center md:max-w-[25%] text-center">
           <div className="relative w-24 aspect-1">

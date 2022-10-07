@@ -71,7 +71,7 @@ const ProductTable = ({ product }) => {
             </td>
             <td>Millésime</td>
             <td className="font-bold">
-              {product.millesime?.value ? product.millesime.value : "-"}
+              {product.millesime?.value ? product.millesime?.value : "-"}
             </td>
           </tr>
           <tr className="border-b">

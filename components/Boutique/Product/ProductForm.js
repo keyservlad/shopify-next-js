@@ -73,12 +73,12 @@ export default function ProductForm({
       >
         <h1>{product.title}</h1>
         <h1>
-          {product.nom_vin.value} {product.millesime.value}
+          {product.nom_vin?.value} {product.millesime?.value}
         </h1>
       </div>
       <h2 className="text-2xl mt-2">{product.productType}</h2>
       <h2 className="text-[#8F8F8F] ">{product.vendor}</h2>
-      <p className="text-lg mt-5">{product.accroche.value}</p>
+      <p className="text-lg mt-5">{product.accroche?.value}</p>
       <button
         onClick={() => {
           scrollVinHistoireSection();
@@ -89,7 +89,7 @@ export default function ProductForm({
       </button>
       <p className="mt-5 font-bold">
         L&#39;unité de vente de ce produit est un carton de{" "}
-        {product.unite.value} bouteilles
+        {product.unite?.value} bouteilles
       </p>
 
       {stock && stock <= 10 ? <p>{stock} cartons restants</p> : null}
@@ -101,7 +101,7 @@ export default function ProductForm({
           <p className="text-lg">{formatter.format(variant.variantPrice)}</p>
           <p className="text-[#8F8F8F]">
             {formatter.format(
-              variant.variantPrice / Number(product.unite.value)
+              variant.variantPrice / Number(product.unite?.value)
             )}{" "}
             / bouteille
           </p>
@@ -109,11 +109,11 @@ export default function ProductForm({
         <div className="text-center">
           <p className="text-sm font-bold text-redWine">Membre</p>
           <p className="text-lg text-redWine font-bold">
-            {formatter.format(Number(product.prix_membre.value))}
+            {formatter.format(Number(product.prix_membre?.value))}
           </p>
           <p className="text-[#8F8F8F]">
             {formatter.format(
-              Number(product.prix_membre.value) / Number(product.unite.value)
+              Number(product.prix_membre?.value) / Number(product.unite?.value)
             )}{" "}
             / bouteille
           </p>
