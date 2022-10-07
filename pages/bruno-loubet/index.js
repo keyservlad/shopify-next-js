@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
-import Loading from "../components/Loading";
-import BrunoMembre from "../components/Loubet/Membre/Bruno-membre";
-import BrunoPublic from "../components/Loubet/Public/Bruno-public";
+import Loading from "../../components/Loading";
+import BrunoMembre from "../../components/Loubet/Membre/Bruno-membre";
+import BrunoPublic from "../../components/Loubet/Public/Bruno-public";
 
 const Brunoloubet = () => {
   const session = useSession();

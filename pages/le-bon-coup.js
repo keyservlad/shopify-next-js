@@ -4,7 +4,7 @@ import { getAllProductsLeBonCoup } from "../lib/shopify";
 
 const leboncoup = ({ productsLBC }) => {
   if (productsLBC.length !== 3) {
-    return <ToutBu />;
+    return <ToutBu page={"bonCoup"}/>;
   }
   return <LeBonCoup productsLBC={productsLBC} />;
 };
