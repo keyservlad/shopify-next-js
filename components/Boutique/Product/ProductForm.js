@@ -88,8 +88,8 @@ export default function ProductForm({
         Plus de détails
       </button>
       <p className="mt-5 font-bold">
-        L'unité de vente de ce produit est un carton de {product.unite.value}{" "}
-        bouteilles
+        L&#39;unité de vente de ce produit est un carton de{" "}
+        {product.unite.value} bouteilles
       </p>
 
       {stock && stock <= 10 ? <p>{stock} cartons restants</p> : null}
@@ -166,7 +166,7 @@ export default function ProductForm({
       </div>
       <p className="text-[#8F8F8F] text-center mt-3 w-2/3 ">
         Taxes incluses. <span className="underline"></span> Frais de port
-        calculés à l'étape de paiement. Emballage renforcé. Paiement 100%
+        calculés à l&#39;étape de paiement. Emballage renforcé. Paiement 100%
         sécurisé.
       </p>
     </div>
