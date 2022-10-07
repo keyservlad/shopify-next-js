@@ -14,7 +14,12 @@ const fetchInventory = (url, id) =>
     })
     .then((res) => res.data);
 
-export default function ProductForm({ product, color }) {
+// TODO spacing feels weird on mobile
+export default function ProductForm({
+  product,
+  color,
+  scrollVinHistoireSection,
+}) {
   const { data: productInventory } = useSWR(
     ["/api/product-available", product.handle],
     (url, id) => fetchInventory(url, id),
@@ -74,7 +79,12 @@ export default function ProductForm({ product, color }) {
       <h2 className="text-2xl mt-2">{product.productType}</h2>
       <h2 className="text-[#8F8F8F] ">{product.vendor}</h2>
       <p className="text-lg mt-5">{product.accroche.value}</p>
-      <button className="underline cursor-pointer text-sm mt-2">
+      <button
+        onClick={() => {
+          scrollVinHistoireSection();
+        }}
+        className="underline cursor-pointer text-sm mt-2"
+      >
         Plus de détails
       </button>
       <p className="mt-5 font-bold">
@@ -84,8 +94,8 @@ export default function ProductForm({ product, color }) {
 
       {stock && stock <= 10 ? <p>{stock} cartons restants</p> : null}
 
-      <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" />
-      <div className="flex flex-row gap-x-10">
+      {/* <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" /> */}
+      <div className="flex flex-row gap-x-10 border-y border-[#8F8F8F] py-3 my-3">
         <div className="text-center">
           <p className="text-sm font-bold">Public</p>
           <p className="text-lg">{formatter.format(variant.variantPrice)}</p>
@@ -109,7 +119,7 @@ export default function ProductForm({ product, color }) {
           </p>
         </div>
       </div>
-      <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" />
+      {/* <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" /> */}
       <div className="flex flex-row gap-2 md:gap-5 mt-2">
         <div className="bg-white p-3 rounded flex flex-row items-center gap-2 md:gap-5">
           <label htmlFor="qte">Quantité</label>

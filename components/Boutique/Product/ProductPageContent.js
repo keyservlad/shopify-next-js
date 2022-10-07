@@ -1,13 +1,23 @@
 import { ArrowLeftIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { createRef, useRef } from "react";
 import ProductForm from "./ProductForm";
+import ProductMomentDegustation from "./ProductMomentDegustation";
 import ProductTable from "./ProductTable";
 import RecommendedList from "./RecommendedList";
 
 export default function ProductPageContent({ product }) {
   console.log(product);
   let color = product.tags.includes("rouge") ? "red" : null;
+
+  const refVinHistoire = createRef();
+
+  const scrollVinHistoireSection = () => {
+    refVinHistoire.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -35,13 +45,19 @@ export default function ProductPageContent({ product }) {
               />
             </div>
           </div>
-          <ProductForm product={product} color={color} />
+          <ProductForm
+            product={product}
+            color={color}
+            scrollVinHistoireSection={scrollVinHistoireSection}
+          />
         </div>
-        <div className="py-12 px-9 mt-20 bg-white w-full rounded">
-          <h1 className="text-2xl">Un vin, son histoire</h1>
+        <div className="relative py-12 px-9 mt-20 bg-white w-full rounded">
+          <div className="absolute -top-20" ref={refVinHistoire} />
+          <h1 className="text-3xl">Un vin, son histoire</h1>
           <p className="mt-5">{product.description}</p>
         </div>
         <ProductTable product={product} />
+        <ProductMomentDegustation product={product} />
         <RecommendedList
           current={product.id}
           products={product.collections.edges[0].node.products.edges}

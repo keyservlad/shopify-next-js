@@ -13,6 +13,7 @@ import Imageregion from "../../../public/images/product/region.svg";
 const ProductTable = ({ product }) => {
   return (
     <div className="py-12 px-9 mt-20 bg-white w-full rounded">
+        <h1 className="text-3xl mb-5">Tout savoir sur ce vin</h1>
       <table className="table-auto w-full">
         <tbody className="">
           <tr className="border-b">
