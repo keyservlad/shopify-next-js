@@ -55,19 +55,47 @@ const navigation = {
           id: "en-ce-moment",
           name: "En ce moment",
           items: [
-            { name: "Meilleures ventes", href: "#" },
-            { name: "Mieux notés", href: "#" },
-            { name: "Nos vins bio", href: "#" },
+            {
+              name: "Meilleures ventes",
+              href: "/notre-boutique",
+              query: "filterquery=best_selling",
+            },
+            {
+              name: "Mieux notés",
+              href: "/notre-boutique",
+              query: "filterquery=rating",
+            },
+            {
+              name: "Nos vins bio",
+              href: "/notre-boutique",
+              query: "bioquery=true",
+            },
           ],
         },
         {
           id: "prix",
           name: "Prix",
           items: [
-            { name: "Moins de 10 €", href: "#" },
-            { name: "Entre 10 et 20 €", href: "#" },
-            { name: "Entre 20 et 35 €", href: "#" },
-            { name: "Plus de 35 €", href: "#" },
+            {
+              name: "Moins de 10 €",
+              href: "/notre-boutique",
+              query: "pricequery=10",
+            },
+            {
+              name: "Entre 10 et 20 €",
+              href: "/notre-boutique",
+              query: "pricequery=10_20",
+            },
+            {
+              name: "Entre 20 et 35 €",
+              href: "/notre-boutique",
+              query: "pricequery=20_35",
+            },
+            {
+              name: "Plus de 35 €",
+              href: "/notre-boutique",
+              query: "pricequery=35",
+            },
           ],
         },
         {
@@ -87,12 +115,36 @@ const navigation = {
           id: "region",
           name: "Région",
           items: [
-            { name: "Bordeaux", href: "#" },
-            { name: "Bourgogne", href: "#" },
-            { name: "Vallée du Rhône", href: "#" },
-            { name: "Savoie", href: "#" },
-            { name: "Vallée de la Loire", href: "#" },
-            { name: "Languedoc-Roussillon", href: "#" },
+            {
+              name: "Bordeaux",
+              href: "/notre-boutique",
+              query: "regionquery=bordeaux",
+            },
+            {
+              name: "Bourgogne",
+              href: "/notre-boutique",
+              query: "regionquery=bourgogne",
+            },
+            {
+              name: "Vallée du Rhône",
+              href: "/notre-boutique",
+              query: "regionquery=rhone",
+            },
+            {
+              name: "Savoie",
+              href: "/notre-boutique",
+              query: "regionquery=savoie",
+            },
+            {
+              name: "Vallée de la Loire",
+              href: "/notre-boutique",
+              query: "regionquery=loire",
+            },
+            {
+              name: "Languedoc-Roussillon",
+              href: "/notre-boutique",
+              query: "regionquery=languedoc",
+            },
           ],
         },
       ],
@@ -250,11 +302,24 @@ export default function Nav2() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <Link href={item.href} passHref>
-                                    <a className="-m-2 p-2 block text-gray-500">
-                                      {item.name}
-                                    </a>
-                                  </Link>
+                                  {item.query ? (
+                                    <Link
+                                      href={{
+                                        pathname: item.href,
+                                        query: item.query,
+                                      }}
+                                    >
+                                      <a className="-m-2 p-2 block text-gray-500">
+                                        {item.name}
+                                      </a>
+                                    </Link>
+                                  ) : (
+                                    <Link href={item.href} passHref>
+                                      <a className="-m-2 p-2 block text-gray-500">
+                                        {item.name}
+                                      </a>
+                                    </Link>
+                                  )}
                                 </li>
                               ))}
                             </ul>
@@ -442,17 +507,39 @@ export default function Nav2() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <Link href={item.href} passHref>
-                                                  <a
-                                                    href={item.href}
-                                                    className="hover:text-gray-800"
-                                                    onClick={() =>
-                                                      buttonRef.current?.click()
-                                                    }
+                                                {item.query ? (
+                                                  <Link
+                                                    href={{
+                                                      pathname: item.href,
+                                                      query: item.query,
+                                                    }}
+                                                    passHref
                                                   >
-                                                    {item.name}
-                                                  </a>
-                                                </Link>
+                                                    <a
+                                                      className="hover:text-gray-800"
+                                                      onClick={() =>
+                                                        buttonRef.current?.click()
+                                                      }
+                                                    >
+                                                      {item.name}
+                                                    </a>
+                                                  </Link>
+                                                ) : (
+                                                  <Link
+                                                    href={item.href}
+                                                    passHref
+                                                  >
+                                                    <a
+                                                      href={item.href}
+                                                      className="hover:text-gray-800"
+                                                      onClick={() =>
+                                                        buttonRef.current?.click()
+                                                      }
+                                                    >
+                                                      {item.name}
+                                                    </a>
+                                                  </Link>
+                                                )}
                                               </li>
                                             ))}
                                             <li className="flex">

@@ -28,9 +28,9 @@ const ProductCardVinotheque = ({
         {product.node.points.value} points
       </div>
       <p className="font-semibold text-sm mt-4">
-        {product.node.title} {product.node.millesime.value}
+        {product.node.title} {product.node.millesime?.value}
       </p>
-      <p className="">{product.node.appellation.value}</p>
+      <p className="">{product.node.appellation?.value}</p>
       <p className="text-xs">{product.node.vendor}</p>
     </div>
   );

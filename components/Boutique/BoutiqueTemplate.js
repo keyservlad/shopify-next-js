@@ -1,6 +1,6 @@
 import ProductList from "./ProductList";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import {
@@ -10,6 +10,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/solid";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const sortOptions = [
   { name: "Meilleures ventes", value: "BEST_SELLING" },
@@ -29,10 +30,10 @@ const filters_init = [
     id: "prix",
     name: "Prix",
     options: [
-      { value: "10", label: "Moins de 10 €", number: 0 },
-      { value: "10_20", label: "Entre 10 et 20 €", number: 0 },
-      { value: "20_35", label: "Entre 20 et 35 €", number: 0 },
-      { value: "35", label: "Plus de 35 €", number: 0 },
+      { value: "10", label: "Moins de 10 €", number: 0, checked: false },
+      { value: "10_20", label: "Entre 10 et 20 €", number: 0, checked: false },
+      { value: "20_35", label: "Entre 20 et 35 €", number: 0, checked: false },
+      { value: "35", label: "Plus de 35 €", number: 0, checked: false },
     ],
   },
   {
@@ -48,7 +49,7 @@ const filters_init = [
   {
     id: "bio",
     name: "Vins bio",
-    options: [{ value: "true", label: "Vins bio", number: 0 }],
+    options: [{ value: "true", label: "Vins bio", number: 0, checked: false }],
   },
 ];
 
@@ -59,7 +60,220 @@ function classNames(...classes) {
 export default function BoutiqueTemplate({ products, pageTitle }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filters, setFilters] = useState(filters_init);
+  const [defaultFilters, setDefaultFilters] = useState(filters_init);
   const [sort, setSort] = useState(sortOptions[0].value);
+  const [productList, setProductList] = useState(products);
+
+  const regions = products.map((product) => product.node.productType);
+  const vendors = products.map((product) => product.node.vendor);
+
+  const router = useRouter();
+  const { filterquery, pricequery, regionquery, bioquery } = router.query;
+
+  useEffect(() => {
+    const newFilters = filters.map((filter) => {
+      if (filter.id === "region") {
+        let options = [];
+        regions.forEach((region) => {
+          if (!options.find((option) => option.value === region)) {
+            options.push({
+              value: region,
+              label: region,
+              number: 1,
+              checked: false,
+            });
+          } else {
+            options = options.map((option) => {
+              if (option.value === region) {
+                return { ...option, number: option.number + 1 };
+              } else {
+                return option;
+              }
+            });
+          }
+        });
+
+        return { ...filter, options };
+      } else if (filter.id === "vendor") {
+        let options = [];
+        vendors.forEach((vendor) => {
+          if (!options.find((option) => option.value === vendor)) {
+            options.push({
+              value: vendor,
+              label: vendor,
+              number: 1,
+              checked: false,
+            });
+          } else {
+            options = options.map((option) => {
+              if (option.value === vendor) {
+                return { ...option, number: option.number + 1 };
+              } else {
+                return option;
+              }
+            });
+          }
+        });
+        return { ...filter, options };
+      } else {
+        return filter;
+      }
+    });
+    setFilters(newFilters);
+    setDefaultFilters(newFilters);
+  }, []);
+
+  useEffect(() => {
+    let newFilters = [...defaultFilters];
+    if (filterquery) {
+      const querySortUpper = filterquery.toUpperCase();
+      let newSort = sortOptions.find(
+        (option) => option.value === querySortUpper
+      );
+      setSort(newSort.value);
+    }
+    if (pricequery) {
+      newFilters[0].options.forEach((option) => {
+        option.checked = false;
+        if (option.value === pricequery) {
+          option.checked = true;
+        }
+      });
+    }
+    if (regionquery) {
+      newFilters[1].options.forEach((option) => {
+        option.checked = false;
+      });
+      newFilters[1].options.forEach((option) => {
+        const valueTransformed = option.value
+          .toLowerCase()
+          .replace(new RegExp(/[ô]/g), "o");
+        if (
+          valueTransformed.includes(regionquery) &&
+          newFilters[1].options.every((option) => !option.checked)
+        ) {
+          option.checked = true;
+          return;
+        }
+      });
+    }
+    if (bioquery) {
+      newFilters[3].options.forEach((option) => {
+        option.checked = false;
+        if (option.value === bioquery) {
+          option.checked = true;
+        }
+      });
+    }
+    setFilters(newFilters);
+  }, [router.query, defaultFilters]);
+
+  // TODO best selling and rating
+  // TODO add numbers to filters
+  useEffect(() => {
+    let tempProductList = [...products];
+
+    // filter by price
+    if (filters[0].options.find((option) => option.checked)) {
+      filters[0].options.forEach((option) => {
+        if (option.checked) {
+          if (option.value === "10") {
+            tempProductList = tempProductList.filter(
+              (product) =>
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) <=
+                10
+            );
+          } else if (option.value === "10_20") {
+            tempProductList = tempProductList.filter(
+              (product) =>
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) >=
+                  10 &&
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) <=
+                  20
+            );
+          } else if (option.value === "20_35") {
+            tempProductList = tempProductList.filter(
+              (product) =>
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) >=
+                  20 &&
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) <=
+                  35
+            );
+          } else if (option.value === "35") {
+            tempProductList = tempProductList.filter(
+              (product) =>
+                Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.unite.value) >=
+                35
+            );
+          }
+        }
+      });
+    }
+
+    // filter by region
+    if (filters[1].options.find((option) => option.checked)) {
+      filters[1].options.forEach((option) => {
+        if (option.checked) {
+          tempProductList = tempProductList.filter(
+            (product) => product.node.productType === option.value
+          );
+        }
+      });
+    }
+
+    // filter by vendor
+    if (filters[2].options.find((option) => option.checked)) {
+      filters[2].options.forEach((option) => {
+        if (option.checked) {
+          tempProductList = tempProductList.filter(
+            (product) => product.node.vendor === option.value
+          );
+        }
+      });
+    }
+
+    // filter by bio
+    if (filters[3].options.find((option) => option.checked)) {
+      filters[3].options.forEach((option) => {
+        if (option.checked) {
+          tempProductList = tempProductList.filter((product) =>
+            product.node.tags.includes("bio")
+          );
+        }
+      });
+    }
+
+    if (sort === "BEST_SELLING") {
+      // setProductList(products);
+    } else if (sort === "RATING") {
+      // setProductList(products);
+    } else if (sort === "PRICE_ASC") {
+      tempProductList = tempProductList.sort(
+        (a, b) =>
+          Number(a.node.priceRange.minVariantPrice.amount) /
+            Number(a.node.unite.value) -
+          Number(b.node.priceRange.minVariantPrice.amount) /
+            Number(b.node.unite.value)
+      );
+    }
+    if (sort === "PRICE_DESC") {
+      tempProductList = tempProductList.sort(
+        (a, b) =>
+          Number(b.node.priceRange.minVariantPrice.amount) /
+            Number(b.node.unite.value) -
+          Number(a.node.priceRange.minVariantPrice.amount) /
+            Number(a.node.unite.value)
+      );
+    }
+    setProductList(tempProductList);
+    console.log(productList);
+  }, [sort, filters]);
 
   return (
     <div className="bg-white">
@@ -171,7 +385,7 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
                                       htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
                                       className="ml-3 min-w-0 flex-1 text-gray-500"
                                     >
-                                      {option.label}
+                                      {option.label} {/*({option.number}) */}
                                     </label>
                                   </div>
                                 ))}
@@ -311,16 +525,36 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
                                 <input
                                   id={`filter-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
-                                  defaultValue={option.value}
                                   type="checkbox"
-                                  defaultChecked={option.checked}
+                                  value={option.checked}
+                                  checked={option.checked}
+                                  onChange={() => {
+                                    let newFilters = [...filters];
+                                    newFilters.forEach((filter) => {
+                                      if (filter.id === section.id) {
+                                        if (filter.options[optionIdx].checked) {
+                                          filter.options[
+                                            optionIdx
+                                          ].checked = false;
+                                          return;
+                                        }
+                                        filter.options.forEach((opt) => {
+                                          opt.checked = false;
+                                        });
+                                        filter.options[optionIdx].checked =
+                                          !filter.options[optionIdx].checked;
+                                      }
+                                    });
+                                    console.log("here");
+                                    setFilters(newFilters);
+                                  }}
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
                                   className="ml-3 text-sm text-gray-600"
                                 >
-                                  {option.label}
+                                  {option.label} {/*({option.number}) */}
                                 </label>
                               </div>
                             ))}
@@ -334,7 +568,7 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
 
               {/* Product grid */}
               <div className="lg:col-span-4">
-                <ProductList products={products} />
+                <ProductList products={productList} />
               </div>
             </div>
           </section>

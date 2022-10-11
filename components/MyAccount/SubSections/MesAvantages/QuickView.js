@@ -130,14 +130,14 @@ export default function QuickView({ product, open, setOpen }) {
                         />
                         <div className="absolute top-0 right-0 left-0 pt-3 mx-auto flex justify-center">
                           <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
-                            {product?.node.points.value} points
+                            {product?.node.points?.value} points
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
                       <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
-                        {product?.node.title} {product?.node.millesime.value}
+                        {product?.node.title} {product?.node.millesime?.value}
                       </h2>
                       {product?.node.description && (
                         <p className="font-semibold">
@@ -145,14 +145,18 @@ export default function QuickView({ product, open, setOpen }) {
                         </p>
                       )}
                       <p>{product?.node.productType}</p>
-                      <p>{product?.node.appellation.value}</p>
-                      <p>{product?.node.couleur.value}</p>
+                      <p>{product?.node.appellation?.value}</p>
+                      <p>{product?.node.couleur?.value}</p>
                       <p>{product?.node.vendor}</p>
-                      <p>{product?.node.cepages.value}</p>
+                      <p>{product?.node.cepages?.value}</p>
                       <p className="text-red-500">
-                        {product?.node.accroche.value}
+                        {product?.node.accroche?.value}
                       </p>
-                      <p>lot de {product?.node.unite.value} bouteilles</p>
+                      {Number(product?.node.unite.value) == 1 ? (
+                        <p>La bouteille</p>
+                      ) : (
+                        <p>Lot de {product?.node.unite?.value} bouteilles</p>
+                      )}
 
                       <section
                         aria-labelledby="options-heading"
