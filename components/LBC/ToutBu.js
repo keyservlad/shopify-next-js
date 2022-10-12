@@ -32,7 +32,7 @@ const ToutBu = ({ page }) => {
         </div>
         <div className="invisible w-full top-0 left-0 relative"></div>
       </div>
-      <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 my-20 w-3/4 mx-auto text-center">
+      <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 my-20 md:w-3/4 mx-auto text-center">
         <h2 className="text-4xl font-light">EMOVIN pour tous les goûts</h2>
         <h3 className="text-2xl font-light">... mais surtout le vôtre !</h3>
         <div className="mt-5 leading-7">
