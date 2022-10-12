@@ -41,7 +41,7 @@ const renderSwitch = (plateforme) => {
     case "Avignon":
       return (
         <>
-          <p>Vos boxes seront livrées à la plateforme d'Avignon</p>
+          <p>Vos boxes seront livrées à la plateforme d&#39;Avignon</p>
           <button className="text-left w-full underline cursor-pointer mt-2">
             Nous contacter pour toute demande relative à la livraison de vos
             boxes
