@@ -77,19 +77,19 @@ const navigation = {
           name: "Prix",
           items: [
             {
-              name: "Moins de 10 €",
+              name: "Moins de 15 €",
               href: "/notre-boutique",
-              query: "pricequery=10",
+              query: "pricequery=15",
             },
             {
-              name: "Entre 10 et 20 €",
+              name: "Entre 15 et 25 €",
               href: "/notre-boutique",
-              query: "pricequery=10_20",
+              query: "pricequery=15_25",
             },
             {
-              name: "Entre 20 et 35 €",
+              name: "Entre 25 et 35 €",
               href: "/notre-boutique",
-              query: "pricequery=20_35",
+              query: "pricequery=25_35",
             },
             {
               name: "Plus de 35 €",

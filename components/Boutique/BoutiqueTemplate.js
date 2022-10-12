@@ -30,9 +30,9 @@ const filters_init = [
     id: "prix",
     name: "Prix",
     options: [
-      { value: "10", label: "Moins de 10 €", number: 0, checked: false },
-      { value: "10_20", label: "Entre 10 et 20 €", number: 0, checked: false },
-      { value: "20_35", label: "Entre 20 et 35 €", number: 0, checked: false },
+      { value: "15", label: "Moins de 15 €", number: 0, checked: false },
+      { value: "15_25", label: "Entre 15 et 25 €", number: 0, checked: false },
+      { value: "25_35", label: "Entre 25 et 35 €", number: 0, checked: false },
       { value: "35", label: "Plus de 35 €", number: 0, checked: false },
     ],
   },
@@ -177,29 +177,29 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
     if (filters[0].options.find((option) => option.checked)) {
       filters[0].options.forEach((option) => {
         if (option.checked) {
-          if (option.value === "10") {
+          if (option.value === "15") {
             tempProductList = tempProductList.filter(
               (product) =>
                 Number(product.node.priceRange.minVariantPrice.amount) /
                   Number(product.node.unite.value) <=
-                10
+                15
             );
-          } else if (option.value === "10_20") {
+          } else if (option.value === "15_25") {
             tempProductList = tempProductList.filter(
               (product) =>
                 Number(product.node.priceRange.minVariantPrice.amount) /
                   Number(product.node.unite.value) >=
-                  10 &&
+                  15 &&
                 Number(product.node.priceRange.minVariantPrice.amount) /
                   Number(product.node.unite.value) <=
-                  20
+                  25
             );
-          } else if (option.value === "20_35") {
+          } else if (option.value === "25_35") {
             tempProductList = tempProductList.filter(
               (product) =>
                 Number(product.node.priceRange.minVariantPrice.amount) /
                   Number(product.node.unite.value) >=
-                  20 &&
+                  25 &&
                 Number(product.node.priceRange.minVariantPrice.amount) /
                   Number(product.node.unite.value) <=
                   35
