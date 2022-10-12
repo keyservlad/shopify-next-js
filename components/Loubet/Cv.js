@@ -107,8 +107,8 @@ const Cv = () => {
                 1992&nbsp;-&nbsp;1997
               </td>
               <td className="pb-7">
-                Ouverture des restaurants "Le Bistrot Bruno" en 1992 et
-                "L&39;Odéon" en 1995 à Londres
+                Ouverture des restaurants &#34;Le Bistrot Bruno&#34; en 1992 et
+                &#34;L&39;Odéon&#34; en 1995 à Londres
               </td>
             </tr>
             <tr className="">
@@ -124,8 +124,8 @@ const Cv = () => {
                 1998&nbsp;-&nbsp;2001
               </td>
               <td className="pb-7">
-                Chef du développement : "The Atlantic Bar and Grill" à Londres,
-                Restaurant "Isola" à Manchester
+                Chef du développement : &#34;The Atlantic Bar and Grill&#34; à Londres,
+                Restaurant &#34;Isola&#34; à Manchester
               </td>
             </tr>
             <tr className="">
@@ -133,8 +133,8 @@ const Cv = () => {
               <td className="pb-7">
                 <p>Bruno déménage à Brisbane (Australie)</p>
                 <p>
-                  Ouverture des restaurants "La Table de Bruno" et "Baguette
-                  Restaurant"
+                  Ouverture des restaurants &#34;La Table de Bruno&#34; et &#34;Baguette
+                  Restaurant&#34;
                 </p>
               </td>
             </tr>
@@ -143,8 +143,8 @@ const Cv = () => {
                 2004&nbsp;&&nbsp;2005
               </td>
               <td className="pb-7 text-[#89B65F]">
-                Elu "Cuisinier de l&#39;année" deux années de suite par le
-                journal australien "The Courier Mail"
+                Elu &#34;Cuisinier de l&#39;année&#34; deux années de suite par le
+                journal australien &#34;The Courier Mail&#34;
               </td>
             </tr>
             <tr className="">
@@ -152,7 +152,7 @@ const Cv = () => {
               <td className="pb-7">
                 <p>Retour à Londres</p>
                 <p>
-                  Ouverture des restaurants "Pop-up" puis "Bistrot Bruno Loubet"
+                  Ouverture des restaurants &#34;Pop-up&#34; puis &#34;Bistrot Bruno Loubet&#34;
                   en 2010
                 </p>
               </td>
@@ -169,7 +169,7 @@ const Cv = () => {
             <tr className="">
               <td className="font-bold md:text-xl text-base pb-7 pr-5">2013</td>
               <td className="pb-7">
-                Bruno lance le restaurant "Grain Store" à Londres
+                Bruno lance le restaurant &#34;Grain Store&#34; à Londres
               </td>
             </tr>
             <tr className="">
@@ -178,7 +178,7 @@ const Cv = () => {
               </td>
               <td className="pb-7 text-[#89B65F]">
                 <p>
-                  Elu "Sustainable Restaurant of the year" (National Restaurant
+                  Elu &#34;Sustainable Restaurant of the year&#34; (National Restaurant
                   Guide)
                 </p>
                 <p>
@@ -191,12 +191,12 @@ const Cv = () => {
               <td className="font-bold md:text-xl text-base pb-7 pr-5">2017</td>
               <td className="pb-7">
                 <p>
-                  Bruno ferme le chapitre "anglais" et retourne en Australie
+                  Bruno ferme le chapitre &#34;anglais&#34; et retourne en Australie
                   (près de Brisbane).
                 </p>
                 <p>
-                  Il ouvre une ferme et crée une école de cuisine "Willow Vale
-                  Cooking School".
+                  Il ouvre une ferme et crée une école de cuisine &#34;Willow Vale
+                  Cooking School&#34;.
                 </p>
               </td>
             </tr>
@@ -264,9 +264,9 @@ const Cv = () => {
         </div>
         <p>
           Bruno a fait plusieurs apparaitions à la télévision, y compris sa
-          propre série de 13 épisodes, “Chez Bruno”, pour le Food Network
-          Carlton, ainsi que sur les relais Hot Chefs de la BBC, “Junior
-          MasterChef”, et “MasterChef United Kingdom” en tant que Chef invité et
+          propre série de 13 épisodes, &#34;Chez Bruno&#34;, pour le Food Network
+          Carlton, ainsi que sur les relais Hot Chefs de la BBC, &#34;Junior
+          MasterChef&#34;, et &#34;MasterChef United Kingdom&#34; en tant que Chef invité et
           mentor.
         </p>
       </div>
