@@ -20,7 +20,7 @@ const HeroLoubet = () => {
             ses conseils… dans l&#39;esprit EMOVIN.
           </p>
           <div className="">
-            <Link href="/notre-boutique" passHref>
+            <Link href="/bruno-loubet/cv" passHref>
               <a className="">
                 <button className="bg-white mr-3 text-black font-bold border-solid rounded-xl border-white border-4 px-4 py-3 cursor-pointer hover:text-white hover:bg-black hover:border-black">
                   En savoir plus sur Bruno

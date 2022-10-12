@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ImageHeart from "../../public/images/HP/heart.png";
 
 const NotreConcept = (props) => {
@@ -28,9 +29,13 @@ const NotreConcept = (props) => {
             que tout le reste.
           </div>
           <div className="mt-6 flex text-center md:inline-block">
-            <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full md:w-auto hover:text-redWine hover:bg-white">
-              Qui sommes-nous
-            </button>
+            <Link href={`/notre-concept`} passHref>
+              <a>
+                <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full md:w-auto hover:text-redWine hover:bg-white">
+                  Qui sommes-nous
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

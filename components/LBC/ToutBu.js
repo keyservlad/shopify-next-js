@@ -32,20 +32,34 @@ const ToutBu = ({ page }) => {
         </div>
         <div className="invisible w-full top-0 left-0 relative"></div>
       </div>
-      <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 text-center my-20 w-3/4 mx-auto">
+      <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 my-20 w-3/4 mx-auto text-center">
         <h2 className="text-4xl font-light">EMOVIN pour tous les goûts</h2>
-        <p className="mt-5">
-          Le concept est super. On l&#39;explique encore ici. Pour tout le monde,
-          pour devenir membre pour le SEO. Lorem ipsum dolor sit amet,
-          consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-          labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-          et accusam et justo duo dolores et ea rebum. Stet clita kasd
-          gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus.
-        </p>
+        <h3 className="text-2xl font-light">... mais surtout le vôtre !</h3>
+        <div className="mt-5 leading-7">
+          <p>Bonne nouvelle ! Votre attente ne devrait pas être trop longue…</p>
+
+          <p className="mt-2">
+            Nos deux compères ont repris la « route des vins » pour vous
+            dénicher de nouvelles « pépites » à découvrir.
+          </p>
+
+          <p className="mt-2">
+            Pour la prochaine opération, notre feuille de route (ADN
+            d&#39;EMOVIN) est de vous trouver des « flacons » rares issus de
+            domaines respectueux de la nature et qui ne sont pas nécessairement
+            les plus connus ou parfois difficile d&#39;accès&nbsp;!
+          </p>
+
+          <p className="mt-2">
+            Notre quête nous pousse rarement vers « le moins disant » d&#39;une
+            appellation, mais plutôt vers un vin « bien fait » et qui correspond
+            à vos attentes ! Vous nous faites confiance depuis près de 2 ans…{" "}
+          </p>
+          <p>cela nous honore tout autant que cela nous oblige.</p>
+
+          <p className="mt-5">A très vite,</p>
+          <p className="font-caveat text-2xl">Patrick & Jean-Louis</p>
+        </div>
       </div>
     </>
   );

@@ -88,6 +88,76 @@ const Profile = () => {
   const [addressToModify, setAddressToModify] = useState(null); // state to store the address to modify
   const [isAddressCreating, setIsAddressCreating] = useState(false); // state to toggle the address creation components
 
+  // This part is used to initialize the boxAddress field when it is empty (case for old customer that used the old card system)
+  const boxAddress = user.boxDeliveryAddress
+    ? JSON.parse(user.boxDeliveryAddress.value)
+    : null;
+  const setBoxAddress = async (address) => {
+    setIsLoading(true);
+    let jsonAddress = {
+      id: address.id,
+      address1: address.address1,
+      city: address.city,
+      country: address.country,
+      firstName: address.firstName,
+      lastName: address.lastName,
+      phone: address.phone,
+      zip: address.zip,
+    };
+    jsonAddress = JSON.stringify(jsonAddress);
+    let inputAddress;
+    if (boxAddress) {
+      inputAddress = {
+        id: user.id,
+        metafields: [
+          {
+            id: user.boxDeliveryAddress.id,
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            type: "json",
+            value: jsonAddress,
+          },
+        ],
+      };
+    } else {
+      inputAddress = {
+        id: user.id,
+        metafields: [
+          {
+            key: "boxDeliveryAddress",
+            namespace: "custom",
+            type: "json",
+            value: jsonAddress,
+          },
+        ],
+      };
+    }
+    inputAddress = JSON.stringify(inputAddress);
+    inputAddress = inputAddress.replaceAll('\\"', "~");
+    inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
+    inputAddress = inputAddress.replaceAll("~", '\\"');
+    console.log(inputAddress);
+    const customer = await updateAddress(inputAddress);
+    console.log(customer);
+    fetchUser(session.data.user.token.accessToken);
+    setIsLoading(false);
+  };
+  const updateAddress = (inputAddress) =>
+    axios
+      .get("/api/update-customer", {
+        params: {
+          inputAddress: inputAddress,
+        },
+      })
+      .then((res) => res.data);
+
+  useEffect(() => {
+    if (user?.isDomicile?.value === "true" && !boxAddress) {
+      setBoxAddress(user.defaultAddress);
+    }
+  }, []);
+  // End of the part to initialize the boxAddress field
+
   useEffect(() => {
     register("phone");
     setValue("phone", formatPhoneNumberIntl(phoneValue));

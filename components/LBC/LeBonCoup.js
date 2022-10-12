@@ -104,6 +104,7 @@ const LeBonCoup = ({ productsLBC }) => {
           </div>
 
           <div className="mt-8 sm:mt-0 flex text-center md:inline-block col-span-1">
+            {/* TODO subscribe customer and push notification to user */}
             <button className="mt-8 bg-black text-[#E3F2FB] font-bold border-solid rounded-xl border-black border-[3px] px-5 py-3 cursor-pointer w-full lg:w-auto hover:text-black hover:bg-[#E3F2FB]">
               Tenez-moi au courant
             </button>

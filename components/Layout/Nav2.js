@@ -44,7 +44,7 @@ const navigation = {
       featured: [
         {
           name: "Série limitée",
-          href: "#",
+          href: "/serie-limitee",
           imageSrc:
             "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
           imageAlt: "Image series limitees",
@@ -115,11 +115,11 @@ const navigation = {
           id: "region",
           name: "Région",
           items: [
-            {
-              name: "Bordeaux",
-              href: "/notre-boutique",
-              query: "regionquery=bordeaux",
-            },
+            // {
+            //   name: "Bordeaux",
+            //   href: "/notre-boutique",
+            //   query: "regionquery=bordeaux",
+            // },
             {
               name: "Bourgogne",
               href: "/notre-boutique",
@@ -130,16 +130,16 @@ const navigation = {
               href: "/notre-boutique",
               query: "regionquery=rhone",
             },
-            {
-              name: "Savoie",
-              href: "/notre-boutique",
-              query: "regionquery=savoie",
-            },
-            {
-              name: "Vallée de la Loire",
-              href: "/notre-boutique",
-              query: "regionquery=loire",
-            },
+            // {
+            //   name: "Savoie",
+            //   href: "/notre-boutique",
+            //   query: "regionquery=savoie",
+            // },
+            // {
+            //   name: "Vallée de la Loire",
+            //   href: "/notre-boutique",
+            //   query: "regionquery=loire",
+            // },
             {
               name: "Languedoc-Roussillon",
               href: "/notre-boutique",
@@ -456,35 +456,43 @@ export default function Nav2() {
                                           key={item.name}
                                           className="group relative text-base sm:text-sm w-full h-full aspect-[1.44]"
                                         >
-                                          <div className="rounded-lg overflow-hidden group-hover:opacity-75 group-hover:cursor-pointer relative w-full h-full">
-                                            <Image
-                                              src={ImageSerieLim}
-                                              alt="Image series lim"
-                                              layout="fill"
-                                              objectFit="contain"
-                                              quality={100}
-                                              placeholder="blur"
-                                            />
-                                            <div className="absolute w-3/4 h-3/4 xl:px-10 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
-                                              <div className="w-16">
+                                          <Link href={item.href} passHref>
+                                            <a
+                                              onClick={() =>
+                                                buttonRef.current?.click()
+                                              }
+                                            >
+                                              <div className="rounded-lg overflow-hidden group-hover:opacity-75 group-hover:cursor-pointer relative w-full h-full">
                                                 <Image
-                                                  src={ImageKrone}
-                                                  alt="Image krone"
+                                                  src={ImageSerieLim}
+                                                  alt="Image series lim"
+                                                  layout="fill"
+                                                  objectFit="contain"
+                                                  quality={100}
                                                   placeholder="blur"
                                                 />
+                                                <div className="absolute w-3/4 h-3/4 xl:px-10 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
+                                                  <div className="w-16">
+                                                    <Image
+                                                      src={ImageKrone}
+                                                      alt="Image krone"
+                                                      placeholder="blur"
+                                                    />
+                                                  </div>
+                                                  <h1 className="text-[#DEC46F] text-4xl mt-2">
+                                                    Série limitée
+                                                  </h1>
+                                                  <p className="text-sm font-semibold mt-1">
+                                                    Exclusivement réservée à nos
+                                                    membres
+                                                  </p>
+                                                  <p className="underline text-xs font-semibold mt-3">
+                                                    Je découvre
+                                                  </p>
+                                                </div>
                                               </div>
-                                              <h1 className="text-[#DEC46F] text-4xl mt-2">
-                                                Série limitée
-                                              </h1>
-                                              <p className="text-sm font-semibold mt-1">
-                                                Exclusivement réservée à nos
-                                                membres
-                                              </p>
-                                              <p className="underline text-xs font-semibold mt-3">
-                                                Je découvre
-                                              </p>
-                                            </div>
-                                          </div>
+                                            </a>
+                                          </Link>
                                         </div>
                                       ))}
                                     </div>

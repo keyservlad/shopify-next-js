@@ -15,14 +15,14 @@ const LoginCardsSection = () => {
             s&#39;intéresse à vous et profitez de plein d&#39;avantages ou tout
             simplement de notre cave. Ouverte pour tous !
           </p>
-          <Link href="/notre-boutique" passHref>
+          <Link href="/cartes" passHref>
             <a>
               <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
                 Je découvre EMOVIN
               </button>
             </a>
           </Link>
-          <Link href="/notre-boutique" passHref>
+          <Link href="/cartes" passHref>
             <a>
               <span className="underline text-xs">
                 Je veux du vin ! Je crée un compte
@@ -105,14 +105,14 @@ const LoginCardsSection = () => {
             />
           </div>
         </div>
-        <Link href="/notre-boutique" passHref>
+        <Link href="/cartes" passHref>
           <a>
             <button className="bg-redWine text-white text-xs font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
               Je découvre EMOVIN
             </button>
           </a>
         </Link>
-        <Link href="/notre-boutique" passHref>
+        <Link href="/cartes" passHref>
           <a>
             <span className="underline text-xs">
               Je veux du vin ! Je crée un compte

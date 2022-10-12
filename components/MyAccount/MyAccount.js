@@ -18,6 +18,10 @@ import Loading from "../Loading";
 import Link from "next/link";
 import MaCarteMembre from "./SubSections/Cartes/MaCarteMembre";
 import MesAvantages from "./SubSections/MesAvantages/MesAvantages";
+import AutresServices from "./SubSections/AutresServices/AutresServices";
+import Image from "next/image";
+
+import ImageHeader from "../../public/images/membre/fond_1920.png";
 
 // TODO add a loading state during the fetch
 
@@ -39,7 +43,11 @@ const MyAccount = ({ products }) => {
       component: <Historique />,
       icon: BellIcon,
     },
-    { name: "Autres services", component: "#", icon: CreditCardIcon },
+    // {
+    //   name: "Autres services",
+    //   component: <AutresServices />,
+    //   icon: CreditCardIcon,
+    // },
     {
       name: "Le coin du chef",
       icon: ViewGridAddIcon,
@@ -60,6 +68,8 @@ const MyAccount = ({ products }) => {
   console.log(user);
 
   const [current, setCurrent] = useState(subNavigation[0]);
+
+  
 
   if (!user) return <Loading />;
 
@@ -107,6 +117,10 @@ const MyAccount = ({ products }) => {
                 />
               </svg>
             </div>
+            {/* <div className="relative w-full h-full">
+              <Image src={ImageHeader} layout="fill" objectFit="cover" />
+
+            </div> */}
           </div>
           <header className="relative py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

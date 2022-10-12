@@ -1,10 +1,8 @@
-import React from 'react'
-
 const AutresServices = () => {
   return (
     <div>AutresServices</div>
     // tableau des millésimes, harmonie des vins et des mets, etc...
-  )
-}
+  );
+};
 
-export default AutresServices
+export default AutresServices;

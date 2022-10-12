@@ -242,8 +242,10 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
     if (filters[3].options.find((option) => option.checked)) {
       filters[3].options.forEach((option) => {
         if (option.checked) {
-          tempProductList = tempProductList.filter((product) =>
-            product.node.tags.includes("bio")
+          tempProductList = tempProductList.filter(
+            (product) =>
+              // product.node.tags.includes("bio")
+              product.node.bio?.value
           );
         }
       });

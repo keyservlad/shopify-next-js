@@ -3,6 +3,8 @@ import Link from "next/link";
 import { formatter } from "../../utils/helper";
 import { StarIcon } from "@heroicons/react/solid";
 
+import ImageBio from "../../public/images/mini-logos/bio.png";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -33,6 +35,18 @@ const ProductCard = ({ product }) => {
               quality={100}
               className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
             />
+            {product.node.bio?.value && (
+              <div className="absolute top-0 right-0 rounded-bl-md p-2">
+                <Image
+                  src={ImageBio}
+                  alt="logo bio"
+                  width={75}
+                  height={75}
+                  quality={100}
+                  placeholder="blur"
+                />
+              </div>
+            )}
           </div>
           <div className="text-center leading-6 mt-5">
             <h2
@@ -77,31 +91,28 @@ const ProductCard = ({ product }) => {
                 </a> 
               </div>
             </div> */}
-
           </div>
-            {/* prices */}
-            <div className="grid grid-cols-2 w-60 max-w-full mx-auto pt-3 sm:p-3 border-t border-gray-400 mt-auto text-center">
-              <div className="">
-                <p className="text-xs font-normal">Public</p>
-                <p>
-                  {formatter.format(
-                    Number(product.node.priceRange.minVariantPrice.amount) /
-                      Number(product.node.unite.value)
-                  )}
-                </p>
-              </div>
-              <div
-                className={`font-bold ${rawColor ? color : "text-blueWine"}`}
-              >
-                <p className="text-xs">Membres</p>
-                <p>
-                  {formatter.format(
-                    Number(product.node.prix_membre.value) /
-                      Number(product.node.unite.value)
-                  )}
-                </p>
-              </div>
+          {/* prices */}
+          <div className="grid grid-cols-2 w-60 max-w-full mx-auto pt-3 sm:p-3 border-t border-gray-400 mt-auto text-center">
+            <div className="">
+              <p className="text-xs font-normal">Public</p>
+              <p>
+                {formatter.format(
+                  Number(product.node.priceRange.minVariantPrice.amount) /
+                    Number(product.node.unite.value)
+                )}
+              </p>
             </div>
+            <div className={`font-bold ${rawColor ? color : "text-blueWine"}`}>
+              <p className="text-xs">Membres</p>
+              <p>
+                {formatter.format(
+                  Number(product.node.prix_membre.value) /
+                    Number(product.node.unite.value)
+                )}
+              </p>
+            </div>
+          </div>
         </div>
       </a>
     </Link>

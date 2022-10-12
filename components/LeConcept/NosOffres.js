@@ -42,7 +42,7 @@ const NosOffres = () => {
             d&#39;avantages et surtout deux fois par an d&#39;une sélection de
             vins d&#39;exception dans une Wine Box&nbsp;!
           </p>
-          <Link href="/cartes-membres" passHref>
+          <Link href="/cartes" passHref>
             <a>
               <button className="mt-10 bg-redWine text-white font-semibold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer w-full md:w-auto hover:text-redWine hover:bg-white">
                 Je choisis ma carte
