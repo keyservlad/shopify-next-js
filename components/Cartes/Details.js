@@ -6,35 +6,15 @@ import ImageTitleImmamquablesBlanc from "../../public/images/cartes/logo_immanqu
 import ImageTitlePrestigeBlanc from "../../public/images/cartes/logo_prestige_blanc.png";
 import DetailsMobile from "./DetailsMobile";
 
+import DessinDecouverte from "../../public/images/logo-cartes/dessinDecouverte.png";
+import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquables.png";
+import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
+
 import DetailsRows from "./DetailsRows";
 
 const Details = (props) => {
-  let date = new Date();
-  let dateInOneYear = new Date();
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  dateInOneYear = new Date(
-    dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
-  );
-  dateInOneYear = new Date(
-    dateInOneYear.setHours(dateInOneYear.getHours() - 24)
-  );
-  date = date.toLocaleDateString("fr-FR", options);
-  dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", options);
-
   return (
-    <div className="mt-20 sm:mt-32 relative">
-      <div className="absolute -top-32" ref={props.refDetailsSection} />
-      <h2 className="font-bold text-4xl">
-        Tous les avantages de nos cartes en détail
-      </h2>
-      <p className="text-2xl font-light mt-6">
-        Besoin d&#39;aide pour faire votre choix&nbsp;?{" "}
-        <span className="underline text-redWine">Contactez-nous</span>
-      </p>
+    <div className="mt-10 relative">
       {/* desktop */}
       <div className="hidden lg:block">
         {/* title */}
@@ -67,174 +47,183 @@ const Details = (props) => {
             />
           </div>
         </div>
+        {/* Image Carte */}
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3">
+          {/* decouverte */}
+          <div className="relative max-h-64 aspect-1 m-auto">
+            <Image
+              src={DessinDecouverte}
+              alt="Dessin carte découverte"
+              quality={100}
+              placeholder="blur"
+            />
+          </div>
+          {/* Immanquables */}
+          <div className="relative max-h-64 aspect-1 m-auto">
+            <Image
+              src={DessinImmanquables}
+              alt="Dessin carte immanquables"
+              quality={100}
+              placeholder="blur"
+            />
+          </div>
+          {/* prestige */}
+          <div className="relative max-h-64 aspect-1 m-auto">
+            <Image
+              src={DessinPrestige}
+              alt="Dessin carte prestige"
+              quality={100}
+              placeholder="blur"
+            />
+          </div>
+        </div>
+        {/* Details */}
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
+          {/* decouverte */}
+          <div className="flex items-center  flex-col ml-6">
+            <div className="text-center flex flex-col">
+              <h2 className="font-semibold text-[#73992C] text-xl">
+                Découvertes de l&#39;automne
+              </h2>
+              <p className="">
+                Ce ne sont pas les vins les plus connus... et pourtant&nbsp;!
+              </p>
+            </div>
+          </div>
+          {/* Immanquables */}
+          <div className="flex items-center flex-col ml-6">
+            <div className="text-center flex flex-col">
+              <h2 className="font-semibold text-[#7FA8E2] text-xl">
+                Les grandes appellations françaises
+              </h2>
+              <p className="">Il faut les avoir dans sa cave&nbsp;!</p>
+            </div>
+          </div>
+          {/* prestige */}
+          <div className="flex items-center flex-col ml-6">
+            <div className="text-center flex flex-col">
+              <h2 className="font-semibold text-[#901340] text-xl">
+                Prestige de France
+              </h2>
+              <p className="">
+                Les goûter au moins une fois dans sa vie&nbsp;!
+              </p>
+            </div>
+          </div>
+        </div>
         {/* Price */}
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6">
-              <p className="text-[#8F8F8F] text-sm">à partir de</p>
-              <p className="text-2xl">
-                <span className="font-semibold">98 € TTC</span> / an
+              <p className="text-2xl text-[#73992C] font-light">
+                <span className="font-semibold">119 € TTC</span> / an
               </p>
             </div>
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6">
-              <p className="text-[#8F8F8F] text-sm">à partir de</p>
-              <p className="text-2xl">
-                <span className="font-semibold">135 € TTC</span> / an
+              <p className="text-2xl text-[#7FA8E2] font-light">
+                <span className="font-semibold">154 € TTC</span> / an
               </p>
             </div>
           </div>
           <div className="flex items-center justify-center flex-col ml-6">
             <div className="text-center flex flex-col my-6">
-              <p className="text-[#8F8F8F] text-sm">à partir de</p>
-              <p className="text-2xl">
-                <span className="font-semibold">195 € TTC</span> / an
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* rectangle */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="w-full h-full border-[3px] border-[#73992C] p-6 text-[#73992C]">
-              <p className="font-semibold">
-                «&nbsp;LES DÉCOUVERTES DE l&#39;AUTOMNE&nbsp;»
-              </p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en septembre</span> de chaque
-                année
-              </p>
-              <p>+</p>
-              <p className="font-semibold">
-                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
-              </p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en février</span> de chaque
-                année
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="w-full h-full border-[3px] border-[#7FA8E2] p-6 text-[#7FA8E2]">
-              <p className="font-semibold">
-                «&nbsp;LES GRANDES APPELLATIONS&nbsp;»
-              </p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en septembre</span> de chaque
-                année
-              </p>
-              <p>+</p>
-              <p className="font-semibold">
-                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
-              </p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en février</span> de chaque
-                année
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="w-full h-full border-[3px] border-[#901340] p-6 text-[#901340]">
-              <p className="font-semibold">«&nbsp;PRESTIGE DE FRANCE&nbsp;»</p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en septembre</span> de chaque
-                année
-              </p>
-              <p>+</p>
-              <p className="font-semibold">
-                «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
-              </p>
-              <p>
-                Box de 3 bouteilles{" "}
-                <span className="font-semibold">en février</span> de chaque
-                année
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* description rectangle */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
-          <div className="flex items-center justify-center flex-col ml-6">
-            <p className="text-[#8F8F8F] text-sm mt-3 text-left">
-              Les deux box vous seront livrées en point Relais ou à domicile
-              (supplément 7,20Є TTC sur le prix de l&#39;abonnement annuel)
-            </p>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <p className="text-[#8F8F8F] text-sm mt-3 text-left">
-              Les deux box vous seront livrées en point Relais ou à domicile
-              (supplément 7,20Є TTC sur le prix de l&#39;abonnement annuel)
-            </p>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <p className="text-[#8F8F8F] text-sm mt-3 text-left">
-              Les deux box vous seront livrées en point Relais ou à domicile
-              (supplément 7,20Є TTC sur le prix de l&#39;abonnement annuel)
-            </p>
-          </div>
-        </div>
-        <DetailsRows />
-        {/* validity row */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="text-center flex flex-col my-6 text-[#73992C]">
-              <p className="font-semibold">Validité de l&#39;abonnement :</p>
-              <p className="">
-                du {date} au {dateInOneYear}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="text-center flex flex-col my-6 text-[#7FA8E2]">
-              <p className="font-semibold">Validité de l&#39;abonnement :</p>
-              <p className="">
-                du {date} au {dateInOneYear}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col ml-6">
-            <div className="text-center flex flex-col my-6 text-[#901340]">
-              <p className="font-semibold">Validité de l&#39;abonnement :</p>
-              <p className="">
-                du {date} au {dateInOneYear}
+              <p className="text-2xl text-[#901340] font-light">
+                <span className="font-semibold">229 € TTC</span> / an
               </p>
             </div>
           </div>
         </div>
         {/* button */}
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
+          {/* decouverte */}
           <div className="flex items-center justify-center flex-col ml-6">
             <Link href="/cartes/decouverte" passHref>
-              <a className="w-full">
-                <button className="mt-3 bg-[#73992C] text-white w-full font-bold border-solid rounded-xl border-[#73992C] border-[3px] px-5 py-3 cursor-pointer hover:text-[#73992C] hover:bg-white">
-                  Choisir la carte Découverte
+              <a className="">
+                <button className="bg-[#73992C] text-white w-full font-bold border-solid rounded-xl border-[#73992C] border-[3px] px-5 py-3 cursor-pointer hover:text-[#73992C] hover:bg-white">
+                  Je prends ma carte
                 </button>
               </a>
             </Link>
+            <button className="underline cursor-pointer text-sm mt-3">
+              Voir tous les avantages
+            </button>
           </div>
+          {/* Immanquables */}
           <div className="flex items-center justify-center flex-col ml-6">
             <Link href="/cartes/immanquables" passHref>
-              <a className="w-full">
-                <button className="mt-3 bg-[#7FA8E2] text-white w-full font-bold border-solid rounded-xl border-[#7FA8E2] border-[3px] px-5 py-3 cursor-pointer hover:text-[#7FA8E2] hover:bg-white">
-                  Choisir la carte Immanquables
+              <a className="">
+                <button className="bg-[#7FA8E2] text-white w-full font-bold border-solid rounded-xl border-[#7FA8E2] border-[3px] px-5 py-3 cursor-pointer hover:text-[#7FA8E2] hover:bg-white">
+                  Je prends ma carte
                 </button>
               </a>
             </Link>
+            <button className="underline cursor-pointer text-sm mt-3">
+              Voir tous les avantages
+            </button>
           </div>
+          {/* prestige */}
           <div className="flex items-center justify-center flex-col ml-6">
             <Link href="/cartes/prestige" passHref>
-              <a className="w-full">
-                <button className="mt-3 bg-[#901340] text-white w-full font-bold border-solid rounded-xl border-[#901340] border-[3px] px-5 py-3 cursor-pointer hover:text-[#901340] hover:bg-white">
-                  Choisir la carte Prestige
+              <a className="">
+                <button className="bg-[#901340] text-white w-full font-bold border-solid rounded-xl border-[#901340] border-[3px] px-5 py-3 cursor-pointer hover:text-[#901340] hover:bg-white">
+                  Je prends ma carte
                 </button>
               </a>
             </Link>
+            <button className="underline cursor-pointer text-sm mt-3">
+              Voir tous les avantages
+            </button>
+          </div>
+        </div>
+        {/* exemples boxes */}
+        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
+          {/* decouverte */}
+          <div className="flex items-center  flex-col ml-6">
+            <div className="text-center flex flex-col my-6 leading-6">
+              <p className="text-[#8F8F8F]">
+                Exemple de la box &#34;Découverte&#34; :
+              </p>
+              <p className="font-bold">Crémant de Bourgogne</p>
+              <p className="">Blanc pétillant</p>
+              <p className="font-bold">Macon Lugny 2021</p>
+              <p className="">Blanc sec</p>
+              <p className="font-bold">Bourgogne Pinot Noir</p>
+              <p className="">Clos Saint-Germain</p>
+              <p className="">Rouge 2020</p>
+            </div>
+          </div>
+          {/* Immanquables */}
+          <div className="flex items-center  flex-col ml-6">
+            <div className="text-center flex flex-col my-6 leading-6">
+              <p className="text-[#8F8F8F]">
+                Exemple de la box &#34;Immanquables&#34; :
+              </p>
+              <p className="font-bold">Chablis Premier Cru 2019</p>
+              <p className="">&#34;Montmains&#34; Vieilles Vignes</p>
+              <p className="">Blanc Sec</p>
+              <p className="font-bold">Château Franc Grace Dieu</p>
+              <p className="">Saint Emilion Grand Cru 2015</p>
+              <p className="font-bold">
+                Vacqueyras &#34;Le Sang des Cailloux&#34;
+              </p>
+              <p className="">Cuvée Floureto - Rouge 2019 - bio</p>
+            </div>
+          </div>
+          {/* prestige */}
+          <div className="flex items-center  flex-col ml-6">
+            <div className="text-center flex flex-col my-6 leading-6">
+              <p className="text-[#8F8F8F]">
+                Exemple de la box &#34;Prestige&#34; :
+              </p>
+              <p className="font-bold">Chatauneuf du pape blanc Bio 2019</p>
+              <p className="">Domaine de Galevan</p>
+              <p className="font-bold">Chataineuf du Pape rouge Bio 2019</p>
+              <p className="">Saint Emilion Grand Cru 2015</p>
+              <p className="font-bold">Gigondas rouge Bio 2020</p>
+              <p className="">Château de Saint-Cosme</p>
+            </div>
           </div>
         </div>
       </div>
