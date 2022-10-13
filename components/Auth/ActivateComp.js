@@ -38,7 +38,6 @@ const ActivateComp = ({ activation_url }) => {
   // TODO add gestion d'erreur ici
   async function onSubmit(values) {
     setIsLoading(true);
-    console.log(values);
 
     // activate account
     const activate = await activateCustomer(
@@ -46,21 +45,18 @@ const ActivateComp = ({ activation_url }) => {
       validationToken,
       process.env.PASSWORD_CREATE_ACCOUNT
     );
-    console.log(activate);
 
     // get token
     const accessToken = await createAccessToken(
       user.customer.email,
       process.env.PASSWORD_CREATE_ACCOUNT
     );
-    console.log(accessToken);
 
     // modif password
     const modifUser = await modifPassword(
       values.password,
       accessToken.customerAccessToken.accessToken
     );
-    console.log(modifUser);
 
     setIsLoading(false);
 

@@ -8,7 +8,6 @@ import ProductTable from "./ProductTable";
 import RecommendedList from "./RecommendedList";
 
 export default function ProductPageContent({ product }) {
-  console.log(product);
   let color = product.tags.includes("rouge") ? "red" : null;
 
   const refVinHistoire = createRef();

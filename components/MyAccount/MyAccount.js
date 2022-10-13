@@ -62,10 +62,8 @@ const MyAccount = ({ products }) => {
   ];
 
   const session = useSession();
-  console.log(session);
 
   const { user } = useContext(CartContext);
-  console.log(user);
 
   const [current, setCurrent] = useState(subNavigation[0]);
 

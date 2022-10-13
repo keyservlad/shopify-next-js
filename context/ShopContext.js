@@ -194,13 +194,11 @@ export default function ShopProvider({ children }) {
       newCheckout = await checkoutAddress(newCheckout.id, defaultAddress);
       newCheckout = await checkoutEmailAssociate(newCheckout.id, user.email);
 
-      console.log(updatedCart);
       for (let i = 0; i < updatedCart.length; i++) {
         newCheckout = await checkoutDiscount(
           newCheckout.id,
           updatedCart[i].handle
         );
-        console.log(updatedCart[i].handle);
       }
     }
 
@@ -307,7 +305,6 @@ export default function ShopProvider({ children }) {
       return;
     }
     setUser(userr);
-    console.log(user);
   }
 
   return (

@@ -108,13 +108,9 @@ const Rows = () => {
 
   return (
     <>
-      <div className="w-full mt-7 mb-14">
-        <div className="flex items-center justify-center flex-col mx-5 lg:mx-10 xl:mx-28 2xl:mx-40">
-          {rows.map((row) => (
-            <Row key={row.id} image={row.image} text={row.text} />
-          ))}
-        </div>
-      </div>
+      {rows.map((row) => (
+        <Row key={row.id} image={row.image} text={row.text} />
+      ))}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../../../context/ShopContext";
 
 import Image from "next/image";
@@ -25,11 +25,15 @@ import VerresPrestige from "../../../../public/images/mini-logos/prestige/verres
 import EtiquettePrestige from "../../../../public/images/mini-logos/prestige/etiquette.svg";
 import VerreSinglePrestige from "../../../../public/images/mini-logos/prestige/verreSingle.svg";
 import RowItem from "./RowItem";
+import Rows from "../../../Cartes/Rows";
+import Renew from "./Renew";
 
 const MaCarteMembre = () => {
   const { user } = useContext(CartContext);
 
-  let expirationDate = new Date(user?.expirationDate.value);
+  const [isRenewingCard, setIsRenewingCard] = useState(false);
+
+  let expirationDate = new Date(user?.expirationDate?.value);
   let dateOptions = {
     year: "numeric",
     month: "long",
@@ -37,303 +41,94 @@ const MaCarteMembre = () => {
   };
   expirationDate = expirationDate.toLocaleDateString("fr-FR", dateOptions);
 
-  let textColorCard, imageCard, borderColor, textMesAvantages, rows;
+  let textColorCard, imageCard, borderColor, textMesAvantages;
 
-  if (user.carte.value === "decouverte") {
+  if (user?.carte?.value === "decouverte") {
     textColorCard = "text-[#73992C]";
     borderColor = "border-[#73992C]";
     imageCard = ImageDecouverte;
     textMesAvantages = <>LES DÉCOUVERTE DE L&#39;AUTOMNE</>;
-    rows = [
-      {
-        logo: CoeurDecouverte,
-        text: (
-          <>
-            <div>
-              <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux
-                «&nbsp;privilèges&nbsp;».
-              </p>
-              <p>
-                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
-                recherchés)
-              </p>
-            </div>
-          </>
-        ),
-      },
-      {
-        logo: VerresDecouverte,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
-              Coup&nbsp;»
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: BouteillesDecouverte,
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Un conseil personnalisé pour constituer ta cave
-              </span>{" "}
-              selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: MainVerreDecouverte,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès illimité au conseil du sommelier par e-mail
-            </p>
-          </>
-        ),
-      },
-    ];
-  } else if (user.carte.value === "immanquables") {
+  } else if (user?.carte?.value === "immanquables") {
     textColorCard = "text-[#7FA8E2]";
     borderColor = "border-[#7FA8E2]";
     imageCard = ImageImmanquables;
     textMesAvantages = "LES GRANDES APPELLATIONS";
-    rows = [
-      {
-        logo: CoeurImmanquables,
-        text: (
-          <>
-            <div>
-              <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux
-                «&nbsp;privilèges&nbsp;».
-              </p>
-              <p>
-                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
-                recherchés)
-              </p>
-            </div>
-          </>
-        ),
-      },
-      {
-        logo: VerresImmanquables,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
-              Coup&nbsp;»
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: BouteillesImmanquables,
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Un conseil personnalisé pour constituer ta cave
-              </span>{" "}
-              selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: MainVerreImmanquables,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès illimité au conseil du sommelier par e-mail
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: EtiquetteImmanquables,
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Remise de 5% sur notre cave
-              </span>{" "}
-              (Boutique et Séries limitées){" "}
-              <span className={`${textColorCard} font-bold`}>
-                et les opération ponctuelles «&nbsp;Le Bon Coup&nbsp;»
-              </span>
-            </p>
-          </>
-        ),
-      },
-      {
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Audit de ta cave dans une limite de 50 appellations maximum
-              </span>{" "}
-              (Nous contacter via{" "}
-              <span className="underline">contact@emovin.fr</span> pour en
-              savoir plus)
-              {/* TODO lien vers formulaire de contact */}
-            </p>
-          </>
-        ),
-      },
-    ];
-  } else if (user.carte.value === "prestige") {
+  } else if (user?.carte?.value === "prestige") {
     textColorCard = "text-[#901340]";
     borderColor = "border-[#901340]";
     imageCard = ImagePrestige;
     textMesAvantages = "PRESTIGE DE FRANCE";
-    rows = [
-      {
-        logo: CoeurPrestige,
-        text: (
-          <>
-            <div>
-              <p className={`${textColorCard} font-bold`}>
-                Accès au programme de fidélité pour des cadeaux
-                «&nbsp;privilèges&nbsp;».
-              </p>
-              <p>
-                (accès à des vins de «&nbsp;précision&nbsp;» et des millésimes
-                recherchés)
-              </p>
-            </div>
-          </>
-        ),
-      },
-      {
-        logo: VerresPrestige,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire au opérations ponctuelles «&nbsp;Le Bon
-              Coup&nbsp;»
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: BouteillesPrestige,
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Un conseil personnalisé pour constituer ta cave
-              </span>{" "}
-              selon tes goûts ou une réponse à un besoin spécifique
-              (anniversaire, événement «&nbsp;festif&nbsp;», cadeaux...)
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: MainVerrePrestige,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès illimité au conseil du sommelier par e-mail
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: EtiquettePrestige,
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Remise de 5% sur notre cave
-              </span>{" "}
-              (Boutique et Séries limitées){" "}
-              <span className={`${textColorCard} font-bold`}>
-                et les opération ponctuelles «&nbsp;Le Bon Coup&nbsp;»
-              </span>
-            </p>
-          </>
-        ),
-      },
-      {
-        text: (
-          <>
-            <p>
-              <span className={`${textColorCard} font-bold`}>
-                Audit de ta cave dans une limite de 50 appellations maximum
-              </span>{" "}
-              (Nous contacter via{" "}
-              <span className="underline">contact@emovin.fr</span> pour en
-              savoir plus)
-              {/* TODO lien vers formulaire de contact */}
-            </p>
-          </>
-        ),
-      },
-      {
-        logo: VerreSinglePrestige,
-        text: (
-          <>
-            <p className={`${textColorCard} font-bold`}>
-              Accès prioritaire aux événements organisés par l&#39;équipe EMOVIN
-            </p>
-          </>
-        ),
-      },
-    ];
   }
 
   return (
-    <div className="lg:col-span-9 px-4 sm:px-10 py-6">
-      <div className="flex flex-col text-center justify-center items-center">
-        <h1 className="text-redWine">Ma carte membre</h1>
-        <div className="mt-6">
-          <p className="font-bold">Mon status de membre :</p>
-          <p className="">Valable jusqu&#39;au {expirationDate}</p>
-        </div>
-        <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
-          <Image src={imageCard} layout="fill" alt="Image Decouverte" />
-        </div>
-        <p className="font-bold mt-10">Mes avantages :</p>
-        {/* TODO faire la version en une seule row */}
-        <div
-          className={`flex text-center justify-center items-center flex-col w-full border-[3px] ${borderColor} ${textColorCard} p-4 mt-6`}
-        >
-          <div className="">
-            <p className="font-bold">«&nbsp;{textMesAvantages}&nbsp;»</p>
-            <p className="">
-              Box de 3 bouteilles <strong>en septembre</strong> de chaque année
+    <>
+      {isRenewingCard ? (
+        <Renew setIsRenewingCard={setIsRenewingCard} />
+      ) : (
+        <div className="lg:col-span-9 px-4 sm:px-10 py-6">
+          <div className="flex flex-col text-center justify-center items-center">
+            <h1 className="text-redWine">Ma carte membre</h1>
+            <div className="mt-6">
+              <p className="font-bold">Mon status de membre :</p>
+              <p className="">Valable jusqu&#39;au {expirationDate}</p>
+            </div>
+            <div className="my-6">
+              <button
+                onClick={() => {
+                  setIsRenewingCard(true);
+                }}
+                className="bg-redWine text-white font-bold py-2 px-4 rounded"
+              >
+                Renouveler ma carte
+              </button>
+            </div>
+            <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
+              <Image src={imageCard} layout="fill" alt="Image Decouverte" />
+              <div className="absolute -top-5 right-0">
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                  {user?.isDomicile?.value === "true"
+                    ? "Livraison à domicile"
+                    : "Livraison en point relais"}
+                </span>
+              </div>
+            </div>
+            <p className="font-bold mt-10">Mes avantages :</p>
+            {/* TODO faire la version en une seule row */}
+            <div
+              className={`flex text-center justify-around items-center flex-col md:flex-row w-full border-[3px] ${borderColor} ${textColorCard} p-4 mt-6`}
+            >
+              <div className="">
+                <p className="font-bold">«&nbsp;{textMesAvantages}&nbsp;»</p>
+                <p className="">
+                  Box de 3 bouteilles <strong>en septembre</strong> de chaque
+                  année
+                </p>
+              </div>
+
+              <PlusIcon
+                className="h-8 w-8 text-center font-bold my-6"
+                aria-hidden="true"
+              />
+              <div className="">
+                <p className="font-bold">
+                  «&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»
+                </p>
+                <p className="">
+                  Box de 3 bouteilles <strong>en février</strong> de chaque
+                  année
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 text-left w-full my-3">
+              Les boxes seront livrées à l&#39;adresse indiquée dans votre
+              profil, vous pouvez la modifier en vous rendant dans la section
+              «&nbsp;Profil&nbsp;»
             </p>
-          </div>
-          {/* TODO faire avec une image pour avoir une croix plus epaisse */}
-          <PlusIcon
-            className="h-8 w-8 text-center font-bold my-6"
-            aria-hidden="true"
-          />
-          <div className="">
-            <p className="font-bold">«&nbsp;DÉCOUVERTE DE PRINTEMPS&nbsp;»</p>
-            <p className="">
-              Box de 3 bouteilles <strong>en février</strong> de chaque année
-            </p>
+            <Rows />
           </div>
         </div>
-        <p className="text-xs text-gray-500 text-left w-full my-3">
-          Les boxes seront livrées à l&#39;adresse indiquée dans votre profil,
-          vous pouvez la modifier en vous rendant dans la section
-          «&nbsp;Profil&nbsp;»
-        </p>
-        {rows.map((row, i) => (
-          <RowItem logo={row.logo ? row.logo : null} text={row.text} key={i} />
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

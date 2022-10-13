@@ -58,7 +58,6 @@ export default function QuickView({ product, open, setOpen }) {
         user.points.value - product.node.points.value,
         user.points.id
       );
-      console.log({ removePts });
     } else {
       // error TODO
     }

@@ -64,13 +64,11 @@ const getCustomerByEmail = (email) =>
 
 export const Card = ({ carte }) => {
   async function onSubmit(values) {
-    console.log(values);
 
     setIsLoading(true);
 
     // verif que le membre n'existe pas
     const customer = await getCustomerByEmail(values.email);
-    console.log(customer);
 
     if (customer.customer.length != 0) {
       const isReturn = false;
@@ -179,7 +177,6 @@ export const Card = ({ carte }) => {
       key: "newCustomerInput",
       value: JSON.stringify(input),
     };
-    console.log(customAttribute);
     // addToCartCarte(variant, customAttribute, values.email);
 
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
@@ -197,7 +194,6 @@ export const Card = ({ carte }) => {
     setIsLoading(false);
 
     // const customer = createCustomerRequest(JSON.stringify(input));
-    // console.log(customer);
 
     // TODO verif unique phone number
     // TODO add all the address + phone number + mail + note under the card to the checkout

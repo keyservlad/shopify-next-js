@@ -274,7 +274,6 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
       );
     }
     setProductList(tempProductList);
-    console.log(productList);
   }, [sort, filters]);
 
   return (
@@ -547,7 +546,6 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
                                           !filter.options[optionIdx].checked;
                                       }
                                     });
-                                    console.log("here");
                                     setFilters(newFilters);
                                   }}
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"

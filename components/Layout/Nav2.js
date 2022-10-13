@@ -164,7 +164,6 @@ function classNames(...classes) {
 
 export default function Nav2() {
   const session = useSession();
-  // console.log(session);
   const buttonRef = useRef();
 
   const router = useRouter();

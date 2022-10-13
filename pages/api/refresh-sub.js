@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-    console.log(req);
     // check for the POST request
     if (req.method !== "POST") {
       return res

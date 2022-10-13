@@ -3,7 +3,6 @@ import ByBruno from "../../public/images/recettes/byBruno.png";
 import VectorBackgroundWhite from "../../public/images/bruno/VectorWhite.png";
 
 const Recette = ({ recette, color }) => {
-  console.log(recette);
   return (
     <>
       <div className="w-full flex flex-col lg:flex-row">

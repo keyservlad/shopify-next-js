@@ -31,7 +31,6 @@ const schema = object({
 
 const Profile = () => {
   async function onSubmit(values) {
-    console.log(values);
 
     setIsLoading(true);
 
@@ -47,7 +46,6 @@ const Profile = () => {
     const token = session.data.user.token.accessToken;
 
     const user = await modifyCustomer(customer, token);
-    console.log(user);
 
     // refresh the user
     fetchUser(session.data.user.token.accessToken);
@@ -136,9 +134,7 @@ const Profile = () => {
     inputAddress = inputAddress.replaceAll('\\"', "~");
     inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
     inputAddress = inputAddress.replaceAll("~", '\\"');
-    console.log(inputAddress);
     const customer = await updateAddress(inputAddress);
-    console.log(customer);
     fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
   };

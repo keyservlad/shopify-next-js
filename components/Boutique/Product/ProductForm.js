@@ -152,7 +152,6 @@ export default function ProductForm({
           <button
             onClick={() => {
               addToCart(variant);
-              console.log(variant);
             }}
             className="w-48 rounded text-white bg-redWine px-1 py-2 hover:opacity-80"
           >

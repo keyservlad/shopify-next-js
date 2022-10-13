@@ -5,7 +5,6 @@ import Order from "./Order";
 export default function Historique() {
   const { user } = useContext(CartContext);
   const orders = user.orders.nodes;
-  console.log(orders);
   return (
     <div className="lg:col-span-9 py-6 flex flex-col items-center px-4 sm:px-10">
       <div className="max-w-7xl mx-auto sm:px-2 lg:px-8">

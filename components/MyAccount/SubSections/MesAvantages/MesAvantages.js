@@ -7,7 +7,6 @@ import Image from "next/image";
 import QuickView from "./QuickView";
 
 const MesAvantages = ({ products }) => {
-  console.log({ products });
   const { user } = useContext(CartContext);
   const [openQuickView, setOpenQuickView] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);

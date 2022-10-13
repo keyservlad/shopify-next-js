@@ -56,7 +56,6 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
     const token = session.data.user.token.accessToken;
 
     const cust = await modifAddress(add, token, address.id);
-    console.log(cust);
 
     // // refresh the user
     fetchUser(session.data.user.token.accessToken);
@@ -136,9 +135,7 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
     inputAddress = inputAddress.replaceAll('\\"', "~");
     inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
     inputAddress = inputAddress.replaceAll("~", '\\"');
-    console.log(inputAddress);
     const customer = await updateAddress(inputAddress);
-    console.log(customer);
     fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
   };
@@ -361,7 +358,6 @@ const ModifAddress = ({ setIsAddressEditing, address }) => {
                           token,
                           address.id
                         );
-                        console.log(add);
                         fetchUser(session.data.user.token.accessToken);
                         setIsLoading(false);
                         setIsAddressEditing(false);

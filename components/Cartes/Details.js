@@ -248,10 +248,7 @@ const Details = (props) => {
       {/* mobile */}
       <div className="lg:hidden flex flex-col">
         <DetailsMobile
-          refDetailsSection={props.refDetailsSection}
-          refDecouverteMobile={props.refDecouverteMobile}
-          refImmanquablesMobile={props.refImmanquablesMobile}
-          refPrestigeMobile={props.refPrestigeMobile}
+          scrollDetailsSection={props.scrollDetailsSection}
         />
       </div>
     </div>

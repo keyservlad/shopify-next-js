@@ -48,7 +48,6 @@ export default async function send(req, res) {
 
     var input = attribute[0].value;
 
-    console.log(input);
 
     // TODO if userErrors not empty return 400
 
@@ -57,15 +56,12 @@ export default async function send(req, res) {
     input = JSON.parse(input);
     const email = input.email;
 
-    console.log("input here :", input);
 
     // recup l'adresse si isDomicile est false
     var jsonAddress;
     var isDomicile = false;
     input.metafields.map((metafield) => {
-      console.log(metafield.key, metafield.value, metafield.value == "true");
       if (metafield.key == "isDomicile" && metafield.value == "true") {
-        console.log("passe");
         isDomicile = true;
         jsonAddress = {
           address1: input.addresses[0].address1,
@@ -84,10 +80,8 @@ export default async function send(req, res) {
     inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
     inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
-    console.log(inputCreate);
     // we first call create in case the user didnt enter the same address so the account is not yet created
     var customerCreate = await createCustomer(inputCreate);
-    console.log("create", customerCreate);
 
     var userByEmail = await queryCustomerByEmail(email);
 
@@ -98,13 +92,11 @@ export default async function send(req, res) {
     input = input.replaceAll("~", '\\"');
 
     var customer = await updateCustomer(input);
-    console.log("update", customer);
 
     var customerStoreFront = await createCustomerStorefront(
       email,
       process.env.PASSWORD_CREATE_ACCOUNT
     );
-    console.log(customerStoreFront);
 
     // TODO after creating to get the id of the address and add it to the input
     if (isDomicile) {
@@ -112,7 +104,6 @@ export default async function send(req, res) {
       // si l'adresse match avec celle de l'input alors on ajoute l'id de l'adresse a l'input
       // sinon on crée l'adresse et on ajoute l'id a l'input
       var userWithAddresses = await queryCustomerByEmail(email);
-      console.log({ userWithAddresses });
       userWithAddresses[0].addresses.map((address) => {
         if (address.address1 == jsonAddress.address1) {
           jsonAddress.id = address.id;
@@ -136,9 +127,7 @@ export default async function send(req, res) {
       inputAddress = inputAddress.replaceAll('\\"', "~");
       inputAddress = inputAddress.replace(/"([^"]+)":/g, "$1:");
       inputAddress = inputAddress.replaceAll("~", '\\"');
-      console.log(inputAddress);
       let cust = await updateCustomer(inputAddress);
-      console.log(cust);
     }
   }
 

@@ -5,7 +5,6 @@ import ImageCloche from "../../public/images/HP/boncoup_cloche.webp";
 import NotreSelection from "./NotreSelection";
 
 const LeBonCoup = ({ productsLBC }) => {
-  console.log(productsLBC);
 
   return (
     <>

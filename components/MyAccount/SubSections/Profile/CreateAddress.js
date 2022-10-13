@@ -33,7 +33,6 @@ const schema = object({
 // TODO creer une adresse aussi
 const CreateAddress = ({ setIsAddressCreating }) => {
   async function onSubmit(values) {
-    console.log({ values });
     setIsLoading(true);
 
     // // modif the user
@@ -52,7 +51,6 @@ const CreateAddress = ({ setIsAddressCreating }) => {
     const token = session.data.user.token.accessToken;
 
     const user = await createAddress(address, token);
-    console.log(user);
 
     // // refresh the user
     fetchUser(session.data.user.token.accessToken);

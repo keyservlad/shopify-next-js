@@ -14,7 +14,6 @@ function classNames(...classes) {
 }
 
 const Order = ({ order }) => {
-  console.log(order);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg sm:border">
