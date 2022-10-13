@@ -10,7 +10,7 @@ import DessinDecouverte from "../../public/images/logo-cartes/dessinDecouverte.p
 import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquables.png";
 import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
 
-import DetailsRows from "./DetailsRows";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 
 const Details = (props) => {
   return (
@@ -146,8 +146,14 @@ const Details = (props) => {
                 </button>
               </a>
             </Link>
-            <button className="underline cursor-pointer text-sm mt-3">
+            <button
+              onClick={() => {
+                props.scrollDetailsSection();
+              }}
+              className="underline cursor-pointer text-sm mt-3 flex items-center"
+            >
               Voir tous les avantages
+              <ChevronDownIcon className="inline-block w-4 h-4 ml-1" />
             </button>
           </div>
           {/* Immanquables */}
@@ -159,8 +165,14 @@ const Details = (props) => {
                 </button>
               </a>
             </Link>
-            <button className="underline cursor-pointer text-sm mt-3">
+            <button
+              onClick={() => {
+                props.scrollDetailsSection();
+              }}
+              className="underline cursor-pointer text-sm mt-3 flex items-center"
+            >
               Voir tous les avantages
+              <ChevronDownIcon className="inline-block w-4 h-4 ml-1" />
             </button>
           </div>
           {/* prestige */}
@@ -172,8 +184,14 @@ const Details = (props) => {
                 </button>
               </a>
             </Link>
-            <button className="underline cursor-pointer text-sm mt-3">
+            <button
+              onClick={() => {
+                props.scrollDetailsSection();
+              }}
+              className="underline cursor-pointer text-sm mt-3 flex items-center"
+            >
               Voir tous les avantages
+              <ChevronDownIcon className="inline-block w-4 h-4 ml-1" />
             </button>
           </div>
         </div>

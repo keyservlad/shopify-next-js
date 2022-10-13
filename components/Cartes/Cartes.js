@@ -1,39 +1,16 @@
 import Image from "next/image";
 import FondHeader from "../../public/images/cartes/fond_header_cartes.jpg";
-import ImageTitleDecouverte from "../../public/images/logo-cartes/decouverte.png";
-import ImageTitleImmanquables from "../../public/images/logo-cartes/immanquables.png";
-import ImageTitlePrestige from "../../public/images/logo-cartes/prestige.png";
-import DessinDecouverte from "../../public/images/logo-cartes/dessinDecouverte.png";
-import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquables.png";
-import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
+
 import Link from "next/link";
 import Details from "./Details";
-import { ChevronDownIcon } from "@heroicons/react/outline";
 import { createRef } from "react";
+import Rows from "./Rows";
 
 const Cartes = () => {
   const refDetailsSection = createRef();
-  const refDecouverteMobile = createRef();
-  const refImmanquablesMobile = createRef();
-  const refPrestigeMobile = createRef();
 
   const scrollDetailsSection = () => {
     refDetailsSection.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-  const scrollDecouverteMobile = () => {
-    refDecouverteMobile.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-  const scrollImmanquablesMobile = () => {
-    refImmanquablesMobile.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-  const scrollPrestigeMobile = () => {
-    refPrestigeMobile.current.scrollIntoView({
       behavior: "smooth",
     });
   };
@@ -83,12 +60,7 @@ const Cartes = () => {
           {/* TODO add formulaire de contact ici */}
         </p>
       </div>
-      <Details
-        refDetailsSection={refDetailsSection}
-        refDecouverteMobile={refDecouverteMobile}
-        refImmanquablesMobile={refImmanquablesMobile}
-        refPrestigeMobile={refPrestigeMobile}
-      />
+      <Details scrollDetailsSection={scrollDetailsSection} />
       <div className="w-full text-[#8F8F8F]">
         <p className="">
           Chaque box est composée de 3 bouteilles et inclus une fiche de
@@ -97,13 +69,16 @@ const Cartes = () => {
         <p className="">
           Supplément optionnel : 15€ TTC/an pour une livraison en adresse privée
           incluant votre box Option, votre cadeau « Surprise » et les 3
-          bouteilles « Découvertes de printemps ». 
+          bouteilles « Découvertes de printemps ».
         </p>
       </div>
-      <div className="w-full mt-14">
-        <h2 className="text-xl font-semibold text-redWine">Tous les autres avantages de votre carte EMOVIN </h2>
+      <div className="w-full mt-14 relative">
+      <div ref={refDetailsSection} className="absolute -top-24" />
+        <h2 className="text-xl font-bold text-redWine">
+          Tous les autres avantages de votre carte EMOVIN{" "}
+        </h2>
       </div>
-      <div className="w-full mt-7 mb-14"></div>
+      <Rows />
     </div>
   );
 };
