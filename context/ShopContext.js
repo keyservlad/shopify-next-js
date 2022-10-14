@@ -296,10 +296,12 @@ export default function ShopProvider({ children }) {
 
     // TODO implement this check in the login page too
     if (
+      !userr ||
       userr.expirationDate.value === null ||
       date < new Date() ||
       !userr.carte ||
-      dateToken < new Date()
+      dateToken < new Date() ||
+      userr.carte?.value === "expired"
     ) {
       signOut();
       return;
