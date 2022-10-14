@@ -8,6 +8,7 @@ import {
   updateCustomer,
   createCustomer,
   queryCustomerByEmail,
+  getCustomerById,
 } from "../../lib/shopifyCustomerAdmin";
 import { createCustomer as createCustomerStorefront } from "../../lib/shopifyCustomer";
 import { sendMail } from "../../utils/sendMail";
@@ -163,6 +164,51 @@ export default async function send(req, res) {
       }
     }
 
+    let email = req.body.customer?.email
+      ? req.body.customer.email
+      : req.body.email
+      ? req.body.email
+      : req.body.contact_email
+      ? req.body.contact_email
+      : null;
+
+    if (email) {
+      var customer = await getCustomerById(email);
+      if (customer[0].carte?.value !== "expired" && customer[0].carte?.value) {
+        const orderId = req.body.admin_graphql_api_id; // TODO use this to add metafield points to order
+
+        const totalSpentWithoutShipping = req.body.subtotal_price;
+
+        let pts = {};
+        if (customer[0].points) {
+          pts["points"] = Number(customer[0].points.value);
+          pts["id"] = customer[0].points.id.replaceAll(":", "Ƶ");
+        } else {
+          pts["points"] = 0;
+        }
+
+        pts["points"] += Math.round(totalSpentWithoutShipping / 10) >= 0;
+
+        let input = {
+          email: email,
+          metafields: [
+            {
+              id: pts["id"] ? pts["id"] : null,
+              key: "points",
+              namespace: "custom",
+              value: pts["points"],
+            },
+          ],
+        };
+        input = JSON.stringify(input);
+        input = input.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+        input = input.replaceAll("Ƶ", ":");
+
+        var customer = await updateCustomer(input);
+        console.log(customer);
+      }
+    }
+
     return res.status(200).json({ status: "Good" });
   } catch (error) {
     console.log(error);
@@ -174,4 +220,3 @@ export default async function send(req, res) {
     return res.status(400).json({ status: "Bad" });
   }
 }
-
