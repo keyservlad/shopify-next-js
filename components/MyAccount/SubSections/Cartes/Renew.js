@@ -117,7 +117,6 @@ const Renew = ({ setIsRenewingCard, cards }) => {
       };
     }
 
-    console.log(input);
     const customAttribute = {
       key: "newCustomerInput",
       value: JSON.stringify(input),
@@ -128,10 +127,9 @@ const Renew = ({ setIsRenewingCard, cards }) => {
       customAttribute,
       user.email
     );
-    console.log(checkout);
 
     router.push(checkout.checkout.webUrl);
-    setIsLoading(false);
+    // setIsLoading(false); disabled cause router.push slow
   };
 
   //   Note to reuse this component, maybe put some conditionals for the setIsRenewingCard function to not have to pass it as a prop && conditionals wether the user is expired or not

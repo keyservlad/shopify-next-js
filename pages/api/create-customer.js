@@ -76,7 +76,8 @@ export default async function send(req, res) {
     if (
       userByEmail[0].carte?.value === "decouverte" ||
       userByEmail[0].carte?.value === "prestige" ||
-      userByEmail[0].carte?.value === "immanquables"
+      userByEmail[0].carte?.value === "immanquables" ||
+      userByEmail[0].carte?.value === "expired" // TODO For now we put it here cause i don't have time to worry about deliveryAddress and getting the id of the metafields etc...
     ) {
       isRenew = true;
     }
@@ -120,8 +121,7 @@ export default async function send(req, res) {
     var customer = await updateCustomer(input);
     console.log(customer);
 
-    if (userByEmail[0].carte?.value === "expired" || isRenew) {
-    } else {
+    if (!isRenew) {
       var customerStoreFront = await createCustomerStorefront(
         email,
         process.env.PASSWORD_CREATE_ACCOUNT

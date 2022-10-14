@@ -68,12 +68,13 @@ export const Card = ({ carte, carteDomicile }) => {
 
     // verif que le membre n'existe pas
     const customer = await getCustomerByEmail(values.email);
-
+    console.log(customer);
+    let ids = null;
     if (customer.customer.length != 0) {
       if (
-        customer.carte?.value === "decouverte" ||
-        customer.carte?.value === "prestige" ||
-        customer.carte?.value === "immanquables"
+        customer.customer[0].carte?.value === "decouverte" ||
+        customer.customer[0].carte?.value === "prestige" ||
+        customer.customer[0].carte?.value === "immanquables"
       ) {
         setIsLoading(false);
         setError("email", {
@@ -81,8 +82,22 @@ export const Card = ({ carte, carteDomicile }) => {
           message: "Un compte avec cette adresse mail existe déjà",
         });
         return;
+      } else if (customer.customer[0].carte?.value === "expired") {
+        ids = {};
+        customer.customer[0].metafields?.edges.map((metafield) => {
+          ids[metafield.node.key] = metafield.node.id;
+          if (
+            metafield.node.key === "points" &&
+            metafield.node.value !== "0" &&
+            metafield.node.value
+          ) {
+            ids["pts"] = metafield.node.value;
+          }
+        });
       }
     }
+
+    console.log(ids);
 
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
       ? "prestige"
@@ -102,12 +117,14 @@ export const Card = ({ carte, carteDomicile }) => {
         phone: values.phone,
         metafields: [
           {
+            id: ids?.carte ? ids.carte : null,
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
           },
           {
-            key: "expirationDate",
+            id: ids?.expirationdate ? ids.expirationdate : null,
+            key: "expirationdate",
             namespace: "custom",
             value: expiryDate.toISOString().split("T")[0],
           },
@@ -118,17 +135,20 @@ export const Card = ({ carte, carteDomicile }) => {
           //   value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
           // },
           {
+            id: ids?.isDomicile ? ids.isDomicile : null,
             key: "isDomicile",
             namespace: "custom",
             type: "boolean",
             value: "false",
           },
           {
+            id: ids?.points ? ids.points : null,
             key: "points",
             namespace: "custom",
-            value: "0",
+            value: ids?.pts ? `${ids.pts}` : "0",
           },
           {
+            id: ids?.plateforme ? ids.plateforme : null,
             key: "plateforme",
             namespace: "custom",
             value: values.plateforme,
@@ -154,25 +174,29 @@ export const Card = ({ carte, carteDomicile }) => {
         phone: values.phone,
         metafields: [
           {
+            id: ids?.carte ? ids.carte : null,
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
           },
           {
+            id: ids?.expirationdate ? ids.expirationdate : null,
             key: "expirationDate",
             namespace: "custom",
             value: expiryDate.toISOString().split("T")[0],
           },
           {
+            id: ids?.isDomicile ? ids.isDomicile : null,
             key: "isDomicile",
             namespace: "custom",
             type: "boolean",
             value: "true",
           },
           {
+            id: ids?.points ? ids.points : null,
             key: "points",
             namespace: "custom",
-            value: "0",
+            value: ids?.pts ? `${ids.pts}` : "0",
           },
         ],
       };
@@ -221,11 +245,11 @@ export const Card = ({ carte, carteDomicile }) => {
       setIsLoading(false);
       return;
     }
-    router.push(checkout.checkout.webUrl);
+    // router.push(checkout.checkout.webUrl);
 
     setIsCartLoading(false);
 
-    // setIsLoading(false); disabled because router.push takes so much time wtf
+    setIsLoading(false); //disabled because router.push takes so much time wtf
 
     // const customer = createCustomerRequest(JSON.stringify(input));
 
