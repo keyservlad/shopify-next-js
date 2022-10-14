@@ -297,7 +297,7 @@ export default function ShopProvider({ children }) {
 
     // TODO implement this check in the login page too
     if (
-      !userr ||
+      userr.length === 0 ||
       userr.expirationDate.value === null ||
       date < new Date() ||
       !userr.carte ||
