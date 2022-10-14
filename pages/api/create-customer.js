@@ -173,7 +173,7 @@ export default async function send(req, res) {
       : null;
 
     if (email) {
-      var customer = await getCustomerById(email);
+      var customer = await queryCustomerByEmail(email);
       if (customer[0].carte?.value !== "expired" && customer[0].carte?.value) {
         const orderId = req.body.admin_graphql_api_id; // TODO use this to add metafield points to order
 
@@ -190,6 +190,7 @@ export default async function send(req, res) {
         pts["points"] += Math.round(totalSpentWithoutShipping / 10) >= 0;
 
         let input = {
+          id: customer[0].id.replaceAll(":", "Ƶ"),
           email: email,
           metafields: [
             {
