@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import {
@@ -32,7 +32,11 @@ function classNames(...classes) {
 const MyAccount = ({ products, cards }) => {
   const subNavigation = [
     { name: "Profil", component: <Profile />, icon: UserCircleIcon },
-    { name: "Ma Carte Membre", component: <MaCarteMembre cards={cards} />, icon: CogIcon },
+    {
+      name: "Ma Carte Membre",
+      component: <MaCarteMembre cards={cards} />,
+      icon: CogIcon,
+    },
     {
       name: "Mes avantages fidélité",
       component: <MesAvantages products={products} />,
@@ -67,9 +71,9 @@ const MyAccount = ({ products, cards }) => {
 
   const [current, setCurrent] = useState(subNavigation[0]);
 
-  
-
-  if (!user) return <Loading />;
+  if (!user) {
+    return <Loading />;
+  }
 
   return (
     <div>
