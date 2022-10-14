@@ -85,7 +85,7 @@ export const Card = ({ carte, carteDomicile }) => {
       } else if (customer.customer[0].carte?.value === "expired") {
         ids = {};
         customer.customer[0].metafields?.edges.map((metafield) => {
-          ids[metafield.node.key] = metafield.node.id;
+          ids[metafield.node.key] = metafield.node.id.replaceAll(":", "Ƶ");
           if (
             metafield.node.key === "points" &&
             metafield.node.value !== "0" &&
@@ -209,6 +209,8 @@ export const Card = ({ carte, carteDomicile }) => {
       key: "newCustomerInput",
       value: JSON.stringify(input),
     };
+
+    console.log({ customAttribute });
     // addToCartCarte(variant, customAttribute, values.email);
 
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
