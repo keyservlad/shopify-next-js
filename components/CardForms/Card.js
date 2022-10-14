@@ -228,7 +228,7 @@ export const Card = ({ carte, carteDomicile }) => {
 
     setIsCartLoading(false);
 
-    setIsLoading(false);
+    // setIsLoading(false); disabled because router.push takes so much time wtf
 
     // const customer = createCustomerRequest(JSON.stringify(input));
 

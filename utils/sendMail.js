@@ -27,5 +27,5 @@ export const sendMail = (destination, subject, html) => {
     }
   });
 
-  // transport.close();
+  transport.close();
 };
