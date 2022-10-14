@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { CartContext } from "../../../context/ShopContext";
+import axios from "axios";
 
 const schema = object({
   email: string().required("Veuillez entrer votre adresse email"),
@@ -28,16 +29,26 @@ const LoginForm = ({ isRouting }) => {
       }`,
     });
 
+    console.log(res);
     if (res?.error) {
-      setError("global", {
-        type: "custom",
-        message: "Identifiants incorrects",
-      });
+      if (res.error === "expired") {
+        setError("global", {
+          type: "custom",
+          message:
+            "Votre carte a expiré, si vous souhaitez retrouver vos avantages, veuillez renouveler votre carte",
+        });
+      } else {
+        setError("global", {
+          type: "custom",
+          message: "Identifiants incorrects",
+        });
+      }
+      setIsLoading(false);
+      return;
     } else {
       setError("global", null);
     }
 
-    setIsLoading(false);
     if (res.url) {
       isRouting.current = true;
       router.push(res.url);

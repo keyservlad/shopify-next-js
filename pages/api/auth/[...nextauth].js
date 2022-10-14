@@ -51,6 +51,10 @@ export default NextAuth({
             token.customerAccessToken.accessToken
           );
 
+          if (userWithoutToken.carte.value === "expired") {
+            throw new Error("expired");
+          }
+
           const user = {
             token: token.customerAccessToken,
             userWithoutToken,
