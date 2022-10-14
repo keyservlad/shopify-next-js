@@ -125,6 +125,12 @@ export const Card = ({ carte, carteDomicile }) => {
             value: "false",
           },
           {
+            key: "points",
+            namespace: "custom",
+            type: "integer",
+            value: "0",
+          },
+          {
             key: "plateforme",
             namespace: "custom",
             value: values.plateforme,
@@ -165,6 +171,12 @@ export const Card = ({ carte, carteDomicile }) => {
             type: "boolean",
             value: "true",
           },
+          {
+            key: "points",
+            namespace: "custom",
+            type: "integer",
+            value: "0",
+          },
         ],
       };
     } else {
@@ -179,7 +191,7 @@ export const Card = ({ carte, carteDomicile }) => {
     // addToCartCarte(variant, customAttribute, values.email);
 
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
-    setIsCartLoading(true);
+    setIsCartLoading(true); // not need anymore but w/e
 
     let checkout;
     if (schema == schemaDom) {

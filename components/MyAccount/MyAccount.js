@@ -29,10 +29,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const MyAccount = ({ products }) => {
+const MyAccount = ({ products, cards }) => {
   const subNavigation = [
     { name: "Profil", component: <Profile />, icon: UserCircleIcon },
-    { name: "Ma Carte Membre", component: <MaCarteMembre />, icon: CogIcon },
+    { name: "Ma Carte Membre", component: <MaCarteMembre cards={cards} />, icon: CogIcon },
     {
       name: "Mes avantages fidélité",
       component: <MesAvantages products={products} />,

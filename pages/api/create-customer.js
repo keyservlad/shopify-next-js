@@ -26,7 +26,7 @@ export default async function send(req, res) {
   sendMail(
     "arnaud.guilhamat@emovin.fr",
     "mail automatique nouvelle commade",
-    req
+    JSON.stringify(req)
   );
 
   // TODO have to figure out a solution
@@ -64,11 +64,27 @@ export default async function send(req, res) {
     input = JSON.parse(input);
     const email = input.email;
 
+    var userByEmail = await queryCustomerByEmail(email);
+
+    // if (userByEmail[0].carte?.value === "expired") { // TODO think expired works the same as create account
+    // } else
+    let isRenew = false;
+    if (
+      userByEmail[0].carte?.value === "decouverte" ||
+      userByEmail[0].carte?.value === "prestige" ||
+      userByEmail[0].carte?.value === "immanquables"
+    ) {
+      isRenew = true;
+    }
     // recup l'adresse si isDomicile est false
     var jsonAddress;
     var isDomicile = false;
     input.metafields.map((metafield) => {
-      if (metafield.key == "isDomicile" && metafield.value == "true") {
+      if (
+        metafield.key == "isDomicile" &&
+        metafield.value == "true" &&
+        !isRenew
+      ) {
         isDomicile = true;
         jsonAddress = {
           address1: input.addresses[0].address1,
@@ -82,15 +98,14 @@ export default async function send(req, res) {
       }
     });
 
-    var inputCreate = JSON.stringify(input);
-    inputCreate = inputCreate.replaceAll("\\", "");
-    inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
-    inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
+    // TODO check / code removed for testing as member already created by shopify when order is created
+    // var inputCreate = JSON.stringify(input);
+    // inputCreate = inputCreate.replaceAll("\\", "");
+    // inputCreate = inputCreate.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+    // inputCreate = inputCreate.replaceAll("~", '\\"'); // formatting the request as it is stringified inside a parsed object
 
     // we first call create in case the user didnt enter the same address so the account is not yet created
-    var customerCreate = await createCustomer(inputCreate);
-
-    var userByEmail = await queryCustomerByEmail(email);
+    // var customerCreate = await createCustomer(inputCreate);
 
     input.id = userByEmail[0].id;
     input = JSON.stringify(input);
@@ -100,13 +115,16 @@ export default async function send(req, res) {
 
     var customer = await updateCustomer(input);
 
-    var customerStoreFront = await createCustomerStorefront(
-      email,
-      process.env.PASSWORD_CREATE_ACCOUNT
-    );
+    if (userByEmail[0].carte?.value === "expired" || isRenew) {
+    } else {
+      var customerStoreFront = await createCustomerStorefront(
+        email,
+        process.env.PASSWORD_CREATE_ACCOUNT
+      );
+    }
 
     // TODO after creating to get the id of the address and add it to the input
-    if (isDomicile) {
+    if (isDomicile && !isRenew) {
       // requete des addresses du user avec l'id user
       // si l'adresse match avec celle de l'input alors on ajoute l'id de l'adresse a l'input
       // sinon on crée l'adresse et on ajoute l'id a l'input
@@ -115,7 +133,7 @@ export default async function send(req, res) {
         if (address.address1 == jsonAddress.address1) {
           jsonAddress.id = address.id;
         } else {
-          // TODO create address
+          // TODO create address (think it works bc we don't use shipping address anymore)
         }
       });
       jsonAddress = JSON.stringify(jsonAddress);
@@ -140,5 +158,3 @@ export default async function send(req, res) {
 
   return res.status(200).json({ status: "Good" });
 }
-
-// TODO add card address to be the same as the shipping address if livraison à domicile

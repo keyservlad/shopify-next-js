@@ -1,8 +1,8 @@
 import MyAccount from "../components/MyAccount/MyAccount";
-import { getAllProductsVinotheque } from "../lib/shopify";
+import { getAllCards, getAllProductsVinotheque } from "../lib/shopify";
 
-const MonCompte = ({ products }) => {
-  return <MyAccount products={products} />;
+const MonCompte = ({ products, cards }) => {
+  return <MyAccount products={products} cards={cards.edges} />;
 };
 
 MonCompte.auth = true;
@@ -12,9 +12,12 @@ export async function getStaticProps() {
   let products = await getAllProductsVinotheque();
   // TODO order croissant de points de la vinotheque
 
+  let cards = await getAllCards();
+
   return {
     props: {
       products,
+      cards
     },
     revalidate: 10,
   };

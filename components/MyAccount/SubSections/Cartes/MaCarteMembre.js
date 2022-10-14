@@ -27,7 +27,7 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const MaCarteMembre = () => {
+const MaCarteMembre = ({ cards }) => {
   const { user } = useContext(CartContext);
 
   const [isRenewingCard, setIsRenewingCard] = useState(false);
@@ -77,7 +77,7 @@ const MaCarteMembre = () => {
   return (
     <>
       {isRenewingCard ? (
-        <Renew setIsRenewingCard={setIsRenewingCard} />
+        <Renew setIsRenewingCard={setIsRenewingCard} cards={cards} />
       ) : (
         <div className="lg:col-span-9 px-4 sm:px-10 py-6">
           <div className="flex flex-col text-center justify-center items-center">

@@ -7,11 +7,30 @@ import ImageDecouverte from "../../../../public/images/logo-cartes/decouverte.pn
 import ImagePrestige from "../../../../public/images/logo-cartes/prestige.png";
 import ImageImmanquables from "../../../../public/images/logo-cartes/immanquables.png";
 import RenewOtherCard from "./RenewOtherCard";
+import { createCheckoutCustomAttribute } from "../../../../lib/shopifyCheckout";
+import { useRouter } from "next/router";
 
-const Renew = ({ setIsRenewingCard }) => {
+const Renew = ({ setIsRenewingCard, cards }) => {
   const { user } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isRenewingOtherCard, setIsRenewingOtherCard] = useState(false);
+
+  const router = useRouter();
+
+  const myCard = cards.find((card) =>
+    (card.node.handle === user.isDomicile?.value) === "true"
+      ? "carte-" + user.carte?.value + "-domicile"
+      : "carte-" + user.carte?.value
+  ).node;
+
+  const variant = {
+    id: myCard.variants.edges[0].node.id,
+    title: myCard.title,
+    handle: myCard.handle,
+    image: myCard.images?.edges[0].node.originalSrc,
+    variantPrice: myCard.variants.edges[0].node.price,
+    variantQuantity: 1,
+  };
 
   let dateOptions = {
     year: "numeric",
@@ -29,7 +48,7 @@ const Renew = ({ setIsRenewingCard }) => {
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
   );
 
-  dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
+  let dateInOneYearFR = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
   expirationDatePlusOneDay = expirationDatePlusOneDay.toLocaleDateString(
     "fr-FR",
     dateOptions
@@ -43,12 +62,80 @@ const Renew = ({ setIsRenewingCard }) => {
       ? ImageImmanquables
       : ImagePrestige;
 
-  const handleRenewSameCard = () => {
+  // TODO add verifications (like if user is logged in, if user has a card, etc.)
+  const handleRenewSameCard = async () => {
     setIsLoading(true);
+    let input;
+    if (user.isDomicile?.value === "true") {
+      input = {
+        email: user.email,
+        metafields: [
+          {
+            key: "nextCarte",
+            namespace: "custom",
+            value: user.carte?.value,
+          },
+          {
+            key: "nextExpirationdate",
+            namespace: "custom",
+            value: dateInOneYear.toISOString().split("T")[0],
+          },
+          {
+            key: "nextIsDomicile",
+            namespace: "custom",
+            type: "boolean",
+            value: "true",
+          },
+        ],
+      };
+    } else {
+      input = {
+        email: user.email,
+        metafields: [
+          {
+            key: "nextCarte",
+            namespace: "custom",
+            value: user.carte?.value,
+          },
+          {
+            key: "nextExpirationdate",
+            namespace: "custom",
+            value: dateInOneYear.toISOString().split("T")[0],
+          },
+          {
+            key: "nextIsDomicile",
+            namespace: "custom",
+            type: "boolean",
+            value: "false",
+          },
+          {
+            key: "plateforme",
+            namespace: "custom",
+            value: user.plateforme?.value,
+          },
+        ],
+      };
+    }
+
+    console.log(input);
+    const customAttribute = {
+      key: "newCustomerInput",
+      value: JSON.stringify(input),
+    };
+
+    const checkout = await createCheckoutCustomAttribute(
+      [variant],
+      customAttribute,
+      user.email
+    );
+    console.log(checkout);
+
+    router.push(checkout.checkout.webUrl);
     setIsLoading(false);
   };
 
   //   Note to reuse this component, maybe put some conditionals for the setIsRenewingCard function to not have to pass it as a prop && conditionals wether the user is expired or not
+  // Actually, don't reuse this component
   return (
     <>
       {isRenewingOtherCard ? (
@@ -82,7 +169,7 @@ const Renew = ({ setIsRenewingCard }) => {
               <p className="">Valable jusqu&#39;au {expirationDate}</p>
               <p className="">
                 En renouvelant maintenant, votre carte sera valable du{" "}
-                {expirationDatePlusOneDay} au {dateInOneYear}
+                {expirationDatePlusOneDay} au {dateInOneYearFR}
               </p>
             </div>
 

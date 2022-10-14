@@ -29,7 +29,7 @@ const schema = object({
     .min(10, "Trop court"),
 });
 
-const Profile = () => {
+const Profile = ({}) => {
   async function onSubmit(values) {
 
     setIsLoading(true);
