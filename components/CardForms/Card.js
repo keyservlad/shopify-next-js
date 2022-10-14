@@ -70,19 +70,19 @@ export const Card = ({ carte, carteDomicile }) => {
     const customer = await getCustomerByEmail(values.email);
 
     if (customer.customer.length != 0) {
-      const isReturn = false;
-
-      customer.customer[0].metafields.nodes.map((metafield) => {
-        if (metafield.key == "carte" && metafield.value) {
-          setIsLoading(false);
-          setError("email", {
-            type: "custom",
-            message: "Un compte avec cette adresse mail existe déjà",
-          });
-          isReturn = true;
-        }
-      });
-      if (isReturn) return;
+      if (
+        customer.carte?.value === "decouverte" ||
+        customer.carte?.value === "prestige" ||
+        customer.carte?.value === "immanquables"
+      ) {
+        setIsLoading(false);
+        setError("email", {
+          type: "custom",
+          message: "Un compte avec cette adresse mail existe déjà",
+        });
+        setIsLoading(false);
+        return;
+      }
     }
 
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
