@@ -130,8 +130,8 @@ const Order = ({ order }) => {
         {/* Products */}
         <h4 className="sr-only">Items</h4>
         <ul role="list" className="divide-y divide-gray-200">
-          {order.lineItems.nodes.map((product) => (
-            <li key={product.id} className="p-4 sm:p-6">
+          {order.lineItems.nodes.map((product, i) => (
+            <li key={i} className="p-4 sm:p-6">
               <div className="flex items-center sm:items-start">
                 <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden sm:w-30 sm:h-30 relative">
                   <Image

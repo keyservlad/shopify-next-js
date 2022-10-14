@@ -11,6 +11,7 @@ import { createCheckoutCustomAttribute } from "../../../../lib/shopifyCheckout";
 import { useRouter } from "next/router";
 
 const Renew = ({ setIsRenewingCard, cards }) => {
+  console.log(cards);
   const { user } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isRenewingOtherCard, setIsRenewingOtherCard] = useState(false);
@@ -137,7 +138,10 @@ const Renew = ({ setIsRenewingCard, cards }) => {
   return (
     <>
       {isRenewingOtherCard ? (
-        <RenewOtherCard setIsRenewingOtherCard={setIsRenewingOtherCard} />
+        <RenewOtherCard
+          setIsRenewingOtherCard={setIsRenewingOtherCard}
+          cards={cards}
+        />
       ) : (
         <div className="lg:col-span-9 px-4 sm:px-10 py-6">
           <button
