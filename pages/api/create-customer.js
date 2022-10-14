@@ -197,7 +197,7 @@ export default async function send(req, res) {
               id: pts["id"] ? pts["id"] : null,
               key: "points",
               namespace: "custom",
-              value: pts["points"],
+              value: `${pts["points"]}`,
             },
           ],
         };
