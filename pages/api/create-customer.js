@@ -36,7 +36,10 @@ export default async function send(req, res) {
     if (
       item.title == "Carte Prestige" ||
       item.title == "Carte Découverte" ||
-      item.title == "Carte Immanquables"
+      item.title == "Carte Immanquables" ||
+      item.title == "Carte Prestige Domicile" ||
+      item.title == "Carte Découverte Domicile" ||
+      item.title == "Carte Immanquables Domicile"
     ) {
       isCard = true;
     }
