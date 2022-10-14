@@ -23,10 +23,14 @@ export default async function send(req, res) {
   //     .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
   // }
 
+  // TODO done by mail for now but wanna create elastic search to store logs
   sendMail(
     "arnaud.guilhamat@emovin.fr",
     "mail automatique nouvelle commade",
-    "body : " + JSON.stringify(req.body) + " headers" + JSON.stringify(req.headers)
+    "body : " +
+      JSON.stringify(req.body) +
+      " headers" +
+      JSON.stringify(req.headers)
   );
 
   // TODO have to figure out a solution
@@ -114,6 +118,7 @@ export default async function send(req, res) {
     input = input.replaceAll("~", '\\"');
 
     var customer = await updateCustomer(input);
+    console.log(customer);
 
     if (userByEmail[0].carte?.value === "expired" || isRenew) {
     } else {
