@@ -68,7 +68,6 @@ function Auth({ children }) {
   }, [session.status]);
 
   if (session.status === "loading") {
-    console.log("loading");
     return <Loading />;
   }
 

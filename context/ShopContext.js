@@ -293,13 +293,11 @@ export default function ShopProvider({ children }) {
       signOut();
       return;
     }
-    console.log(userr);
 
     const date = new Date(userr?.expirationDate.value);
 
     const dateToken = new Date(session.data.user.token.expiresAt);
 
-    // TODO implement this check in the login page too
     if (
       !userr ||
       userr?.expirationDate?.value === null ||

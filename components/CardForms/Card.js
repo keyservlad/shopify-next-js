@@ -68,7 +68,6 @@ export const Card = ({ carte, carteDomicile }) => {
 
     // verif que le membre n'existe pas
     const customer = await getCustomerByEmail(values.email);
-    console.log(customer);
     let ids = null;
     if (customer.customer.length != 0) {
       if (
@@ -96,8 +95,6 @@ export const Card = ({ carte, carteDomicile }) => {
         });
       }
     }
-
-    console.log(ids);
 
     const Cartetitle = carte.title.toLowerCase().includes("prestige")
       ? "prestige"
@@ -205,12 +202,17 @@ export const Card = ({ carte, carteDomicile }) => {
       return;
     }
 
+    input.metafields.map((metafield) => {
+      if (metafield.id === null) {
+        delete metafield.id;
+      }
+    });
+
     const customAttribute = {
       key: "newCustomerInput",
       value: JSON.stringify(input),
     };
 
-    console.log({ customAttribute });
     // addToCartCarte(variant, customAttribute, values.email);
 
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
@@ -247,11 +249,11 @@ export const Card = ({ carte, carteDomicile }) => {
       setIsLoading(false);
       return;
     }
-    // router.push(checkout.checkout.webUrl);
+    router.push(checkout.checkout.webUrl);
 
     setIsCartLoading(false);
 
-    setIsLoading(false); //disabled because router.push takes so much time wtf
+    // setIsLoading(false); //disabled because router.push takes so much time wtf
 
     // const customer = createCustomerRequest(JSON.stringify(input));
 
