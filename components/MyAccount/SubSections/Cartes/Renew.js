@@ -109,7 +109,7 @@ const Renew = ({ setIsRenewingCard, cards }) => {
             value: "false",
           },
           {
-            key: "plateforme",
+            key: "nextPlateforme",
             namespace: "custom",
             value: user.plateforme?.value,
           },

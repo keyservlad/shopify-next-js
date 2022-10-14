@@ -80,7 +80,6 @@ export const Card = ({ carte, carteDomicile }) => {
           type: "custom",
           message: "Un compte avec cette adresse mail existe déjà",
         });
-        setIsLoading(false);
         return;
       }
     }
