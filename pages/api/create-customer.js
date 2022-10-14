@@ -26,7 +26,7 @@ export default async function send(req, res) {
   sendMail(
     "arnaud.guilhamat@emovin.fr",
     "mail automatique nouvelle commade",
-    JSON.stringify(req)
+    "body : " + JSON.stringify(req.body) + " headers" + JSON.stringify(req.headers)
   );
 
   // TODO have to figure out a solution
