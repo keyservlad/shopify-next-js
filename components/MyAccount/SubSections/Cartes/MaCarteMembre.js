@@ -7,38 +7,52 @@ import ImagePrestige from "../../../../public/images/logo-cartes/prestige.png";
 import ImageImmanquables from "../../../../public/images/logo-cartes/immanquables.png";
 import { PlusIcon } from "@heroicons/react/outline";
 
-import CoeurDecouverte from "../../../../public/images/mini-logos/decouverte/coeur.svg";
-import BouteillesDecouverte from "../../../../public/images/mini-logos/decouverte/bouteilles.svg";
-import MainVerreDecouverte from "../../../../public/images/mini-logos/decouverte/mainVerre.svg";
-import VerresDecouverte from "../../../../public/images/mini-logos/decouverte/verres.svg";
-
-import CoeurImmanquables from "../../../../public/images/mini-logos/immanquables/coeur.svg";
-import BouteillesImmanquables from "../../../../public/images/mini-logos/immanquables/bouteilles.svg";
-import MainVerreImmanquables from "../../../../public/images/mini-logos/immanquables/mainVerre.svg";
-import VerresImmanquables from "../../../../public/images/mini-logos/immanquables/verres.svg";
-import EtiquetteImmanquables from "../../../../public/images/mini-logos/immanquables/etiquette.svg";
-
-import CoeurPrestige from "../../../../public/images/mini-logos/prestige/coeur.svg";
-import BouteillesPrestige from "../../../../public/images/mini-logos/prestige/bouteilles.svg";
-import MainVerrePrestige from "../../../../public/images/mini-logos/prestige/mainVerre.svg";
-import VerresPrestige from "../../../../public/images/mini-logos/prestige/verres.svg";
-import EtiquettePrestige from "../../../../public/images/mini-logos/prestige/etiquette.svg";
-import VerreSinglePrestige from "../../../../public/images/mini-logos/prestige/verreSingle.svg";
-import RowItem from "./RowItem";
 import Rows from "../../../Cartes/Rows";
 import Renew from "./Renew";
+import Button from "@mui/material/Button";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+
+const BootstrapTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "rgb(168 61 114)",
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "rgba(168 61 114)",
+    font: "inherit",
+    fontSize: "0.75rem",
+  },
+}));
 
 const MaCarteMembre = () => {
   const { user } = useContext(CartContext);
 
   const [isRenewingCard, setIsRenewingCard] = useState(false);
 
-  let expirationDate = new Date(user?.expirationDate?.value);
   let dateOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+  let expirationDate = new Date(user?.expirationDate?.value);
+  let expirationDatePlusOneDay = new Date(user?.expirationDate?.value);
+  expirationDatePlusOneDay = new Date(
+    expirationDatePlusOneDay.setHours(expirationDatePlusOneDay.getHours() + 24)
+  );
+  let dateInOneYear = new Date(expirationDate);
+
+  dateInOneYear = new Date(
+    dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
+  );
+
+  dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
+  expirationDatePlusOneDay = expirationDatePlusOneDay.toLocaleDateString(
+    "fr-FR",
+    dateOptions
+  );
   expirationDate = expirationDate.toLocaleDateString("fr-FR", dateOptions);
 
   let textColorCard, imageCard, borderColor, textMesAvantages;
@@ -71,17 +85,31 @@ const MaCarteMembre = () => {
             <div className="mt-6">
               <p className="font-bold">Mon status de membre :</p>
               <p className="">Valable jusqu&#39;au {expirationDate}</p>
+              <p className="">
+                En renouvelant maintenant, votre carte sera valable du{" "}
+                {expirationDatePlusOneDay} au {dateInOneYear}
+              </p>
             </div>
-            <div className="my-6">
-              <button
-                onClick={() => {
-                  setIsRenewingCard(true);
-                }}
-                className="bg-redWine text-white font-bold py-2 px-4 rounded"
+            <div className="mt-6 md:my-6">
+              <BootstrapTooltip
+                title="Vous pouvez renouveler votre carte avant même la date d'expiration"
+                arrow
+                placement="top"
               >
-                Renouveler ma carte
-              </button>
+                <button
+                  onClick={() => {
+                    setIsRenewingCard(true);
+                  }}
+                  className="bg-redWine text-white font-bold py-2 px-4 rounded relative inline-block"
+                >
+                  Renouveler ma carte
+                </button>
+              </BootstrapTooltip>
             </div>
+            <p className="md:hidden mb-6 text-sm text-[#8F8F8F]">
+              Vous pouvez renouveler votre carte avant même la date
+              d&#39;expiration
+            </p>
             <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
               <Image src={imageCard} layout="fill" alt="Image Decouverte" />
               <div className="absolute -top-5 right-0">

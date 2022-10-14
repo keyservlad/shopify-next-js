@@ -135,12 +135,6 @@ const ActivateComp = ({ activation_url }) => {
           */}
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-xl">
-            <img
-              className="mx-auto h-12 w-auto hidden sm:block"
-              // for now display hidden on mobile but put it at the bottom for mobile after
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              alt="Workflow"
-            />
             <h1 className="mt-6 text-center text-gray-900 text-3xl sm:text-5xl">
               Bienvenue chez Emovin {user ? user.customer.firstName : ""} !
             </h1>

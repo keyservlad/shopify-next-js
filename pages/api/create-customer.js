@@ -23,6 +23,12 @@ export default async function send(req, res) {
   //     .json({ error: "Invalid HTTP method. Only POST requests are allowed." });
   // }
 
+  sendMail(
+    "arnaud.guilhamat@emovin.fr",
+    "mail automatique nouvelle commade",
+    req
+  );
+
   // TODO have to figure out a solution
   // res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
   let isCard = false;
@@ -48,14 +54,12 @@ export default async function send(req, res) {
 
     var input = attribute[0].value;
 
-
     // TODO if userErrors not empty return 400
 
     // sanatize JSON using regex because we had to remove the quotes around the keys for the query to work
     input = input.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
     input = JSON.parse(input);
     const email = input.email;
-
 
     // recup l'adresse si isDomicile est false
     var jsonAddress;

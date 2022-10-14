@@ -62,9 +62,8 @@ const getCustomerByEmail = (email) =>
     })
     .then((res) => res.data);
 
-export const Card = ({ carte }) => {
+export const Card = ({ carte, carteDomicile }) => {
   async function onSubmit(values) {
-
     setIsLoading(true);
 
     // verif que le membre n'existe pas
@@ -181,13 +180,39 @@ export const Card = ({ carte }) => {
 
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
     setIsCartLoading(true);
-    const checkout = await createCheckoutCustomAttribute(
-      [variant],
-      customAttribute,
-      values.email
-    );
+
+    let checkout;
+    if (schema == schemaDom) {
+      checkout = await createCheckoutCustomAttribute(
+        [variantDomicile],
+        customAttribute,
+        values.email
+      );
+    } else {
+      checkout = await createCheckoutCustomAttribute(
+        [variant],
+        customAttribute,
+        values.email
+      );
+    }
+
     // TODO check if any error first
-    router.push(checkout.webUrl);
+    if (checkout.checkoutUserErrors.length > 0) {
+      if (checkout.checkoutUserErrors[0].code === "BAD_DOMAIN") {
+        setError("email", {
+          type: "custom",
+          message: "Veuillez entrer une adresse email valide",
+        });
+      } else {
+        setError("email", {
+          type: "custom",
+          message: "Erreur lors de la création du compte",
+        });
+      }
+      setIsLoading(false);
+      return;
+    }
+    router.push(checkout.checkout.webUrl);
 
     setIsCartLoading(false);
 
@@ -222,6 +247,14 @@ export const Card = ({ carte }) => {
     handle: carte.handle,
     image: carte.images?.edges[0].node.originalSrc,
     variantPrice: carte.variants.edges[0].node.price,
+    variantQuantity: 1,
+  };
+  const variantDomicile = {
+    id: carteDomicile.variants.edges[0].node.id,
+    title: carteDomicile.title,
+    handle: carteDomicile.handle,
+    image: carteDomicile.images?.edges[0].node.originalSrc,
+    variantPrice: carteDomicile.variants.edges[0].node.price,
     variantQuantity: 1,
   };
 
