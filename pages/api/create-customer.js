@@ -172,6 +172,7 @@ export default async function send(req, res) {
       ? req.body.contact_email
       : null;
 
+    // TODO add a check that the order has not been processed already (using the metafield point on order)
     if (email) {
       var customer = await queryCustomerByEmail(email);
       if (customer[0].carte?.value !== "expired" && customer[0].carte?.value) {
@@ -187,7 +188,7 @@ export default async function send(req, res) {
           pts["points"] = 0;
         }
 
-        pts["points"] += Math.round(totalSpentWithoutShipping / 10) >= 0;
+        pts["points"] += Math.round(totalSpentWithoutShipping / 10);
 
         let input = {
           id: customer[0].id.replaceAll(":", "Ƶ"),
