@@ -289,6 +289,10 @@ export default function ShopProvider({ children }) {
 
   async function fetchUser(clientAccessToken) {
     const userr = await getCustomer(clientAccessToken);
+    if (userr.length === 0) {
+      signOut();
+      return;
+    }
     console.log(userr);
 
     const date = new Date(userr?.expirationDate.value);
@@ -297,12 +301,12 @@ export default function ShopProvider({ children }) {
 
     // TODO implement this check in the login page too
     if (
-      userr.length === 0 ||
-      userr.expirationDate.value === null ||
+      !userr ||
+      userr?.expirationDate?.value === null ||
       date < new Date() ||
-      !userr.carte ||
+      !userr?.carte ||
       dateToken < new Date() ||
-      userr.carte?.value === "expired"
+      userr?.carte?.value === "expired"
     ) {
       signOut();
       return;
