@@ -127,7 +127,6 @@ export const Card = ({ carte, carteDomicile }) => {
           {
             key: "points",
             namespace: "custom",
-            type: "integer",
             value: "0",
           },
           {
@@ -174,7 +173,6 @@ export const Card = ({ carte, carteDomicile }) => {
           {
             key: "points",
             namespace: "custom",
-            type: "integer",
             value: "0",
           },
         ],
