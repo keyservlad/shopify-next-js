@@ -136,7 +136,10 @@ const ActivateComp = ({ activation_url }) => {
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-xl">
             <h1 className="mt-6 text-center text-gray-900 text-3xl sm:text-5xl">
-              Bienvenue chez Emovin {user ? user.customer.firstName : ""} !
+              Bienvenue chez Emovin
+            </h1>
+            <h1 className="text-center text-gray-900 text-3xl sm:text-5xl">
+              {user ? user.customer.firstName : ""}
             </h1>
             <h2 className="mt-6 text-center sm:text-lg font-extrabold text-gray-900">
               Activez votre compte et créez votre mot de passe

@@ -18,11 +18,21 @@ const Renew = ({ setIsRenewingCard, cards }) => {
 
   const router = useRouter();
 
-  const myCard = cards.find((card) =>
-    (card.node.handle === user.isDomicile?.value) === "true"
-      ? "carte-" + user.carte?.value + "-domicile"
-      : "carte-" + user.carte?.value
-  ).node;
+  const myCard = cards.find((card) => {
+    if (card.node.handle.includes(user.carte?.value)) {
+      if (
+        user.isDomicile?.value === "true" &&
+        card.node.handle.includes("domicile")
+      ) {
+        return true;
+      } else if (
+        user.isDomicile?.value === "false" &&
+        !card.node.handle.includes("domicile")
+      ) {
+        return true;
+      }
+    }
+  }).node;
 
   const variant = {
     id: myCard.variants.edges[0].node.id,

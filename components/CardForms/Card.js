@@ -388,7 +388,7 @@ export const Card = ({ carte, carteDomicile }) => {
                               htmlFor="mode-domicile"
                               className="ml-3 block text-sm font-medium text-gray-700"
                             >
-                              Livraison à domicile (+ 7,20€)
+                              Livraison adresse privée (+ 15,00€)
                             </label>
                             <span
                               htmlFor="mode-domicile"
@@ -412,7 +412,7 @@ export const Card = ({ carte, carteDomicile }) => {
                               htmlFor="mode-plateforme"
                               className="ml-3 block text-sm font-medium text-gray-700"
                             >
-                              Plateformes
+                              Point relais
                             </label>
                           </div>
                         </div>
@@ -433,7 +433,7 @@ export const Card = ({ carte, carteDomicile }) => {
                                     htmlFor="plateforme"
                                     className="block text-sm font-medium text-gray-700"
                                   >
-                                    Plateforme
+                                    Point relais
                                   </label>
                                   <select
                                     id="plateforme"

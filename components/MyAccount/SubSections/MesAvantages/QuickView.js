@@ -161,8 +161,13 @@ export default function QuickView({ product, open, setOpen }) {
                         aria-labelledby="options-heading"
                         className="mt-10"
                       >
-                        {parseInt(user.points.value) <
-                        parseInt(product?.node.points.value) ? (
+                        {product?.node.variants.nodes[0].quantityAvailable ==
+                        0 ? (
+                          <div className="cursor-not-allowed mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-redWine py-3 px-8 text-base font-medium text-white opacity-75 focus:outline-none focus:ring-2 focus:ring-redWine focus:ring-offset-2">
+                            Rupture de stock...
+                          </div>
+                        ) : parseInt(user.points.value) <
+                          parseInt(product?.node.points.value) ? (
                           <div className="cursor-not-allowed mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-redWine py-3 px-8 text-base font-medium text-white opacity-75 focus:outline-none focus:ring-2 focus:ring-redWine focus:ring-offset-2">
                             Pas assez de points
                           </div>

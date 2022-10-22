@@ -31,7 +31,6 @@ const schema = object({
 
 const Profile = ({}) => {
   async function onSubmit(values) {
-
     setIsLoading(true);
 
     // modif the user
@@ -87,6 +86,7 @@ const Profile = ({}) => {
   const [isAddressCreating, setIsAddressCreating] = useState(false); // state to toggle the address creation components
 
   // This part is used to initialize the boxAddress field when it is empty (case for old customer that used the old card system)
+  // also used to remove the address when boxAddress is empty TODO
   const boxAddress = user.boxDeliveryAddress
     ? JSON.parse(user.boxDeliveryAddress.value)
     : null;
@@ -138,6 +138,14 @@ const Profile = ({}) => {
     fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
   };
+
+  const removeBoxAddress = async () => {
+    setIsLoading(true);
+    const customer = await deleteMetaRequest(user.boxDeliveryAddress.id);
+    console.log(customer);
+    fetchUser(session.data.user.token.accessToken);
+    setIsLoading(false);
+  };
   const updateAddress = (inputAddress) =>
     axios
       .get("/api/update-customer", {
@@ -146,10 +154,20 @@ const Profile = ({}) => {
         },
       })
       .then((res) => res.data);
+  const deleteMetaRequest = (id) =>
+    axios
+      .get("/api/delete-metafield", {
+        params: {
+          id,
+        },
+      })
+      .then((res) => res.data);
 
   useEffect(() => {
     if (user?.isDomicile?.value === "true" && !boxAddress) {
       setBoxAddress(user.defaultAddress);
+    } else if (user?.isDomicile?.value === "false" && boxAddress) {
+      removeBoxAddress();
     }
   }, []);
   // End of the part to initialize the boxAddress field
