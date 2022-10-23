@@ -28,6 +28,7 @@ const HeroSection = (props) => {
           src={ImageHeroMobile}
           alt="Image fond d'écran Home Page mobile"
           layout="fill"
+          objectFit="contain"
           quality={100}
           placeholder="blur"
         />
