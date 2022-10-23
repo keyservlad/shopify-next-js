@@ -18,17 +18,16 @@ const HeroSection = (props) => {
           src={ImageHero}
           alt="Image fond d'écran Home Page"
           layout="fill"
-          objectFit="contain"
+          objectFit="cover"
           quality={100}
           placeholder="blur"
         />
       </div>
-      <div className="sm:hidden relative h-full w-full">
+      <div className="sm:hidden relative aspect-[0.65]">
         <Image
           src={ImageHeroMobile}
           alt="Image fond d'écran Home Page mobile"
           layout="fill"
-          objectFit="contain"
           quality={100}
           placeholder="blur"
         />
