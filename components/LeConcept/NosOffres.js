@@ -57,7 +57,7 @@ const NosOffres = () => {
           <h1 className="hidden md:block text-4xl">Le Bon Coup</h1>
           <p className="mt-5">
             <strong>Avec 3 à 4 opérations par an</strong> (“Coup de cœur
-            d&#39;EMOVIN”), profitez des effets de l&#39;achat groupé pour
+            d&#39;EMOVIN”), profitez des effets de l&#39;achat groupé pour{" "}
             <strong>acheter malin</strong> et bénéficiez des effets de la
             mutualisation grâce à nos plateformes régionales EMOVIN (Lyon Ouest,
             Rambouillet, Grenoble, Avignon).
