@@ -14,7 +14,7 @@ const NosOffres = () => {
       <div className="bg-[#F2F4EB] w-full flex flex-col justify-between md:flex-row pb-10 px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
         <div className="md:w-1/2 lg:w-2/5 flex flex-col justify-center">
           <h1 className="md:hidden text-4xl text-center mt-12">
-            Les cartes Membres
+            La carte Membre
           </h1>
           <div className="relative w-full aspect-1 max-w-xl m-auto">
             <Image
@@ -28,7 +28,7 @@ const NosOffres = () => {
           </div>
         </div>
         <div className="md:w-1/2 flex flex-col justify-center">
-          <h1 className="hidden md:block text-4xl">Les cartes Membres</h1>
+          <h1 className="hidden md:block text-4xl">La carte membre</h1>
           <p className="mt-5">Ouvert à tous et toutes…</p>
           <p className="">
             Tout le monde peut profiter de l&#39;idée d&#39;EMOVIN&nbsp;!
@@ -38,7 +38,7 @@ const NosOffres = () => {
             à vous.
           </p>
           <p className="font-bold">
-            Choissez entre 3 cartes de membre et profitez de pleins
+            Choissez entre 3 options selon vos goûts et profitez de pleins
             d&#39;avantages et surtout deux fois par an d&#39;une sélection de
             vins d&#39;exception dans une Wine Box&nbsp;!
           </p>
