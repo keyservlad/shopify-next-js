@@ -165,6 +165,7 @@ function classNames(...classes) {
 export default function Nav2() {
   const session = useSession();
   const buttonRef = useRef();
+  const menuButtonRef = useRef();
 
   const router = useRouter();
 
@@ -223,6 +224,7 @@ export default function Nav2() {
                 <div className="px-4 pt-5 pb-2 flex">
                   <button
                     type="button"
+                    ref={menuButtonRef}
                     className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400 focus:outline-none"
                     onClick={() => setOpen(false)}
                   >
@@ -233,7 +235,7 @@ export default function Nav2() {
 
                 {/* Links */}
                 <Tab.Group as="div" className="mt-2">
-                  <div className="border-b border-gray-200">
+                  {/* <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex px-4 space-x-8">
                       {navigation.categories.map((category) => (
                         <Tab
@@ -251,40 +253,97 @@ export default function Nav2() {
                         </Tab>
                       ))}
                     </Tab.List>
-                  </div>
+                  </div> */}
                   <Tab.Panels as={Fragment}>
                     {navigation.categories.map((category) => (
                       <Tab.Panel
                         key={category.name}
-                        className="pt-10 pb-8 px-4 space-y-10"
+                        className="pb-8 px-4 space-y-10"
                       >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-center object-cover"
-                                />
-                              </div>
-                              <Link href={item.href} passHref>
-                                <a className="mt-6 block font-medium text-gray-900">
-                                  <span
-                                    className="absolute z-10 inset-0"
-                                    aria-hidden="true"
-                                  />
-                                  {item.name}
+                        <div className="border-b border-gray-200 py-6 space-y-6">
+                          {navigation.pages.map((page) => (
+                            <div key={page.name} className="flow-root">
+                              <Link href={page.href} passHref>
+                                <a
+                                  onClick={() => menuButtonRef.current?.click()}
+                                  className="-m-2 p-2 block font-medium text-gray-900"
+                                >
+                                  {page.name}
                                 </a>
                               </Link>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
                             </div>
                           ))}
+                        </div>
+                        <div className="border-b border-gray-200 py-6 space-y-6">
+                          {session.status === "loading" ||
+                          (!user && session.status === "authenticated") ? (
+                            <>{/* TODO put skeleton when loading */}</>
+                          ) : session.status === "authenticated" ? (
+                            <>
+                              <div className="flow-root -mt-10">
+                                <Link href="/mon-compte" passHref>
+                                  <a
+                                    onClick={() =>
+                                      menuButtonRef.current?.click()
+                                    }
+                                    className="-m-2 p-2 block font-medium text-gray-900"
+                                  >
+                                    Mon compte
+                                  </a>
+                                </Link>
+                              </div>
+                              <div className="flow-root">
+                                <Link href="/cartes" passHref>
+                                  <button
+                                    onClick={() => {
+                                      signOut();
+                                      menuButtonRef.current?.click();
+                                    }}
+                                    className="-m-2 p-2 block font-medium text-gray-900"
+                                  >
+                                    Se déconnecter
+                                  </button>
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flow-root -mt-10">
+                                <Link
+                                  href={{
+                                    pathname: "/login",
+                                    query: {
+                                      callbackUrl:
+                                        `${window.location.origin}` +
+                                        router.asPath,
+                                    },
+                                  }}
+                                  passHref
+                                >
+                                  <a
+                                    onClick={() =>
+                                      menuButtonRef.current?.click()
+                                    }
+                                    className="-m-2 p-2 block font-medium text-gray-900"
+                                  >
+                                    Se connecter
+                                  </a>
+                                </Link>
+                              </div>
+                              <div className="flow-root">
+                                <Link href="/cartes" passHref>
+                                  <a
+                                    onClick={() =>
+                                      menuButtonRef.current?.click()
+                                    }
+                                    className="-m-2 p-2 block font-medium text-gray-900"
+                                  >
+                                    Devenir membre
+                                  </a>
+                                </Link>
+                              </div>
+                            </>
+                          )}
                         </div>
                         {category.sections.map((section) => (
                           <div key={section.name}>
@@ -308,13 +367,23 @@ export default function Nav2() {
                                         query: item.query,
                                       }}
                                     >
-                                      <a className="-m-2 p-2 block text-gray-500">
+                                      <a
+                                        onClick={() =>
+                                          menuButtonRef.current?.click()
+                                        }
+                                        className="-m-2 p-2 block text-gray-500"
+                                      >
                                         {item.name}
                                       </a>
                                     </Link>
                                   ) : (
                                     <Link href={item.href} passHref>
-                                      <a className="-m-2 p-2 block text-gray-500">
+                                      <a
+                                        onClick={() =>
+                                          menuButtonRef.current?.click()
+                                        }
+                                        className="-m-2 p-2 block text-gray-500"
+                                      >
                                         {item.name}
                                       </a>
                                     </Link>
@@ -328,35 +397,6 @@ export default function Nav2() {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <Link href={page.href} passHref>
-                        <a className="-m-2 p-2 block font-medium text-gray-900">
-                          {page.name}
-                        </a>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                  <div className="flow-root">
-                    <Link href="/login" passHref>
-                      <a className="-m-2 p-2 block font-medium text-gray-900">
-                        Sign in
-                      </a>
-                    </Link>
-                  </div>
-                  <div className="flow-root">
-                    <Link href="/cartes" passHref>
-                      <a className="-m-2 p-2 block font-medium text-gray-900">
-                        Create account
-                      </a>
-                    </Link>
-                  </div>
-                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
