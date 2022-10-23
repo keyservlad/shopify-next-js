@@ -20,7 +20,8 @@ const Details = (props) => {
         {/* title */}
         <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-10 grid grid-cols-1 lg:grid-cols-3">
           {/* decouverte */}
-          <div className="relative bg-[#73992C] px-16 xl:px-20 2xl:px-24 py-6 flex items-center justify-center ml-6">
+          <div className="relative bg-[#73992C] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center ml-6 text-white">
+            <p className="mb-2">Option box</p>
             <Image
               src={ImageTitleDecouverteBlanc}
               alt="Titre carte découverte"
@@ -29,7 +30,8 @@ const Details = (props) => {
             />
           </div>
           {/* Immanquables */}
-          <div className="relative bg-[#7FA8E2] px-16 xl:px-20 2xl:px-24 py-6 flex items-center justify-center ml-6">
+          <div className="relative bg-[#7FA8E2] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col text-white items-center justify-center ml-6">
+            <p className="mb-2">Option box</p>
             <Image
               src={ImageTitleImmamquablesBlanc}
               alt="Titre carte immanquables"
@@ -38,7 +40,8 @@ const Details = (props) => {
             />
           </div>
           {/* prestige */}
-          <div className="relative bg-[#901340] px-16 xl:px-20 2xl:px-24 py-6 flex items-center justify-center ml-6">
+          <div className="relative bg-[#901340] px-16 xl:px-20 2xl:px-24 pt-6 pb-7 flex flex-col text-white items-center justify-center ml-6">
+            <p className="mb-2">Option box</p>
             <Image
               src={ImageTitlePrestigeBlanc}
               alt="Titre carte prestige"
@@ -247,9 +250,7 @@ const Details = (props) => {
       </div>
       {/* mobile */}
       <div className="lg:hidden flex flex-col">
-        <DetailsMobile
-          scrollDetailsSection={props.scrollDetailsSection}
-        />
+        <DetailsMobile scrollDetailsSection={props.scrollDetailsSection} />
       </div>
     </div>
   );

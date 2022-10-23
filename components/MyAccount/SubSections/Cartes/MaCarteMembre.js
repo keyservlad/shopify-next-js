@@ -127,13 +127,14 @@ const MaCarteMembre = ({ cards }) => {
 
             <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
               <Image src={imageCard} layout="fill" alt="Image Decouverte" />
-              <div className="absolute -top-5 right-0">
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-                  {user?.isDomicile?.value === "true"
-                    ? "Livraison à domicile"
-                    : "Livraison en point relais"}
-                </span>
-              </div>
+            </div>
+
+            <div className="mt-3">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                {user?.isDomicile?.value === "true"
+                  ? "Livraison à domicile"
+                  : "Livraison en point relais"}
+              </span>
             </div>
             <p className="font-bold mt-10">Mes avantages :</p>
             {/* TODO faire la version en une seule row */}

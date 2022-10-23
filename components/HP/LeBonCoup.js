@@ -39,7 +39,7 @@ const LeBonCoup = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-2 m-auto">
+        <div className="col-span-2 m-auto relative">
           <Image
             src={ImageBonCoup}
             alt="image Le bon coup page d'accueil"
@@ -52,7 +52,7 @@ const LeBonCoup = () => {
           Le Bon Coup !<br />
           Comment ça marche&nbsp;?
         </h1>
-        <div className="mt-8 mx-auto">
+        <div className="mt-8 mx-auto relative">
           <Image
             src={ImageBonCoup}
             alt="image Le bon coup page d'accueil"

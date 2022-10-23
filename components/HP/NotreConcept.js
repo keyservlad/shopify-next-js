@@ -6,7 +6,7 @@ const NotreConcept = (props) => {
   return (
     <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40">
       <div className="py-11 md:pb-28 grid grid-cols-1 md:grid-cols-2 md:gap-x-24">
-        <div className="m-auto">
+        <div className="m-auto relative">
           <Image
             src={ImageHeart}
             alt="image heart page d'accueil"

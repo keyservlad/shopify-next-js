@@ -58,7 +58,7 @@ const LeBonCoup = ({ productsLBC }) => {
       <NotreSelection productsLBC={productsLBC} />
       <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-20">
         <div className="py-11 md:pb-28 grid grid-cols-1 md:grid-cols-3 md:gap-x-24">
-          <div className="m-auto col-span-1">
+          <div className="m-auto col-span-1 relative">
             <Image
               src={ImageHouraLBC}
               alt="image heart page d'accueil"
@@ -85,7 +85,7 @@ const LeBonCoup = ({ productsLBC }) => {
         <div className="mt-16 py-9 lg:grid grid-cols-5 gap-x-4">
           <div className="md:grid grid-cols-5 gap-x-4 lg:col-span-4">
             <div className="grid grid-cols-4 md:col-span-2 md:gap-x-3">
-              <div className="col-span-1 max-w-[100px] m-auto">
+              <div className="col-span-1 max-w-[100px] m-auto relative">
                 <Image
                   src={ImageCloche}
                   alt="image ImageCloche"
