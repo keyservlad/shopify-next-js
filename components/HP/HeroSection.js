@@ -13,7 +13,7 @@ const HeroSection = (props) => {
 
   return (
     <div className="relative w-screen aspect-[0.65] sm:aspect-[2.18] max-h-screen overflow-hidden">
-      <div className="hidden sm:flex relative">
+      <div className="hidden sm:flex relative h-full w-full">
         <Image
           src={ImageHero}
           alt="Image fond d'écran Home Page"
@@ -23,7 +23,7 @@ const HeroSection = (props) => {
           placeholder="blur"
         />
       </div>
-      <div className="sm:hidden relative">
+      <div className="sm:hidden relative h-full w-full">
         <Image
           src={ImageHeroMobile}
           alt="Image fond d'écran Home Page mobile"
