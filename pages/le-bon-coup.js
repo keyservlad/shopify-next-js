@@ -4,9 +4,10 @@ import { getAllProductsLeBonCoup } from "../lib/shopify";
 
 const leboncoup = ({ productsLBC }) => {
   if (productsLBC.length !== 3) {
-    return <ToutBu page={"bonCoup"}/>;
+    return <ToutBu page={"bonCoup"} />;
   }
-  return <LeBonCoup productsLBC={productsLBC} />;
+  return <ToutBu page={"bonCoup"} />;
+  // return <LeBonCoup productsLBC={productsLBC} />;
 };
 
 export default leboncoup;

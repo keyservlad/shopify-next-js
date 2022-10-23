@@ -8,6 +8,7 @@ const nextConfig = {
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
     PASSWORD_MAIL_CONTACT: process.env.PASSWORD_MAIL_CONTACT,
     PASSWORD_CREATE_ACCOUNT: process.env.PASSWORD_CREATE_ACCOUNT,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
   },
   images: {
     domains: ["cdn.shopify.com"],

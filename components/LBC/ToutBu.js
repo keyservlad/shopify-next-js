@@ -8,7 +8,7 @@ const ToutBu = ({ page }) => {
         <div className="bg-blueWine text-white flex flex-col py-12 px-5 w-full sm:px-10 lg:absolute lg:top-0 lg:left-0 lg:z-10 lg:px-20 lg:pr-10 lg:py-16 lg:w-[59%] xl:px-28 xl:py-16 xl:w-[55%] 2xl:px-40">
           <h1 className="">Ils ont tout bu :-)</h1>
           <p className="text-2xl font-semibold mt-5">
-            Nous revenons très vite avec
+            Nous revenons très vite avec{" "}
             {page === "serieLim"
               ? "une nouvelle série limitée"
               : "le prochain Bon Coup"}
@@ -34,26 +34,32 @@ const ToutBu = ({ page }) => {
       </div>
       <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 my-20 md:w-3/4 mx-auto text-center">
         <h2 className="text-4xl font-light">EMOVIN pour tous les goûts</h2>
-        <h3 className="text-2xl font-light">... mais surtout le vôtre !</h3>
+        <h3 className="text-2xl font-light">
+          ...&nbsp;mais surtout le vôtre&nbsp;!
+        </h3>
         <div className="mt-5 leading-7">
-          <p>Bonne nouvelle ! Votre attente ne devrait pas être trop longue…</p>
+          <p>
+            Bonne nouvelle&nbsp;! Votre attente ne devrait pas être trop longue…
+          </p>
 
           <p className="mt-2">
-            Nos deux compères ont repris la « route des vins » pour vous
-            dénicher de nouvelles « pépites » à découvrir.
+            Nos deux compères ont repris la «&nbsp;route des vins&nbsp;» pour
+            vous dénicher de nouvelles «&nbsp;pépites&nbsp;» à découvrir.
           </p>
 
           <p className="mt-2">
             Pour la prochaine opération, notre feuille de route (ADN
-            d&#39;EMOVIN) est de vous trouver des « flacons » rares issus de
-            domaines respectueux de la nature et qui ne sont pas nécessairement
-            les plus connus ou parfois difficile d&#39;accès&nbsp;!
+            d&#39;EMOVIN) est de vous trouver des «&nbsp;flacons&nbsp;» rares
+            issus de domaines respectueux de la nature et qui ne sont pas
+            nécessairement les plus connus ou parfois difficile
+            d&#39;accès&nbsp;!
           </p>
 
           <p className="mt-2">
-            Notre quête nous pousse rarement vers « le moins disant » d&#39;une
-            appellation, mais plutôt vers un vin « bien fait » et qui correspond
-            à vos attentes ! Vous nous faites confiance depuis près de 2 ans…{" "}
+            Notre quête nous pousse rarement vers «&nbsp;le moins disant&nbsp;»
+            d&#39;une appellation, mais plutôt vers un vin «&nbsp;bien
+            fait&nbsp;» et qui correspond à vos attentes ! Vous nous faites
+            confiance depuis près de 2 ans…{" "}
           </p>
           <p>cela nous honore tout autant que cela nous oblige.</p>
 

@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
 import { CookieNotFound } from "@shopify/shopify-api/dist/error";
 import Cookies from "js-cookie";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -32,6 +33,22 @@ function MyApp({ Component, pageProps }) {
   // }
   return (
     <>
+      <Script
+        id="1"
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+
+      <Script strategy="lazyOnload" id="2">
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+        page_path: window.location.pathname,
+        });
+    `}
+      </Script>
       <Head>
         <title>Emovin : le Plaisir de Partager</title> {/* customisable */}
       </Head>
