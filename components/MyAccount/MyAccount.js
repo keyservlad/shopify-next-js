@@ -31,12 +31,12 @@ function classNames(...classes) {
 
 const MyAccount = ({ products, cards }) => {
   const subNavigation = [
-    { name: "Profil", component: <Profile />, icon: UserCircleIcon },
     {
       name: "Ma Carte Membre",
       component: <MaCarteMembre cards={cards} />,
       icon: CogIcon,
     },
+    { name: "Profil", component: <Profile />, icon: UserCircleIcon },
     {
       name: "Mes avantages fidélité",
       component: <MesAvantages products={products} />,

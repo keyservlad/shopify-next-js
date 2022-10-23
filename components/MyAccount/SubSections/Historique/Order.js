@@ -15,6 +15,24 @@ function classNames(...classes) {
 
 const Order = ({ order }) => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(order.id);
+  // regex to get the order id from the string gid://shopify/Order/4954627047658?key=ec49f866ee01614891bdd653a02b77d4
+  const orderId = order.id.match(/Order\/(.*)\?/)[1];
+
+  let hrefFacture =
+    "https://www.orderprinterpro.com/download/orders/b3053c215dd8b93b7221/" +
+    orderId * 1168 +
+    "/" +
+    order.orderNumber +
+    ".pdf";
+  if (order.lineItems.nodes[0].title.includes("Carte")) {
+    hrefFacture =
+      "https://www.orderprinterpro.com/download/orders/6458aa138c71e56a1014/" +
+      orderId * 4339 +
+      "/" +
+      order.orderNumber +
+      ".pdf";
+  }
   return (
     <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg sm:border">
       <div
@@ -110,8 +128,11 @@ const Order = ({ order }) => {
             )}
             <span className="sr-only">{order.orderNumber}</span>
           </button>
-          <Link href={""} passHref>
-            <a className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <Link href={hrefFacture} passHref>
+            <a
+              target={"_blank"}
+              className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
               <span>Ma facture</span>
             </a>
           </Link>

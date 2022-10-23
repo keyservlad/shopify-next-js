@@ -48,6 +48,13 @@ const MaCarteMembre = ({ cards }) => {
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
   );
 
+  let expirationDateMinusOneMonth = new Date(user?.expirationDate?.value);
+  expirationDateMinusOneMonth = new Date(
+    expirationDateMinusOneMonth.setMonth(
+      expirationDateMinusOneMonth.getMonth() - 1
+    )
+  );
+
   dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
   expirationDatePlusOneDay = expirationDatePlusOneDay.toLocaleDateString(
     "fr-FR",
@@ -85,31 +92,39 @@ const MaCarteMembre = ({ cards }) => {
             <div className="mt-6">
               <p className="font-bold">Mon status de membre :</p>
               <p className="">Valable jusqu&#39;au {expirationDate}</p>
-              <p className="">
-                En renouvelant maintenant, votre carte sera valable du{" "}
-                {expirationDatePlusOneDay} au {dateInOneYear}
-              </p>
+
+              {expirationDateMinusOneMonth < new Date() &&
+                !user?.nextCarte?.value && (
+                  <p className="">
+                    En renouvelant maintenant, votre carte sera valable du{" "}
+                    {expirationDatePlusOneDay} au {dateInOneYear}
+                  </p>
+                )}
             </div>
-            <div className="mt-6 md:my-6">
-              <BootstrapTooltip
-                title="Vous pouvez renouveler votre carte avant même la date d'expiration"
-                arrow
-                placement="top"
-              >
-                <button
-                  onClick={() => {
-                    setIsRenewingCard(true);
-                  }}
-                  className="bg-redWine text-white font-bold py-2 px-4 rounded relative inline-block"
-                >
-                  Renouveler ma carte
-                </button>
-              </BootstrapTooltip>
-            </div>
+            {expirationDateMinusOneMonth < new Date() &&
+              !user?.nextCarte?.value && (
+                <div className="mt-6 md:my-6">
+                  <BootstrapTooltip
+                    title="Vous pouvez renouveler votre carte avant même la date d'expiration"
+                    arrow
+                    placement="top"
+                  >
+                    <button
+                      onClick={() => {
+                        setIsRenewingCard(true);
+                      }}
+                      className="bg-redWine text-white font-bold py-2 px-4 rounded relative inline-block"
+                    >
+                      Renouveler ma carte
+                    </button>
+                  </BootstrapTooltip>
+                </div>
+              )}
             <p className="md:hidden mb-6 text-sm text-[#8F8F8F]">
               Vous pouvez renouveler votre carte avant même la date
               d&#39;expiration
             </p>
+
             <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
               <Image src={imageCard} layout="fill" alt="Image Decouverte" />
               <div className="absolute -top-5 right-0">

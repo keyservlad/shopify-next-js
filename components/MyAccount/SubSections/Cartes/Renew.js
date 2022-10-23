@@ -178,10 +178,12 @@ const Renew = ({ setIsRenewingCard, cards }) => {
             </div>
             <div className="mt-6">
               <p className="font-bold">Mon status de membre :</p>
-              <p className="">Valable jusqu&#39;au {expirationDate}</p>
               <p className="">
-                En renouvelant maintenant, votre carte sera valable du{" "}
-                {expirationDatePlusOneDay} au {dateInOneYearFR}
+                Merci de votre confiance en renouvellant votre carte EMOVIN
+              </p>
+              <p className="">
+                Votre prochaine carte sera active du {expirationDatePlusOneDay}{" "}
+                au {dateInOneYearFR}
               </p>
             </div>
 
