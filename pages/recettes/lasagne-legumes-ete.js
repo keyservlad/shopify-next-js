@@ -3,6 +3,7 @@ import Recette from "../../components/Recettes/Recette";
 import ImagePorc from "../../public/images/recettes/plat3.png";
 import VectorRedWine from "../../public/images/recettes/VectorRoseWine.png";
 import ImageBouteille from "../../public/images/recettes/bouteille3-modif.png";
+import Head from "next/head";
 
 const recette = {
   title: (
@@ -116,7 +117,8 @@ const recette = {
 
         <p className="mt-7">
           <strong>
-          ... et pour ceux qui n&#39;en ont plus en cave, nous contacter</strong>
+            ... et pour ceux qui n&#39;en ont plus en cave, nous contacter
+          </strong>
         </p>
         <div className="w-full flex justify-center md:justify-start">
           <button className="bg-redWine text-white px-5 py-2 rounded-lg mt-7 hover:bg-white hover:text-redWine border border-redWine">
@@ -130,7 +132,14 @@ const recette = {
 };
 
 const LasagneLegumesEte = () => {
-  return <Recette recette={recette} color={"rose"} />;
+  return (
+    <>
+      <Head>
+        <title>Emovin : Lasagne legumes ete</title>
+      </Head>
+      <Recette recette={recette} color={"rose"} />
+    </>
+  );
 };
 
 LasagneLegumesEte.auth = true;

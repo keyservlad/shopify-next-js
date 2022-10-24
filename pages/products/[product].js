@@ -1,11 +1,17 @@
 import { getAllProductsNotreCave, getProduct } from "../../lib/shopify";
 import ProductPageContent from "../../components/Boutique/Product/ProductPageContent";
+import Head from "next/head";
 
 export default function ProductPage({ product }) {
   return (
-    <div className="min-h-screen pb-12 bg-[#FAF8F7]">
-      <ProductPageContent product={product} />
-    </div>
+    <>
+      <Head>
+        <title>Emovin : {product.title}</title>
+      </Head>
+      <div className="min-h-screen pb-12 bg-[#FAF8F7]">
+        <ProductPageContent product={product} />
+      </div>
+    </>
   );
 }
 

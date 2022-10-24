@@ -3,6 +3,7 @@ import Recette from "../../components/Recettes/Recette";
 import ImagePorc from "../../public/images/recettes/plat1.png";
 import VectorRedWine from "../../public/images/recettes/VectorRedWine.png";
 import ImageBouteille from "../../public/images/recettes/bouteille1-modif.png";
+import Head from "next/head";
 
 const recette = {
   title: (
@@ -114,7 +115,14 @@ const recette = {
 };
 
 const EchinePorcPrille = () => {
-  return <Recette recette={recette} color={"red"} />;
+  return (
+    <>
+      <Head>
+        <title>Emovin : Echine de porc grille</title>
+      </Head>
+      <Recette recette={recette} color={"red"} />
+    </>
+  );
 };
 
 EchinePorcPrille.auth = true;

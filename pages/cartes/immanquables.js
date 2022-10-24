@@ -1,8 +1,16 @@
 import { getCarte } from "../../lib/shopify";
 import { Card } from "../../components/CardForms/Card";
+import Head from "next/head";
 
 export default function Immanqubles({ carte, carteDomicile }) {
-  return <Card carte={carte} carteDomicile={carteDomicile} />;
+  return (
+    <>
+      <Head>
+        <title>Emovin : Carte Immanquables</title>
+      </Head>
+      <Card carte={carte} carteDomicile={carteDomicile} />
+    </>
+  );
 }
 
 export async function getStaticProps() {

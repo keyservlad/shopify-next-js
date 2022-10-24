@@ -3,6 +3,7 @@ import Recette from "../../components/Recettes/Recette";
 import ImageSalade from "../../public/images/recettes/plat2.png";
 import VectorWhiteWine from "../../public/images/recettes/VectorWhiteWine.png";
 import ImageBouteille from "../../public/images/recettes/bouteille2-modif.png";
+import Head from "next/head";
 
 const recette = {
   title: (
@@ -126,7 +127,14 @@ const recette = {
 };
 
 const SaladeCopines = () => {
-  return <Recette recette={recette} color={"white"} />;
+  return (
+    <>
+      <Head>
+        <title>Emovin : Salade copines</title>
+      </Head>
+      <Recette recette={recette} color={"white"} />
+    </>
+  );
 };
 
 SaladeCopines.auth = true;

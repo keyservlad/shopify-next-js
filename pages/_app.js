@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }) {
     `}
       </Script>
       <Head>
-        <title>Emovin : le Plaisir de Partager</title> {/* customisable */}
+        <title>Emovin : le Plaisir de Partager</title> {/* default title : customisable on each page */}
       </Head>
       <SessionProvider session={pageProps.session}>
         {Component.auth ? (

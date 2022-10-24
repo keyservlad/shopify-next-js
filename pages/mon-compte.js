@@ -1,8 +1,16 @@
+import Head from "next/head";
 import MyAccount from "../components/MyAccount/MyAccount";
 import { getAllCards, getAllProductsVinotheque } from "../lib/shopify";
 
 const MonCompte = ({ products, cards }) => {
-  return <MyAccount products={products} cards={cards.edges} />;
+  return (
+    <>
+      <Head>
+        <title>Emovin : Mon compte</title>
+      </Head>
+      <MyAccount products={products} cards={cards.edges} />
+    </>
+  );
 };
 
 MonCompte.auth = true;
@@ -19,7 +27,7 @@ export async function getStaticProps() {
   });
 
   // TODO order croissant de points de la vinotheque (done but manually to have the no photo at the end too) / but need to order and only display the ones with photos
-  // but then only display the ones without photos at the end 
+  // but then only display the ones without photos at the end
 
   let cards = await getAllCards();
 
