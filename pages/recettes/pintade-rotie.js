@@ -125,7 +125,7 @@ const recette = {
           frais de livraison en point relais inclus. <br />
           (Offre valable jusqu&#39;au 30 novemebre 2022)
         </p>
-        <div className="w-full flex flex-row justify-center md:justify-start items-center mt-5">
+        <div className="w-full flex flex-col md:flex-row justify-center md:justify-start items-center mt-5">
           Pour commander{" "}:
           <button className="bg-redWine text-white px-5 py-2 rounded-lg ml-3 hover:bg-white hover:text-redWine border border-redWine">
             Nous contacter
