@@ -70,7 +70,7 @@ const Recette = ({ recette, color }) => {
             <h1 className="text-3xl">Emovin vous recommande</h1>
           </div>
           <div className="flex flex-col md:flex-row mt-10 md:gap-x-20">
-            <div className="relative aspect-[0.65] max-h-96 w-full md:w-1/3">
+            <div className="relative aspect-[0.65] max-h-96 w-full md:w-1/3 text-center flex items-center justify-center mx-auto">
               <Image
                 src={recette.imageBouteille}
                 alt={"bouteille image"}

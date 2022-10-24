@@ -141,7 +141,7 @@ const EchinePorcPrille = () => {
   return (
     <>
       <Head>
-        <title>Emovin : Echine de porc grille</title>
+        <title>Emovin : Pintade rotie</title>
       </Head>
       <Recette recette={recette} color={"red"} />
     </>
