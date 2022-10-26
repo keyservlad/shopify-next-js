@@ -19,7 +19,7 @@ const Recette = ({ recette, color }) => {
           <h2 className="text-4xl font-light mt-8">{recette.title}</h2>
           <p className="mt-4">Recette pour {recette.numberPerson} personnes</p>
         </div>
-        <div className="w-full aspect-[1.52865957] max-h-[50vh] lg:max-h-full lg:w-1/2 xl:w-2/5 relative text-center mt-5 lg:mt-auto m-auto">
+        <div className="w-full aspect-[1.52865957] max-h-[50vh] lg:max-h-full lg:w-1/2 xl:w-2/5 relative text-center mt-5 lg:mt-auto m-auto lg:bg-[#FAF8F8]">
           <Image
             src={recette.image}
             alt="Image recette"

@@ -21,9 +21,10 @@ export const sendMail = (destination, subject, html) => {
 
   transport.sendMail(mailOptions, function (error, info) {
     if (error) {
-      // console.log(error);
+      console.log(error);
+      console.log(mailOptions);
     } else {
-      // console.log(info);
+      console.log(info);
     }
   });
 
