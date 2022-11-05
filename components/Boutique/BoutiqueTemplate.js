@@ -1,6 +1,6 @@
 import ProductList from "./ProductList";
 
-import { Fragment, useEffect, useState } from "react";
+import { createRef, Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/solid";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 
 const sortOptions = [
   { name: "Meilleures ventes", value: "BEST_SELLING" },
@@ -35,21 +36,29 @@ const filters_init = [
       { value: "25_35", label: "Entre 25 et 35 €", number: 0, checked: false },
       { value: "35", label: "Plus de 35 €", number: 0, checked: false },
     ],
+    refButton: createRef(),
+    open: false,
   },
   {
     id: "region",
     name: "Région",
     options: [],
+    refButton: createRef(),
+    open: false,
   },
   {
     id: "vendor",
     name: "Producteur",
     options: [],
+    refButton: createRef(),
+    open: false,
   },
   {
     id: "bio",
     name: "Vins bio",
     options: [{ value: "true", label: "Vins bio", number: 0, checked: false }],
+    refButton: createRef(),
+    open: false,
   },
 ];
 
@@ -165,11 +174,20 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
         }
       });
     }
+
+    // set filters.open to true if there is a filter checked
+    newFilters = newFilters.map((filter) => {
+      if (filter.options.find((option) => option.checked)) {
+        return { ...filter, open: true };
+      } else {
+        return filter;
+      }
+    });
     setFilters(newFilters);
   }, [router.query, defaultFilters]);
 
   // TODO best selling and rating
-  // TODO add numbers to filters
+  // TODO add numbers to filters (count)
   useEffect(() => {
     let tempProductList = [...products];
 
@@ -490,78 +508,93 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
 
                 {filters.map((section) => (
                   <Disclosure
+                    // defaultOpen={
+                    //   // if there is a filter that is checked, open the section by default
+                    //   section.options.some((option) => option.checked)
+                    // }
                     as="div"
                     key={section.id}
                     className="border-b border-gray-200 py-6"
                   >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  type="checkbox"
-                                  value={option.checked}
-                                  checked={option.checked}
-                                  onChange={() => {
-                                    let newFilters = [...filters];
-                                    newFilters.forEach((filter) => {
-                                      if (filter.id === section.id) {
-                                        if (filter.options[optionIdx].checked) {
-                                          filter.options[
-                                            optionIdx
-                                          ].checked = false;
-                                          return;
-                                        }
-                                        filter.options.forEach((opt) => {
-                                          opt.checked = false;
-                                        });
-                                        filter.options[optionIdx].checked =
-                                          !filter.options[optionIdx].checked;
-                                      }
-                                    });
-                                    setFilters(newFilters);
-                                  }}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
+                    {({ open }) => {
+                      if (section.open && !open) {
+                        section.refButton.current.click();
+                      }
+
+                      return (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button
+                              ref={section.refButton}
+                              className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                            >
+                              <span className="font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
                                 >
-                                  {option.label} {/*({option.number}) */}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    type="checkbox"
+                                    value={option.checked}
+                                    checked={option.checked}
+                                    onChange={() => {
+                                      let newFilters = [...filters];
+                                      newFilters.forEach((filter) => {
+                                        if (filter.id === section.id) {
+                                          if (
+                                            filter.options[optionIdx].checked
+                                          ) {
+                                            filter.options[
+                                              optionIdx
+                                            ].checked = false;
+                                            return;
+                                          }
+                                          filter.options.forEach((opt) => {
+                                            opt.checked = false;
+                                          });
+                                          filter.options[optionIdx].checked =
+                                            !filter.options[optionIdx].checked;
+                                        }
+                                      });
+                                      setFilters(newFilters);
+                                    }}
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label} {/*({option.number}) */}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      );
+                    }}
                   </Disclosure>
                 ))}
               </form>

@@ -113,7 +113,7 @@ const MaCarteMembre = ({ cards }) => {
       ) : (
         <div className="lg:col-span-9 px-4 sm:px-10 py-6">
           <div className="flex flex-col text-center justify-center items-center">
-            <h1 className="text-redWine">Ma carte membre</h1>
+            <h1 className="text-redWine text-6xl">Ma carte membre</h1>
             <div className="mt-6">
               <p className="font-bold">Mon status de membre :</p>
               <p className="">Valable jusqu&#39;au {expirationDate}</p>
