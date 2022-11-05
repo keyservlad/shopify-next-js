@@ -35,7 +35,7 @@ const ReservedMembres = () => {
       <div className="flex flex-row md:gap-x-24 px-5 lg:px-32 xl:px-40 2xl:px-60 bg-[#FAF8F8] pb-10">
         <div className="flex flex-col justify-center md:basis-2/3">
           <h2 className="text-3xl font-semibold mt-5">
-            Les conseils et recettes de Bruno Loubet sont réservées aux membres
+            Les conseils et recettes de Bruno Loubet sont réservés aux membres
             Emovin
           </h2>
           <p className="my-5">

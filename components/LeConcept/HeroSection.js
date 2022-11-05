@@ -1,4 +1,5 @@
 import Image from "next/image";
+// import ImageHeroBonCoup from "../../public/images/concept/visuel_concept.jpg";
 import ImageHeroBonCoup from "../../public/images/concept/concept_hero.jpg";
 
 

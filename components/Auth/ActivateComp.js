@@ -62,7 +62,7 @@ const ActivateComp = ({ activation_url }) => {
 
     router.push({
       pathname: "/login",
-      query: { success: "creation de compte reussie" },
+      query: { success: "creation-de-compte-reussie" },
     });
   }
 
