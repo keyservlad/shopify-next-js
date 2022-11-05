@@ -14,6 +14,14 @@ import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
+import ImageTitleDecouverteBlanc from "../../../../public/images/cartes/logo_decouverte_blanc.png";
+import ImageTitleImmamquablesBlanc from "../../../../public/images/cartes/logo_immanquables_blanc.png";
+import ImageTitlePrestigeBlanc from "../../../../public/images/cartes/logo_prestige_blanc.png";
+
+import DessinDecouverte from "../../../../public/images/logo-cartes/dessinDecouverte.png";
+import DessinImmanquables from "../../../../public/images/logo-cartes/dessinImmanquables.png";
+import DessinPrestige from "../../../../public/images/logo-cartes/dessinPrestige.png";
+
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -62,23 +70,40 @@ const MaCarteMembre = ({ cards }) => {
   );
   expirationDate = expirationDate.toLocaleDateString("fr-FR", dateOptions);
 
-  let textColorCard, imageCard, borderColor, textMesAvantages;
+  let textColorCard,
+    imageCard,
+    borderColor,
+    textMesAvantages,
+    textAccroche,
+    imageDessin,
+    bgColor;
 
   if (user?.carte?.value === "decouverte") {
     textColorCard = "text-[#73992C]";
     borderColor = "border-[#73992C]";
-    imageCard = ImageDecouverte;
+    bgColor = "bg-[#73992C]";
+    imageCard = ImageTitleDecouverteBlanc;
+    imageDessin = DessinDecouverte;
     textMesAvantages = <>LES DÉCOUVERTE DE L&#39;AUTOMNE</>;
+    textAccroche = (
+      <>Ce ne sont pas les vins les plus connus... et pourtant&nbsp;!</>
+    );
   } else if (user?.carte?.value === "immanquables") {
     textColorCard = "text-[#7FA8E2]";
     borderColor = "border-[#7FA8E2]";
-    imageCard = ImageImmanquables;
+    bgColor = "bg-[#7FA8E2]";
+    imageCard = ImageTitleImmamquablesBlanc;
+    imageDessin = DessinImmanquables;
     textMesAvantages = "LES GRANDES APPELLATIONS";
+    textAccroche = <>Il faut les avoir dans sa cave&nbsp;!</>;
   } else if (user?.carte?.value === "prestige") {
     textColorCard = "text-[#901340]";
     borderColor = "border-[#901340]";
-    imageCard = ImagePrestige;
+    bgColor = "bg-[#901340]";
+    imageCard = ImageTitlePrestigeBlanc;
+    imageDessin = DessinPrestige;
     textMesAvantages = "PRESTIGE DE FRANCE";
+    textAccroche = <>Les goûter au moins une fois dans sa vie&nbsp;!</>;
   }
 
   return (
@@ -125,20 +150,52 @@ const MaCarteMembre = ({ cards }) => {
               d&#39;expiration
             </p>
 
-            <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
+            {/* <div className="relative w-2/3 max-w-xs aspect-[5] mt-6">
               <Image src={imageCard} layout="fill" alt="Image Decouverte" />
-            </div>
+            </div> */}
 
-            <div className="mt-3">
+            <div
+              className={`relative ${bgColor} max-w-sm px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center text-white`}
+            >
+              <p className="mb-2">Option box</p>
+              <Image
+                src={imageCard}
+                alt="Titre carte découverte"
+                quality={100}
+                placeholder="blur"
+              />
+            </div>
+            <div className="my-3">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
                 {user?.isDomicile?.value === "true"
                   ? "Livraison à domicile"
                   : "Livraison en point relais"}
               </span>
             </div>
+            <div className="relative max-h-64 max-w-xs aspect-1 m-auto">
+              <Image
+                src={imageDessin}
+                alt="Dessin carte découverte"
+                quality={100}
+                placeholder="blur"
+              />
+            </div>
+            <div className="flex items-center  flex-col ml-6">
+              <div className="text-center flex flex-col">
+                <h2 className={`font-semibold ${textColorCard} text-xl`}>
+                  {textMesAvantages}
+                </h2>
+                <p className="">{textAccroche}</p>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-500 text-left w-full my-3">
+              Les boxes seront livrées à l&#39;adresse indiquée dans votre
+              profil, vous pouvez la modifier en vous rendant dans la section
+              «&nbsp;Profil&nbsp;»
+            </p>
             <p className="font-bold mt-10">Mes avantages :</p>
-            {/* TODO faire la version en une seule row */}
-            <div
+            {/* <div
               className={`flex text-center justify-around items-center flex-col md:flex-row w-full border-[3px] ${borderColor} ${textColorCard} p-4 mt-6`}
             >
               <div className="">
@@ -162,12 +219,8 @@ const MaCarteMembre = ({ cards }) => {
                   année
                 </p>
               </div>
-            </div>
-            <p className="text-xs text-gray-500 text-left w-full my-3">
-              Les boxes seront livrées à l&#39;adresse indiquée dans votre
-              profil, vous pouvez la modifier en vous rendant dans la section
-              «&nbsp;Profil&nbsp;»
-            </p>
+            </div> */}
+
             <Rows />
           </div>
         </div>

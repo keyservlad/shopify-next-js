@@ -16,7 +16,8 @@ const DetailsMobile = ({ scrollDetailsSection }) => {
     <>
       {/* decouverte */}
       <div className="w-full px-5 sm:px-10 mt-10">
-        <div className="relative bg-[#73992C] px-16 py-6 flex items-center justify-center ">
+        <div className="relative bg-[#73992C] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center ml-6 text-white">
+          <p className="mb-2">Option box</p>
           <Image
             src={ImageTitleDecouverteBlanc}
             alt="Titre carte découverte"
@@ -82,7 +83,8 @@ const DetailsMobile = ({ scrollDetailsSection }) => {
           </div>
         </div>
         {/* Immanquables */}
-        <div className="relative bg-[#7FA8E2] px-16 xl:px-20 2xl:px-24 py-6 flex items-center justify-center   ">
+        <div className="relative bg-[#7FA8E2] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center ml-6 text-white">
+          <p className="mb-2">Option box</p>
           <Image
             src={ImageTitleImmamquablesBlanc}
             alt="Titre carte immanquables"
@@ -148,7 +150,8 @@ const DetailsMobile = ({ scrollDetailsSection }) => {
           </div>
         </div>
         {/* Prestige */}
-        <div className="relative bg-[#901340] px-16 xl:px-20 2xl:px-24 py-6 flex items-center justify-center   ">
+        <div className="relative bg-[#901340] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center ml-6 text-white">
+          <p className="mb-2">Option box</p>
           <Image
             src={ImageTitlePrestigeBlanc}
             alt="Titre carte prestige"
