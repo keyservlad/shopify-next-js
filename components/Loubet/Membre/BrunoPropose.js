@@ -1,8 +1,11 @@
 import Image from "next/image";
 import VectorBackgroundWhite from "../../../public/images/bruno/VectorWhite.png";
-import ImagePlat1 from "../../../public/images/bruno/plat1.png";
-import ImagePlat2 from "../../../public/images/bruno/plat2.png";
-import ImagePlat3 from "../../../public/images/bruno/plat3.png";
+import ImagePlat1 from "../../../public/images/recettes/plat4.png";
+import ImagePlat2 from "../../../public/images/recettes/plat5.jpg";
+import ImagePlat3 from "../../../public/images/recettes/plat6.png";
+// import ImagePlat1 from "../../../public/images/bruno/plat1.png";
+// import ImagePlat2 from "../../../public/images/bruno/plat5.png";
+// import ImagePlat3 from "../../../public/images/bruno/plat6.png";
 import RowRecette from "./RowRecette";
 
 const lines = [
@@ -10,26 +13,21 @@ const lines = [
     image: ImagePlat1,
     text: (
       <>
-        Echine de porc grillé en aigre doux et romarin, Aubergine fumée à
-        l&#39;ail et petite salade d&#39;herbes
+        Pintade rôtie, sel de céleri et mélasse de grenade, pudding aux oignons
+        et bacon
       </>
     ),
-    href: "/recettes/echine-porc-grille",
+    href: "/recettes/pintade-rotie",
   },
   {
     image: ImagePlat2,
-    text: <>Salade d&#39;été pour les copines (végétarien)</>,
-    href: "/recettes/salade-copines",
+    text: <>Tartare de saumon</>,
+    href: "/recettes/tartare-saumon",
   },
   {
     image: ImagePlat3,
-    text: (
-      <>
-        Tranche froide de lasagne aux légumes d&#39;été, Vinaigrette
-        d&#39;herbes et avocat
-      </>
-    ),
-    href: "/recettes/lasagne-legumes-ete",
+    text: <>Mini pudding aux pruneaux et armagnac</>,
+    href: "/recettes/mini-pudding-pruneaux",
   },
 ];
 
