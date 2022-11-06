@@ -6,7 +6,7 @@ const ToutBu = ({ page }) => {
     <>
       <div className="relative lg:aspect-[2.677] w-full">
         <div className="bg-blueWine text-white flex flex-col py-12 px-5 w-full sm:px-10 lg:absolute lg:top-0 lg:left-0 lg:z-10 lg:px-20 lg:pr-10 lg:py-16 lg:w-[59%] xl:px-28 xl:py-16 xl:w-[55%] 2xl:px-40">
-          <h1 className="">Ils ont tout bu :-)</h1>
+          <h1 className="">Ils ont tout bu 😮</h1>
           <p className="text-2xl font-semibold mt-5">
             Nous revenons très vite avec{" "}
             {page === "serieLim"

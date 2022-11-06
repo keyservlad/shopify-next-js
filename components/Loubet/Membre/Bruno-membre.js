@@ -27,7 +27,7 @@ const col2 = {
     <>
       Au fil des recettes, je vous propose de partager mon univers. Laissez-vous
       guider… EMOVIN se charge du reste ! “Vos amis ne vous regarderont plus de
-      la même façon”&nbsp;:-)
+      la même façon”&nbsp;😉
     </>
   ),
 };

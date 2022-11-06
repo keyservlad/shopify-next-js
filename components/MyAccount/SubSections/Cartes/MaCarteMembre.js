@@ -155,7 +155,7 @@ const MaCarteMembre = ({ cards }) => {
             </div> */}
 
             <div
-              className={`relative ${bgColor} max-w-sm px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center text-white`}
+              className={`mt-6 relative ${bgColor} max-w-sm px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center text-white`}
             >
               <p className="mb-2">Option box</p>
               <Image
