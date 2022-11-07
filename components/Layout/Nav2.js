@@ -40,7 +40,7 @@ const navigation = {
   categories: [
     {
       id: "notre-cave",
-      name: "Notre Boutique",
+      name: "Boutique",
       featured: [
         {
           name: "Série limitée",
@@ -152,9 +152,10 @@ const navigation = {
   ],
   pages: [
     { name: "Bon Coup", href: "/le-bon-coup" },
-    { name: "Le Concept", href: "/notre-concept" },
     { name: "Série Limitée", href: "/serie-limitee" },
+    // { name: "Coffrets cadeaux", href: "/bruno-loubet" },
     { name: "Coin du chef", href: "/bruno-loubet" },
+    { name: "Concept", href: "/notre-concept" },
   ],
 };
 

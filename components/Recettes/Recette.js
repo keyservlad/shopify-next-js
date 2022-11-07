@@ -77,6 +77,7 @@ const Recette = ({ recette, color }) => {
                 objectFit="contain"
                 layout="fill"
                 quality={100}
+                placeholder="blur"
               />
             </div>
             <div className="mt-10 md:w-2/3 md:mt-0">
