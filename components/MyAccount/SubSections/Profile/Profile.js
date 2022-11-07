@@ -67,13 +67,12 @@ const Profile = ({}) => {
     };
 
     const token = session.data.user.token.accessToken;
-
     const cust = await modifyCustomer(customer, token);
 
     // check if the birthMount has changed and is not undefined
     if (
-      values.birthMonth !== undefined
-      // && values.birthDay !== user.birthDay.value
+      values.birthMonth !== undefined &&
+      values.birthMonth !== Number(user.birthDay?.value)
     ) {
       let inputMonth;
       if (user.birthDay) {
@@ -146,7 +145,9 @@ const Profile = ({}) => {
   const [email, setEmail] = useState(initialValues.email);
   const [birthMonth, setBirthMonth] = useState({
     id: initialValues.birthMonth,
-    name: months[initialValues.birthMonth - 1].name,
+    name: initialValues.birthMonth
+      ? months[initialValues.birthMonth - 1].name
+      : undefined,
   });
 
   const [isAddressEditing, setIsAddressEditing] = useState(false); // state to toggle the address editing components
@@ -442,100 +443,124 @@ const Profile = ({}) => {
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
-                    <Listbox
-                      value={birthMonth?.id}
-                      onChange={(value) => {
-                        setBirthMonth(value);
-                        setValue("birthMonth", value.id);
-                      }}
-                    >
-                      {({ open }) => (
-                        <>
-                          <Listbox.Label className="block text-sm font-medium text-gray-700">
-                            Mois de naissance
-                          </Listbox.Label>
-                          <div className="relative mt-1">
-                            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-                              <span className="flex items-center">
-                                <span className="ml-3 block truncate h-full">
-                                  {birthMonth?.name}&nbsp;
-                                </span>
+                    {user?.birthDay ? (
+                      <>
+                        <label className="block text-sm font-medium text-gray-700">
+                          Mois de naissance
+                        </label>
+                        <span className="flex items-center">
+                          <span className="block truncate h-full">
+                            {birthMonth?.name}
+                          </span>
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Listbox
+                          value={birthMonth?.id}
+                          onChange={(value) => {
+                            setBirthMonth(value);
+                            setValue("birthMonth", value.id);
+                          }}
+                        >
+                          {({ open }) => (
+                            <>
+                              <Listbox.Label className="block text-sm font-medium text-gray-700">
+                                Mois de naissance
+                              </Listbox.Label>
+                              <span
+                                htmlFor="birthMonth"
+                                className="block text-sm font-medium text-orange-600"
+                              >
+                                Attention vous ne pourrez pas changer ce champ
+                                une fois confirmé
                               </span>
-                              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                <ChevronDoubleDownIcon
-                                  className="h-5 w-5 text-gray-400"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Listbox.Button>
 
-                            <Transition
-                              show={open}
-                              as={Fragment}
-                              leave="transition ease-in duration-100"
-                              leaveFrom="opacity-100"
-                              leaveTo="opacity-0"
-                            >
-                              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {months.map((month) => (
-                                  <Listbox.Option
-                                    key={month.id}
-                                    className={({ active }) =>
-                                      classNames(
-                                        active
-                                          ? "text-white bg-indigo-600"
-                                          : "text-gray-900",
-                                        "relative cursor-default select-none py-2 pl-3 pr-9"
-                                      )
-                                    }
-                                    value={month}
-                                  >
-                                    {({ selected, active }) => (
-                                      <>
-                                        <div className="flex items-center">
-                                          <span
-                                            className={classNames(
-                                              selected
-                                                ? "font-semibold"
-                                                : "font-normal",
-                                              "ml-3 block truncate"
-                                            )}
-                                          >
-                                            {month.name}
-                                          </span>
-                                        </div>
+                              <div className="relative mt-1">
+                                <Listbox.Button className="relative w-full cursor-pointer rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                                  <span className="flex items-center">
+                                    <span className="ml-3 block truncate h-full">
+                                      {birthMonth?.name}&nbsp;
+                                    </span>
+                                  </span>
+                                  <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                                    <ChevronDoubleDownIcon
+                                      className="h-5 w-5 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                  </span>
+                                </Listbox.Button>
 
-                                        {selected ? (
-                                          <span
-                                            className={classNames(
-                                              active
-                                                ? "text-white"
-                                                : "text-indigo-600",
-                                              "absolute inset-y-0 right-0 flex items-center pr-4"
-                                            )}
-                                          >
-                                            <CheckIcon
-                                              className="h-5 w-5"
-                                              aria-hidden="true"
-                                            />
-                                          </span>
-                                        ) : null}
-                                      </>
-                                    )}
-                                  </Listbox.Option>
-                                ))}
-                              </Listbox.Options>
-                            </Transition>
-                          </div>
-                        </>
-                      )}
-                    </Listbox>
-                    <span
-                      htmlFor="birthMonth"
-                      className="block text-sm font-medium text-orange-600"
-                    >
-                      {errors?.birthMonth?.message}
-                    </span>
+                                <Transition
+                                  show={open}
+                                  as={Fragment}
+                                  leave="transition ease-in duration-100"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
+                                >
+                                  <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                    {months.map((month) => (
+                                      <Listbox.Option
+                                        key={month.id}
+                                        className={({ active }) =>
+                                          classNames(
+                                            active
+                                              ? "text-white bg-indigo-600"
+                                              : "text-gray-900",
+                                            "relative cursor-pointer select-none py-2 pl-3 pr-9"
+                                          )
+                                        }
+                                        value={month}
+                                      >
+                                        {({ selected, active }) => (
+                                          <>
+                                            <div className="flex items-center">
+                                              <span
+                                                className={classNames(
+                                                  selected
+                                                    ? "font-semibold"
+                                                    : "font-normal",
+                                                  "ml-3 block truncate"
+                                                )}
+                                              >
+                                                {month.name}
+                                              </span>
+                                            </div>
+
+                                            {selected ? (
+                                              <span
+                                                className={classNames(
+                                                  active
+                                                    ? "text-white"
+                                                    : "text-indigo-600",
+                                                  "absolute inset-y-0 right-0 flex items-center pr-4"
+                                                )}
+                                              >
+                                                <CheckIcon
+                                                  className="h-5 w-5"
+                                                  aria-hidden="true"
+                                                />
+                                              </span>
+                                            ) : null}
+                                          </>
+                                        )}
+                                      </Listbox.Option>
+                                    ))}
+                                  </Listbox.Options>
+                                </Transition>
+                              </div>
+                            </>
+                          )}
+                        </Listbox>
+
+                        <span
+                          htmlFor="birthMonth"
+                          className="block text-sm font-medium text-orange-600"
+                        >
+                          {errors?.birthMonth?.message}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -601,6 +626,15 @@ const Profile = ({}) => {
                         setValue("lastName", lastName);
                         setEmail(initialValues.email);
                         setValue("email", email);
+                        setBirthMonth(
+                          initialValues.birthMonth
+                            ? {
+                                id: initialValues.birthMonth,
+                                name: months[initialValues.birthMonth - 1].name,
+                              }
+                            : undefined
+                        );
+                        setValue("birthMonth", birthMonth.id);
                       }}
                       className={`bg-white border hover:cursor-pointer border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500`}
                     >
