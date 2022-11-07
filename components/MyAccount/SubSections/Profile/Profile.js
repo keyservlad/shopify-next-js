@@ -4,7 +4,7 @@ import fr from "react-phone-number-input/locale/fr.json";
 import "react-phone-number-input/style.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string } from "yup";
+import { object, string, number } from "yup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Controller } from "react-hook-form";
@@ -14,6 +14,10 @@ import { useSession } from "next-auth/react";
 import { modifyCustomer } from "../../../../lib/shopifyCustomer";
 import ModifAddress from "./ModifAddress";
 import CreateAddress from "./CreateAddress";
+
+import { Fragment } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronDoubleDownIcon } from "@heroicons/react/outline";
 
 const phoneRegExp =
   /^(?:(?:\+|00)\d{2,3}[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -25,9 +29,29 @@ const schema = object({
     .required("Veuillez entrer votre adresse email"),
   phone: string()
     .required("Veuillez entrer votre numéro de téléphone")
-    .matches(phoneRegExp, "Numéro de léléphone non valide")
+    .matches(phoneRegExp, "Numéro de téléphone non valide")
     .min(10, "Trop court"),
+  birthMonth: number("Veuillez entrer une date de naissance valide"),
 });
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const months = [
+  { id: 1, name: "Janvier" },
+  { id: 2, name: "Février" },
+  { id: 3, name: "Mars" },
+  { id: 4, name: "Avril" },
+  { id: 5, name: "Mai" },
+  { id: 6, name: "Juin" },
+  { id: 7, name: "Juillet" },
+  { id: 8, name: "Août" },
+  { id: 9, name: "Septembre" },
+  { id: 10, name: "Octobre" },
+  { id: 11, name: "Novembre" },
+  { id: 12, name: "Décembre" },
+];
 
 const Profile = ({}) => {
   async function onSubmit(values) {
@@ -44,7 +68,46 @@ const Profile = ({}) => {
 
     const token = session.data.user.token.accessToken;
 
-    const user = await modifyCustomer(customer, token);
+    const cust = await modifyCustomer(customer, token);
+
+    // check if the birthMount has changed and is not undefined
+    if (
+      values.birthMonth !== undefined
+      // && values.birthDay !== user.birthDay.value
+    ) {
+      let inputMonth;
+      if (user.birthDay) {
+        inputMonth = {
+          id: user.id,
+          metafields: [
+            {
+              id: user.birthDay.id,
+              key: "birthDay",
+              namespace: "custom",
+              type: "number_integer",
+              value: `${values.birthMonth}`,
+            },
+          ],
+        };
+      } else {
+        inputMonth = {
+          id: user.id,
+          metafields: [
+            {
+              key: "birthDay",
+              namespace: "custom",
+              type: "number_integer",
+              value: `${values.birthMonth}`,
+            },
+          ],
+        };
+      }
+      inputMonth = JSON.stringify(inputMonth);
+      inputMonth = inputMonth.replaceAll('\\"', "~");
+      inputMonth = inputMonth.replace(/"([^"]+)":/g, "$1:");
+      inputMonth = inputMonth.replaceAll("~", '\\"');
+      const customer = await updateAddress(inputMonth);
+    }
 
     // refresh the user
     fetchUser(session.data.user.token.accessToken);
@@ -73,6 +136,7 @@ const Profile = ({}) => {
     lastName: user.lastName,
     email: user.email,
     phone: user.phone,
+    birthMonth: user.birthDay?.value ? Number(user.birthDay?.value) : undefined,
   };
 
   const [isLoading, setIsLoading] = useState(false);
@@ -80,6 +144,10 @@ const Profile = ({}) => {
   const [firstName, setFirstName] = useState(initialValues.firstName);
   const [lastName, setLastName] = useState(initialValues.lastName);
   const [email, setEmail] = useState(initialValues.email);
+  const [birthMonth, setBirthMonth] = useState({
+    id: initialValues.birthMonth,
+    name: months[initialValues.birthMonth - 1].name,
+  });
 
   const [isAddressEditing, setIsAddressEditing] = useState(false); // state to toggle the address editing components
   const [addressToModify, setAddressToModify] = useState(null); // state to store the address to modify
@@ -142,10 +210,10 @@ const Profile = ({}) => {
   const removeBoxAddress = async () => {
     setIsLoading(true);
     const customer = await deleteMetaRequest(user.boxDeliveryAddress.id);
-    console.log(customer);
     fetchUser(session.data.user.token.accessToken);
     setIsLoading(false);
   };
+
   const updateAddress = (inputAddress) =>
     axios
       .get("/api/update-customer", {
@@ -154,6 +222,7 @@ const Profile = ({}) => {
         },
       })
       .then((res) => res.data);
+
   const deleteMetaRequest = (id) =>
     axios
       .get("/api/delete-metafield", {
@@ -189,6 +258,9 @@ const Profile = ({}) => {
   useEffect(() => {
     setValue("email", email);
   }, [email]);
+  useEffect(() => {
+    setValue("birthMonth", birthMonth?.id);
+  }, [birthMonth]);
 
   return (
     <>
@@ -368,6 +440,103 @@ const Profile = ({}) => {
                       {errors?.phone?.message}
                     </label>
                   </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <Listbox
+                      value={birthMonth?.id}
+                      onChange={(value) => {
+                        setBirthMonth(value);
+                        setValue("birthMonth", value.id);
+                      }}
+                    >
+                      {({ open }) => (
+                        <>
+                          <Listbox.Label className="block text-sm font-medium text-gray-700">
+                            Mois de naissance
+                          </Listbox.Label>
+                          <div className="relative mt-1">
+                            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                              <span className="flex items-center">
+                                <span className="ml-3 block truncate h-full">
+                                  {birthMonth?.name}&nbsp;
+                                </span>
+                              </span>
+                              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                                <ChevronDoubleDownIcon
+                                  className="h-5 w-5 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Listbox.Button>
+
+                            <Transition
+                              show={open}
+                              as={Fragment}
+                              leave="transition ease-in duration-100"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                            >
+                              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {months.map((month) => (
+                                  <Listbox.Option
+                                    key={month.id}
+                                    className={({ active }) =>
+                                      classNames(
+                                        active
+                                          ? "text-white bg-indigo-600"
+                                          : "text-gray-900",
+                                        "relative cursor-default select-none py-2 pl-3 pr-9"
+                                      )
+                                    }
+                                    value={month}
+                                  >
+                                    {({ selected, active }) => (
+                                      <>
+                                        <div className="flex items-center">
+                                          <span
+                                            className={classNames(
+                                              selected
+                                                ? "font-semibold"
+                                                : "font-normal",
+                                              "ml-3 block truncate"
+                                            )}
+                                          >
+                                            {month.name}
+                                          </span>
+                                        </div>
+
+                                        {selected ? (
+                                          <span
+                                            className={classNames(
+                                              active
+                                                ? "text-white"
+                                                : "text-indigo-600",
+                                              "absolute inset-y-0 right-0 flex items-center pr-4"
+                                            )}
+                                          >
+                                            <CheckIcon
+                                              className="h-5 w-5"
+                                              aria-hidden="true"
+                                            />
+                                          </span>
+                                        ) : null}
+                                      </>
+                                    )}
+                                  </Listbox.Option>
+                                ))}
+                              </Listbox.Options>
+                            </Transition>
+                          </div>
+                        </>
+                      )}
+                    </Listbox>
+                    <span
+                      htmlFor="birthMonth"
+                      className="block text-sm font-medium text-orange-600"
+                    >
+                      {errors?.birthMonth?.message}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="mt-4 py-4 px-4 flex justify-end sm:px-6">
@@ -464,3 +633,32 @@ const Profile = ({}) => {
 };
 
 export default Profile;
+
+const numberToMounth = (number) => {
+  switch (number) {
+    case 1:
+      return "Janvier";
+    case 2:
+      return "Février";
+    case 3:
+      return "Mars";
+    case 4:
+      return "Avril";
+    case 5:
+      return "Mai";
+    case 6:
+      return "Juin";
+    case 7:
+      return "Juillet";
+    case 8:
+      return "Août";
+    case 9:
+      return "Septembre";
+    case 10:
+      return "Octobre";
+    case 11:
+      return "Novembre";
+    case 12:
+      return "Décembre";
+  }
+};
