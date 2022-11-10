@@ -21,5 +21,6 @@ export async function getStaticProps() {
       carte,
       carteDomicile,
     },
+    revalidate: 10,
   };
 }

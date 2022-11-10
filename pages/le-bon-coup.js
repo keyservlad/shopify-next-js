@@ -34,5 +34,6 @@ export async function getStaticProps() {
     props: {
       productsLBC,
     },
+    revalidate: 10,
   };
 }
