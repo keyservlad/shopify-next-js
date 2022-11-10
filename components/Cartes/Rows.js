@@ -31,7 +31,7 @@ const Rows = () => {
             «&nbsp;Découvertes de printemps&nbsp;»
           </p>
           <p className="text-center text-sm text-[#8F8F8F]">
-            Livrées en printemps en «&nbsp;point relais&nbsp;»
+            Livrées au printemps
           </p>
         </>
       ),

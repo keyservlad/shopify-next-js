@@ -86,7 +86,16 @@ const MaCarteMembre = ({ cards }) => {
     imageDessin = DessinDecouverte;
     textMesAvantages = <>LES DÉCOUVERTE DE L&#39;AUTOMNE</>;
     textAccroche = (
-      <>Ce ne sont pas les vins les plus connus... et pourtant&nbsp;!</>
+      <>
+        Avec l&#39;option «&nbsp;BOX Découverte&nbsp;», vous recevrez en
+        septembre 3 bouteilles «&nbsp;Les Découvertes de l&#39;Automne&nbsp;»
+        spécialement sélectionnés pour vous : «&nbsp;Les pépites du
+        moment&nbsp;»
+        <br />
+        <span className="font-semibold">
+          Ce ne sont pas les vins les plus connus&nbsp;… et pourtant&nbsp;!
+        </span>
+      </>
     );
   } else if (user?.carte?.value === "immanquables") {
     textColorCard = "text-[#7FA8E2]";
@@ -95,7 +104,18 @@ const MaCarteMembre = ({ cards }) => {
     imageCard = ImageTitleImmamquablesBlanc;
     imageDessin = DessinImmanquables;
     textMesAvantages = "LES GRANDES APPELLATIONS";
-    textAccroche = <>Il faut les avoir dans sa cave&nbsp;!</>;
+    textAccroche = (
+      <>
+        Avec L&#39;option «&nbsp;BOX LES IMMANQUABLES&nbsp;», vous recevrez en
+        septembre 3 bouteilles «&nbsp;Les Immanquables de France&nbsp;»
+        spécialement sélectionnés pour vous&nbsp;: «&nbsp;Le petit jésus en
+        culotte de velour&nbsp;»
+        <br />
+        <span className="font-semibold">
+          Il faut les avoir dans sa cave&nbsp;!
+        </span>
+      </>
+    );
   } else if (user?.carte?.value === "prestige") {
     textColorCard = "text-[#901340]";
     borderColor = "border-[#901340]";
@@ -103,7 +123,17 @@ const MaCarteMembre = ({ cards }) => {
     imageCard = ImageTitlePrestigeBlanc;
     imageDessin = DessinPrestige;
     textMesAvantages = "PRESTIGE DE FRANCE";
-    textAccroche = <>Les goûter au moins une fois dans sa vie&nbsp;!</>;
+    textAccroche = (
+      <>
+        Avec L&#39;option «&nbsp;BOX PRESTIGE&nbsp;», vous recevrez en septembre
+        3 bouteilles de «&nbsp;Prestige de France&nbsp;» spécialement
+        sélectionnés pour vous : «&nbsp;La crème de la crème&nbsp;»
+        <br />
+        <span className="font-semibold">
+          Les goûter au moins une fois dans sa vie&nbsp;!
+        </span>
+      </>
+    );
   }
 
   return (
@@ -189,11 +219,11 @@ const MaCarteMembre = ({ cards }) => {
               </div>
             </div>
 
-            <p className="text-xs text-gray-500 text-left w-full my-3">
+            {/* <p className="text-xs text-gray-500 text-left w-full my-3">
               Les boxes seront livrées à l&#39;adresse indiquée dans votre
               profil, vous pouvez la modifier en vous rendant dans la section
               «&nbsp;Profil&nbsp;»
-            </p>
+            </p> */}
             <p className="font-bold mt-10">Mes avantages :</p>
             {/* <div
               className={`flex text-center justify-around items-center flex-col md:flex-row w-full border-[3px] ${borderColor} ${textColorCard} p-4 mt-6`}
