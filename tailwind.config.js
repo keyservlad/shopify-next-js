@@ -6,6 +6,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -28,6 +29,7 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("tailwindcss-animation-delay"),
     require("@tailwindcss/aspect-ratio"),
+    require("tw-elements/dist/plugin"),
     ({ matchUtilities, theme /* … */ }) => {
       // …
       matchUtilities(

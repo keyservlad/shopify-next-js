@@ -39,7 +39,7 @@ const ProductMomentDegustation = ({ product }) => {
   const soupleTannique = ST[product.en_bouche_souple_tannique?.value - 1];
 
   return (
-    <div className="relative pt-12  mt-20 bg-white w-full rounded">
+    <div className="relative pt-12 mt-20 bg-white w-full rounded">
       <div className="px-9">
         <h1 className="text-3xl text-center">Le moment de la dégustation</h1>
         <div className="flex flex-col justify-center md:flex-row md:justify-around w-full mt-14">

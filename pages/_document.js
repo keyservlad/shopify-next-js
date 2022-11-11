@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-title-in-document-head */
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
+
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const originalRenderPage = ctx.renderPage;

@@ -742,7 +742,7 @@ export default function Nav2() {
                           />
                           <Link href="/cartes" passHref>
                             <a className="">
-                              <div className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-redWine border-redWine focus:outline-none">
+                              <div className="w-full flex justify-center py-2 border border-transparent rounded-md text-sm font-medium text-redWine border-redWine focus:outline-none">
                                 Devenir membre
                               </div>
                             </a>
