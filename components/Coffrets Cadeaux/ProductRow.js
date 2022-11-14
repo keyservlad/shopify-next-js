@@ -7,7 +7,7 @@ const ProductRow = ({ product, i, arr, orderState, setOrderState }) => {
       <div className="flex text-sm">
         <p
           className={`mr-10 pt-4 ${
-            arr.length - 1 !== i ? "border-b w-full border-[#E6E6E6] pb-4" : ""
+            arr.length - 1 !== i%3 ? "border-b w-full border-[#E6E6E6] pb-4" : ""
           } `}
         >
           {product.node.title}

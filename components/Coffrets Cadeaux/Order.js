@@ -7,8 +7,16 @@ import Image3CoffretsMobile from "../../public/images/coffrets/3_images_mobile_f
 import ProductRow from "./ProductRow";
 
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import {
+  checkoutAddress,
+  checkoutCustomerAssociate,
+  checkoutDiscount,
+  checkoutEmailAssociate,
+  createCheckout,
+} from "../../lib/shopifyCheckout";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const BootstrapTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -25,6 +33,64 @@ const BootstrapTooltip = styled(({ className, ...props }) => (
 
 const Order = ({ productsCoffrets }) => {
   const { user } = useContext(CartContext);
+  const session = useSession();
+  const router = useRouter();
+
+  const commander = async () => {
+    setIsLoading(true);
+    // check that we have at least three products in the order state
+    if (
+      Object.values(orderState).reduce((acc, product) => {
+        return acc + product.quantity;
+      }, 0) < 3
+    ) {
+      setIsLoading(false);
+      return;
+    }
+    // create the variants (array or integrate in the object directly?)
+
+    const variants = [];
+    Object.values(orderState).map((product) => {
+      if (product.quantity > 0) {
+        variants.push({
+          variantQuantity: product.quantity,
+          id: product.product.variants.nodes[0].id,
+          handle: product.product.handle,
+        });
+      }
+    });
+
+    // create the checkout
+
+    let checkout = await createCheckout(variants);
+
+    // apply discounts if the user is logged in
+    if (user && session.status === "authenticated") {
+      checkout = await checkoutCustomerAssociate(
+        checkout.id,
+        session.data.user.token.accessToken
+      );
+
+      let defaultAddress = user.defaultAddress;
+      delete defaultAddress.id;
+      defaultAddress = JSON.stringify(defaultAddress);
+      defaultAddress = defaultAddress.replace(/"([^"]+)":/g, "$1:"); // remove quotes for keys
+      checkout = await checkoutAddress(checkout.id, defaultAddress);
+      checkout = await checkoutEmailAssociate(checkout.id, user.email);
+      // for (let i = 0; i < variants.length; i++) {
+      //   checkout = await checkoutDiscount(checkout.id, variants[i].handle);
+      // }
+      checkout = await checkoutDiscount(checkout.id, "coffret-cadeau");
+    }
+
+    console.log(checkout);
+
+    // route to checkout url
+
+    router.push(checkout.webUrl);
+
+    // setIsLoading(false);
+  };
 
   const [orderState, setOrderState] = useState(
     productsCoffrets.map((item) => {
@@ -36,9 +102,9 @@ const Order = ({ productsCoffrets }) => {
   );
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(orderState);
-  }, [orderState]);
+  // useEffect(() => {
+  //   console.log(orderState);
+  // }, [orderState]);
 
   const [variant, setVariant] = useState({
     id: "product.variants.edges[0].node.id",
@@ -91,9 +157,9 @@ const Order = ({ productsCoffrets }) => {
             </li>
             <li>• Prix € TTC par bouteille (tout compris)</li>
           </ul>
-          <p className="underline cursor-pointer font-semibold mt-8 text-sm">
+          {/* <p className="underline cursor-pointer font-semibold mt-8 text-sm">
             Tout savoir sur nos bouteilles cadeaux
-          </p>
+          </p> */}
           {/* divider horizontal 2px */}
           <div className="w-full h-0.5 bg-black my-8" />
           <p className="font-bold text-sm mb-3">
@@ -214,7 +280,10 @@ const Order = ({ productsCoffrets }) => {
                 Chargement...
               </button>
             ) : (
-              <button className="bg-redWine inline-block text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
+              <button
+                onClick={() => commander()}
+                className="bg-redWine inline-block text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white"
+              >
                 Commander
               </button>
             )}
@@ -226,16 +295,16 @@ const Order = ({ productsCoffrets }) => {
           </p>
         </div>
       </div>
-
-      {/* seleciton Faire plaisir 
+      {/* 
+      seleciton Faire plaisir 
       TODO add a component for taht
-      */}
+      
       <div className="relative py-12 px-9 mt-20 bg-white w-full rounded">
         <h1 className="text-3xl text-center">
           Notre sélection &#34;Faire Plaisir&#34;
         </h1>
         <p className="mt-5">asas</p>
-      </div>
+      </div> */}
     </div>
   );
 };

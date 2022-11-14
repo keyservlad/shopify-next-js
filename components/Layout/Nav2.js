@@ -153,7 +153,7 @@ const navigation = {
   pages: [
     { name: "Bon Coup", href: "/le-bon-coup" },
     { name: "Série Limitée", href: "/serie-limitee" },
-    // { name: "Coffrets cadeaux", href: "/bruno-loubet" },
+    { name: "Coffrets cadeaux", href: "/coffrets-cadeaux" },
     { name: "Coin du chef", href: "/bruno-loubet" },
     { name: "Concept", href: "/notre-concept" },
   ],
