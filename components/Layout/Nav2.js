@@ -256,12 +256,16 @@ export default function Nav2() {
                     </Tab.List>
                   </div> */}
                   <Tab.Panels as={Fragment}>
+                    
                     {navigation.categories.map((category) => (
                       <Tab.Panel
                         key={category.name}
                         className="pb-8 px-4 space-y-10"
                       >
                         <div className="border-b border-gray-200 py-6 space-y-6">
+
+                          {/* add boutique here */}
+
                           {navigation.pages.map((page) => (
                             <div key={page.name} className="flow-root">
                               <Link href={page.href} passHref>
@@ -346,7 +350,7 @@ export default function Nav2() {
                             </>
                           )}
                         </div>
-                        {category.sections.map((section) => (
+                        {/* {category.sections.map((section) => (
                           <div key={section.name}>
                             <p
                               id={`${category.id}-${section.id}-heading-mobile`}
@@ -393,7 +397,7 @@ export default function Nav2() {
                               ))}
                             </ul>
                           </div>
-                        ))}
+                        ))} */}
                       </Tab.Panel>
                     ))}
                   </Tab.Panels>

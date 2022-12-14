@@ -1,6 +1,6 @@
 import Image from "next/image";
-// import ImageHeroBonCoup from "../../public/images/concept/visuel_concept.jpg";
-import ImageHeroBonCoup from "../../public/images/concept/concept_hero.jpg";
+import ImageHeroBonCoup from "../../public/images/concept/visuel_concept_2022.jpg";
+// import ImageHeroBonCoup from "../../public/images/concept/concept_hero.jpg";
 
 
 // TODO fox resolution hero chevauchement pour tablette (md-lg)
