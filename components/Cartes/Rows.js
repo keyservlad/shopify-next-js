@@ -16,7 +16,7 @@ const Rows = () => {
         <>
           <p className="text-center">
             <span className="font-semibold">Un cadeau </span>
-            «&nbsp;Surprise&nbsp;» de bienvenue
+            «&nbsp;Surprise&nbsp;» de bienvenue lors de la première commande
           </p>
         </>
       ),

@@ -3,7 +3,7 @@ import React from "react";
 
 const Row = ({ image, text }) => {
   return (
-    <div className="bg-[#FAF8F9] flex flex-row justify-center w-full p-6 mt-6 h-full">
+    <div className="bg-[#FAF8F9] flex flex-row justify-center w-full p-6 mt-6 h-full items-center">
       <div className="flex items-center justify-center">
         <div className="relative aspect-1 w-9 mr-6 flex justify-center align-center">
           <Image
