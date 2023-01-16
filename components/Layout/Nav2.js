@@ -256,16 +256,12 @@ export default function Nav2() {
                     </Tab.List>
                   </div> */}
                   <Tab.Panels as={Fragment}>
-                    
                     {navigation.categories.map((category) => (
                       <Tab.Panel
                         key={category.name}
                         className="pb-8 px-4 space-y-10"
                       >
                         <div className="border-b border-gray-200 py-6 space-y-6">
-
-                          {/* add boutique here */}
-
                           {navigation.pages.map((page) => (
                             <div key={page.name} className="flow-root">
                               <Link href={page.href} passHref>
@@ -279,6 +275,23 @@ export default function Nav2() {
                             </div>
                           ))}
                         </div>
+
+                        {/* add boutique here // add the links to the navigation filters */}
+                        <div className="border-b border-gray-200 py-6">
+                          <>
+                            <div className="flow-root -mt-10">
+                              <Link href="/notre-boutique" passHref>
+                                <a
+                                  onClick={() => menuButtonRef.current?.click()}
+                                  className="-mr-2 py-2 block font-medium text-gray-900"
+                                >
+                                  Notre boutique
+                                </a>
+                              </Link>
+                            </div>
+                          </>
+                        </div>
+
                         <div className="border-b border-gray-200 py-6 space-y-6">
                           {session.status === "loading" ||
                           (!user && session.status === "authenticated") ? (
