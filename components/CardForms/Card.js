@@ -4,7 +4,7 @@ import fr from "react-phone-number-input/locale/fr.json";
 import "react-phone-number-input/style.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string } from "yup";
+import { boolean, object, string } from "yup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import PersonalInfos from "./PersonalInfos";
@@ -12,6 +12,7 @@ import DeliveryAdress from "./DeliveryAdress";
 import DeliveryAdress2 from "./DeliveryAdress2";
 import { createCheckoutCustomAttribute } from "../../lib/shopifyCheckout";
 import { useRouter } from "next/router";
+import { formatter } from "../../utils/helper";
 
 // TODO remove billing address + add shippping address to be the id of the current address of the user
 // TODO do the other cards like prestige
@@ -33,6 +34,7 @@ const schemaPlat = object({
       ["Rambouillet", "Lyon", "Avignon", "Grenoble", "Chronopost"],
       "Veuillez entrer une plateforme de livraison valide"
     ),
+  boxPlusPlus: boolean("Case à cocher ou décocher"),
 });
 const schemaDom = object({
   firstName: string().required("Veuillez entrer votre prénom"),
@@ -51,6 +53,7 @@ const schemaDom = object({
     .required("Veuillez entrer votre numéro de téléphone")
     .matches(phoneRegExp, "Numéro de léléphone non valide")
     .min(10, "Trop court"),
+  boxPlusPlus: boolean("Case à cocher ou décocher"),
 });
 
 const getCustomerByEmail = (email) =>
@@ -62,7 +65,12 @@ const getCustomerByEmail = (email) =>
     })
     .then((res) => res.data);
 
-export const Card = ({ carte, carteDomicile }) => {
+export const Card = ({
+  carte,
+  carteDomicile,
+  cartePlusPlus,
+  cartePlusPlusDomicile,
+}) => {
   async function onSubmit(values) {
     setIsLoading(true);
 
@@ -139,6 +147,13 @@ export const Card = ({ carte, carteDomicile }) => {
             value: "false",
           },
           {
+            id: ids?.isPlusPlus ? ids.isPlusPlus : null,
+            key: "isPlusPlus",
+            namespace: "custom",
+            type: "boolean",
+            value: `${values.boxPlusPlus}`,
+          },
+          {
             id: ids?.points ? ids.points : null,
             key: "points",
             namespace: "custom",
@@ -183,6 +198,13 @@ export const Card = ({ carte, carteDomicile }) => {
             value: expiryDate.toISOString().split("T")[0],
           },
           {
+            id: ids?.isPlusPlus ? ids.isPlusPlus : null,
+            key: "isPlusPlus",
+            namespace: "custom",
+            type: "boolean",
+            value: `${values.boxPlusPlus}`,
+          },
+          {
             id: ids?.isDomicile ? ids.isDomicile : null,
             key: "isDomicile",
             namespace: "custom",
@@ -220,17 +242,33 @@ export const Card = ({ carte, carteDomicile }) => {
 
     let checkout;
     if (schema == schemaDom) {
-      checkout = await createCheckoutCustomAttribute(
-        [variantDomicile],
-        customAttribute,
-        values.email
-      );
+      if (values.boxPlusPlus) {
+        checkout = await createCheckoutCustomAttribute(
+          [variantDomicilePlusPlus],
+          customAttribute,
+          values.email
+        );
+      } else {
+        checkout = await createCheckoutCustomAttribute(
+          [variantDomicile],
+          customAttribute,
+          values.email
+        );
+      }
     } else {
-      checkout = await createCheckoutCustomAttribute(
-        [variant],
-        customAttribute,
-        values.email
-      );
+      if (values.boxPlusPlus) {
+        checkout = await createCheckoutCustomAttribute(
+          [variantPlusPlus],
+          customAttribute,
+          values.email
+        );
+      } else {
+        checkout = await createCheckoutCustomAttribute(
+          [variant],
+          customAttribute,
+          values.email
+        );
+      }
     }
 
     // TODO check if any error first
@@ -254,13 +292,6 @@ export const Card = ({ carte, carteDomicile }) => {
     setIsCartLoading(false);
 
     // setIsLoading(false); //disabled because router.push takes so much time wtf
-
-    // const customer = createCustomerRequest(JSON.stringify(input));
-
-    // TODO verif unique phone number
-    // TODO add all the address + phone number + mail + note under the card to the checkout
-    // TODO acheter qu'une seule carte à la fois
-    // TODO add date + router.push
   }
 
   const [schema, setSchema] = useState(schemaPlat);
@@ -295,11 +326,30 @@ export const Card = ({ carte, carteDomicile }) => {
     variantQuantity: 1,
   };
 
+  const variantPlusPlus = {
+    id: cartePlusPlus.variants.edges[0].node.id,
+    title: cartePlusPlus.title,
+    handle: cartePlusPlus.handle,
+    image: cartePlusPlus.images?.edges[0].node.originalSrc,
+    variantPrice: cartePlusPlus.variants.edges[0].node.price,
+    variantQuantity: 1,
+  };
+  const variantDomicilePlusPlus = {
+    id: cartePlusPlusDomicile.variants.edges[0].node.id,
+    title: cartePlusPlusDomicile.title,
+    handle: cartePlusPlusDomicile.handle,
+    image: cartePlusPlusDomicile.images?.edges[0].node.originalSrc,
+    variantPrice: cartePlusPlusDomicile.variants.edges[0].node.price,
+    variantQuantity: 1,
+  };
+
   // const { addToCartCarte } = useContext(CartContext);
   const { setIsCartLoading } = useContext(CartContext);
   const router = useRouter();
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
+  const [boxPlusState, setBoxPlusState] = useState(false);
+  const [price, setPrice] = useState(carte.variants.edges[0].node.price);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -315,6 +365,22 @@ export const Card = ({ carte, carteDomicile }) => {
       setSchema(schemaDom);
     }
   }, [deliveryMode]);
+
+  useEffect(() => {
+    if (deliveryMode == "Plateforme") {
+      if (boxPlusState) {
+        setPrice(Number(carte.variants.edges[0].node.price) + 90);
+      } else {
+        setPrice(carte.variants.edges[0].node.price);
+      }
+    } else {
+      if (boxPlusState) {
+        setPrice(Number(carteDomicile.variants.edges[0].node.price) + 90);
+      } else {
+        setPrice(carteDomicile.variants.edges[0].node.price);
+      }
+    }
+  }, [deliveryMode, boxPlusState, price, carte, carteDomicile]);
 
   return (
     <div>
@@ -344,8 +410,72 @@ export const Card = ({ carte, carteDomicile }) => {
             </div>
           </div>
 
+          {/* divider */}
           <div className="hidden sm:block" aria-hidden="true">
-            <div className="py-5">
+            <div className="py-7">
+              <div className="border-t border-gray-200" />
+            </div>
+          </div>
+
+          <div className="md:grid md:grid-cols-3 md:gap-6 mt-10 sm:mt-0">
+            <div className="md:col-span-1">
+              <div className="px-4 sm:px-0">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Option 3ème box
+                </h3>
+                <p className="mt-1 text-sm text-gray-600">
+                  Recevez une troisième box en mai en plus de celles de votre
+                  carte pour mieux couvrir l&#39;année.
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 md:mt-0 md:col-span-2">
+              <div className="shadow overflow-hidden sm:rounded-md">
+                <div className="px-4 py-5 bg-white sm:p-6 ">
+                  {/* <PersonalInfos register={register} errors={errors} /> */}
+                  <fieldset className="flex items-center">
+                    <legend className="sr-only">Notifications</legend>
+                    <div className="relative flex items-start">
+                      <div className="flex items-center h-5">
+                        <input
+                          id="boxPlusPlus"
+                          aria-describedby="boxPlusPlus-description"
+                          name="boxPlusPlus"
+                          type="checkbox"
+                          defaultChecked={boxPlusState}
+                          {...register("boxPlusPlus")}
+                          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          value={boxPlusState}
+                          onChange={() => setBoxPlusState(!boxPlusState)}
+                        />
+                      </div>
+                      <div className="ml-3 text-sm">
+                        <label
+                          htmlFor="boxPlusPlus"
+                          className="font-medium text-gray-700"
+                        >
+                          Box Plus Plus
+                          <span
+                            id="candidates-description"
+                            className="text-gray-500"
+                          >
+                            <span className="sr-only">Box Plus Plus</span> -
+                            Pour 90€ supplémentaires, recevez une sélection de 3
+                            belles &laquo;&nbsp;appellations&nbsp;&raquo;
+                            françaises.
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* divider */}
+          <div className="hidden sm:block" aria-hidden="true">
+            <div className="py-7">
               <div className="border-t border-gray-200" />
             </div>
           </div>
@@ -492,7 +622,8 @@ export const Card = ({ carte, carteDomicile }) => {
                     className="sealsubs-target-element"
                     data-handle={carte.handle}
                   ></div>
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <div className="px-4 py-3 bg-gray-50 sm:px-6 flex flex-row items-center justify-end">
+                    <div className="mr-5">{formatter.format(price)}</div>
                     {isLoading ? (
                       <div
                         className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}

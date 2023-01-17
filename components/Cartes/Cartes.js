@@ -73,19 +73,7 @@ const Cartes = () => {
           </p>
         </div>
         <Details scrollDetailsSection={scrollDetailsSection} />
-        <div className="w-full text-[#8F8F8F]">
-          <p className="">
-            Chaque box est composée de 3 bouteilles et inclus une fiche de
-            dégustation. Livraison gratuite en automne en «&nbsp;point
-            relais&nbsp;».
-          </p>
-          <p className="">
-            Supplément optionnel : 15€ TTC/an pour une livraison en adresse
-            privée incluant votre box Option, votre cadeau
-            «&nbsp;Surprise&nbsp;» et les 3 bouteilles «&nbsp;Découvertes de
-            printemps&nbsp;».
-          </p>
-        </div>
+
         <div className="w-full mt-14 relative">
           <div ref={refDetailsSection} className="absolute -top-24" />
           <h2 className="text-xl font-bold text-redWine">
@@ -97,6 +85,21 @@ const Cartes = () => {
           <div className="flex items-center justify-center flex-col mx-5 lg:mx-10 xl:mx-28 2xl:mx-40">
             <Rows />
           </div>
+        </div>
+        <div className="w-full text-[#8F8F8F]">
+          <p className="">
+            Chaque box est composée de 3 bouteilles et inclus une fiche de
+            dégustation (Livraison en Point Relais inclus).
+          </p>
+          <p className="">
+            Supplément optionnel : 15€ TTC/an pour une livraison en adresse
+            privée (Box «&nbsp;option&nbsp;» + Box «&nbsp;Découvertes de
+            printemps&nbsp;»).
+          </p>
+          <p className="">
+            Supplément optionnel : 90€ TTC pour une 3ème Box de 3 bouteilles
+            (livraison en mai (pour mieux couvrir une année complète !)).
+          </p>
         </div>
       </div>
       <Contact open={isContactFormOpen} setOpen={setIsContactFormOpen} />

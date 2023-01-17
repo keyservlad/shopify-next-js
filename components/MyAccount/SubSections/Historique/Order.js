@@ -15,7 +15,7 @@ function classNames(...classes) {
 
 const Order = ({ order }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(order.id);
+  // console.log(order.id);
   // regex to get the order id from the string gid://shopify/Order/4954627047658?key=ec49f866ee01614891bdd653a02b77d4
   const orderId = order.id.match(/Order\/(.*)\?/)[1];
 
@@ -94,8 +94,9 @@ const Order = ({ order }) => {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <Link href={""} passHref>
+                    <Link href={hrefFacture} passHref>
                       <a
+                        target={"_blank"}
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -157,11 +158,11 @@ const Order = ({ order }) => {
                 <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden sm:w-30 sm:h-30 relative">
                   <Image
                     src={
-                      product.variant?.image.url
-                        ? product.variant?.image.url
+                      product.variant?.image?.url
+                        ? product.variant?.image?.url
                         : "/images/loader.gif"
                     }
-                    alt={product.variant?.image.altText}
+                    alt={product.variant?.image?.altText}
                     layout="fill"
                     objectFit="contain"
                     quality={100}

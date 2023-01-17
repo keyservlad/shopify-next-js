@@ -205,9 +205,9 @@ const DetailsMobile = ({ scrollDetailsSection }) => {
             <p className="text-[#8F8F8F]">
               Exemple de la box &#34;Prestige&#34; :
             </p>
-            <p className="font-bold">Chatauneuf du pape blanc Bio 2019</p>
+            <p className="font-bold">Châteauneuf du pape blanc Bio 2019</p>
             <p className="">Domaine de Galevan</p>
-            <p className="font-bold">Chataineuf du Pape rouge Bio 2019</p>
+            <p className="font-bold">Châteauneuf du Pape rouge Bio 2019</p>
             <p className="">Saint Emilion Grand Cru 2015</p>
             <p className="font-bold">Gigondas rouge Bio 2020</p>
             <p className="">Château de Saint-Cosme</p>
