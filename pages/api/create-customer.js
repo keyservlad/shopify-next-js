@@ -39,14 +39,7 @@ export default async function send(req, res) {
     // res.send("ok"); // we have to return status 200 to avoid shopify from sending multiple webhooks requests and avoid multiple failures in a row resulting in deleting the webhook
     let isCard = false;
     req.body.line_items.map((item) => {
-      if (
-        item.title == "Carte Prestige" ||
-        item.title == "Carte Découverte" ||
-        item.title == "Carte Immanquables" ||
-        item.title == "Carte Prestige Domicile" ||
-        item.title == "Carte Découverte Domicile" ||
-        item.title == "Carte Immanquables Domicile"
-      ) {
+      if (item.title.includes("Carte")) {
         isCard = true;
       }
     });
