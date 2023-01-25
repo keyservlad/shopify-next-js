@@ -242,7 +242,7 @@ export const Card = ({
 
     let checkout;
     if (schema == schemaDom) {
-      if (values.boxPlusPlus) {
+      if (boxPlusState) {
         checkout = await createCheckoutCustomAttribute(
           [variantDomicilePlusPlus],
           customAttribute,
@@ -256,7 +256,7 @@ export const Card = ({
         );
       }
     } else {
-      if (values.boxPlusPlus) {
+      if (boxPlusState) {
         checkout = await createCheckoutCustomAttribute(
           [variantPlusPlus],
           customAttribute,
