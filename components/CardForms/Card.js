@@ -151,7 +151,7 @@ export const Card = ({
             key: "isPlusPlus",
             namespace: "custom",
             type: "boolean",
-            value: `${values.boxPlusPlus}`,
+            value: `${boxPlusState}`,
           },
           {
             id: ids?.points ? ids.points : null,
@@ -202,7 +202,7 @@ export const Card = ({
             key: "isPlusPlus",
             namespace: "custom",
             type: "boolean",
-            value: `${values.boxPlusPlus}`,
+            value: `${boxPlusState}`,
           },
           {
             id: ids?.isDomicile ? ids.isDomicile : null,
