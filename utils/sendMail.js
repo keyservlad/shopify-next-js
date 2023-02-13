@@ -5,7 +5,7 @@ export const sendMail = async (destination, subject, html) => {
   var transport = nodemailer.createTransport({
     host: "ssl0.ovh.net",
     port: 587,
-    secureConnection: false,
+    secureConnection: true,
     auth: {
       user: "contact@emovin.fr",
       pass: process.env.PASSWORD_MAIL_CONTACT,
