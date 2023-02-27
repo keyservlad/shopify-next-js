@@ -38,9 +38,9 @@ const NosOffres = () => {
             à vous.
           </p>
           <p className="font-bold">
-            Choissez entre 3 options selon vos goûts et profitez de pleins
-            d&#39;avantages et surtout deux fois par an d&#39;une sélection de
-            vins d&#39;exception dans une Wine Box&nbsp;!
+            Choissez entre 3 options selon vos goûts et profitez de 2 livraisons
+            de vins et de pleins d&#39;avantages et surtout deux fois par an
+            d&#39;une sélection de vins d&#39;exception dans une Wine Box&nbsp;!
           </p>
           <Link href="/cartes" passHref>
             <a>

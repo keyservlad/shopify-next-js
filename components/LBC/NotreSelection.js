@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../context/ShopContext";
 
 const NotreSelection = ({ productsLBC }) => {
+  console.log(productsLBC[0].node.images.edges[0].node.originalSrc);
   const cuveeMarine = {
     title: productsLBC[0].node.title,
     id: productsLBC[0].node.variants.nodes[0].id,
@@ -14,7 +15,7 @@ const NotreSelection = ({ productsLBC }) => {
     prix_membre: productsLBC[0].node.prix_membre.value,
     appellations: productsLBC[0].node.appellation.value,
     couleur: productsLBC[0].node.couleur.value,
-    image: productsLBC[0].node.featuredImage.url,
+    image: productsLBC[0].node.images.edges[0].node.originalSrc,
     unite: productsLBC[0].node.unite.value,
     textCaisse: (
       <>
@@ -50,7 +51,7 @@ const NotreSelection = ({ productsLBC }) => {
     prix_membre: productsLBC[1].node.prix_membre.value,
     appellations: productsLBC[1].node.appellation.value,
     couleur: productsLBC[1].node.couleur.value,
-    image: productsLBC[1].node.featuredImage.url,
+    image: productsLBC[1].node.images.edges[0].node.originalSrc,
     unite: productsLBC[1].node.unite.value,
     textCaisse: (
       <>
@@ -90,12 +91,12 @@ const NotreSelection = ({ productsLBC }) => {
     prix_membre: productsLBC[2].node.prix_membre.value,
     appellations: productsLBC[2].node.appellation.value,
     couleur: productsLBC[2].node.couleur.value,
-    image: productsLBC[2].node.featuredImage.url,
+    image: productsLBC[2].node.images.edges[0].node.originalSrc,
     unite: productsLBC[2].node.unite.value,
     textCaisse: (
       <>
-        Prix par bouteille, conditionnement : carton de 6 bouteilles.
-        Frais de livraison non inclus.
+        Prix par bouteille, conditionnement : carton de 6 bouteilles. Frais de
+        livraison non inclus.
       </>
     ),
     cepages: <>Syrah 100%</>,

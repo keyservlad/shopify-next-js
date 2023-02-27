@@ -5,7 +5,7 @@ import ImageCloche from "../../public/images/HP/boncoup_cloche.webp";
 import NotreSelection from "./NotreSelection";
 
 const LeBonCoup = ({ productsLBC }) => {
-
+  console.log(productsLBC);
   return (
     <>
       <div className="relative lg:aspect-[2.677] 2xl:aspect-[3.2128] w-full">

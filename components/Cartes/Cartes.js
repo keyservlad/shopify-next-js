@@ -49,7 +49,7 @@ const Cartes = () => {
             1 carte avec 3 options de «&nbsp;Wine box&nbsp;» selon vos goûts
           </h1>
           <p className="text-2xl font-light mt-6">
-            Avec votre carte EMOVIN profitez de plein d&#39;avantages autour du
+            Avec votre carte EMOVIN, profitez de 2 livraisons de vin et de plein d&#39;avantages autour du
             vin et des wine box composées de pur plaisir&nbsp;!
           </p>
           <p className="font-light mt-6">
