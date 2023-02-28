@@ -88,23 +88,23 @@ const SerieLim = ({ productSerieLim }) => {
   return (
     <>
       <div className="relative lg:aspect-[2.677] 2xl:aspect-[3.2128] w-full">
-        <div className="bg-gradient-to-b from-[#DEC46F] to-[#BB9B48] text-white flex flex-col py-12 px-5 w-full sm:px-10 lg:absolute lg:top-0 lg:left-0 lg:z-10 lg:px-20 lg:pr-10 lg:py-16 lg:w-[59%] xl:px-28 xl:py-16 xl:w-[55%] 2xl:px-40">
+        <div className="bg-gradient-to-b from-[#DEC46F] to-[#BB9B48] text-white flex flex-col py-10 px-5 w-full sm:px-10 lg:absolute lg:top-0 lg:left-0 lg:z-10 lg:px-10 lg:w-[59%] xl:py-12 xl:px-28 xl:w-[55%] 2xl:px-34">
           <h1 className="">Nos séries limitées&nbsp;!</h1>
-          <p className="font-semibold text-xl mt-6">
+          <p className="font-semibold text-xl lg:text-lg xl:text-xl mt-6">
             La Trilogie du Nord by Saint Cosme
           </p>
-          <p className="font-semibold text-xl mt-1">
+          <p className="text-xl lg:text-lg xl:text-xl mt-1">
             Assortiment de 3 bouteilles (100% Syrah - Rouge) Millésime 2020 Côte
             Rôtie, Saint Joseph & Crozes-Hermitage
           </p>
-          <p className="font-light text-xl mt-1">
+          <p className="font-light text-lg lg:text-base xl:text-lg italic mt-3">
             «&nbsp;A Saint Cosme, nous réalisons le maximum de travaux à la
             main. Je souhaite vinifier des vins qui expriment leur terroir, leur
             origine avec pureté et précision; des vins qui ont de la
             personnalité et de l&#39;équilibre. Je veux qu&#39;ils soient apte à
             Vieillir&nbsp;!&nbsp;»
           </p>
-          <p className="font-light mt-10">Louis Barruol</p>
+          <p className="font-light mt-2 ml-auto">Louis Barruol</p>
         </div>
         <div className="relative aspect-[1.6064] md:w-2/3 mx-auto lg:absolute lg:top-0 lg:right-0 lg:w-[60%] 2xl:w-[50%]">
           {/* <Image
@@ -164,7 +164,6 @@ const SerieLim = ({ productSerieLim }) => {
                 layout="fill"
                 objectFit="contain"
                 quality={100}
-                className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
               />
             </div>
           </div>

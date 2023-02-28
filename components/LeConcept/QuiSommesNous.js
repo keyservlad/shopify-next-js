@@ -16,7 +16,7 @@ const QuiSommesNous = () => {
             Pendant plus de 20 ans, Patrick & Jean-Louis ont travaillé dans
             l&#39;univers de la restauration à la découverte des « saveurs »,
             des cultures et des grandes tables à travers le monde. Passionnés de
-            la première heure en oenologie, nos « deux compères » ont développé
+            la première heure en œnologie, nos « deux compères » ont développé
             un savoir-faire « rare » qui combine toutes les disciplines de
             l&#39;art de la table... en recherchant la magie du moment celle qui
             combine flacons, mets, convives et circonstances... C&#39;est sous
@@ -25,7 +25,7 @@ const QuiSommesNous = () => {
             qu&#39;ils ont décidé de créer en 2021 EMOVIN ... pour vous&nbsp;!
           </p>
           <p className="font-semibold mt-10">
-            Amicalement, Patrik et Jean-Louis
+            Amicalement, Patrick et Jean-Louis
           </p>
         </div>
         <div className="lg:w-1/2 flex flex-col justify-center">

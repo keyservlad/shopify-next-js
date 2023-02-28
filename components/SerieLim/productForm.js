@@ -145,7 +145,10 @@ const ProductForm = ({ productSerieLim, scrollPetiteHistoireSection }) => {
               href={{
                 pathname: "/login",
                 query: {
-                  callbackUrl: typeof window === "undefined" ? "https://www.emovin.fr" + router.asPath : `${window.location.origin}` + router.asPath,
+                  callbackUrl:
+                    typeof window === "undefined"
+                      ? "https://www.emovin.fr" + router.asPath
+                      : `${window.location.origin}` + router.asPath,
                 },
               }}
             >
@@ -166,8 +169,7 @@ const ProductForm = ({ productSerieLim, scrollPetiteHistoireSection }) => {
         )}
       </div>
       <p className="text-[#8F8F8F] text-center mt-3 w-2/3 ">
-        Taxes incluses. <span className="underline"></span> Frais de port
-        calculés à l&#39;étape de paiement. Emballage renforcé. Paiement 100%
+        Taxes et frais de livraison inclus. Emballage renforcé. Paiement 100%
         sécurisé.
       </p>
     </div>

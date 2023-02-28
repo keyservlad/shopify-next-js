@@ -4,8 +4,10 @@ import React from "react";
 const UneColonneCommeCa = ({ col }) => {
   return (
     <div>
-      <h2 className="text-2xl font-bold">{col.title1}</h2>
-      <h3 className="text-xl font-semibold text-gray-400">{col.title2}</h3>
+      <div className="border-l-2 py-3 pl-4 border-red-400">
+        <h2 className="text-2xl font-bold">{col.title1}</h2>
+        <h3 className="text-xl font-semibold text-gray-400">{col.title2}</h3>
+      </div>
       <div className="flex flex-col align-center justify-center">
         <div className="relative max-w-xs aspect-1">
           <Image

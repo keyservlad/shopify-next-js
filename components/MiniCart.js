@@ -186,7 +186,8 @@ export default function MiniCart({ cart }) {
                         <div className="flex items-center justify-between text-base font-medium text-gray-900">
                           <p>Total</p>
 
-                          {session.status === "authenticated" ? (
+                          {session.status === "authenticated" &&
+                          cartTotal !== cartTotalMembre ? (
                             <div className="flex flex-col">
                               <p className="line-through">
                                 {formatter.format(cartTotal)}

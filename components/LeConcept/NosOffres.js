@@ -109,9 +109,9 @@ const NosOffres = () => {
             <p>
               &nbsp;
               <span className="font-semibold">
-                Profitez d&#39;un centaine de références
+                Profitez d&#39;une centaine de références
               </span>{" "}
-              “dénicheré pour vous lors de vos escapades dans les vignobles.
+              “dénichées pour vous lors de nos escapades dans les vignobles.
             </p>
           </div>
           <div className="flex flex-row">
