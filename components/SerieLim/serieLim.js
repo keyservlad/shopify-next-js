@@ -122,6 +122,7 @@ const SerieLim = ({ productSerieLim }) => {
             playsInline
             className="w-full h-full object-cover"
             src="/videos/serie-lim-vid.mp4"
+            placeholder="blur"
           />
         </div>
         <div className="invisible w-full top-0 left-0 relative"></div>
