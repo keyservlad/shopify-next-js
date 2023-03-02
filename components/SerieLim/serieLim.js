@@ -16,8 +16,6 @@ import Photo1Product2 from "../../public/images/serie-lim-mar/saint-joseph.jpg";
 import Photo1Product3 from "../../public/images/serie-lim-mar/crozes-hermitage.jpg";
 import UneColonneCommeCa from "./UneColonneCommeCa";
 
-import GIFWineGlass from "../../public/videos/serie-lim-vid.gif";
-
 const productsDescriptions = [
   {
     title1: "SAINT COSME",
@@ -109,6 +107,14 @@ const SerieLim = ({ productSerieLim }) => {
           <p className="font-light mt-2 ml-auto">Louis Barruol</p>
         </div>
         <div className="relative aspect-[1.6064] md:w-2/3 mx-auto lg:absolute lg:top-0 lg:right-0 lg:w-[60%] 2xl:w-[50%]">
+          {/* <Image
+            src={ImageHeroBonCoup}
+            alt="Image fond d'écran Bruno Loubet"
+            layout="fill"
+            objectFit="contain"
+            quality={100}
+            placeholder="blur"
+          /> */}
           <video
             loop
             muted
@@ -116,16 +122,6 @@ const SerieLim = ({ productSerieLim }) => {
             playsInline
             className="w-full h-full object-cover"
             src="/videos/serie-lim-vid.mp4"
-          />
-        </div>
-        <div className="relative aspect-[1.6064] md:w-2/3 mx-auto lg:absolute lg:top-0 lg:right-0 lg:w-[60%] 2xl:w-[50%] -z-10">
-          <Image
-            src={GIFWineGlass}
-            alt="GIF Wine Glass"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            className=""
           />
         </div>
         <div className="invisible w-full top-0 left-0 relative"></div>
