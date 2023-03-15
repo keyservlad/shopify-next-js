@@ -92,7 +92,7 @@ export default function ProductForm({
         {product.unite?.value} bouteilles
       </p>
 
-      {stock && stock <= 10 ? <p>{stock} cartons restants</p> : null}
+      {stock && stock <= 5 ? <p>{stock} cartons restants</p> : null}
 
       {/* <div className="border-b border-[#8F8F8F] w-2/3 md:w-1/2 max-w-xs my-3" /> */}
       <div className="flex flex-row gap-x-10 border-y border-[#8F8F8F] py-3 my-3">
