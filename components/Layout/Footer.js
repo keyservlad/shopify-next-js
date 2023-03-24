@@ -32,7 +32,7 @@ const navigation2 = [
   },
   {
     name: <>Politique de résiliation</>,
-    href: "politiques/politique-resiliation",
+    href: "/politiques/politique-resiliation",
   },
 ];
 
