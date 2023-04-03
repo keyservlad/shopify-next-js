@@ -81,7 +81,13 @@ const Bouteille = ({ bouteille }) => {
             {bouteille.appellations} {bouteille.couleur}
           </p>
           <p className="text-sm text-[#707070]">{bouteille.vendor}</p>
+          <p className="text-sm text-[#707070] mt-2">
+            L&#39;unité de vente de ce produit est un carton de{" "}
+            {bouteille.unite} bouteilles
+          </p>
+
           <div className="w-full border-b border-[#8F8F8F] mt-auto pt-5" />
+
           <div className="flex flex-row items-center justify-center space-x-10 mt-5">
             <div className="">
               <p className="text-xs">Public</p>
@@ -142,6 +148,7 @@ const Bouteille = ({ bouteille }) => {
         </div>
       </div>
 
+      {/* mobile */}
       <div className="mb-5 md:hidden">
         <div className="p-3 rounded-t bg-white">
           <div className="relative w-full bg-white m-auto aspect-[0.65] max-h-96 overflow-hidden sm:h-auto">
@@ -162,7 +169,13 @@ const Bouteille = ({ bouteille }) => {
               {bouteille.appellations} {bouteille.couleur}
             </p>
             <p className="text-sm text-[#707070]">{bouteille.vendor}</p>
+            <p className="text-sm text-[#707070] mt-2">
+              L&#39;unité de vente de ce produit est un carton de{" "}
+              {bouteille.unite} bouteilles
+            </p>
+
             <div className="w-full border-b border-[#8F8F8F] mt-5" />
+
             <div className="flex flex-row items-center justify-center space-x-10 mt-5">
               <div className="">
                 <p className="text-xs">Public</p>

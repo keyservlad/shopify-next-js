@@ -35,7 +35,7 @@ const LeBonCoup = ({ productsLBC }) => {
         </div>
         <div className="invisible w-full top-0 left-0 relative" />
       </div>
-      <div className="flex flex-col text-center mt-24">
+      <div className="flex flex-col text-center mt-28">
         <h2 className="text-4xl font-light">Une région, trois histoires</h2>
         <p className="mt-12 md:w-2/3 mx-auto px-5">
           Une belle région de France, trois domaines, trois histoires de famille
