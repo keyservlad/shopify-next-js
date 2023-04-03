@@ -83,7 +83,7 @@ const Order = ({ productsCoffrets }) => {
       checkout = await checkoutDiscount(checkout.id, "coffret-cadeau");
     }
 
-    console.log(checkout);
+    (checkout);
 
     // route to checkout url
 

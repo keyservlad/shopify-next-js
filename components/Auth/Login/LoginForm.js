@@ -30,7 +30,6 @@ const LoginForm = ({ isRouting }) => {
       }`,
     });
 
-    console.log(res);
     if (res?.error) {
       if (res.error === "expired") {
         setError("global", {

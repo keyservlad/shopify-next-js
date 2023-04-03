@@ -11,7 +11,6 @@ import { createCheckoutCustomAttribute } from "../../../../lib/shopifyCheckout";
 import { useRouter } from "next/router";
 
 const Renew = ({ setIsRenewingCard, cards }) => {
-  console.log(cards);
   const { user } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isRenewingOtherCard, setIsRenewingOtherCard] = useState(false);

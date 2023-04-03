@@ -20,7 +20,6 @@ export default function Contact({ open, setOpen }) {
 
   async function onSubmit(values) {
     setIsLoading(true);
-    console.log(values.message);
     // assign each line of the message to an array element
     var message = values.message.split("\n");
     message = message

@@ -17,13 +17,11 @@ const ForgotPassword = ({ setIsPasswordForgot }) => {
   async function onSubmit(values) {
     setIsLoading(true);
     const customer = await verifCustomer(values.email);
-    console.log(customer);
     if (customer?.customer?.length === 0) {
       setError("global", {
         type: "custom",
         message: "Aucun compte associé à cette adresse email",
       });
-      console.log("here");
       setIsLoading(false);
       return;
     } else if (customer?.customer[0].carte?.value === "expired") {
@@ -36,7 +34,6 @@ const ForgotPassword = ({ setIsPasswordForgot }) => {
     } else if (customer?.customer[0].carte?.value) {
       setError("global", null);
       const res = await sendPasswordRecoverEmail(values.email);
-      console.log(res);
       if (res.length === 0) {
         setError("global", null);
         setIsLoading(false);
@@ -49,7 +46,7 @@ const ForgotPassword = ({ setIsPasswordForgot }) => {
         });
       }
     } else {
-      console.log(customer?.customer[0].carte?.value);
+      (customer?.customer[0].carte?.value);
       setError("global", {
         type: "custom",
         message: "Une erreur est survenue, veuillez réessayer",

@@ -4,7 +4,6 @@ import ToutBu from "../components/LBC/ToutBu";
 import { getAllProductsLeBonCoup } from "../lib/shopify";
 
 const leboncoup = ({ productsLBC }) => {
-  console.log(productsLBC);
   if (productsLBC.length !== 3) {
     return (
       <>
