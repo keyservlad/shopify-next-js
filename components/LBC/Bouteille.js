@@ -190,7 +190,7 @@ const Bouteille = ({ bouteille }) => {
                 <p className="text-center">
                   {formatter.format(bouteille.variantPrice)}
                 </p>
-                <p className="text-center text-base text-[#8F8F8F] font-normal">
+                <p className="text-center text-sm text-[#8F8F8F] font-normal">
                   {formatter.format(bouteille.variantPrice / bouteille.unite)} /
                   bouteille
                 </p>
@@ -200,7 +200,7 @@ const Bouteille = ({ bouteille }) => {
                 <p className="text-center">
                   {formatter.format(bouteille.prix_membre)}
                 </p>
-                <p className="text-center text-base text-[#8F8F8F] font-normal">
+                <p className="text-center text-sm text-[#8F8F8F] font-normal">
                   {formatter.format(bouteille.prix_membre / bouteille.unite)} /
                   bouteille
                 </p>
