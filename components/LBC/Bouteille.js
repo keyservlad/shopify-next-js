@@ -81,10 +81,10 @@ const Bouteille = ({ bouteille }) => {
             {bouteille.appellations} {bouteille.couleur}
           </p>
           <p className="text-sm text-[#707070]">{bouteille.vendor}</p>
-          <p className="text-sm text-[#707070] mt-2">
+          {/* <p className="text-sm text-[#707070] mt-2">
             L&#39;unité de vente de ce produit est un carton de{" "}
             {bouteille.unite} bouteilles
-          </p>
+          </p> */}
 
           <div className="w-full border-b border-[#8F8F8F] mt-auto pt-5" />
 
@@ -92,17 +92,25 @@ const Bouteille = ({ bouteille }) => {
             <div className="">
               <p className="text-xs">Public</p>
               <p className="text-center">
-                {formatter.format(bouteille.variantPrice / bouteille.unite)}
+                {formatter.format(bouteille.variantPrice)}
+              </p>
+              <p className="text-center text-base text-[#8F8F8F] font-normal">
+                {formatter.format(bouteille.variantPrice / bouteille.unite)} /
+                bouteille
               </p>
             </div>
             <div className={`font-bold ${bouteille.textColor}`}>
               <p className="text-xs">Membre</p>
               <p className="text-center">
-                {formatter.format(bouteille.prix_membre / bouteille.unite)}
+                {formatter.format(bouteille.prix_membre)}
+              </p>
+              <p className="text-center text-base text-[#8F8F8F] font-normal">
+                {formatter.format(bouteille.prix_membre / bouteille.unite)} /
+                bouteille
               </p>
             </div>
           </div>
-          <div className="bg-white rounded flex flex-row items-center gap-2 md:gap-5 justify-center mt-3">
+          <div className="bg-white rounded flex flex-row items-center gap-2 md:gap-5 justify-center mt-5">
             <label htmlFor="qte">Quantité</label>
             <div className="flex items-center">
               <button
@@ -169,10 +177,10 @@ const Bouteille = ({ bouteille }) => {
               {bouteille.appellations} {bouteille.couleur}
             </p>
             <p className="text-sm text-[#707070]">{bouteille.vendor}</p>
-            <p className="text-sm text-[#707070] mt-2">
+            {/* <p className="text-sm text-[#707070] mt-2">
               L&#39;unité de vente de ce produit est un carton de{" "}
               {bouteille.unite} bouteilles
-            </p>
+            </p> */}
 
             <div className="w-full border-b border-[#8F8F8F] mt-5" />
 
@@ -180,17 +188,25 @@ const Bouteille = ({ bouteille }) => {
               <div className="">
                 <p className="text-xs">Public</p>
                 <p className="text-center">
-                  {formatter.format(bouteille.variantPrice / bouteille.unite)}
+                  {formatter.format(bouteille.variantPrice)}
+                </p>
+                <p className="text-center text-base text-[#8F8F8F] font-normal">
+                  {formatter.format(bouteille.variantPrice / bouteille.unite)} /
+                  bouteille
                 </p>
               </div>
               <div className={`font-bold ${bouteille.textColor}`}>
                 <p className="text-xs">Membre</p>
                 <p className="text-center">
-                  {formatter.format(bouteille.prix_membre / bouteille.unite)}
+                  {formatter.format(bouteille.prix_membre)}
+                </p>
+                <p className="text-center text-base text-[#8F8F8F] font-normal">
+                  {formatter.format(bouteille.prix_membre / bouteille.unite)} /
+                  bouteille
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded flex flex-row items-center gap-2 md:gap-5 justify-center mt-3">
+            <div className="bg-white rounded flex flex-row items-center gap-2 md:gap-5 justify-center mt-5">
               <label htmlFor="qte">Quantité</label>
               <div className="flex items-center">
                 <button
