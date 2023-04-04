@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { CartContext } from "../../context/ShopContext";
 import { formatter } from "../../utils/helper";
+import ImageBio from "../../public/images/mini-logos/bio.png";
+import ImageHVE from "../../public/images/mini-logos/certification-hve.png";
 
 const fetchInventory = (url, id) =>
   axios
@@ -72,6 +74,29 @@ const Bouteille = ({ bouteille }) => {
             quality={100}
             className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
           />
+          {bouteille.bio ? (
+            <div className="absolute top-0 right-0 rounded-bl-md p-2">
+              <Image
+                src={ImageBio}
+                alt="logo bio"
+                width={75}
+                height={75}
+                quality={100}
+                placeholder="blur"
+              />
+            </div>
+          ) : bouteille.hve ? (
+            <div className="absolute top-0 right-0 rounded-bl-md p-2">
+              <Image
+                src={ImageHVE}
+                alt="logo bio"
+                width={75}
+                height={75}
+                quality={100}
+                placeholder="blur"
+              />
+            </div>
+          ) : null}
         </div>
         <div className="px-5 py-5 text-center flex flex-col justify-start">
           <h2 className={`font-semibold ${bouteille.textColor}`}>
@@ -168,6 +193,29 @@ const Bouteille = ({ bouteille }) => {
               quality={100}
               className="bg-[url('/images/loader.gif')] bg-center bg-cover bg-no-repeat"
             />
+            {bouteille.bio ? (
+              <div className="absolute top-0 right-0 rounded-bl-md p-2">
+                <Image
+                  src={ImageBio}
+                  alt="logo bio"
+                  width={75}
+                  height={75}
+                  quality={100}
+                  placeholder="blur"
+                />
+              </div>
+            ) : bouteille.hve ? (
+              <div className="absolute top-0 right-0 rounded-bl-md p-2">
+                <Image
+                  src={ImageHVE}
+                  alt="logo bio"
+                  width={75}
+                  height={75}
+                  quality={100}
+                  placeholder="blur"
+                />
+              </div>
+            ) : null}
           </div>
           <div className="px-5 py-5 text-center">
             <h2 className={`font-semibold ${bouteille.textColor}`}>
