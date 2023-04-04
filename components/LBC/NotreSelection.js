@@ -19,12 +19,7 @@ const NotreSelection = ({ productsLBC }) => {
     couleur: productsLBC[0].node.couleur?.value,
     image: productsLBC[0].node.images.edges[0].node.originalSrc,
     unite: productsLBC[0].node.unite?.value,
-    textCaisse: (
-      <>
-        Prix par bouteille, conditionnement : carton de 6 bouteilles. Frais de
-        livraison non inclus.
-      </>
-    ),
+    textCaisse: <>Frais de livraison non inclus.</>,
     // cepages: <>Roussanne 50%, Marsanne 50%</>,
     // age: <>21 à 41 ans</>,
     // rendement: <>40 hl/ha</>,
@@ -69,12 +64,7 @@ const NotreSelection = ({ productsLBC }) => {
     couleur: productsLBC[1].node.couleur?.value,
     image: productsLBC[1].node.images.edges[0].node.originalSrc,
     unite: productsLBC[1].node.unite?.value,
-    textCaisse: (
-      <>
-        Prix par bouteille, conditionnement : carton de 6 bouteilles. Frais de
-        livraison non inclus.
-      </>
-    ),
+    textCaisse: <>Frais de livraison non inclus.</>,
     // cepages: <>Syrah 100%</>,
     // age: <>11 à 28 ans</>,
     // rendement: <>41 hl/ha</>,
@@ -120,12 +110,7 @@ const NotreSelection = ({ productsLBC }) => {
     couleur: productsLBC[2].node.couleur?.value,
     image: productsLBC[2].node.images.edges[0].node.originalSrc,
     unite: productsLBC[2].node.unite?.value,
-    textCaisse: (
-      <>
-        Prix par bouteille, conditionnement : carton de 6 bouteilles. Frais de
-        livraison non inclus.
-      </>
-    ),
+    textCaisse: <>Frais de livraison non inclus.</>,
     // cepages: <>Syrah 100%</>,
     // age: <>65 ans</>,
     // rendement: <>35 hl/ha</>,
