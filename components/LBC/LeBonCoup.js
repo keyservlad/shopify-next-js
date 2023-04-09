@@ -13,7 +13,7 @@ const LeBonCoup = ({ productsLBC }) => {
           <p className="font-semibold text-xl mt-6">
             Escapade en Pays de Loire&nbsp;!
           </p>
-          <p className="font-semibold text-xl mt-1">
+          <p className="font-light text-xl mt-1">
             Fraicheur du sauvignon blanc,
           </p>
           <p className="font-light text-xl mt-1">
