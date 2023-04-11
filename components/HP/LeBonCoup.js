@@ -76,9 +76,13 @@ const LeBonCoup = () => {
           Ces opérations sont éligibles aux points de fidélité pour les membres.
         </div>
         <div className="mt-8 flex text-center sm:inline-block">
-          <button className="bg-blueWine text-white font-semibold sm:font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
-            Je découvre le prochain bon Coup&nbsp;!
-          </button>
+          <Link href="/le-bon-coup" passHref>
+            <a>
+              <button className="bg-blueWine text-white font-semibold sm:font-bold border-solid rounded-xl border-blueWine border-[3px] px-5 py-3 cursor-pointer w-full hover:text-blueWine hover:bg-white">
+                Je découvre le prochain bon Coup&nbsp;!
+              </button>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
