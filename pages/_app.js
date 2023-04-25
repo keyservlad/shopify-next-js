@@ -10,6 +10,7 @@ import { useContext, useEffect } from "react";
 import { CookieNotFound } from "@shopify/shopify-api/dist/error";
 import Cookies from "js-cookie";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -53,6 +54,7 @@ function MyApp({ Component, pageProps }) {
           </ShopProvider>
         )}
       </SessionProvider>
+      <Analytics />
     </>
   );
 }
