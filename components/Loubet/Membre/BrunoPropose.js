@@ -1,8 +1,8 @@
 import Image from "next/image";
 import VectorBackgroundWhite from "../../../public/images/bruno/VectorWhite.png";
-import ImagePlat1 from "../../../public/images/recettes/plat4.png";
-import ImagePlat2 from "../../../public/images/recettes/plat5.jpg";
-import ImagePlat3 from "../../../public/images/recettes/plat6.png";
+import ImagePlat1 from "../../../public/images/recettes/plat7.jpg";
+import ImagePlat2 from "../../../public/images/recettes/plat8.jpg";
+import ImagePlat3 from "../../../public/images/recettes/plat9.jpg";
 // import ImagePlat1 from "../../../public/images/bruno/plat1.png";
 // import ImagePlat2 from "../../../public/images/bruno/plat5.png";
 // import ImagePlat3 from "../../../public/images/bruno/plat6.png";
@@ -13,21 +13,20 @@ const lines = [
     image: ImagePlat1,
     text: (
       <>
-        Pintade rôtie, sel de céleri et mélasse de grenade, pudding aux oignons
-        et bacon
+        Epaule d&#39;agneau confite, sumac orange et graines de fenouil
       </>
     ),
-    href: "/recettes/pintade-rotie",
+    href: "/recettes/epaule-agneau-confite",
   },
   {
     image: ImagePlat2,
-    text: <>Tartare de saumon</>,
-    href: "/recettes/tartare-saumon",
+    text: <>Saumon confit aux asperges, pommes de terre nouvelles, gazpacho vert</>,
+    href: "/recettes/saumon-confit-asperges",
   },
   {
     image: ImagePlat3,
-    text: <>Mini pudding aux pruneaux et armagnac</>,
-    href: "/recettes/mini-pudding-pruneaux",
+    text: <>Mousse de fraises et sirop au basilic</>,
+    href: "/recettes/mousse-fraises-et-sirop-basilic",
   },
 ];
 

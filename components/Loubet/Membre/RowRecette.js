@@ -51,7 +51,7 @@ const RowRecette = ({ line, index }) => {
           </div>
         </div>
         <div
-          className={`hidden md:block m-auto w-full md:w-4/5 basis-1/2 pt-10 mt-10 bg-transparent relative aspect-[2.05]`}
+          className={`hidden md:block m-auto w-full md:w-4/5 basis-1/2 pt-10 mt-10 bg-transparent relative aspect-[2.05] bg-gray-500`}
         >
           <Image
             src={line.image}

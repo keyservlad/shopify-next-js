@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ByBruno from "../../public/images/recettes/byBruno.png";
 import VectorBackgroundWhite from "../../public/images/bruno/VectorWhite.png";
+import ImageBio from "../../public/images/mini-logos/bio.png";
 
-const Recette = ({ recette, color }) => {
+const Recette = ({ recette, color, bio }) => {
   return (
     <>
       <div className="w-full flex flex-col lg:flex-row">
@@ -17,7 +18,13 @@ const Recette = ({ recette, color }) => {
             />
           </div>
           <h2 className="text-4xl font-light mt-8">{recette.title}</h2>
-          <p className="mt-4">Recette pour {recette.numberPerson} personnes</p>
+          {recette.customPersonNumber ? (
+            <p className="mt-4">{recette.customPersonNumber}</p>
+          ) : (
+            <p className="mt-4">
+              Recette pour {recette.numberPerson} personnes
+            </p>
+          )}
         </div>
         <div className="w-full aspect-[1.52865957] max-h-[50vh] lg:max-h-full lg:w-1/2 xl:w-2/5 relative text-center mt-5 lg:mt-auto m-auto lg:bg-[#FAF8F8]">
           <Image
@@ -70,7 +77,7 @@ const Recette = ({ recette, color }) => {
             <h1 className="text-3xl">Emovin vous recommande</h1>
           </div>
           <div className="flex flex-col md:flex-row mt-10 md:gap-x-20">
-            <div className="relative aspect-[0.65] max-h-96 w-full md:w-1/3 text-center flex items-center justify-center mx-auto">
+            <div className="relative aspect-[0.65] max-h-96 w-full md:w-1/3 mx-auto bg-white">
               <Image
                 src={recette.imageBouteille}
                 alt={"bouteille image"}
@@ -79,6 +86,18 @@ const Recette = ({ recette, color }) => {
                 quality={100}
                 placeholder="blur"
               />
+              {bio && (
+                <div className="absolute top-0 right-0 rounded-bl-md p-2">
+                  <Image
+                    src={ImageBio}
+                    alt="logo bio"
+                    width={75}
+                    height={75}
+                    quality={100}
+                    placeholder="blur"
+                  />
+                </div>
+              )}
             </div>
             <div className="mt-10 md:w-2/3 md:mt-0">
               {recette.recommande.text}
