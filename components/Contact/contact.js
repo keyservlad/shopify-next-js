@@ -15,7 +15,7 @@ const schema = object({
   message: string().required("Veuillez entrer votre message"),
 });
 
-export default function Contact({ open, setOpen }) {
+export default function Contact({ open, setOpen, object }) {
   const cancelButtonRef = useRef(null);
 
   async function onSubmit(values) {
@@ -92,7 +92,7 @@ export default function Contact({ open, setOpen }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(object ? object : "");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
