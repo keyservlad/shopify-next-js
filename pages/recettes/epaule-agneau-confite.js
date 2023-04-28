@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Recette from "../../components/Recettes/Recette";
 import ImagePorc from "../../public/images/recettes/plat7.jpg";
-import VectorRedWine from "../../public/images/recettes/VectorWhiteWine.png";
-import ImageBouteille from "../../public/images/recettes/bouteille7.png";
+import VectorRedWine from "../../public/images/recettes/VectorRedWine.png";
+import ImageBouteille from "../../public/images/recettes/bouteille7.jpg";
 import Head from "next/head";
 import Contact from "../../components/Contact/contact";
 import { useState } from "react";
@@ -124,7 +124,7 @@ const EpauleAgneauConfite = () => {
       <Head>
         <title>Emovin : Epaule d&#39;agneau confite</title>
       </Head>
-      <Recette recette={recette} color={"white"} />
+      <Recette recette={recette} color={"red"} />
       <Contact open={isContactFormOpen} setOpen={setIsContactFormOpen} />
     </>
   );
