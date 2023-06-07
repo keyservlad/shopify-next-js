@@ -97,7 +97,7 @@ const Cartes = () => {
             printemps&nbsp;»).
           </p>
           <p className="">
-            Supplément optionnel : 90€ TTC pour une 3ème Box de 3 bouteilles
+            Supplément optionnel : 60€ TTC pour une 3ème Box de 3 bouteilles
             (livraison en mai (pour mieux couvrir une année complète !)).
           </p>
         </div>

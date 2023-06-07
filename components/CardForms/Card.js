@@ -369,13 +369,13 @@ export const Card = ({
   useEffect(() => {
     if (deliveryMode == "Plateforme") {
       if (boxPlusState) {
-        setPrice(Number(carte.variants.edges[0].node.price) + 90);
+        setPrice(Number(carte.variants.edges[0].node.price) + 60);
       } else {
         setPrice(carte.variants.edges[0].node.price);
       }
     } else {
       if (boxPlusState) {
-        setPrice(Number(carteDomicile.variants.edges[0].node.price) + 90);
+        setPrice(Number(carteDomicile.variants.edges[0].node.price) + 60);
       } else {
         setPrice(carteDomicile.variants.edges[0].node.price);
       }
@@ -460,7 +460,7 @@ export const Card = ({
                             className="text-gray-500"
                           >
                             <span className="sr-only">Box Plus Plus</span> -
-                            Pour 90€ supplémentaires, recevez une sélection de 3
+                            Pour 60 supplémentaires, recevez une sélection de 3
                             belles &laquo;&nbsp;appellations&nbsp;&raquo;
                             françaises.
                           </span>
