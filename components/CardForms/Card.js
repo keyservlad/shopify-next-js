@@ -460,7 +460,7 @@ export const Card = ({
                             className="text-gray-500"
                           >
                             <span className="sr-only">Box Plus Plus</span> -
-                            Pour 60 supplémentaires, recevez une sélection de 3
+                            Pour 60€ supplémentaires, recevez une sélection de 3
                             belles &laquo;&nbsp;appellations&nbsp;&raquo;
                             françaises.
                           </span>
