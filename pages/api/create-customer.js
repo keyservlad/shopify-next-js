@@ -75,6 +75,7 @@ export default async function send(req, res) {
         userByEmail[0].carte?.value === "expired" // TODO For now we put it here cause i don't have time to worry about deliveryAddress and getting the id of the metafields etc...
       ) {
         isRenew = true;
+        // TODO await tag order with "renew"
       }
       // recup l'adresse si isDomicile est false
       var jsonAddress;
