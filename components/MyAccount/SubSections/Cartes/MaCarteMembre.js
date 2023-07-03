@@ -135,6 +135,7 @@ const MaCarteMembre = ({ cards }) => {
       </>
     );
   }
+  console.log(user);
 
   return (
     <>
@@ -156,6 +157,22 @@ const MaCarteMembre = ({ cards }) => {
                   </p>
                 )}
             </div>
+            {user?.nextCarte?.value && (
+              <div className="mt-6">
+                <p className="font-bold">Renouvellement programmé :</p>
+                <p className="">
+                  Carte {capitalize(user?.nextCarte?.value)} (livraison{" "}
+                  {user?.nextIsDomicile?.value
+                    ? "en adresse privée"
+                    : "en plateforme"}
+                  ) valable du {expirationDatePlusOneDay} au{" "}
+                  {new Date(user?.nextExpirationdate?.value).toLocaleDateString(
+                    "fr-FR",
+                    dateOptions
+                  )}
+                </p>
+              </div>
+            )}
             {expirationDateMinusOneMonth < new Date() &&
               !user?.nextCarte?.value && (
                 <div className="mt-6 md:my-6">
@@ -258,5 +275,7 @@ const MaCarteMembre = ({ cards }) => {
     </>
   );
 };
+
+const capitalize = (s) => (s && s[0].toUpperCase() + s.slice(1)) || "";
 
 export default MaCarteMembre;
