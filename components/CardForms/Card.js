@@ -465,6 +465,12 @@ export const Card = ({
                             françaises.
                           </span>
                         </label>
+                        <p className="mt-3 text-gray-700">Exemple : Sélection 2023 </p>
+                        <p className="text-gray-500">
+                          Syrah &#34;Les candives&#34; Cave Cuilleron&nbsp;-
+                          Pouilly-Fumé (Loire) Château de Tracy&nbsp;- Corbières
+                          Château La Voulte Gasparets
+                        </p>
                       </div>
                     </div>
                   </fieldset>
