@@ -203,47 +203,45 @@ const Details = (props) => {
           {/* decouverte */}
           <div className="flex items-center  flex-col ml-6">
             <div className="text-center flex flex-col my-6 leading-6">
-              <p className="text-[#8F8F8F]">
-                Exemple de la box &#34;Découverte&#34; :
+              <p className="text-[#8F8F8F] mb-2">
+                Exemple de la box &#34;Découverte&#34; sélection 2023 :
               </p>
-              <p className="font-bold">Crémant de Bourgogne</p>
-              <p className="">Blanc pétillant</p>
-              <p className="font-bold">Macon Lugny 2021</p>
-              <p className="">Blanc sec</p>
-              <p className="font-bold">Bourgogne Pinot Noir</p>
-              <p className="">Clos Saint-Germain</p>
-              <p className="">Rouge 2020</p>
+              <p className="font-bold">Fronton Rouge (Sud Ouest) Le Roc 2020</p>
+              <p className="font-bold my-2">
+                Picpoul de Pinet (Languedoc) Blanc 2022
+              </p>
+              <p className="font-bold">Luberon Rouge Famille Perrin 2021</p>
             </div>
           </div>
           {/* Immanquables */}
           <div className="flex items-center  flex-col ml-6">
             <div className="text-center flex flex-col my-6 leading-6">
-              <p className="text-[#8F8F8F]">
-                Exemple de la box &#34;Immanquables&#34; :
+              <p className="text-[#8F8F8F] mb-2">
+                Exemple de la box &#34;Immanquables&#34; sélection 2023 :
               </p>
-              <p className="font-bold">Chablis Premier Cru 2019</p>
-              <p className="">&#34;Montmains&#34; Vieilles Vignes</p>
-              <p className="">Blanc Sec</p>
-              <p className="font-bold">Château Franc Grace Dieu</p>
-              <p className="">Saint Emilion Grand Cru 2015</p>
               <p className="font-bold">
-                Vacqueyras &#34;Le Sang des Cailloux&#34;
+                Bourgogne Hautes Côtes de Nuits Blanc 2020
               </p>
-              <p className="">Cuvée Floureto - Rouge 2019 - bio</p>
+              <p className="font-bold my-2">Cahors Château le Cèdres 2020</p>
+              <p className="font-bold">
+                Corbières Rouge &#34;Château La Voulte-Gasparet_Cuvée Romain
+                Pauc&#34; 2020
+              </p>
             </div>
           </div>
           {/* prestige */}
           <div className="flex items-center  flex-col ml-6">
             <div className="text-center flex flex-col my-6 leading-6">
-              <p className="text-[#8F8F8F]">
-                Exemple de la box &#34;Prestige&#34; :
+              <p className="text-[#8F8F8F] mb-2">
+                Exemple de la box &#34;Prestige&#34; sélection 2023 :
               </p>
-              <p className="font-bold">Châteauneuf du pape blanc Bio 2019</p>
-              <p className="">Domaine de Galevan</p>
-              <p className="font-bold">Châteauneuf du Pape rouge Bio 2019</p>
-              <p className="">Saint Emilion Grand Cru 2015</p>
-              <p className="font-bold">Gigondas rouge Bio 2020</p>
-              <p className="">Château de Saint-Cosme</p>
+              <p className="font-bold">Gevrey-Chambertin Amiot 2021</p>
+              <p className="font-bold my-2">
+                Condrieu Cave Yves Cuilleron 2022
+              </p>
+              <p className="font-bold">
+                Pouilly-Fuissé 1er Cru La Souffrandise 2021
+              </p>
             </div>
           </div>
         </div>
