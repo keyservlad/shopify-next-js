@@ -3,7 +3,8 @@ import Script from "next/script";
 import Order from "../../components/Coffrets Cadeaux/Order";
 import { getAllProductsCoffretsCadeaux } from "../../lib/shopify";
 
-const coffretCdeaux = ({ productsCoffrets }) => {
+const coffretCadeaux = ({ productsCoffrets }) => {
+  console.log(productsCoffrets);
   return (
     <>
       <Head>
@@ -17,7 +18,7 @@ const coffretCdeaux = ({ productsCoffrets }) => {
   );
 };
 
-export default coffretCdeaux;
+export default coffretCadeaux;
 
 export async function getStaticProps() {
   let productsCoffrets = await getAllProductsCoffretsCadeaux();

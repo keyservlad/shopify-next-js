@@ -13,8 +13,8 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
 
   const cardsSorted = cards.sort(
     (a, b) =>
-      Number(a.node.priceRange.minVariantPrice.amount) -
-      Number(b.node.priceRange.minVariantPrice.amount)
+      Number(a.node.priceRange.maxVariantPrice.amount) -
+      Number(b.node.priceRange.maxVariantPrice.amount)
   );
 
   let expirationDate = new Date(user?.expirationDate?.value);
@@ -136,7 +136,7 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
             title: card.node.title,
             handle: card.node.handle,
             image: card.node.images.edges[0].node.originalSrc,
-            variantPrice: card.node.priceRange.minVariantPrice.amount,
+            variantPrice: card.node.priceRange.maxVariantPrice.amount,
             variantQuantity: 1,
           };
           return (

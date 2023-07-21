@@ -3,7 +3,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { CartContext } from "../context/ShopContext";
 import { formatter } from "../utils/helper";
-import { XIcon } from "@heroicons/react/outline";
+import {
+  XIcon,
+  ExclamationIcon,
+  BadgeCheckIcon,
+} from "@heroicons/react/outline";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
@@ -196,6 +200,43 @@ export default function MiniCart({ cart }) {
                             </div>
                           ) : (
                             <p>{formatter.format(cartTotal)}</p>
+                          )}
+                        </div>
+                        <div className="text-sm my-3">
+                          {session.status === "authenticated" ? (
+                            <p className="text-green-700 flex items-center">
+                              <BadgeCheckIcon
+                                className="h-14 w-14 mr-2"
+                                aria-hidden="true"
+                              />
+                              Vous êtes bien connecté en tant que membre EMOVIN
+                              et bénéficez du tarif préférentiel reservé aux
+                              membres.
+                            </p>
+                          ) : (
+                            <p className="text-orange-600 flex items-center">
+                              <ExclamationIcon
+                                className="h-20 w-20 mr-2"
+                                aria-hidden="true"
+                              />
+                              <span>
+                                Attention, vous n'êtes actuellement pas connecté
+                                à votre compte membre Emovin et ne bénéficiez
+                                acutellement pas du tarif préférentiel,{" "}
+                                <Link href={"/cartes"}>
+                                  <span className="underline cursor-pointer">
+                                    devenez membre
+                                  </span>
+                                </Link>{" "}
+                                ou{" "}
+                                <Link href={"/login"}>
+                                  <span className="underline cursor-pointer">
+                                    connectez-vous
+                                  </span>
+                                </Link>
+                                .
+                              </span>
+                            </p>
                           )}
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">

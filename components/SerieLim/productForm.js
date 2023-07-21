@@ -34,7 +34,7 @@ const ProductForm = ({ productSerieLim, scrollPetiteHistoireSection }) => {
     title: productSerieLim.title,
     handle: productSerieLim.handle,
     image: productSerieLim.featuredImage.url,
-    variantPrice: productSerieLim.priceRange.minVariantPrice.amount,
+    variantPrice: productSerieLim.priceRange.maxVariantPrice.amount,
     variantQuantity: 1,
   });
 

@@ -36,7 +36,7 @@ export default async function send(req, res) {
     {
       productByHandle(handle: "${handle}") {
         id
-        variants(first: 1) {
+        variants(first: 2) {
           edges {
             node {
               id

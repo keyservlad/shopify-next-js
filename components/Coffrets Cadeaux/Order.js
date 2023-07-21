@@ -54,7 +54,10 @@ const Order = ({ productsCoffrets }) => {
       if (product.quantity > 0) {
         variants.push({
           variantQuantity: product.quantity,
-          id: product.product.variants.nodes[0].id,
+          id:
+            user && session.status === "authenticated"
+              ? product.product.variants.nodes[1].id
+              : product.product.variants.nodes[0].id,
           handle: product.product.handle,
         });
       }
@@ -80,10 +83,12 @@ const Order = ({ productsCoffrets }) => {
       // for (let i = 0; i < variants.length; i++) {
       //   checkout = await checkoutDiscount(checkout.id, variants[i].handle);
       // }
-      checkout = await checkoutDiscount(checkout.id, "coffret-cadeau");
+
+      // removed bc idk what it does // maybe it's for the coffret cadeau member reduction?
+      // checkout = await checkoutDiscount(checkout.id, "coffret-cadeau");
     }
 
-    (checkout);
+    checkout;
 
     // route to checkout url
 
@@ -113,8 +118,12 @@ const Order = ({ productsCoffrets }) => {
     image: "product.images.edges[0].node.originalSrc",
     variantPrice: "product.variants.edges[0].node.priceV2.amount",
     variantQuantity: 1,
-    prix_membre: "product.prix_membre?.value",
+    prix_membre: "product.prix_membre?.priceV2.amount",
   });
+
+  useEffect(() => {
+    console.log(orderState);
+  }, [orderState]);
   return (
     <div className="px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 flex flex-col">
       <div className="flex flex-col lg:flex-row justify-center gap-14 mt-10 lg:mt-24">
@@ -227,11 +236,11 @@ const Order = ({ productsCoffrets }) => {
                   user
                     ? (acc +=
                         product.quantity *
-                        Number(product.product.prix_membre?.value))
+                        Number(product.product.prix_membre?.priceV2.amount))
                     : (acc +=
                         product.quantity *
                         Number(
-                          product.product.priceRange.minVariantPrice.amount
+                          product.product.priceRange.maxVariantPrice.amount
                         )),
                 0
               )}{" "}

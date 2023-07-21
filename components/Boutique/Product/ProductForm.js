@@ -4,6 +4,7 @@ import { CartContext } from "../../../context/ShopContext";
 import axios from "axios";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import { set } from "react-hook-form";
 
 const fetchInventory = (url, id) =>
   axios
@@ -29,14 +30,17 @@ export default function ProductForm({
   const [available, setAvailable] = useState(true);
   const [stock, setStock] = useState(true);
   const session = useSession();
+
   const [variant, setVariant] = useState({
     id: product.variants.edges[0].node.id,
+    idPublic: product.variants.edges[0].node.id,
+    idMembre: product.variants.edges[1]?.node?.id ?? null,
     title: product.title,
     handle: product.handle,
     image: product.images.edges[0].node.originalSrc,
     variantPrice: product.variants.edges[0].node.priceV2.amount,
     variantQuantity: 1,
-    prix_membre: product.prix_membre?.value,
+    prix_membre: product.prix_membre?.priceV2.amount,
   });
 
   const updateQuant = (quant) => {
@@ -44,6 +48,15 @@ export default function ProductForm({
   };
 
   const { addToCart } = useContext(CartContext);
+
+  useEffect(() => {
+    if (session.status === "authenticated" && product.variants.edges[1]) {
+      setVariant({
+        ...variant,
+        id: product.variants.edges[1].node.id,
+      });
+    }
+  }, [session.status]);
 
   useEffect(() => {
     if (productInventory) {
@@ -109,11 +122,12 @@ export default function ProductForm({
         <div className="text-center">
           <p className="text-sm font-bold text-redWine">Membre</p>
           <p className="text-lg text-redWine font-bold">
-            {formatter.format(Number(product.prix_membre?.value))}
+            {formatter.format(Number(product.prix_membre?.priceV2.amount))}
           </p>
           <p className="text-[#8F8F8F]">
             {formatter.format(
-              Number(product.prix_membre?.value) / Number(product.unite?.value)
+              Number(product.prix_membre?.priceV2.amount) /
+                Number(product.unite?.value)
             )}{" "}
             / bouteille
           </p>
@@ -127,7 +141,7 @@ export default function ProductForm({
             id="qte"
             name="qte"
             type="number"
-            value={variant.variantQuantity}
+            value={variant.variantQuantity || ""}
             onChange={(e) => {
               if (
                 typeof parseInt(e.target.value) === "number" &&
@@ -151,6 +165,7 @@ export default function ProductForm({
         {available ? (
           <button
             onClick={() => {
+              console.log(product.variants);
               addToCart(variant);
             }}
             className="w-48 rounded text-white bg-redWine px-1 py-2 hover:opacity-80"
