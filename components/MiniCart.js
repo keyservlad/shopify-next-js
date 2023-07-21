@@ -220,7 +220,7 @@ export default function MiniCart({ cart }) {
                                 aria-hidden="true"
                               />
                               <span>
-                                Attention, vous n'êtes actuellement pas connecté
+                                Attention, vous n&#39;êtes actuellement pas connecté
                                 à votre compte membre Emovin et ne bénéficiez
                                 acutellement pas du tarif préférentiel,{" "}
                                 <Link href={"/cartes"}>
