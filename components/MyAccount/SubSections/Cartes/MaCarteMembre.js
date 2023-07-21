@@ -135,7 +135,6 @@ const MaCarteMembre = ({ cards }) => {
       </>
     );
   }
-  console.log(user);
 
   return (
     <>

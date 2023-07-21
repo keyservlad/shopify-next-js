@@ -24,8 +24,12 @@ const Bouteille = ({ bouteille }) => {
     { errorRetryCount: 3, revalidateOnMount: true }
   );
 
+  console.log(bouteille);
+
   const [variant, setVariant] = useState({
     id: bouteille.id,
+    idPublic: bouteille.idPublic,
+    idMembre: bouteille.idMembre,
     title: bouteille.title,
     handle: bouteille.handle,
     image: bouteille.image,

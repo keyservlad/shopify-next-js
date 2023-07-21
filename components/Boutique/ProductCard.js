@@ -98,7 +98,7 @@ const ProductCard = ({ product }) => {
               <p className="text-xs font-normal">Public</p>
               <p>
                 {formatter.format(
-                  Number(product.node.priceRange.minVariantPrice.amount) /
+                  Number(product.node.priceRange.maxVariantPrice.amount) /
                     Number(product.node.unite.value)
                 )}
               </p>
@@ -107,7 +107,7 @@ const ProductCard = ({ product }) => {
               <p className="text-xs">Membres</p>
               <p>
                 {formatter.format(
-                  Number(product.node.prix_membre.value) /
+                  Number(product.node.prix_membre?.priceV2.amount) /
                     Number(product.node.unite.value)
                 )}
               </p>

@@ -198,34 +198,34 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
           if (option.value === "15") {
             tempProductList = tempProductList.filter(
               (product) =>
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) <=
                 15
             );
           } else if (option.value === "15_25") {
             tempProductList = tempProductList.filter(
               (product) =>
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) >=
                   15 &&
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) <=
                   25
             );
           } else if (option.value === "25_35") {
             tempProductList = tempProductList.filter(
               (product) =>
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) >=
                   25 &&
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) <=
                   35
             );
           } else if (option.value === "35") {
             tempProductList = tempProductList.filter(
               (product) =>
-                Number(product.node.priceRange.minVariantPrice.amount) /
+                Number(product.node.priceRange.maxVariantPrice.amount) /
                   Number(product.node.unite.value) >=
                 35
             );
@@ -276,18 +276,18 @@ export default function BoutiqueTemplate({ products, pageTitle }) {
     } else if (sort === "PRICE_ASC") {
       tempProductList = tempProductList.sort(
         (a, b) =>
-          Number(a.node.priceRange.minVariantPrice.amount) /
+          Number(a.node.priceRange.maxVariantPrice.amount) /
             Number(a.node.unite.value) -
-          Number(b.node.priceRange.minVariantPrice.amount) /
+          Number(b.node.priceRange.maxVariantPrice.amount) /
             Number(b.node.unite.value)
       );
     }
     if (sort === "PRICE_DESC") {
       tempProductList = tempProductList.sort(
         (a, b) =>
-          Number(b.node.priceRange.minVariantPrice.amount) /
+          Number(b.node.priceRange.maxVariantPrice.amount) /
             Number(b.node.unite.value) -
-          Number(a.node.priceRange.minVariantPrice.amount) /
+          Number(a.node.priceRange.maxVariantPrice.amount) /
             Number(a.node.unite.value)
       );
     }
