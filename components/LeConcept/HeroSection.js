@@ -15,7 +15,7 @@ const HeroSection = () => {
           partager avec ses amis&nbsp;!
         </p>
         <p className="font-light text-xl">
-          Appréhener le vin pour ce qu&#39;il apporte en “émotion”. Pas de
+          Appréhender le vin pour ce qu&#39;il apporte en “émotion”. Pas de
           “chichi” et point de discours “pompeux”… juste la vérité de
           l&#39;instant&nbsp;!
         </p>
