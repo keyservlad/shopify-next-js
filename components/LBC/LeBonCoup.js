@@ -10,17 +10,19 @@ const LeBonCoup = ({ productsLBC }) => {
       <div className="relative lg:aspect-[2.677] 2xl:aspect-[3.2128] w-full">
         <div className="bg-[#51BBC9] text-white flex flex-col py-16 px-5 w-full sm:px-10 lg:absolute lg:top-0 lg:left-0 lg:z-10 lg:px-20 lg:pr-10 lg:py-12 lg:w-[59%] xl:py-16 xl:w-[50%] 2xl:px-38">
           <h1 className="">Notre Bon Coup du moment&nbsp;!</h1>
-          <p className="font-semibold text-xl mt-6">
-            Escapade en Pays de Loire&nbsp;!
+          <p className="font-semibold text-xl mt-6">Cap Sud-Ouest&nbsp;!</p>
+          <p className="font-light text-xl mt-1">
+            Des valeurs sûres que l&#39;on appréciera lorsque les températures
+            se feront plus fraîches...
           </p>
           <p className="font-light text-xl mt-1">
-            Fraicheur du sauvignon blanc,
+            Mais aussi de belles découvertes «&nbsp;Coup de cœur EMOVIN&nbsp;».
           </p>
           <p className="font-light text-xl mt-1">
-            et gourmandise du cabernet franc rouge “&nbsp;au Menu&nbsp;”&nbsp;!
+            ...et tout ça pour moins de 20€ la bouteille&nbsp;!
           </p>
           <p className="font-light mt-10">
-            Date limite de commande : 30 avril 2023
+            Date limite de commande : 31 octobre 2023
           </p>
         </div>
         <div className="relative aspect-[1.7333333] md:w-2/3 mx-auto lg:absolute lg:top-0 lg:right-0 lg:w-[60%]">
