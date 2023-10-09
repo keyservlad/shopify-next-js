@@ -6,7 +6,7 @@ import { formatter } from "../../utils/helper";
 import Bouteille from "./Bouteille";
 
 const NotreSelection = ({ productsLBC }) => {
-  const lesPentes = {
+  const chateauCedre = {
     title: productsLBC[0].node.title,
     id: productsLBC[0].node.variants.nodes[0].id,
     variantQuantity: 1,
@@ -36,24 +36,23 @@ const NotreSelection = ({ productsLBC }) => {
     // ),
     description: (
       <>
-        Sylvain Bruneau, vigneron gardien d&#39;un «&nbsp;savoir faire&nbsp;»
-        ancestral nous propose un vin plaisir par excellence avec ce 100%
-        Cabernet Franc Vieilles Vignes. Des arômes de fruits rouges intenses qui
-        annoncent une bouche ample et soyeuse. C&#39;est frais et gourmand à
-        souhait&nbsp;!
+        Ne passez pas à côté de l&#39;un des meilleurs Cahors (90% Malbec, 5%
+        Tannât, 5% Merlot). Concentration, densité et volume, le raisin est
+        travaillé de telle façon que la puissance n&#39;exclut pas
+        l&#39;élégance et la fraîcheur&nbsp;... Le tout en BIO&nbsp;!
+        <br />
+        <span className="text-[#A51D46]">
+          A apprécier particulièrement sur des produits locaux : Magret de
+          canard, Confit, Cassoulet...
+        </span>
       </>
     ),
-    accroche: (
-      <>
-        Un petit verre pour les grillardins (Viande ou poisson)&nbsp;☺&nbsp;… et
-        ce qui reste pour la table&nbsp;!
-      </>
-    ),
+    accroche: <>Définitivement La Référence&nbsp;! Succès garanti&nbsp;...</>,
     textColor: "text-[#A51D46]",
     bgColor: "bg-[#F9F3F6]",
     buttonColor: "bg-[#A51D46]",
   };
-  const tracy = {
+  const cedreHeritage = {
     title: productsLBC[1].node.title,
     id: productsLBC[1].node.variants.nodes[0].id,
     handle: productsLBC[1].node.handle,
@@ -66,8 +65,8 @@ const NotreSelection = ({ productsLBC }) => {
     couleur: productsLBC[1].node.couleur?.value,
     image: productsLBC[1].node.images.edges[0].node.originalSrc,
     unite: productsLBC[1].node.unite?.value,
-    bio: false,
-    hve: true,
+    bio: true,
+    hve: false,
     textCaisse: <>Frais de livraison non inclus.</>,
     // cepages: <>Syrah 100%</>,
     // age: <>11 à 28 ans</>,
@@ -83,25 +82,28 @@ const NotreSelection = ({ productsLBC }) => {
     // ),
     description: (
       <>
-        Ici le Pouilly Fumé est roi&nbsp;! Le sauvignon aussi appelé
-        «&nbsp;blanc fumé&nbsp;» dévoile avec cette cuvée son expression
-        aromatique, mêlant arômes végétaux à des notes citronnées, de fruits à
-        chair blanche et de poivre. Un vin de précision tout en finesse et
-        gourmandise&nbsp;!
+        Avec cette cuvée 100% Chardonnay, Pascal Verhaeghe a voulu renouer avec
+        le cépage côtoyé dans ses débuts de vigneron en Bourgogne! Ce chardonnay
+        (15 à 30 ans d&#39;âge) est planté sur des terroirs calcaires ce qui
+        confère au vin une grande fraicheur.
+        <br />
+        <span className="text-[#4EB799]">
+          La bouche se caractérise par des notes de poire, de citron et de
+          fleurs blanches qui se prolongent sur une finale saline.
+        </span>
       </>
     ),
     accroche: (
       <>
-        Parfait à toutes les «&nbsp;sauces&nbsp;»&nbsp;…
-        <br />
-        Et «&nbsp;ça goutte bien&nbsp;»&nbsp;:-)
+        Parfait à l&#39;Apéro avec des copains&nbsp;! ou sur un fromage de
+        chèvre&nbsp;...s&#39;il en reste&nbsp;:)
       </>
     ),
     textColor: "text-[#4EB799]",
     bgColor: "bg-[#EFF8F5]",
     buttonColor: "bg-[#4EB799]",
   };
-  const coudray = {
+  const domaineRoc = {
     title: productsLBC[2].node.title,
     id: productsLBC[2].node.variants.nodes[0].id,
     handle: productsLBC[2].node.handle,
@@ -114,7 +116,7 @@ const NotreSelection = ({ productsLBC }) => {
     couleur: productsLBC[2].node.couleur?.value,
     image: productsLBC[2].node.images.edges[0].node.originalSrc,
     unite: productsLBC[2].node.unite?.value,
-    bio: true,
+    bio: false,
     hve: false,
     textCaisse: <>Frais de livraison non inclus.</>,
     // cepages: <>Syrah 100%</>,
@@ -131,10 +133,16 @@ const NotreSelection = ({ productsLBC }) => {
     // ),
     description: (
       <>
-        Voisin de ses illustres ainés (Sancerre & Pouilly fumé), ce 100%
-        Sauvignon Blanc a un nez agréable aux notes de fleurs blanches et
-        d&#39;agrumes, une bouche tendre et vive avec une belle fraicheur. Un
-        Quincy typique à la fois sec et fruité&nbsp;!
+        Convaincu que les cépages Négrette (cépage roi de l&#39;appellation) et
+        Syrah sont complémentaires, Frédéric Ribes crée sa cuvée Don Quichotte
+        en 1995! Un assemblage Précurseur - L&#39;esprit de Cervantes entre
+        idéal et réalité&nbsp;!
+        <br />
+        <span className="text-[#A51D46]">
+          Nez aux senteurs de fruits mûrs et épices. Bouche structurée, profonde
+          et concentrée avec de beaux tanins matures, velouté et une finale sur
+          le fruit&nbsp;!
+        </span>
       </>
     ),
     accroche: (
@@ -143,12 +151,12 @@ const NotreSelection = ({ productsLBC }) => {
         Excellent aussi avec des fruits de mer
       </>
     ),
-    textColor: "text-[#4EB799]",
-    bgColor: "bg-[#EFF8F5]",
-    buttonColor: "bg-[#4EB799]",
+    textColor: "text-[#A51D46]",
+    bgColor: "bg-[#F9F3F6]",
+    buttonColor: "bg-[#A51D46]",
   };
 
-  const bouteilles = [lesPentes, tracy, coudray];
+  const bouteilles = [chateauCedre, cedreHeritage, domaineRoc];
 
   return (
     <>

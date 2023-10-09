@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ImageHeroBonCoup from "../../public/images/bon-coup/lbc-background-midjourney.png";
+import ImageHeroBonCoup from "../../public/images/bon-coup/379665807_728446922481270_3495090914604774033_n.png";
 import ImageHouraLBC from "../../public/images/bon-coup/houraLBC.png";
 import ImageCloche from "../../public/images/HP/boncoup_cloche.webp";
 import NotreSelection from "./NotreSelection";
@@ -38,11 +38,15 @@ const LeBonCoup = ({ productsLBC }) => {
       <div className="flex flex-col text-center mt-28">
         <h2 className="text-4xl font-light">Une région, trois histoires</h2>
         <p className="mt-12 md:w-2/3 mx-auto px-5">
-          Une belle région de France, trois domaines, trois histoires de famille
-          mais un point commun&nbsp;: Une philosophie de travail, une démarche
-          BIO de conviction et la quête de l&#39;excellence. Une sélection
-          spéciale pour vous offrir des vins très gourmands et frais à consommer
-          jeunes&nbsp;!
+          Berceau de la préhistoire&nbsp;: de l&#39;homme de Cro-Magnon des
+          Eyzies de Tayac aux grottes de Lascaux... Haut lieu de la
+          gastronomie&nbsp;: Foie gras et cèpes du Périgord, confit de canard et
+          pommes sarladaises, Rocamadour (un peu calorique, mais
+          qu&#39;importe); Et puis une pléiade d&#39;appellations viticoles et
+          de cépages qui offrent une diversité unique&nbsp;: la Négrette de
+          Fronton, le Côt ou Malbec de Cahors, le Tannat de Madiran, ou encore
+          le petit et gros Manseng. Bienvenue dans l&#39;incontournable et
+          fascinant Sud-Ouest&nbsp;!
         </p>
       </div>
       {/* TODO faire la section des bouteilles avec à partir de lg un display grid-cols-3 et avant flex-col et faire la div normal et le background une image en position absolute */}
@@ -59,14 +63,17 @@ const LeBonCoup = ({ productsLBC }) => {
           <div className="flex flex-col items-start col-span-2">
             <h2 className="text-4xl font-light">La Petite Histoire</h2>
             <p className="mt-5">
-              Escapade dans la «&nbsp;Vallée de la Loire&nbsp;» et pour une
-              fois, pas pour visiter ses châteaux mais pour vous faire découvrir
-              des vins remarquables. Première étape en Touraine avec un
-              «&nbsp;Saint-Nicolas de Bourgueil&nbsp;» Rouge frais, gouleyant et
-              digeste pour un plaisir immédiat&nbsp;!… puis passage par le
-              vignoble du «&nbsp;centre Val de Loire&nbsp;» et ses incomparables
-              Sauvignon blancs … Des vins pour préparer vos prochains barbecues
-              entre amis ou préparer les «&nbsp;paniers vacances&nbsp;».
+              Nous avons une petite confidence à vous faire&#39;: On est plutôt
+              fier de nous (rassurez-vous, on a parfois quelques moments de
+              doute passagers). Car ce Bon Coup porte très bien son nom. Nous
+              avons la chance d&#39;avoir dans notre beau pays une palette de
+              très grands vins, voire même exceptionnels, des bouteilles qui
+              font rêver mais de plus en plus inaccessibles. Alors, nous sommes
+              heureux de vous proposer ces «&nbsp;pépites&nbsp;» rouges
+              élaborées par deux très grands vinificateurs et promises à un long
+              et bel avenir et tout ça pour moins de 20 Euros la bouteille.
+              Excellents dès à présent mais pas grave si vous oubliez les rouges
+              en cave quelques années&nbsp;!
             </p>
             <p className="font-caveat text-2xl mt-5">Patrick & Jean-Louis</p>
           </div>
