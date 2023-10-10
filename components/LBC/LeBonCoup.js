@@ -22,7 +22,7 @@ const LeBonCoup = ({ productsLBC }) => {
             ...et tout ça pour moins de 20€ la bouteille&nbsp;!
           </p>
           <p className="font-light mt-10">
-            Date limite de commande : 31 octobre 2023
+            Date limite de commande : 15 novembre 2023
           </p>
         </div>
         <div className="relative aspect-[1.7333333] md:w-2/3 mx-auto lg:absolute lg:top-0 lg:right-0 lg:w-[60%]">
