@@ -195,7 +195,7 @@ export default function Nav2() {
   }, [session.status]);
 
   return (
-    <div className="bg-white lg:sticky top-0 z-20 border-b border-gray-200">
+    <div className="bg-white lg:sticky top-0 z-50 border-b border-gray-200">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>

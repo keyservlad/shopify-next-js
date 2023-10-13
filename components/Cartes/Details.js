@@ -10,32 +10,54 @@ import DessinDecouverte from "../../public/images/logo-cartes/dessinDecouverte.p
 import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquables.png";
 import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
 
+import LogoTrinque from "../../public/images/page-cartes/wine-glass-wine-svgrepo-com.svg";
+
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
 
 const Details = (props) => {
   useEffect(() => {
+    const updateTop = () => {
+      const firstStickyElement = document.getElementById("firstStickyElement");
+      const secondStickyElement = document.getElementById(
+        "secondStickyElement"
+      );
+      const thirdStickyElement = document.getElementById("thirdStickyElement");
+
+      const heightOfFirstSticky = firstStickyElement.offsetHeight;
+      secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+      thirdStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+
+      if (window.innerWidth < 1024) {
+        secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 12px)`;
+        thirdStickyElement.style.top = `calc(${heightOfFirstSticky}px - 12px)`;
+      }
+    };
     const main = document.getElementById("main");
     main.style.overflow = "visible";
 
-    const firstStickyElement = document.getElementById("firstStickyElement");
-    const secondStickyElement = document.getElementById("secondStickyElement");
+    updateTop();
 
-    const heightOfFirstSticky = firstStickyElement.offsetHeight;
-    secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+    window.addEventListener("resize", updateTop);
+
+    return () => {
+      window.removeEventListener("resize", updateTop);
+    };
   }, []);
 
   return (
     <div className="mt-10 relative">
       {/* desktop */}
-      <div className="hidden lg:block mb-[1000px]">
+      <div className="block mb-[1000px]">
         {/* title */}
         <div
           id="firstStickyElement"
-          className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 mt-10 grid grid-cols-1 lg:grid-cols-3 sticky top-[0.45rem] z-10"
+          className="flex flex-row w-full max-w-7xl px-3 mx-auto mt-10 sticky top-0 lg:top-[0.5rem] z-20 bg-white"
         >
+          {/* void div */}
+          <div className="flex-1 flex" />
           {/* decouverte */}
-          <div className="relative bg-[#73992C] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col items-center justify-center ml-6 text-white">
+          <div className="relative bg-[#73992C] w-52 xl:w-64 px-10 py-6 flex flex-col items-center justify-center mx-3 text-white">
             <p className="mb-2">Option box</p>
             <Image
               src={ImageTitleDecouverteBlanc}
@@ -45,7 +67,7 @@ const Details = (props) => {
             />
           </div>
           {/* Immanquables */}
-          <div className="relative bg-[#7FA8E2] px-16 xl:px-20 2xl:px-24 py-6 flex flex-col text-white items-center justify-center ml-6">
+          <div className="relative bg-[#7FA8E2] w-52 xl:w-64 px-10 py-6 flex flex-col text-white items-center justify-center mx-3">
             <p className="mb-2">Option box</p>
             <Image
               src={ImageTitleImmamquablesBlanc}
@@ -55,7 +77,7 @@ const Details = (props) => {
             />
           </div>
           {/* prestige */}
-          <div className="relative bg-[#901340] px-16 xl:px-20 2xl:px-24 pt-6 pb-7 flex flex-col text-white items-center justify-center ml-6">
+          <div className="relative bg-[#901340] w-52 xl:w-64 px-10 pt-6 pb-7 flex flex-col text-white items-center justify-center mx-3">
             <p className="mb-2">Option box</p>
             <Image
               src={ImageTitlePrestigeBlanc}
@@ -65,10 +87,13 @@ const Details = (props) => {
             />
           </div>
         </div>
+
         {/* Image Carte */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3">
+        <div className="my-5 flex flex-row w-full max-w-7xl px-3 mx-auto">
+          {/* void div */}
+          <div className="flex-1 flex" />
           {/* decouverte */}
-          <div className="relative max-h-64 aspect-1 m-auto">
+          <div className="relative m-auto w-52 xl:w-64 px-10 flex items-center justify-center mx-3">
             <Image
               src={DessinDecouverte}
               alt="Dessin carte découverte"
@@ -77,7 +102,7 @@ const Details = (props) => {
             />
           </div>
           {/* Immanquables */}
-          <div className="relative max-h-64 aspect-1 m-auto">
+          <div className="relative m-auto w-52 xl:w-64 px-10 flex items-center justify-center mx-3">
             <Image
               src={DessinImmanquables}
               alt="Dessin carte immanquables"
@@ -86,7 +111,7 @@ const Details = (props) => {
             />
           </div>
           {/* prestige */}
-          <div className="relative max-h-64 aspect-1 m-auto">
+          <div className="relative m-auto w-52 xl:w-64 px-10 flex items-center justify-center mx-3">
             <Image
               src={DessinPrestige}
               alt="Dessin carte prestige"
@@ -95,10 +120,13 @@ const Details = (props) => {
             />
           </div>
         </div>
+
         {/* Details */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
+        <div className="flex flex-row w-full max-w-7xl px-3 mx-auto">
+          {/* void div */}
+          <div className="flex-1 flex" />
           {/* decouverte */}
-          <div className="flex items-center  flex-col ml-6">
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col">
               <h2 className="font-semibold text-[#73992C] text-xl">
                 Découvertes de l&#39;automne
@@ -109,7 +137,7 @@ const Details = (props) => {
             </div>
           </div>
           {/* Immanquables */}
-          <div className="flex items-center flex-col ml-6">
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col">
               <h2 className="font-semibold text-[#7FA8E2] text-xl">
                 Les grandes appellations françaises
@@ -118,7 +146,7 @@ const Details = (props) => {
             </div>
           </div>
           {/* prestige */}
-          <div className="flex items-center flex-col ml-6">
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col">
               <h2 className="font-semibold text-[#901340] text-xl">
                 Prestige de France
@@ -129,23 +157,26 @@ const Details = (props) => {
             </div>
           </div>
         </div>
+
         {/* Price */}
-        <div className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6">
-          <div className="flex items-center justify-center flex-col ml-6">
+        <div className=" flex flex-row w-full max-w-7xl px-3 mx-auto">
+          {/* void div */}
+          <div className="flex-1 flex" />
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col my-6">
               <p className="text-2xl text-[#73992C] font-light">
                 <span className="font-semibold">162 € TTC</span> / an
               </p>
             </div>
           </div>
-          <div className="flex items-center justify-center flex-col ml-6">
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col my-6">
               <p className="text-2xl text-[#7FA8E2] font-light">
                 <span className="font-semibold">198 € TTC</span> / an
               </p>
             </div>
           </div>
-          <div className="flex items-center justify-center flex-col ml-6">
+          <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
             <div className="text-center flex flex-col my-6">
               <p className="text-2xl text-[#901340] font-light">
                 <span className="font-semibold">270 € TTC</span> / an
@@ -153,42 +184,120 @@ const Details = (props) => {
             </div>
           </div>
         </div>
+
         {/* button */}
         <div
           id="secondStickyElement"
-          className="w-full px-5 sm:px-10 lg:px-20 xl:px-28 2xl:px-40 grid grid-cols-1 lg:grid-cols-3 lg:space-x-6 sticky z-10"
+          className="sticky z-10 border-b border-gray-400 pb-5 bg-white"
         >
-          {/* decouverte */}
-          <div className="flex items-center justify-center flex-col ml-6">
-            <Link href="/cartes/decouverte" passHref>
-              <a className="w-full">
-                <button className="bg-[#73992C] text-white w-full font-bold border-solid rounded-xl border-[#73992C] border-[3px] px-5 py-3 cursor-pointer hover:text-[#73992C] hover:bg-white">
-                  Je prends ma carte
-                </button>
-              </a>
-            </Link>
-          </div>
-          {/* Immanquables */}
-          <div className="flex items-center justify-center flex-col ml-6">
-            <Link href="/cartes/immanquables" passHref>
-              <a className="w-full">
-                <button className="bg-[#7FA8E2] text-white w-full font-bold border-solid rounded-xl border-[#7FA8E2] border-[3px] px-5 py-3 cursor-pointer hover:text-[#7FA8E2] hover:bg-white">
-                  Je prends ma carte
-                </button>
-              </a>
-            </Link>
-          </div>
-          {/* prestige */}
-          <div className="flex items-center justify-center flex-col ml-6">
-            <Link href="/cartes/prestige" passHref>
-              <a className="w-full">
-                <button className="bg-[#901340] text-white w-full font-bold border-solid rounded-xl border-[#901340] border-[3px] px-5 py-3 cursor-pointer hover:text-[#901340] hover:bg-white">
-                  Je prends ma carte
-                </button>
-              </a>
-            </Link>
+          <div className="flex flex-row w-full max-w-7xl px-3 mx-auto">
+            {/* void div */}
+            <div className="flex-1 flex" />
+            {/* decouverte */}
+            <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
+              <Link href="/cartes/decouverte" passHref>
+                <a className="w-full">
+                  <button className="bg-[#73992C] text-white w-full font-bold border-solid rounded-xl border-[#73992C] border-[3px] px-5 py-3 cursor-pointer hover:text-[#73992C] hover:bg-white">
+                    Je prends ma carte
+                  </button>
+                </a>
+              </Link>
+            </div>
+            {/* Immanquables */}
+            <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
+              <Link href="/cartes/immanquables" passHref>
+                <a className="w-full">
+                  <button className="bg-[#7FA8E2] text-white w-full font-bold border-solid rounded-xl border-[#7FA8E2] border-[3px] px-5 py-3 cursor-pointer hover:text-[#7FA8E2] hover:bg-white">
+                    Je prends ma carte
+                  </button>
+                </a>
+              </Link>
+            </div>
+            {/* prestige */}
+            <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
+              <Link href="/cartes/prestige" passHref>
+                <a className="w-full">
+                  <button className="bg-[#901340] text-white w-full font-bold border-solid rounded-xl border-[#901340] border-[3px] px-5 py-3 cursor-pointer hover:text-[#901340] hover:bg-white">
+                    Je prends ma carte
+                  </button>
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+          <thead>
+            <tr>
+              <th
+                id="thirdStickyElement"
+                className="sticky z-20 pb-4 table-cell font-semibold"
+              >
+                <div className="flex flex-row items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+                    <Image
+                      src={LogoTrinque}
+                      alt="Logo Trinque"
+                      height={30}
+                      width={30}
+                      quality={100}
+                    />
+                  </div>
+                  <h5 className="font-caveat text-3xl">Recevez du vin</h5>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">PLUS PLSU</div>
+                </div>
+              </th>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+            <tr>
+              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">PLUS PLSU</div>
+                </div>
+              </th>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+            <tr>
+              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">PLUS PLSU</div>
+                </div>
+              </th>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+          </tbody>
+        </table>
         <div className="h-96"></div>
       </div>
       {/* mobile */}
