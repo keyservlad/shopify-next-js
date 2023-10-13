@@ -314,7 +314,7 @@ export const Card = ({
     title: carte.title,
     handle: carte.handle,
     image: carte.images?.edges[0].node.originalSrc,
-    variantPrice: carte.variants.edges[0].node.price,
+    variantPrice: carte.variants.edges[0].node.price.amount,
     variantQuantity: 1,
   };
   const variantDomicile = {
@@ -322,7 +322,7 @@ export const Card = ({
     title: carteDomicile.title,
     handle: carteDomicile.handle,
     image: carteDomicile.images?.edges[0].node.originalSrc,
-    variantPrice: carteDomicile.variants.edges[0].node.price,
+    variantPrice: carteDomicile.variants.edges[0].node.price.amount,
     variantQuantity: 1,
   };
 
@@ -331,7 +331,7 @@ export const Card = ({
     title: cartePlusPlus.title,
     handle: cartePlusPlus.handle,
     image: cartePlusPlus.images?.edges[0].node.originalSrc,
-    variantPrice: cartePlusPlus.variants.edges[0].node.price,
+    variantPrice: cartePlusPlus.variants.edges[0].node.price.amount,
     variantQuantity: 1,
   };
   const variantDomicilePlusPlus = {
@@ -339,7 +339,7 @@ export const Card = ({
     title: cartePlusPlusDomicile.title,
     handle: cartePlusPlusDomicile.handle,
     image: cartePlusPlusDomicile.images?.edges[0].node.originalSrc,
-    variantPrice: cartePlusPlusDomicile.variants.edges[0].node.price,
+    variantPrice: cartePlusPlusDomicile.variants.edges[0].node.price.amount,
     variantQuantity: 1,
   };
 
@@ -349,7 +349,7 @@ export const Card = ({
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
   const [boxPlusState, setBoxPlusState] = useState(false);
-  const [price, setPrice] = useState(carte.variants.edges[0].node.price);
+  const [price, setPrice] = useState(carte.variants.edges[0].node.price.amount);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -369,15 +369,17 @@ export const Card = ({
   useEffect(() => {
     if (deliveryMode == "Plateforme") {
       if (boxPlusState) {
-        setPrice(Number(carte.variants.edges[0].node.price) + 60);
+        setPrice(Number(carte.variants.edges[0].node.price.amount) + 60);
       } else {
-        setPrice(carte.variants.edges[0].node.price);
+        setPrice(carte.variants.edges[0].node.price.amount);
       }
     } else {
       if (boxPlusState) {
-        setPrice(Number(carteDomicile.variants.edges[0].node.price) + 60);
+        setPrice(
+          Number(carteDomicile.variants.edges[0].node.price.amount) + 60
+        );
       } else {
-        setPrice(carteDomicile.variants.edges[0].node.price);
+        setPrice(carteDomicile.variants.edges[0].node.price.amount);
       }
     }
   }, [deliveryMode, boxPlusState, price, carte, carteDomicile]);
@@ -465,7 +467,9 @@ export const Card = ({
                             françaises.
                           </span>
                         </label>
-                        <p className="mt-3 text-gray-700">Exemple : Sélection 2023 </p>
+                        <p className="mt-3 text-gray-700">
+                          Exemple : Sélection 2023{" "}
+                        </p>
                         <p className="text-gray-500">
                           Syrah &#34;Les candives&#34; Cave Cuilleron&nbsp;-
                           Pouilly-Fumé (Loire) Château de Tracy&nbsp;- Corbières

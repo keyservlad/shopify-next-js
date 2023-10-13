@@ -9,9 +9,9 @@ const serieLimitee = ({ productSerieLim }) => {
       <Head>
         <title>Emovin : Série limitée</title>
       </Head>
-      {/* <ToutBu page={"serieLim"} /> */}
+      <ToutBu page={"serieLim"} />
 
-      <SerieLim productSerieLim={productSerieLim} />
+      {/* <SerieLim productSerieLim={productSerieLim} /> */}
     </>
   );
 };
