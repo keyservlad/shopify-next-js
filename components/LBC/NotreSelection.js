@@ -147,8 +147,7 @@ const NotreSelection = ({ productsLBC }) => {
     ),
     accroche: (
       <>
-        Coup de Cœur Emovin&nbsp;!! Perso, je l&#39;adore à l&#39;apéro&nbsp;…
-        Excellent aussi avec des fruits de mer
+        Coup de Cœur Emovin !! Un bon rôti avec une &#34;&nbsp;cuisinée&nbsp;&#34; de champignons de saison ...
       </>
     ),
     textColor: "text-[#A51D46]",
