@@ -528,7 +528,7 @@ export default function Nav2() {
                                                   quality={100}
                                                   placeholder="blur"
                                                 />
-                                                <div className="absolute w-3/4 h-3/4 xl:px-10 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
+                                                <div className="absolute w-3/4 h-3/4 xl:px-9 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
                                                   <div className="w-16 relative">
                                                     <Image
                                                       src={ImageKrone}

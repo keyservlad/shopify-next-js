@@ -35,6 +35,17 @@ const Cartes = () => {
 
   return (
     <>
+      <div className="w-full h-[64.4vh] flex items-center align-center text-center">
+        <h1 className="text-redWine w-full">
+          Service momentanément indisponible, veuillez réessayer dans quelques
+          jours
+        </h1>
+      </div>
+    </>
+  );
+
+  return (
+    <>
       <div className="flex flex-col w-full align-center justify-center text-center mb-10">
         <div className="sm:mx-10 lg:mx-20 xl:mx-28 2xl:mx-40 relative -z-10">
           <Image
@@ -49,8 +60,9 @@ const Cartes = () => {
             1 carte avec 3 options de «&nbsp;Wine box&nbsp;» selon vos goûts
           </h1>
           <p className="text-2xl font-light mt-6">
-            Avec votre carte EMOVIN, profitez de 2 livraisons de vin et de plein d&#39;avantages autour du
-            vin et des wine box composées de pur plaisir&nbsp;!
+            Avec votre carte EMOVIN, profitez de 2 livraisons de vin et de plein
+            d&#39;avantages autour du vin et des wine box composées de pur
+            plaisir&nbsp;!
           </p>
           <p className="font-light mt-6">
             Validité de votre carte : 1 an à compter de la date d&#39;engagement
