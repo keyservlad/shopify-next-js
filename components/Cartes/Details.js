@@ -11,9 +11,12 @@ import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquabl
 import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
 
 import LogoTrinque from "../../public/images/page-cartes/wine-glass-wine-svgrepo-com.svg";
+import PostCard from "../../public/images/page-cartes/postCard.svg";
+import HandsCommunity from "../../public/images/page-cartes/handsCommunity.svg";
 
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useEffect } from "react";
+import { LogoTickVercel } from "./LogoTickVercel";
 
 const Details = (props) => {
   useEffect(() => {
@@ -59,7 +62,7 @@ const Details = (props) => {
   return (
     <div className="mt-10 relative">
       {/* desktop */}
-      <div className="block mb-[1000px]">
+      <div className="block mb-24">
         {/* title */}
         <div
           id="firstStickyElement"
@@ -262,13 +265,13 @@ const Details = (props) => {
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-semibold uppercase">Box de printemps</p>
                     <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
                       En savoir
                       <br />
                       plus
@@ -276,41 +279,89 @@ const Details = (props) => {
                   </div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-semibold uppercase">Box d&#39;été</p>
                     <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
-                  <div className="ml-auto">PLUS PLSU</div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-semibold uppercase">Box d&#39;automne</p>
                     <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
-                  <div className="ml-auto">PLUS PLSU</div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle text-[#73992C] p-5 relative pb-10">
+                <h3 className="font-semibold">Découvertes d&#39;automne</h3>
+                <p className="italic font-light text-sm">
+                  Ce ne sont pas les plus connus&nbsp;...
+                  <br />
+                  et pourtant&nbsp;!
+                </p>
+                <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
+                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                    En savoir
+                    <br />
+                    plus
+                  </button>
+                </div>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle text-[#7FA8E2] p-5 pb-10 relative">
+                <h3 className="font-semibold">Grandes appellations</h3>
+                <p className="italic font-light text-sm">
+                  Il faut les avoir dans sa cave&nbsp;!
+                </p>
+                <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
+                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                    En savoir
+                    <br />
+                    plus
+                  </button>
+                </div>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle text-[#901340] p-5 pb-10 relative">
+                <h3 className="font-semibold">Prestige de France</h3>
+                <p className="italic font-light text-sm">
+                  Les goûter au moins une fois dans sa vie&nbsp;!
+                </p>
+                <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
+                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                    En savoir
+                    <br />
+                    plus
+                  </button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -323,7 +374,7 @@ const Details = (props) => {
                 <div className="flex flex-row items-center gap-3">
                   <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
                     <Image
-                      src={LogoTrinque}
+                      src={PostCard}
                       alt="Logo Trinque"
                       height={30}
                       width={30}
@@ -331,7 +382,7 @@ const Details = (props) => {
                     />
                   </div>
                   <h5 className="font-caveat text-3xl">
-                    Bénéficiez des avantages
+                    Avantages <span className="text-redWine">EMOVIN</span>
                   </h5>
                 </div>
               </th>
@@ -339,56 +390,243 @@ const Details = (props) => {
           </thead>
           <tbody>
             <tr>
-              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
-                  <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
+                  <div className="flex flex-col text-left">
+                    <p className="font-semibold uppercase">Remise Moyenne</p>
                     <p className="font-light text-sm">
-                      (3 bouteilles + fiche dégustation)
+                      sur les Prix Publics &#34;emovin&#34;
                     </p>
                   </div>
-                  <div className="ml-auto">PLUS PLSU</div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <p className="text-[#73992C] m-auto text-4xl font-semibold font-caveat">
+                  10%
+                </p>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <p className="text-[#7FA8E2] m-auto text-4xl font-semibold font-caveat">
+                  10%
+                </p>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <p className="text-[#901340] m-auto text-4xl font-semibold font-caveat">
+                  10%
+                </p>
+              </td>
             </tr>
             <tr>
-              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
-                    <p className="font-light text-sm">
-                      (3 bouteilles + fiche dégustation)
+                    <p className="font-semibold uppercase">
+                      Programme de fidélité
                     </p>
                   </div>
-                  <div className="ml-auto">PLUS PLSU</div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
             </tr>
             <tr>
-              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
-                    <p className="font-semibold">Box de printemps</p>
-                    <p className="font-light text-sm">
-                      (3 bouteilles + fiche dégustation)
-                    </p>
+                    <p className="font-semibold uppercase">Ventes privées</p>
                   </div>
-                  <div className="ml-auto">PLUS PLSU</div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
                 </div>
               </th>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center py-12">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center py-12">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center relative py-12">
+                <LogoTickVercel color={"fill-[#901340]"} />
+                <div className="absolute bottom-0 left-[50%] -translate-x-[50%] w-full pb-1">
+                  <p className="text-sm text-[#901340]">
+                    Accès exclusif
+                    <br />
+                    aux &#34;allocations réduites&#34;
+                  </p>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
-        <div className="h-96"></div>
+
+        {/* table 3 accédez aux services EMOVIN */}
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+          <thead>
+            <tr>
+              <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
+                <div className="flex flex-row items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+                    <Image
+                      src={HandsCommunity}
+                      alt="Logo Trinque"
+                      height={30}
+                      width={30}
+                      quality={100}
+                    />
+                  </div>
+                  <h5 className="font-caveat text-3xl">
+                    Services <span className="text-redWine">EMOVIN</span>
+                  </h5>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-left">
+                    <p className="font-semibold uppercase">
+                      Conseils personnalisés
+                    </p>
+                    <p className="font-light text-sm">
+                      &#34;Wine Assistance&#34;
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
+            </tr>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-left">
+                    <p className="font-semibold uppercase">
+                      Invitation aux soirées
+                    </p>
+                    <p className="font-light text-sm">
+                      &#34;Dégustation/vente&#34;
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center text-[#73992C]">
+                <p className="font-semibold uppercase">GRATUIT</p>
+                <p className="font-light text-sm">(places prioritaires)</p>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center text-[#7FA8E2]">
+                <p className="font-semibold uppercase">GRATUIT</p>
+                <p className="font-light text-sm">(places prioritaires)</p>
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center text-[#901340]">
+                <p className="font-semibold uppercase">GRATUIT</p>
+                <p className="font-light text-sm">(places prioritaires)</p>
+              </td>
+            </tr>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-left">
+                    <p className="font-semibold uppercase">Site web dédié</p>
+                    <p className="font-light text-sm">
+                      &#34;Espace Membre&#34;
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#73992C]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
+            </tr>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-left">
+                    <p className="font-semibold uppercase">Audit de cave</p>
+                    <p className="font-light text-sm">(sur demande)</p>
+                  </div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center text-[#73992C] text-3xl">
+                -
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center text-[#7FA8E2] text-3xl">
+                -
+              </td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
+                <LogoTickVercel color={"fill-[#901340]"} />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       {/* mobile */}
       <div className="lg:hidden flex flex-col">
