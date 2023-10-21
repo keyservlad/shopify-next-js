@@ -22,15 +22,26 @@ const Details = (props) => {
       const secondStickyElement = document.getElementById(
         "secondStickyElement"
       );
-      const thirdStickyElement = document.getElementById("thirdStickyElement");
+      // const thirdStickyElement = document.getElementById("thirdStickyElement");
+      const thirdStickyElements =
+        document.getElementsByClassName("thirdStickyElement");
 
       const heightOfFirstSticky = firstStickyElement.offsetHeight;
       secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
-      thirdStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+
+      for (let i = 0; i < thirdStickyElements.length; i++) {
+        thirdStickyElements[
+          i
+        ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+      }
 
       if (window.innerWidth < 1024) {
         secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 12px)`;
-        thirdStickyElement.style.top = `calc(${heightOfFirstSticky}px - 12px)`;
+        for (let i = 0; i < thirdStickyElements.length; i++) {
+          thirdStickyElements[
+            i
+          ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+        }
       }
     };
     const main = document.getElementById("main");
@@ -225,13 +236,12 @@ const Details = (props) => {
             </div>
           </div>
         </div>
+
+        {/* table 1 recevez du vin */}
         <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
           <thead>
             <tr>
-              <th
-                id="thirdStickyElement"
-                className="sticky z-20 pb-4 table-cell font-semibold"
-              >
+              <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
                 <div className="flex flex-row items-center gap-3">
                   <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
                     <Image
@@ -249,52 +259,132 @@ const Details = (props) => {
           </thead>
           <tbody>
             <tr>
-              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold">Box de printemps</p>
-                    <p className="font-light">
+                    <p className="font-light text-sm">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2">
+                      En savoir
+                      <br />
+                      plus
+                    </button>
+                  </div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
                   <div className="ml-auto">PLUS PLSU</div>
                 </div>
               </th>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+            <tr>
+              <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light text-sm">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">PLUS PLSU</div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* table 2 beneficiez des avantages EMOVIN */}
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+          <thead>
+            <tr>
+              <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
+                <div className="flex flex-row items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+                    <Image
+                      src={LogoTrinque}
+                      alt="Logo Trinque"
+                      height={30}
+                      width={30}
+                      quality={100}
+                    />
+                  </div>
+                  <h5 className="font-caveat text-3xl">
+                    Bénéficiez des avantages
+                  </h5>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-col text-center">
+                    <p className="font-semibold">Box de printemps</p>
+                    <p className="font-light text-sm">
+                      (3 bouteilles + fiche dégustation)
+                    </p>
+                  </div>
+                  <div className="ml-auto">PLUS PLSU</div>
+                </div>
+              </th>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
             </tr>
             <tr>
               <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold">Box de printemps</p>
-                    <p className="font-light">
+                    <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
                   <div className="ml-auto">PLUS PLSU</div>
                 </div>
               </th>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
             </tr>
             <tr>
               <th className="py-4 pr-3 pl-4 border-t border-gray-400 text-left">
                 <div className="flex flex-row gap-3 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold">Box de printemps</p>
-                    <p className="font-light">
+                    <p className="font-light text-sm">
                       (3 bouteilles + fiche dégustation)
                     </p>
                   </div>
                   <div className="ml-auto">PLUS PLSU</div>
                 </div>
               </th>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
-              <td className="w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
+              <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle"></td>
             </tr>
           </tbody>
         </table>
