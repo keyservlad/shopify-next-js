@@ -34,7 +34,6 @@ const schemaPlat = object({
       ["Rambouillet", "Lyon", "Avignon", "Grenoble", "Chronopost"],
       "Veuillez entrer une plateforme de livraison valide"
     ),
-  boxPlusPlus: boolean("Case à cocher ou décocher"),
 });
 const schemaDom = object({
   firstName: string().required("Veuillez entrer votre prénom"),
@@ -53,7 +52,6 @@ const schemaDom = object({
     .required("Veuillez entrer votre numéro de téléphone")
     .matches(phoneRegExp, "Numéro de léléphone non valide")
     .min(10, "Trop court"),
-  boxPlusPlus: boolean("Case à cocher ou décocher"),
 });
 
 const getCustomerByEmail = (email) =>
@@ -65,12 +63,7 @@ const getCustomerByEmail = (email) =>
     })
     .then((res) => res.data);
 
-export const Card = ({
-  carte,
-  carteDomicile,
-  cartePlusPlus,
-  cartePlusPlusDomicile,
-}) => {
+export const Card = ({ carte, carteDomicile }) => {
   async function onSubmit(values) {
     setIsLoading(true);
 
@@ -147,13 +140,6 @@ export const Card = ({
             value: "false",
           },
           {
-            id: ids?.isPlusPlus ? ids.isPlusPlus : null,
-            key: "isPlusPlus",
-            namespace: "custom",
-            type: "boolean",
-            value: `${boxPlusState}`,
-          },
-          {
             id: ids?.points ? ids.points : null,
             key: "points",
             namespace: "custom",
@@ -198,13 +184,6 @@ export const Card = ({
             value: expiryDate.toISOString().split("T")[0],
           },
           {
-            id: ids?.isPlusPlus ? ids.isPlusPlus : null,
-            key: "isPlusPlus",
-            namespace: "custom",
-            type: "boolean",
-            value: `${boxPlusState}`,
-          },
-          {
             id: ids?.isDomicile ? ids.isDomicile : null,
             key: "isDomicile",
             namespace: "custom",
@@ -242,33 +221,17 @@ export const Card = ({
 
     let checkout;
     if (schema == schemaDom) {
-      if (boxPlusState) {
-        checkout = await createCheckoutCustomAttribute(
-          [variantDomicilePlusPlus],
-          customAttribute,
-          values.email
-        );
-      } else {
-        checkout = await createCheckoutCustomAttribute(
-          [variantDomicile],
-          customAttribute,
-          values.email
-        );
-      }
+      checkout = await createCheckoutCustomAttribute(
+        [variantDomicile],
+        customAttribute,
+        values.email
+      );
     } else {
-      if (boxPlusState) {
-        checkout = await createCheckoutCustomAttribute(
-          [variantPlusPlus],
-          customAttribute,
-          values.email
-        );
-      } else {
-        checkout = await createCheckoutCustomAttribute(
-          [variant],
-          customAttribute,
-          values.email
-        );
-      }
+      checkout = await createCheckoutCustomAttribute(
+        [variant],
+        customAttribute,
+        values.email
+      );
     }
 
     // TODO check if any error first
@@ -326,29 +289,11 @@ export const Card = ({
     variantQuantity: 1,
   };
 
-  const variantPlusPlus = {
-    id: cartePlusPlus.variants.edges[0].node.id,
-    title: cartePlusPlus.title,
-    handle: cartePlusPlus.handle,
-    image: cartePlusPlus.images?.edges[0].node.originalSrc,
-    variantPrice: cartePlusPlus.variants.edges[0].node.price.amount,
-    variantQuantity: 1,
-  };
-  const variantDomicilePlusPlus = {
-    id: cartePlusPlusDomicile.variants.edges[0].node.id,
-    title: cartePlusPlusDomicile.title,
-    handle: cartePlusPlusDomicile.handle,
-    image: cartePlusPlusDomicile.images?.edges[0].node.originalSrc,
-    variantPrice: cartePlusPlusDomicile.variants.edges[0].node.price.amount,
-    variantQuantity: 1,
-  };
-
   // const { addToCartCarte } = useContext(CartContext);
   const { setIsCartLoading } = useContext(CartContext);
   const router = useRouter();
 
   const [deliveryMode, setDeliveryMode] = useState("Plateforme");
-  const [boxPlusState, setBoxPlusState] = useState(false);
   const [price, setPrice] = useState(carte.variants.edges[0].node.price.amount);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -368,21 +313,11 @@ export const Card = ({
 
   useEffect(() => {
     if (deliveryMode == "Plateforme") {
-      if (boxPlusState) {
-        setPrice(Number(carte.variants.edges[0].node.price.amount) + 60);
-      } else {
-        setPrice(carte.variants.edges[0].node.price.amount);
-      }
+      setPrice(carte.variants.edges[0].node.price.amount);
     } else {
-      if (boxPlusState) {
-        setPrice(
-          Number(carteDomicile.variants.edges[0].node.price.amount) + 60
-        );
-      } else {
-        setPrice(carteDomicile.variants.edges[0].node.price.amount);
-      }
+      setPrice(carteDomicile.variants.edges[0].node.price.amount);
     }
-  }, [deliveryMode, boxPlusState, price, carte, carteDomicile]);
+  }, [deliveryMode, price, carte, carteDomicile]);
 
   return (
     <div>
@@ -407,77 +342,6 @@ export const Card = ({
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <PersonalInfos register={register} errors={errors} />
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* divider */}
-          <div className="hidden sm:block" aria-hidden="true">
-            <div className="py-7">
-              <div className="border-t border-gray-200" />
-            </div>
-          </div>
-
-          <div className="md:grid md:grid-cols-3 md:gap-6 mt-10 sm:mt-0">
-            <div className="md:col-span-1">
-              <div className="px-4 sm:px-0">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  Option 3ème box
-                </h3>
-                <p className="mt-1 text-sm text-gray-600">
-                  Recevez une troisième box en mai en plus de celles de votre
-                  carte pour mieux couvrir l&#39;année.
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 md:mt-0 md:col-span-2">
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6 ">
-                  {/* <PersonalInfos register={register} errors={errors} /> */}
-                  <fieldset className="flex items-center">
-                    <legend className="sr-only">Notifications</legend>
-                    <div className="relative flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="boxPlusPlus"
-                          aria-describedby="boxPlusPlus-description"
-                          name="boxPlusPlus"
-                          type="checkbox"
-                          defaultChecked={boxPlusState}
-                          {...register("boxPlusPlus")}
-                          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                          value={boxPlusState}
-                          onChange={() => setBoxPlusState(!boxPlusState)}
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label
-                          htmlFor="boxPlusPlus"
-                          className="font-medium text-gray-700"
-                        >
-                          Box Plus Plus
-                          <span
-                            id="candidates-description"
-                            className="text-gray-500"
-                          >
-                            <span className="sr-only">Box Plus Plus</span> -
-                            Pour 60€ supplémentaires, recevez une sélection de 3
-                            belles &laquo;&nbsp;appellations&nbsp;&raquo;
-                            françaises.
-                          </span>
-                        </label>
-                        <p className="mt-3 text-gray-700">
-                          Exemple : Sélection 2023{" "}
-                        </p>
-                        <p className="text-gray-500">
-                          Syrah &#34;Les candives&#34; Cave Cuilleron&nbsp;-
-                          Pouilly-Fumé (Loire) Château de Tracy&nbsp;- Corbières
-                          Château La Voulte Gasparets
-                        </p>
-                      </div>
-                    </div>
-                  </fieldset>
                 </div>
               </div>
             </div>
@@ -528,7 +392,7 @@ export const Card = ({
                               htmlFor="mode-domicile"
                               className="ml-3 block text-sm font-medium text-gray-700"
                             >
-                              Livraison adresse privée (+ 15,00€)
+                              Livraison adresse privée (+ 20,00€)
                             </label>
                             <span
                               htmlFor="mode-domicile"
