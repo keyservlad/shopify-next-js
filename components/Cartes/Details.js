@@ -271,7 +271,13 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("Printemps");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -280,13 +286,37 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <LogoTickVercel color={"fill-[#73992C]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Printemps");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#73992C]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Printemps");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Printemps");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
               </td>
             </tr>
             <tr>
@@ -329,7 +359,13 @@ const Details = (props) => {
                   et pourtant&nbsp;!
                 </p>
                 <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
-                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                  <button
+                    onClick={() => {
+                      props.setImageContext("DecouverteAutomne");
+                      props.setIsSavoirPlusOpen(true);
+                    }}
+                    className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal text-black hover:text-[#73992C] hover:shadow-lg hover:scale-105 bg-white"
+                  >
                     En savoir
                     <br />
                     plus
@@ -342,7 +378,13 @@ const Details = (props) => {
                   Il faut les avoir dans sa cave&nbsp;!
                 </p>
                 <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
-                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                  <button
+                    onClick={() => {
+                      props.setImageContext("ImmanquablesAutomne");
+                      props.setIsSavoirPlusOpen(true);
+                    }}
+                    className="rounded-full border text-xs border-gray-400 px-4 text-black hover:text-[#7FA8E2] py-2 font-normal hover:shadow-lg hover:scale-105 bg-white"
+                  >
                     En savoir
                     <br />
                     plus
@@ -355,7 +397,13 @@ const Details = (props) => {
                   Les goûter au moins une fois dans sa vie&nbsp;!
                 </p>
                 <div className="absolute translate-y-[50%] -translate-x-[50%] bottom-0 left-[50%]">
-                  <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 bg-white">
+                  <button
+                    onClick={() => {
+                      props.setImageContext("PrestigeAutomne");
+                      props.setIsSavoirPlusOpen(true);
+                    }}
+                    className="rounded-full border text-xs border-gray-400 px-4 py-2 text-black hover:text-[#901340] font-normal hover:shadow-lg hover:scale-105 bg-white"
+                  >
                     En savoir
                     <br />
                     plus
@@ -399,7 +447,13 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("Boutique");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -432,7 +486,13 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("Fidelite");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -441,13 +501,37 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <LogoTickVercel color={"fill-[#73992C]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Fidelite");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#73992C]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Fidelite");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("Fidelite");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
               </td>
             </tr>
             <tr>
@@ -457,7 +541,13 @@ const Details = (props) => {
                     <p className="font-semibold uppercase">Ventes privées</p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("BonCoup");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -466,13 +556,37 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center py-12">
-                <LogoTickVercel color={"fill-[#73992C]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("BonCoup");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#73992C]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center py-12">
-                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("BonCoup");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center relative py-12">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("BonCoup");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
                 <div className="absolute bottom-0 left-[50%] -translate-x-[50%] w-full pb-1">
                   <p className="text-sm text-[#901340]">
                     Accès exclusif
@@ -520,7 +634,13 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("ConseilPersonnalise");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -529,13 +649,37 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <LogoTickVercel color={"fill-[#73992C]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("ConseilPersonnalise");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#73992C]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("ConseilPersonnalise");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("ConseilPersonnalise");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
               </td>
             </tr>
             <tr>
@@ -550,7 +694,14 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      disabled
+                      onClick={() => {
+                        // props.setImageContext("DecouverteAutomne");
+                        // props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105 cursor-not-allowed"
+                    >
                       En savoir
                       <br />
                       plus
@@ -581,7 +732,13 @@ const Details = (props) => {
                     </p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("SiteWeb");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -590,13 +747,37 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <LogoTickVercel color={"fill-[#73992C]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("SiteWeb");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#73992C]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("SiteWeb");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#7FA8E2]"} />
+                </button>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("SiteWeb");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
               </td>
             </tr>
             <tr>
@@ -607,7 +788,13 @@ const Details = (props) => {
                     <p className="font-light text-sm">(sur demande)</p>
                   </div>
                   <div className="ml-auto">
-                    <button className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105">
+                    <button
+                      onClick={() => {
+                        props.setImageContext("AuditCave");
+                        props.setIsSavoirPlusOpen(true);
+                      }}
+                      className="rounded-full border text-xs border-gray-400 px-4 py-2 font-normal hover:shadow-lg hover:scale-105"
+                    >
                       En savoir
                       <br />
                       plus
@@ -622,7 +809,15 @@ const Details = (props) => {
                 -
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <LogoTickVercel color={"fill-[#901340]"} />
+                <button
+                  onClick={() => {
+                    props.setImageContext("AuditCave");
+                    props.setIsSavoirPlusOpen(true);
+                  }}
+                  className="hover:scale-110 m-auto flex"
+                >
+                  <LogoTickVercel color={"fill-[#901340]"} />
+                </button>
               </td>
             </tr>
           </tbody>

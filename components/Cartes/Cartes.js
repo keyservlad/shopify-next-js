@@ -6,9 +6,12 @@ import Details from "./Details";
 import { createRef, useState } from "react";
 import Rows from "./Rows";
 import Contact from "../Contact/contact";
+import SavoirPlus from "./SavoirPlus";
 
 const Cartes = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isSavoirPlusOpen, setIsSavoirPlusOpen] = useState(false);
+  const [imageContext, setImageContext] = useState("Printemps");
   const refDetailsSection = createRef();
 
   const scrollDetailsSection = () => {
@@ -135,9 +138,18 @@ const Cartes = () => {
             </span>
           </p>
         </div>
-        <Details scrollDetailsSection={scrollDetailsSection} />
+        <Details
+          scrollDetailsSection={scrollDetailsSection}
+          setIsSavoirPlusOpen={setIsSavoirPlusOpen}
+          setImageContext={setImageContext}
+        />
       </div>
       <Contact open={isContactFormOpen} setOpen={setIsContactFormOpen} />
+      <SavoirPlus
+        open={isSavoirPlusOpen}
+        setOpen={setIsSavoirPlusOpen}
+        imageContext={imageContext}
+      />
     </>
   );
 };
