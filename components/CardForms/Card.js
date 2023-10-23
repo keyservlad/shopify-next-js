@@ -332,7 +332,7 @@ export const Card = ({ carte, carteDomicile }) => {
                     Informations Personnelles
                   </h3>
                   <p className="mt-1 text-sm text-gray-600">
-                    Rensignez vos informations Personnelles pour la création de
+                    Rensignez vos informations personnelles pour la création de
                     votre compte
                   </p>
                 </div>

@@ -62,7 +62,7 @@ const Details = (props) => {
   return (
     <div className="mt-10 relative">
       {/* desktop */}
-      <div className="block mb-24">
+      <div className="hidden lg:block mb-24">
         {/* title */}
         <div
           id="firstStickyElement"
@@ -824,8 +824,12 @@ const Details = (props) => {
         </table>
       </div>
       {/* mobile */}
-      <div className="lg:hidden flex flex-col">
-        <DetailsMobile scrollDetailsSection={props.scrollDetailsSection} />
+      <div className="block lg:hidden">
+        <DetailsMobile
+          scrollDetailsSection={props.scrollDetailsSection}
+          setIsSavoirPlusOpen={props.setIsSavoirPlusOpen}
+          setImageContext={props.setImageContext}
+        />
       </div>
     </div>
   );
