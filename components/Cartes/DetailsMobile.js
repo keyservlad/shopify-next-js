@@ -45,7 +45,6 @@ const DetailsMobile = (props) => {
         ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
       }
     }
-    toggleStickyClass();
   };
 
   const toggleStickyClass = () => {
