@@ -45,6 +45,7 @@ const DetailsMobile = (props) => {
         ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
       }
     }
+    // toggleStickyClass();
   };
 
   const toggleStickyClass = () => {
@@ -63,13 +64,52 @@ const DetailsMobile = (props) => {
   useEffect(() => {
     document.getElementById("main").style.overflow = "visible";
     window.addEventListener("resize", updateTop);
-    window.addEventListener("scroll", toggleStickyClass);
+    // window.addEventListener("scroll", toggleStickyClass);
     updateTop();
-    toggleStickyClass(); // Initial check
+    // toggleStickyClass(); // Initial check
+
+    const buttonMobile = document.getElementById("buttonMobile");
+    const el = document.getElementById("secondStickyElementMobile");
+
+    // Store original scroll position
+    const originalScrollY = window.scrollY;
+
+    // Temporarily set scroll to top
+    window.scrollTo(0, 0);
+
+    const sentinel = document.createElement("div");
+    sentinel.style.position = "absolute";
+    sentinel.style.top = `${el.offsetTop - 1}px`;
+    sentinel.style.height = "1px";
+    sentinel.style.width = "100%";
+    el.parentElement.insertBefore(sentinel, el);
+
+    // Restore original scroll position
+    window.scrollTo(0, originalScrollY);
+
+    // Function to handle the class toggle
+    const toggleClass = (isInView) => {
+      buttonMobile.classList.toggle("py-3", isInView);
+    };
+
+    // Manually check the position during mount
+    const isInView = sentinel.getBoundingClientRect().top >= 0;
+    toggleClass(isInView);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        toggleClass(entry.isIntersecting);
+      },
+      { threshold: [0] }
+    );
+
+    observer.observe(sentinel);
 
     return () => {
       window.removeEventListener("resize", updateTop);
-      window.removeEventListener("scroll", toggleStickyClass);
+      // window.removeEventListener("scroll", toggleStickyClass);
+      observer.disconnect();
+      el.parentElement.removeChild(sentinel);
     };
   }, []);
 
@@ -263,8 +303,7 @@ const DetailsMobile = (props) => {
                   style={{
                     transitionProperty: "all",
                   }}
-                  id="buttonMobile"
-                  className={`text-white w-full font-bold transition border-solid rounded-xl border-[3px] px-5 cursor-pointer hover:bg-white ${
+                  className={` text-white w-full font-bold transition border-solid rounded-xl border-[3px] px-5 cursor-pointer hover:bg-white ${
                     boxSelected === "Decouverte"
                       ? "bg-[#73992C] border-[#73992C] hover:text-[#73992C]"
                       : boxSelected === "Immanquables"
@@ -272,7 +311,15 @@ const DetailsMobile = (props) => {
                       : "bg-[#901340] border-[#901340] hover:text-[#901340]"
                   }`}
                 >
-                  Je prends ma carte
+                  <div
+                    style={{
+                      transitionProperty: "all",
+                    }}
+                    id="buttonMobile"
+                    className="transition"
+                  >
+                    Je prends ma carte
+                  </div>
                 </button>
               </a>
             </Link>
