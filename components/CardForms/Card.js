@@ -215,8 +215,6 @@ export const Card = ({ carte, carteDomicile }) => {
       value: JSON.stringify(input),
     };
 
-    // addToCartCarte(variant, customAttribute, values.email);
-
     //  TODO next create checkout with variant, custom attributes, email (not address because it is not physical product)
     setIsCartLoading(true); // not need anymore but w/e
 
