@@ -6,32 +6,12 @@ import Details from "./Details";
 import { createRef, useState } from "react";
 import Rows from "./Rows";
 import Contact from "../Contact/contact";
+import SavoirPlus from "./SavoirPlus";
 
 const Cartes = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const refDetailsSection = createRef();
-
-  const scrollDetailsSection = () => {
-    refDetailsSection.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
-  let date = new Date();
-  let dateInOneYear = new Date();
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  dateInOneYear = new Date(
-    dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
-  );
-  dateInOneYear = new Date(
-    dateInOneYear.setHours(dateInOneYear.getHours() - 24)
-  );
-  date = date.toLocaleDateString("fr-FR", options);
-  dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", options);
+  const [isSavoirPlusOpen, setIsSavoirPlusOpen] = useState(false);
+  const [imageContext, setImageContext] = useState("Printemps");
 
   return (
     <>
@@ -55,12 +35,75 @@ const Cartes = () => {
             placeholder="blur"
           />
         </div>
-        <div className="px-5 md:w-1/2 md:p-0 mx-auto sm:-mt-12">
+
+        <div className="mb-20 px-5 md:w-1/2 md:p-0 mx-auto sm:-mt-12">
+          <h1>Bienvenue chez EMOVIN</h1>
+          <p className="mt-5">
+            Dans le pays du vin, il est souvent difficile de choisir une bonne
+            bouteille ?
+          </p>
+          <p>
+            Comprendre les appellations, déchiffrer une étiquette, choisir un
+            millésime,&nbsp;... n&#39;est pas toujours facile&nbsp;!
+          </p>
+          <p>Stocker du vin n&#39;est pas toujours votre choix...</p>
+
+          <p className="mt-3">
+            Fort de ce constat, deux professionnels du vin et de la gastronomie
+            (Patrick & Jean-Louis) ont créé en 2000vin1 EMOVIN.
+          </p>
+          <p>
+            EMOVIN est un{" "}
+            <span className="text-redWine font-bold">
+              Club Privé d&#39;amateurs de vins
+            </span>{" "}
+            qui propose, au travers d&#39;un abonnement annuel de vous faire
+            découvrir{" "}
+            <span className="text-redWine font-bold">
+              &#34;les pépites de nos régions&#34;
+            </span>{" "}
+            mais aussi de{" "}
+            <span className="text-redWine font-bold">
+              &#34;belles appellations françaises&#34;
+            </span>{" "}
+            souvent difficiles à dénicher.
+          </p>
+          <p className="mt-3">
+            Être membre de ce club vous permet ainsi, de{" "}
+            <span className="text-redWine font-bold">recevoir du vin</span>, de
+            participer à des{" "}
+            <span className="text-redWine font-bold">
+              ventes-dégustations privées
+            </span>
+            , d&#39;accéder à de{" "}
+            <span className="text-redWine font-bold">nombreux avantages</span>{" "}
+            (Remises, Programmes de fidélité, &#34;Bon Cadeau&#34;, cours de
+            dégustation ...), ... mais aussi de bénéficier d&#39;un{" "}
+            <span className="text-redWine font-bold">conseil personnalisé</span>{" "}
+            &#34;Wine Assistance&#34; pour constituer votre cave, ou commander
+            les vins pour une fête, bénéficier de conseils sur des accords
+            &#34;Vins-Mets&#34; ... Chez EMOVIN, nous prendrons le temps de vous
+            écouter.
+          </p>
+          <p className="mt-3">
+            Et au fait, pourquoi EMOVIN ?{" "}
+            <span className="text-blueWine font-semibold">
+              &#34;La finalité n&#39;est-elle pas de partager de l&#39;
+              <span className="text-redWine font-bold">EMO</span>tion par le{" "}
+              <span className="text-redWine font-bold">VIN</span> ?&#34;
+            </span>
+          </p>
+          <p className="font-caveat text-2xl mt-3">Patrick & Jean-Louis</p>
+        </div>
+
+        {/* section cartes */}
+        <div className="px-5 md:w-1/2 md:p-0 mx-auto">
           <h1 className="">
             1 carte avec 3 options de «&nbsp;Wine box&nbsp;» selon vos goûts
           </h1>
           <p className="text-2xl font-light mt-6">
-            Avec votre carte EMOVIN, profitez de 2 livraisons de vin et de plein
+            Avec votre carte EMOVIN, profitez de{" "}
+            <span className="font-bold">3</span> livraisons de vin et de plein
             d&#39;avantages autour du vin et des wine box composées de pur
             plaisir&nbsp;!
           </p>
@@ -68,11 +111,9 @@ const Cartes = () => {
             Validité de votre carte : 1 an à compter de la date d&#39;engagement
             de l&#39;abonnement.
           </p>
-          <p>
-            (du {date} au {dateInOneYear})
-          </p>
           <p className="font-light">
-            Offre pour les résidents français, pour les étrangers, {` `}
+            Offre pour les résidents français, <br />
+            pour les étrangers, {` `}
             <span
               onClick={() => {
                 setIsContactFormOpen(true);
@@ -81,40 +122,19 @@ const Cartes = () => {
             >
               nous&nbsp;contacter
             </span>
-            {/* TODO add formulaire de contact ici */}
           </p>
         </div>
-        <Details scrollDetailsSection={scrollDetailsSection} />
-
-        <div className="w-full mt-14 relative">
-          <div ref={refDetailsSection} className="absolute -top-24" />
-          <h2 className="text-xl font-bold text-redWine">
-            Tous les autres avantages de votre carte EMOVIN{" "}
-          </h2>
-        </div>
-
-        <div className="w-full mt-7 mb-14">
-          <div className="flex items-center justify-center flex-col mx-5 lg:mx-10 xl:mx-28 2xl:mx-40">
-            <Rows />
-          </div>
-        </div>
-        <div className="w-full text-[#8F8F8F]">
-          <p className="">
-            Chaque box est composée de 3 bouteilles et inclus une fiche de
-            dégustation (Livraison en Point Relais inclus).
-          </p>
-          <p className="">
-            Supplément optionnel : 15€ TTC/an pour une livraison en adresse
-            privée (Box «&nbsp;option&nbsp;» + Box «&nbsp;Découvertes de
-            printemps&nbsp;»).
-          </p>
-          <p className="">
-            Supplément optionnel : 60€ TTC pour une 3ème Box de 3 bouteilles
-            (livraison en mai (pour mieux couvrir une année complète !)).
-          </p>
-        </div>
+        <Details
+          setIsSavoirPlusOpen={setIsSavoirPlusOpen}
+          setImageContext={setImageContext}
+        />
       </div>
       <Contact open={isContactFormOpen} setOpen={setIsContactFormOpen} />
+      <SavoirPlus
+        open={isSavoirPlusOpen}
+        setOpen={setIsSavoirPlusOpen}
+        imageContext={imageContext}
+      />
     </>
   );
 };

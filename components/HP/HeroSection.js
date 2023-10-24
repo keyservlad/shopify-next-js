@@ -37,10 +37,10 @@ const HeroSection = (props) => {
         <h1 className="text-6xl sm:text-5xl xl:text-7xl mb-7">
           L&#39;Emotion par le vin
         </h1>
-        <Link href="/notre-boutique" passHref>
+        <Link href="/cartes" passHref>
           <a>
             <button className="bg-redWine text-white font-bold border-solid rounded-xl border-redWine border-[3px] px-5 py-3 cursor-pointer hover:text-redWine hover:bg-white">
-              Découvrir notre cave
+              Devenez membre
             </button>
           </a>
         </Link>

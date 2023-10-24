@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     <div className="min-h-screen max-w-[100vw]">
       {/* <Nav /> */}
       <Nav2 />
-      <main className="overflow-hidden min-h-[64.4vh]">{children}</main>
+      <main id="main" className="overflow-hidden min-h-[64.4vh]">{children}</main>
       <Footer />
     </div>
   );

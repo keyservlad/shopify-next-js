@@ -193,6 +193,7 @@ export default async function send(req, res) {
               key: "points",
               namespace: "custom",
               value: `${pts["points"]}`,
+              type: "number_integer",
             },
           ],
         };
