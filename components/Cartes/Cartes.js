@@ -15,6 +15,17 @@ const Cartes = () => {
 
   return (
     <>
+      <div className="w-full h-[64.4vh] flex items-center align-center text-center">
+        <h1 className="text-redWine w-full">
+          Service momentanément indisponible, veuillez réessayer dans quelques
+          jours
+        </h1>
+      </div>
+    </>
+  );
+
+  return (
+    <>
       <div className="flex flex-col w-full align-center justify-center text-center mb-10">
         <div className="sm:mx-10 lg:mx-20 xl:mx-28 2xl:mx-40 relative -z-10">
           <Image
