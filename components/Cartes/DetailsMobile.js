@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { LogoTickVercel } from "./LogoTickVercel";
 
 const DetailsMobile = (props) => {
-  const [boxSelected, setBoxSelected] = useState("Decouverte");
+  const [boxSelected, setBoxSelected] = useState("Immanquables");
 
   const updateTop = () => {
     const boxMobile = document.getElementById("boxMobile");
@@ -33,34 +33,18 @@ const DetailsMobile = (props) => {
       "thirdStickyElementMobile"
     );
 
-    firstStickyElementMobile.style.top = `calc(-${boxMobile.offsetHeight}px - 10px)`;
-
     const heightOfFirstSticky = firstStickyElementMobile.offsetHeight;
 
     if (window.innerWidth < 1024) {
-      secondStickyElementMobile.style.top = `calc(${heightOfFirstSticky}px - 50px)`;
+      secondStickyElementMobile.style.top = `calc(${heightOfFirstSticky}px)`;
       for (let i = 0; i < thirdStickyElementMobiles.length; i++) {
         thirdStickyElementMobiles[
           i
         ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
       }
     }
-    // toggleStickyClass();
   };
 
-  const toggleStickyClass = () => {
-    const firstStickyElementMobile = document.getElementById(
-      "firstStickyElementMobile"
-    );
-    const buttonMobile = document.getElementById("buttonMobile");
-    const el = document.getElementById("secondStickyElementMobile");
-    const heightOfFirstSticky = firstStickyElementMobile.offsetHeight;
-    const rect = el.getBoundingClientRect();
-    const isSticky =
-      window.getComputedStyle(el).position === "sticky" &&
-      rect.top === heightOfFirstSticky - 50;
-    buttonMobile.classList.toggle("py-3", !isSticky);
-  };
   useEffect(() => {
     document.getElementById("main").style.overflow = "visible";
     window.addEventListener("resize", updateTop);
@@ -79,7 +63,7 @@ const DetailsMobile = (props) => {
 
     const sentinel = document.createElement("div");
     sentinel.style.position = "absolute";
-    sentinel.style.top = `${el.offsetTop - 1}px`;
+    sentinel.style.top = `${el.offsetTop - 100}px`;
     sentinel.style.height = "1px";
     sentinel.style.width = "100%";
     el.parentElement.insertBefore(sentinel, el);
@@ -93,7 +77,7 @@ const DetailsMobile = (props) => {
     };
 
     // Manually check the position during mount
-    const isInView = sentinel.getBoundingClientRect().top >= 0;
+    const isInView = sentinel.getBoundingClientRect().top >= 1;
     toggleClass(isInView);
 
     const observer = new IntersectionObserver(
@@ -115,10 +99,13 @@ const DetailsMobile = (props) => {
 
   return (
     <>
+      <h3 className="w-full mt-10 mb-5 font-caveat text-3xl px-3 inline-block">
+        Sélectionnez la box qui vous fait envie&nbsp;! 👇
+      </h3>
       {/* title */}
       <div
         id="firstStickyElementMobile"
-        className="flex flex-row w-full mt-10 sticky z-20 bg-white"
+        className="flex flex-row w-full sticky z-20 bg-white top-0"
       >
         {/* decouverte */}
         <div
@@ -133,8 +120,8 @@ const DetailsMobile = (props) => {
           }}
           className={`relative bg-[#73992C] py-3 transition flex flex-col items-center justify-center text-white ${
             boxSelected === "Decouverte"
-              ? "px-3 w-2/3 opacity-100"
-              : "opacity-40 w-1/6 px-1"
+              ? "px-3 w-[60%] opacity-100"
+              : "opacity-40 w-[20%] px-1"
           }`}
         >
           <p id="boxMobile" className="mb-2">
@@ -158,10 +145,10 @@ const DetailsMobile = (props) => {
               updateTop();
             }, 150);
           }}
-          className={`relative bg-[#7FA8E2] transition py-3 flex flex-col text-white items-center justify-center mx-1 ${
+          className={`relative bg-[#7FA8E2] transition py-3 flex flex-col text-white items-center justify-center ${
             boxSelected === "Immanquables"
-              ? "px-3 w-2/3 opacity-100"
-              : "opacity-40 w-1/6 px-1"
+              ? "px-3 w-[60%] opacity-100"
+              : "opacity-40 w-[20%] px-1"
           }`}
         >
           <p className="mb-2">Box</p>
@@ -185,8 +172,8 @@ const DetailsMobile = (props) => {
           }}
           className={`relative bg-[#901340] transition py-3 flex flex-col text-white items-center justify-center ${
             boxSelected === "Prestige"
-              ? "px-3 w-2/3 opacity-100"
-              : "opacity-40 w-1/6 px-1"
+              ? "px-3 w-[60%] opacity-100"
+              : "opacity-40 w-[20%] px-1"
           }`}
         >
           <p className="mb-2">Box</p>

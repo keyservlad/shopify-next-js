@@ -1,7 +1,7 @@
 export const LogoTickVercel = ({ color }) => {
   return (
     <svg
-      className={"w-11 h-11 text-white m-auto " + color}
+      className={"w-16 h-16 text-white m-auto " + color}
       height="24"
       shapeRendering="geometricPrecision"
       stroke="currentColor"

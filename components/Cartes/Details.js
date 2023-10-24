@@ -6,6 +6,8 @@ import ImageTitleImmamquablesBlanc from "../../public/images/cartes/logo_immanqu
 import ImageTitlePrestigeBlanc from "../../public/images/cartes/logo_prestige_blanc.png";
 import DetailsMobile from "./DetailsMobile";
 
+import ImageHouraLBC from "../../public/images/bon-coup/houraLBC.png";
+
 import DessinDecouverte from "../../public/images/logo-cartes/dessinDecouverte.png";
 import DessinImmanquables from "../../public/images/logo-cartes/dessinImmanquables.png";
 import DessinPrestige from "../../public/images/logo-cartes/dessinPrestige.png";
@@ -32,30 +34,46 @@ const Details = (props) => {
       const heightOfFirstSticky = firstStickyElement.offsetHeight;
       secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
 
+      const fourthStickyElement = document.getElementById(
+        "fourthStickyElement"
+      );
+
+      fourthStickyElement.style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+
       for (let i = 0; i < thirdStickyElements.length; i++) {
         thirdStickyElements[
           i
-        ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
+        ].style.top = `calc(${heightOfFirstSticky}px - 40px)`;
       }
 
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth < 1280) {
         secondStickyElement.style.top = `calc(${heightOfFirstSticky}px - 12px)`;
-        for (let i = 0; i < thirdStickyElements.length; i++) {
-          thirdStickyElements[
-            i
-          ].style.top = `calc(${heightOfFirstSticky}px - 5px)`;
-        }
       }
+    };
+
+    const calculateHeightImageLBC = () => {
+      const imageHouraLBC = document.getElementById("imageHouraLBC");
+      const height1Div = document.getElementById("height1");
+      const height2Div = document.getElementById("height2");
+      const height3Div = document.getElementById("height3");
+      const height1 = height1Div.offsetHeight;
+      const height2 = height2Div.offsetHeight;
+      const height3 = height3Div.offsetHeight;
+
+      imageHouraLBC.style.height = `${height1 + height2 + height3}px`;
     };
     const main = document.getElementById("main");
     main.style.overflow = "visible";
 
     updateTop();
+    calculateHeightImageLBC();
 
     window.addEventListener("resize", updateTop);
+    window.addEventListener("resize", calculateHeightImageLBC);
 
     return () => {
       window.removeEventListener("resize", updateTop);
+      window.removeEventListener("resize", calculateHeightImageLBC);
     };
   }, []);
 
@@ -66,7 +84,7 @@ const Details = (props) => {
         {/* title */}
         <div
           id="firstStickyElement"
-          className="flex flex-row w-full max-w-7xl px-3 mx-auto mt-10 sticky top-0 lg:top-[0.5rem] z-20 bg-white"
+          className="flex flex-row w-full max-w-6xl 2xl:max-w-7xl px-3 mx-auto mt-10 sticky top-0 lg:top-[0.5rem] z-20 bg-white"
         >
           {/* void div */}
           <div className="flex-1 flex" />
@@ -103,9 +121,25 @@ const Details = (props) => {
         </div>
 
         {/* Image Carte */}
-        <div className="my-5 flex flex-row w-full max-w-7xl px-3 mx-auto">
+        <div
+          id="height1"
+          className="my-5 flex flex-row w-full max-w-6xl 2xl:max-w-7xl px-3 mx-auto"
+        >
           {/* void div */}
-          <div className="flex-1 flex" />
+          <div className="relative flex flex-1">
+            <div
+              id="imageHouraLBC"
+              className="absolute aspect-[0.66] left-[50%] -translate-x-[50%]"
+            >
+              <Image
+                src={ImageHouraLBC}
+                alt="Houra LBC"
+                layout="fill"
+                quality={100}
+                placeholder="blur"
+              />
+            </div>
+          </div>
           {/* decouverte */}
           <div className="relative m-auto w-52 xl:w-64 px-10 flex items-center justify-center mx-3">
             <Image
@@ -136,7 +170,10 @@ const Details = (props) => {
         </div>
 
         {/* Details */}
-        <div className="flex flex-row w-full max-w-7xl px-3 mx-auto">
+        <div
+          id="height2"
+          className="flex flex-row w-full max-w-6xl 2xl:max-w-7xl px-3 mx-auto"
+        >
           {/* void div */}
           <div className="flex-1 flex" />
           {/* decouverte */}
@@ -173,7 +210,10 @@ const Details = (props) => {
         </div>
 
         {/* Price */}
-        <div className=" flex flex-row w-full max-w-7xl px-3 mx-auto">
+        <div
+          id="height3"
+          className="flex flex-row w-full max-w-6xl 2xl:max-w-7xl px-3 mx-auto"
+        >
           {/* void div */}
           <div className="flex-1 flex" />
           <div className="w-52 xl:w-64 flex items-center justify-center mx-3">
@@ -204,7 +244,7 @@ const Details = (props) => {
           id="secondStickyElement"
           className="sticky z-10 border-b border-gray-400 pb-5 bg-white"
         >
-          <div className="flex flex-row w-full max-w-7xl px-3 mx-auto">
+          <div className="flex flex-row w-full max-w-6xl 2xl:max-w-7xl px-3 mx-auto">
             {/* void div */}
             <div className="flex-1 flex" />
             {/* decouverte */}
@@ -241,29 +281,40 @@ const Details = (props) => {
         </div>
 
         {/* table 1 recevez du vin */}
-        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-6xl 2xl:max-w-7xl px-3 mx-auto">
           <thead>
             <tr>
-              <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
-                <div className="flex flex-row items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+              <th
+                id="fourthStickyElement"
+                className="sticky z-20 pb-4 table-cell font-semibold"
+              >
+                <div className="flex flex-row items-center gap-1">
+                  <div className="relative w-14 h-14 rounded-full border border-gray-400 flex items-center justify-center">
                     <Image
                       src={LogoTrinque}
                       alt="Logo Trinque"
-                      height={30}
-                      width={30}
+                      height={35}
+                      width={35}
                       quality={100}
                     />
                   </div>
-                  <h5 className="font-caveat text-3xl">Recevez du vin</h5>
+                  <h5 className="font-caveat text-4xl">Recevez du vin</h5>
                 </div>
               </th>
+              <td colSpan={3} className="font-semibold text-left">
+                (9 bouteilles_Conditionnement BOX de 3 bouteilles)
+                <br />
+                <span className="font-normal text-sm">
+                  Chaque box (livrée chez vous ou en point relais) est
+                  accompagnée d&#39;une fiche dégustation
+                </span>
+              </td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold uppercase">Box de printemps</p>
                     <p className="font-light text-sm">
@@ -321,7 +372,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold uppercase">Box d&#39;été</p>
                     <p className="font-light text-sm">
@@ -342,7 +393,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold uppercase">Box d&#39;automne</p>
                     <p className="font-light text-sm">
@@ -415,22 +466,23 @@ const Details = (props) => {
         </table>
 
         {/* table 2 beneficiez des avantages EMOVIN */}
-        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-6xl 2xl:max-w-7xl px-3 mx-auto">
           <thead>
             <tr>
               <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
-                <div className="flex flex-row items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+                <div className="flex flex-row items-center gap-1">
+                  <div className="relative w-14 h-14 rounded-full border border-gray-400 flex items-center justify-center">
                     <Image
                       src={PostCard}
                       alt="Logo Trinque"
-                      height={30}
-                      width={30}
+                      height={35}
+                      width={35}
                       quality={100}
                     />
                   </div>
-                  <h5 className="font-caveat text-3xl">
-                    Avantages <span className="text-redWine">EMOVIN</span>
+                  <h5 className="font-caveat text-4xl">
+                    Bénéficiez des avantages{" "}
+                    <span className="text-redWine">EMOVIN</span>
                   </h5>
                 </div>
               </th>
@@ -439,7 +491,7 @@ const Details = (props) => {
           <tbody>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-left">
                     <p className="font-semibold uppercase">Remise Moyenne</p>
                     <p className="font-light text-sm">
@@ -462,24 +514,24 @@ const Details = (props) => {
                 </div>
               </th>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center">
-                <p className="text-[#73992C] m-auto text-4xl font-semibold font-caveat">
+                <p className="text-[#73992C] m-auto text-5xl font-semibold font-caveat">
                   10%
                 </p>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <p className="text-[#7FA8E2] m-auto text-4xl font-semibold font-caveat">
+                <p className="text-[#7FA8E2] m-auto text-5xl font-semibold font-caveat">
                   10%
                 </p>
               </td>
               <td className="w-[232px] xl:w-[280px] border-t border-l border-gray-400 text-center align-middle">
-                <p className="text-[#901340] m-auto text-4xl font-semibold font-caveat">
+                <p className="text-[#901340] m-auto text-5xl font-semibold font-caveat">
                   10%
                 </p>
               </td>
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold uppercase">
                       Programme de fidélité
@@ -536,7 +588,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-center">
                     <p className="font-semibold uppercase">Ventes privées</p>
                   </div>
@@ -600,22 +652,23 @@ const Details = (props) => {
         </table>
 
         {/* table 3 accédez aux services EMOVIN */}
-        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-7xl px-3 mx-auto">
+        <table className="flex-1 table content-start items-stretch border-separate border-spacing-0 w-full border-b border-gray-400 mt-16 max-w-6xl 2xl:max-w-7xl px-3 mx-auto">
           <thead>
             <tr>
               <th className="sticky z-20 pb-4 table-cell font-semibold thirdStickyElement">
-                <div className="flex flex-row items-center gap-3">
-                  <div className="relative w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center">
+                <div className="flex flex-row items-center gap-1">
+                  <div className="relative w-16 h-16 rounded-full border border-gray-400 flex items-center justify-center">
                     <Image
                       src={HandsCommunity}
                       alt="Logo Trinque"
-                      height={30}
-                      width={30}
+                      height={40}
+                      width={40}
                       quality={100}
                     />
                   </div>
-                  <h5 className="font-caveat text-3xl">
-                    Services <span className="text-redWine">EMOVIN</span>
+                  <h5 className="font-caveat text-4xl">
+                    Accédez aux services{" "}
+                    <span className="text-redWine">EMOVIN</span>
                   </h5>
                 </div>
               </th>
@@ -624,7 +677,7 @@ const Details = (props) => {
           <tbody>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-left">
                     <p className="font-semibold uppercase">
                       Conseils personnalisés
@@ -684,7 +737,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-left">
                     <p className="font-semibold uppercase">
                       Invitation aux soirées
@@ -724,7 +777,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-left">
                     <p className="font-semibold uppercase">Site web dédié</p>
                     <p className="font-light text-sm">
@@ -782,7 +835,7 @@ const Details = (props) => {
             </tr>
             <tr>
               <th className="py-5 pr-3 pl-4 border-t border-gray-400 text-left">
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row gap-1 items-center">
                   <div className="flex flex-col text-left">
                     <p className="font-semibold uppercase">Audit de cave</p>
                     <p className="font-light text-sm">(sur demande)</p>

@@ -12,29 +12,6 @@ const Cartes = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [isSavoirPlusOpen, setIsSavoirPlusOpen] = useState(false);
   const [imageContext, setImageContext] = useState("Printemps");
-  const refDetailsSection = createRef();
-
-  const scrollDetailsSection = () => {
-    refDetailsSection.current.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
-  let date = new Date();
-  let dateInOneYear = new Date();
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  dateInOneYear = new Date(
-    dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
-  );
-  dateInOneYear = new Date(
-    dateInOneYear.setHours(dateInOneYear.getHours() - 24)
-  );
-  date = date.toLocaleDateString("fr-FR", options);
-  dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", options);
 
   return (
     <>
@@ -123,11 +100,9 @@ const Cartes = () => {
             Validité de votre carte : 1 an à compter de la date d&#39;engagement
             de l&#39;abonnement.
           </p>
-          <p>
-            (du {date} au {dateInOneYear})
-          </p>
           <p className="font-light">
-            Offre pour les résidents français, pour les étrangers, {` `}
+            Offre pour les résidents français, <br />
+            pour les étrangers, {` `}
             <span
               onClick={() => {
                 setIsContactFormOpen(true);
@@ -139,7 +114,6 @@ const Cartes = () => {
           </p>
         </div>
         <Details
-          scrollDetailsSection={scrollDetailsSection}
           setIsSavoirPlusOpen={setIsSavoirPlusOpen}
           setImageContext={setImageContext}
         />
