@@ -119,12 +119,14 @@ export const Card = ({ carte, carteDomicile }) => {
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
+            type: "single_line_text_field",
           },
           {
             id: ids?.expirationdate ? ids.expirationdate : null,
             key: "expirationdate",
             namespace: "custom",
             value: expiryDate.toISOString().split("T")[0],
+            type: "date",
           },
           {
             id: ids?.isDomicile ? ids.isDomicile : null,
@@ -138,12 +140,14 @@ export const Card = ({ carte, carteDomicile }) => {
             key: "points",
             namespace: "custom",
             value: ids?.pts ? `${ids.pts}` : "0",
+            type: "number_integer",
           },
           {
             id: ids?.plateforme ? ids.plateforme : null,
             key: "plateforme",
             namespace: "custom",
             value: values.plateforme,
+            type: "single_line_text_field",
           },
         ],
       };
@@ -170,12 +174,14 @@ export const Card = ({ carte, carteDomicile }) => {
             key: "carte",
             namespace: "custom",
             value: Cartetitle,
+            type: "single_line_text_field",
           },
           {
             id: ids?.expirationdate ? ids.expirationdate : null,
             key: "expirationDate",
             namespace: "custom",
             value: expiryDate.toISOString().split("T")[0],
+            type: "date",
           },
           {
             id: ids?.isDomicile ? ids.isDomicile : null,
@@ -189,6 +195,7 @@ export const Card = ({ carte, carteDomicile }) => {
             key: "points",
             namespace: "custom",
             value: ids?.pts ? `${ids.pts}` : "0",
+            type: "number_integer",
           },
         ],
       };
