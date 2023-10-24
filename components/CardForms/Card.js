@@ -126,12 +126,6 @@ export const Card = ({ carte, carteDomicile }) => {
             namespace: "custom",
             value: expiryDate.toISOString().split("T")[0],
           },
-          // {
-          //   key: "boxBilling",
-          //   namespace: "custom",
-          //   type: "json",
-          //   value: `{~adresse~: ~${values.address}~, ~ville~: ~${values.city}~, ~pays~:~${values.country}~, ~zip~:~${values.zipCode}~, ~prenom~: ~${values.firstName}~, ~nomFamille~:~${values.lastName}~, ~tel~: ~${values.phone}~}`,
-          // },
           {
             id: ids?.isDomicile ? ids.isDomicile : null,
             key: "isDomicile",
