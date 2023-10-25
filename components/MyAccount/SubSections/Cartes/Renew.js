@@ -84,11 +84,13 @@ const Renew = ({ setIsRenewingCard, cards }) => {
             key: "nextCarte",
             namespace: "custom",
             value: user.carte?.value,
+            type: "single_line_text_field",
           },
           {
             key: "nextExpirationdate",
             namespace: "custom",
             value: dateInOneYear.toISOString().split("T")[0],
+            type: "date",
           },
           {
             key: "nextIsDomicile",
@@ -106,11 +108,13 @@ const Renew = ({ setIsRenewingCard, cards }) => {
             key: "nextCarte",
             namespace: "custom",
             value: user.carte?.value,
+            type: "single_line_text_field",
           },
           {
             key: "nextExpirationdate",
             namespace: "custom",
             value: dateInOneYear.toISOString().split("T")[0],
+            type: "date",
           },
           {
             key: "nextIsDomicile",
@@ -122,6 +126,7 @@ const Renew = ({ setIsRenewingCard, cards }) => {
             key: "nextPlateforme",
             namespace: "custom",
             value: user.plateforme?.value,
+            type: "single_line_text_field",
           },
         ],
       };
