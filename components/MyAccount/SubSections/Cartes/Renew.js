@@ -47,23 +47,23 @@ const Renew = ({ setIsRenewingCard, cards }) => {
     month: "long",
     day: "numeric",
   };
-  let expirationDate = new Date(user?.expirationDate?.value);
-  let expirationDatePlusOneDay = new Date(user?.expirationDate?.value);
-  expirationDatePlusOneDay = new Date(
-    expirationDatePlusOneDay.setHours(expirationDatePlusOneDay.getHours() + 24)
+  let expirationdate = new Date(user?.expirationdate?.value);
+  let expirationdatePlusOneDay = new Date(user?.expirationdate?.value);
+  expirationdatePlusOneDay = new Date(
+    expirationdatePlusOneDay.setHours(expirationdatePlusOneDay.getHours() + 24)
   );
-  let dateInOneYear = new Date(expirationDate);
+  let dateInOneYear = new Date(expirationdate);
 
   dateInOneYear = new Date(
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
   );
 
   let dateInOneYearFR = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
-  expirationDatePlusOneDay = expirationDatePlusOneDay.toLocaleDateString(
+  expirationdatePlusOneDay = expirationdatePlusOneDay.toLocaleDateString(
     "fr-FR",
     dateOptions
   );
-  expirationDate = expirationDate.toLocaleDateString("fr-FR", dateOptions);
+  expirationdate = expirationdate.toLocaleDateString("fr-FR", dateOptions);
 
   let imageCard =
     user?.carte?.value === "decouverte"
@@ -186,7 +186,7 @@ const Renew = ({ setIsRenewingCard, cards }) => {
                 Merci de votre confiance en renouvellant votre carte EMOVIN
               </p>
               <p className="">
-                Votre prochaine carte sera active du {expirationDatePlusOneDay}{" "}
+                Votre prochaine carte sera active du {expirationdatePlusOneDay}{" "}
                 au {dateInOneYearFR}
               </p>
             </div>

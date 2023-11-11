@@ -17,12 +17,12 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
       Number(b.node.priceRange.minVariantPrice.amount)
   );
 
-  let expirationDate = new Date(user?.expirationDate?.value);
-  let expirationDatePlusOneDay = new Date(user?.expirationDate?.value);
-  expirationDatePlusOneDay = new Date(
-    expirationDatePlusOneDay.setHours(expirationDatePlusOneDay.getHours() + 24)
+  let expirationdate = new Date(user?.expirationdate?.value);
+  let expirationdatePlusOneDay = new Date(user?.expirationdate?.value);
+  expirationdatePlusOneDay = new Date(
+    expirationdatePlusOneDay.setHours(expirationdatePlusOneDay.getHours() + 24)
   );
-  let dateInOneYear = new Date(expirationDate);
+  let dateInOneYear = new Date(expirationdate);
 
   dateInOneYear = new Date(
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
