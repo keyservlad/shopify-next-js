@@ -45,30 +45,30 @@ const MaCarteMembre = ({ cards }) => {
     month: "long",
     day: "numeric",
   };
-  let expirationDate = new Date(user?.expirationDate?.value);
-  let expirationDatePlusOneDay = new Date(user?.expirationDate?.value);
-  expirationDatePlusOneDay = new Date(
-    expirationDatePlusOneDay.setHours(expirationDatePlusOneDay.getHours() + 24)
+  let expirationdate = new Date(user?.expirationdate?.value);
+  let expirationdatePlusOneDay = new Date(user?.expirationdate?.value);
+  expirationdatePlusOneDay = new Date(
+    expirationdatePlusOneDay.setHours(expirationdatePlusOneDay.getHours() + 24)
   );
-  let dateInOneYear = new Date(expirationDate);
+  let dateInOneYear = new Date(expirationdate);
 
   dateInOneYear = new Date(
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
   );
 
-  let expirationDateMinusOneMonth = new Date(user?.expirationDate?.value);
-  expirationDateMinusOneMonth = new Date(
-    expirationDateMinusOneMonth.setMonth(
-      expirationDateMinusOneMonth.getMonth() - 1
+  let expirationdateMinusOneMonth = new Date(user?.expirationdate?.value);
+  expirationdateMinusOneMonth = new Date(
+    expirationdateMinusOneMonth.setMonth(
+      expirationdateMinusOneMonth.getMonth() - 1
     )
   );
 
   dateInOneYear = dateInOneYear.toLocaleDateString("fr-FR", dateOptions);
-  expirationDatePlusOneDay = expirationDatePlusOneDay.toLocaleDateString(
+  expirationdatePlusOneDay = expirationdatePlusOneDay.toLocaleDateString(
     "fr-FR",
     dateOptions
   );
-  expirationDate = expirationDate.toLocaleDateString("fr-FR", dateOptions);
+  expirationdate = expirationdate.toLocaleDateString("fr-FR", dateOptions);
 
   let textColorCard,
     imageCard,
@@ -146,13 +146,13 @@ const MaCarteMembre = ({ cards }) => {
             <h1 className="text-redWine text-6xl">Ma carte membre</h1>
             <div className="mt-6">
               <p className="font-bold">Mon status de membre :</p>
-              <p className="">Valable jusqu&#39;au {expirationDate}</p>
+              <p className="">Valable jusqu&#39;au {expirationdate}</p>
 
-              {expirationDateMinusOneMonth < new Date() &&
+              {expirationdateMinusOneMonth < new Date() &&
                 !user?.nextCarte?.value && (
                   <p className="">
                     En renouvelant maintenant, votre carte sera valable du{" "}
-                    {expirationDatePlusOneDay} au {dateInOneYear}
+                    {expirationdatePlusOneDay} au {dateInOneYear}
                   </p>
                 )}
             </div>
@@ -164,7 +164,7 @@ const MaCarteMembre = ({ cards }) => {
                   {user?.nextIsDomicile?.value
                     ? "en adresse privée"
                     : "en plateforme"}
-                  ) valable du {expirationDatePlusOneDay} au{" "}
+                  ) valable du {expirationdatePlusOneDay} au{" "}
                   {new Date(user?.nextExpirationdate?.value).toLocaleDateString(
                     "fr-FR",
                     dateOptions
@@ -172,7 +172,7 @@ const MaCarteMembre = ({ cards }) => {
                 </p>
               </div>
             )}
-            {expirationDateMinusOneMonth < new Date() &&
+            {expirationdateMinusOneMonth < new Date() &&
               !user?.nextCarte?.value && (
                 <div className="mt-6 md:my-6">
                   <BootstrapTooltip

@@ -17,12 +17,12 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
       Number(b.node.priceRange.maxVariantPrice.amount)
   );
 
-  let expirationDate = new Date(user?.expirationDate?.value);
-  let expirationDatePlusOneDay = new Date(user?.expirationDate?.value);
-  expirationDatePlusOneDay = new Date(
-    expirationDatePlusOneDay.setHours(expirationDatePlusOneDay.getHours() + 24)
+  let expirationdate = new Date(user?.expirationdate?.value);
+  let expirationdatePlusOneDay = new Date(user?.expirationdate?.value);
+  expirationdatePlusOneDay = new Date(
+    expirationdatePlusOneDay.setHours(expirationdatePlusOneDay.getHours() + 24)
   );
-  let dateInOneYear = new Date(expirationDate);
+  let dateInOneYear = new Date(expirationdate);
 
   dateInOneYear = new Date(
     dateInOneYear.setFullYear(dateInOneYear.getFullYear() + 1)
@@ -48,11 +48,13 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
             key: "nextCarte",
             namespace: "custom",
             value: carteTitle,
+            type: "single_line_text_field",
           },
           {
             key: "nextExpirationdate",
             namespace: "custom",
             value: dateInOneYear.toISOString().split("T")[0],
+            type: "date",
           },
           {
             key: "nextIsDomicile",
@@ -70,11 +72,13 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
             key: "nextCarte",
             namespace: "custom",
             value: carteTitle,
+            type: "single_line_text_field",
           },
           {
             key: "nextExpirationdate",
             namespace: "custom",
             value: dateInOneYear.toISOString().split("T")[0],
+            type: "date",
           },
           {
             key: "nextIsDomicile",
@@ -86,6 +90,7 @@ const RenewOtherCard = ({ setIsRenewingOtherCard, cards }) => {
             key: "nextPlateforme",
             namespace: "custom",
             value: "Chronopost",
+            type: "single_line_text_field",
           },
         ],
       };

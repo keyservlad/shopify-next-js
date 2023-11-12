@@ -318,13 +318,13 @@ export default function ShopProvider({ children }) {
       return;
     }
 
-    const date = new Date(userr?.expirationDate.value);
+    const date = new Date(userr?.expirationdate.value);
 
     const dateToken = new Date(session.data.user.token.expiresAt);
 
     if (
       !userr ||
-      userr?.expirationDate?.value === null ||
+      userr?.expirationdate?.value === null ||
       date < new Date() ||
       !userr?.carte ||
       dateToken < new Date() ||

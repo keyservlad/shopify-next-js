@@ -195,7 +195,7 @@ export default function Nav2() {
   }, [session.status]);
 
   return (
-    <div className="bg-white lg:sticky top-0 z-20 border-b border-gray-200">
+    <div className="bg-white lg:sticky top-0 z-50 border-b border-gray-200">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -528,7 +528,7 @@ export default function Nav2() {
                                                   quality={100}
                                                   placeholder="blur"
                                                 />
-                                                <div className="absolute w-3/4 h-3/4 xl:px-10 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
+                                                <div className="absolute w-3/4 h-3/4 xl:px-9 border-2 z-30 left-0 right-0 top-0 bottom-0 m-auto border-[#DEC46F] text-center text-black flex flex-col justify-center items-center">
                                                   <div className="w-16 relative">
                                                     <Image
                                                       src={ImageKrone}
