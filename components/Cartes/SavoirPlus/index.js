@@ -19,45 +19,58 @@ export default function SavoirPlus({ open, setOpen, imageContext }) {
   const cancelButtonRef = useRef(null);
 
   const [image, setImage] = useState(Printemps);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     switch (imageContext) {
       case "Printemps":
         setImage(Printemps);
+        setText("Selection Février 2023");
         break;
       case "DecouverteAutomne":
         setImage(DecouverteAutomne);
+        setText("Selection Septembre 2023");
         break;
       case "ImmanquablesAutomne":
         setImage(ImmanquablesAutomne);
+        setText("Selection Septembre 2023");
         break;
       case "PrestigeAutomne":
         setImage(PrestigeAutomne);
+        setText("Selection Septembre 2023");
         break;
       case "Boutique":
         setImage(Boutique);
+        setText("");
         break;
       case "Fidelite":
         setImage(Fidelite);
+        setText("");
         break;
       case "BonCoup":
         setImage(BonCoup);
+        setText("");
         break;
       case "ConseilPersonnalise":
         setImage(ConseilPersonnalise);
+        setText("");
         break;
       case "Soiree":
         setImage(DecouverteAutomne);
+        setText("");
         break;
       case "SiteWeb":
         setImage(SiteWeb);
+        setText("");
         break;
       case "AuditCave":
         setImage(AuditCave);
+        setText("");
         break;
 
       default:
         setImage(Printemps);
+        setText("");
     }
   }, [imageContext]);
 
@@ -100,7 +113,10 @@ export default function SavoirPlus({ open, setOpen, imageContext }) {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-3xl lg:max-w-5xl xl:max-w-6xl m-auto">
                 <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                  <div className="ml-3 flex justify-end h-7 items-center z-[51]">
+                  <div className="ml-3 flex justify-end h-7 items-center z-[51] relative">
+                    <div className="absolute left-1/2 -translate-x-1/2 italic text-gray-500">
+                      {text}
+                    </div>
                     <button
                       ref={cancelButtonRef}
                       type="button"
@@ -111,7 +127,11 @@ export default function SavoirPlus({ open, setOpen, imageContext }) {
                       <XIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
-                  <div className={`m-auto max-w-full relative ${isImageSquare ? "aspect-1" : "aspect-[16/9]"}`}>
+                  <div
+                    className={`m-auto max-w-full relative ${
+                      isImageSquare ? "aspect-1" : "aspect-[16/9]"
+                    }`}
+                  >
                     <Image
                       src={image}
                       alt="Savoir plus"
