@@ -7,7 +7,6 @@ import ShopProvider, { CartContext } from "../context/ShopContext";
 import { SessionProvider, signOut, useSession } from "next-auth/react";
 import Loading from "../components/Loading";
 import { useContext, useEffect } from "react";
-import { CookieNotFound } from "@shopify/shopify-api/dist/error";
 import Cookies from "js-cookie";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
